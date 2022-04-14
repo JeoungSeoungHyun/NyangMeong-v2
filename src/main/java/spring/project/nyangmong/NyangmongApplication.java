@@ -9,5 +9,4 @@ public class NyangmongApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NyangmongApplication.class, args);
 	}
-
 }

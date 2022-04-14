@@ -8,18 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
-import spring.project.nyangmong.domain.places.PlaceRespository;
+import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.web.dto.craw.PlaceDto;
+import spring.project.nyangmong.web.dto.craw.Result;
 
 @Controller
 public class PlaceController {
 
-    private PlaceRespository placeRespository;
+    private PlaceRepository placeRepository;
 
     @GetMapping("/")
     public String main() {
-
-        return "places/download";
+        return "pages/download";
     }
 
     @GetMapping("/list")
@@ -28,20 +29,20 @@ public class PlaceController {
         // 1. DB 연결
         RestTemplate rt = new RestTemplate();
         String url = "http://www.pettravel.kr/api/detailSeqPart.do?partCode=PC02&contentNum=1";
+        Result[] response = rt.getForObject(url, Result[].class);
+        List<Result> rList = Arrays.asList(response);
 
-        Places[] response = rt.getForObject(url, Places[].class);
+        PlaceDto places = rList.get(0).getResultList();
+        // List<PlacesDto> pList = Arrays.asList(places);
 
-        List<Places> placesList = Arrays.asList(response);
-
+        // placeRespository.saveAll(pList);
         // DB에 saveAll() 호출
-        placeRespository.saveAll(placesList);
+        // placeRespository.saveAll(placesList);
 
-        // 1. HospitalRepository의 findAll() 호출
+        // 1. Repository의 findAll() 호출
         // 2. model에 담기
-        model.addAttribute("hospitals", placeRespository.findAll());
+        model.addAttribute("places", placeRepository.findAll());
         // model.addAttribute("hospitals", hosList);
-
-        return "hospital/list";
+        return "pages/list";
     }
-
 }

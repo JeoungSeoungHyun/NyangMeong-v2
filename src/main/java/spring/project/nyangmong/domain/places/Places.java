@@ -14,17 +14,20 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.image.Image;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Data
-@AllArgsConstructor
 public class Places {
 
     @Id
@@ -33,7 +36,7 @@ public class Places {
 
     // 콘텐츠 번호
     @Column(length = 30, nullable = false)
-    private String contentSeq;
+    private Integer contentSeq;
 
     // 지역 명
     @Column(length = 200)
@@ -42,6 +45,7 @@ public class Places {
     // 분야 명
     @Column(length = 60)
     private String partName;
+
     // 업체 명
     @Column(length = 200)
     private String title;
@@ -49,6 +53,7 @@ public class Places {
     // 검색 키워드
     @Column(length = 300)
     private String keyword;
+
     // 주소
     @Column(length = 300)
     private String address;
@@ -56,9 +61,11 @@ public class Places {
     // 전화번호
     @Column(length = 60)
     private String tel;
+
     // 위도
     @Column(length = 60)
     private String latitude;
+
     // 경도
     @Column(length = 60)
     private String longitude;
@@ -68,9 +75,9 @@ public class Places {
     private String usedTime;
 
     // 홈페이지
-
     @Column(length = 200)
     private String homePage;
+
     // 소개
     @Lob
     @Column
@@ -87,31 +94,40 @@ public class Places {
     // 식당
     @Column(length = 100)
     private String restaurant;
+
     // 주차장 수용
     @Column(length = 30)
-    private String parkingLot;
+    private String parkingLog;
+
     // 주요시설
     @Column(length = 30)
     private String mainFacility;
+
     // 이용요금
     @Column(length = 30)
     private String usedCost;
+
     // 애견정책 및 주의사항
     @Column(length = 300)
     private String policyCautions;
+
     // 응급상황 대처 여부
     @Column(length = 30)
     private String emergencyResponse;
+
     // 기타(메모)
     @Lob
     @Column(length = 30)
     private String memo;
+
     // 목욕시설 (Y/N)
     @Column(length = 3)
     private String bathFlag;
+
     // 비품제공 (Y/N)
     @Column(length = 3)
     private String provisionFlag;
+
     // 펫 동반식당 (Y/N)
     @Column(length = 3)
     private String petFlag;
@@ -119,19 +135,24 @@ public class Places {
     // 제한 몸무게 (kg)
     @Column
     private int petWeight;
+
     // 견종 (현재 사용 안함)
     @Column(length = 30)
     private String petBreed;
+
     // 응급 수칙 (Y/N)
     @Column(length = 3)
     private String emergencyFlag;
+
     // 입장료 (Y/N)
     @Column(length = 3)
     private String entranceFlag;
+
     // 주차장 (Y/N)
     @Column(length = 3)
     private String parkingFlag;
-    // 실내외 구분 (IN/OUT)
+
+    // 실내 외 구분 (IN/OUT)
     @Column(length = 10)
     private String inOutFlag;
 
@@ -139,5 +160,4 @@ public class Places {
     @JsonIgnoreProperties({ "places" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
     private List<Image> imageList;
-
 }
