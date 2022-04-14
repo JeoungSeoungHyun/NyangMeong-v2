@@ -17,10 +17,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import spring.project.nyangmong.domain.image.Image;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Data
+@AllArgsConstructor
 public class Places {
 
     @Id
@@ -136,12 +140,4 @@ public class Places {
     @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
     private List<Image> imageList;
 
-    // 좋아요 수
-    @ColumnDefault("0")
-    @Column
-    private int favorite;
-    // 공공데이터는 - 1 직접 넣을 데이터 - 2
-    @ColumnDefault("일반")
-    @Column(length = 3)
-    private String insertData;
 }
