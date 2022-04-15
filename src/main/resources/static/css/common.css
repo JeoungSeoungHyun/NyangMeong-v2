@@ -1,0 +1,100 @@
+/* 폰트 */
+
+.m_txt_title {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.m_txt_info{
+    font-family: 'Poor Story', cursive;
+}
+
+.m_txt_main{
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+/* a 태그 밑줄 없애기 + 색 */
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+/* 라운드 박스 */
+
+.m_box_md_round {
+    border-radius: 10px;
+}
+
+.m_box_lg_round {
+    border-radius: 25px;
+}
+
+.m_box_lg_up_round {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+/* 박스 테두리 */
+.m_box_outline {
+    border: 1px solid black;
+}
+
+
+/* 로그인,회원가입,아이디비밀번호 찾기 아우터 */
+.m_outer_notice_category{
+    width: 400px;
+    margin-top: 40px;
+}
+
+.m_box_notice_category {
+    padding: 40px;
+    background-color: #FFE082;
+    text-align: center;
+}
+
+
+/* 이미지 채우기 */
+
+.m_img_fit {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* 이미지 래핑 */
+
+.m_outer_wrap {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.m_box_wrap {
+    width: 390px;
+}
+
+.m_img_wrap {
+    object-fit: cover;
+    width: 100%;
+    height: 240px;
+}
+
+
+/* 버튼 */
+
+.m_btn {
+    background-color: #E1E2E1;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    float: right;
+}
+
+/* 알아보기 및 상세보기, 댕냥이자랑 페이지 이미지박스 */
+.m_box_image{
+    width: 100%;
+    height: 100%;
+    margin-top: 25px;
+}

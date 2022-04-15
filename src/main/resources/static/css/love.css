@@ -1,0 +1,13 @@
+.m_feeling_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .m_feeling_a {
+    background-color: #fff;
+    border: 2px solid #CAAE53;
+    padding: 10px 20px;
+    border-radius: 2px;
+    color: #CAAE53;
+  }

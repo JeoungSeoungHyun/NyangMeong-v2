@@ -37,5 +37,4 @@ public class PlaceLikes {
     @JoinColumn(name = "placesId")
     @ManyToOne
     private Places places;
-
 }

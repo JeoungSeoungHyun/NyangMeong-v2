@@ -1,0 +1,166 @@
+/* 패딩 sm*/
+
+.m_p_sm {
+    padding: 10px;
+}
+
+.m_ph_sm {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.m_pl_sm {
+    padding-left: 10px;
+}
+
+.m_pr_sm {
+    padding-right: 10px;
+}
+
+.m_pt_sm {
+    padding-top: 10px;
+}
+
+.m_pb_sm {
+    padding-bottom: 10px;
+}
+
+
+/* 마진 sm */
+
+.m_m_sm {
+    margin: 10px;
+}
+
+.m_mh_sm {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.m_ml_sm {
+    margin-left: 10px;
+}
+
+.m_mr_sm {
+    margin-right: 10px;
+}
+
+.m_mt_sm {
+    margin-top: 10px;
+}
+
+.m_mb_sm {
+    margin-bottom: 10px;
+}
+
+
+/* 패딩 md*/
+
+.m_p_md {
+    padding: 20px;
+}
+
+.m_ph_md {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.m_pl_md {
+    padding-left: 20px;
+}
+
+.m_pr_md {
+    padding-right: 20px;
+}
+
+.m_pt_md {
+    padding-top: 20px;
+}
+
+.m_pb_md {
+    padding-bottom: 20px;
+}
+
+
+/* 마진 md */
+
+.m_m_md {
+    margin: 20px;
+}
+
+.m_mh_md {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.m_ml_md {
+    margin-left: 20px;
+}
+
+.m_mr_md {
+    margin-right: 20px;
+}
+
+.m_mt_md {
+    margin-top: 20px;
+}
+
+.m_mb_md {
+    margin-bottom: 20px;
+}
+
+
+/* 패딩 lg */
+
+.m_p_lg {
+    padding: 40px;
+}
+
+.m_ph_lg {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.m_pl_lg {
+    padding-left: 40px;
+}
+
+.m_pr_lg {
+    padding-right: 40px;
+}
+
+.m_pt_lg {
+    padding-top: 40px;
+}
+
+.m_pb_lg {
+    padding-bottom: 40px;
+}
+
+
+/* 마진 lg */
+
+.m_m_lg {
+    margin: 40px;
+}
+
+.m_mh_lg {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.m_ml_lg {
+    margin-left: 40px;
+}
+
+.m_mr_lg {
+    margin-right: 40px;
+}
+
+.m_mt_lg {
+    margin-top: 40px;
+}
+
+.m_mb_lg {
+    margin-bottom: 40px;
+}

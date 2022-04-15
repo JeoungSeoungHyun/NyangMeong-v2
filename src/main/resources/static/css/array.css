@@ -1,0 +1,11 @@
+/* 오른쪽 정렬 */
+
+.m_right {
+    float: right;
+}
+
+/* 가운데정렬 */
+
+.m_center{
+    margin: 0 auto;
+}
