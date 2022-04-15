@@ -30,11 +30,8 @@ import spring.project.nyangmong.domain.image.Image;
 @EntityListeners(AuditingEntityListener.class)
 public class Places {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     // 콘텐츠 번호
+    @Id
     @Column(length = 30, nullable = false)
     private Integer contentSeq;
 
@@ -71,6 +68,7 @@ public class Places {
     private String longitude;
 
     // 이용시간
+    @Lob
     @Column(length = 60)
     private String usedTime;
 
@@ -88,72 +86,77 @@ public class Places {
     private String provisionSupply;
 
     // 반려동물 시설
-    @Column(length = 100)
+    @Lob
+    @Column()
     private String petFacility;
 
     // 식당
-    @Column(length = 100)
+    @Lob
+    @Column
     private String restaurant;
 
     // 주차장 수용
-    @Column(length = 30)
+    @Column(length = 300)
     private String parkingLog;
 
     // 주요시설
-    @Column(length = 30)
+    @Lob
+    @Column()
     private String mainFacility;
 
     // 이용요금
-    @Column(length = 30)
+    @Lob
+    @Column
     private String usedCost;
 
     // 애견정책 및 주의사항
-    @Column(length = 300)
+    @Lob
+    @Column
     private String policyCautions;
 
     // 응급상황 대처 여부
-    @Column(length = 30)
+    @Column(length = 300)
     private String emergencyResponse;
 
     // 기타(메모)
     @Lob
-    @Column(length = 30)
+    @Column(length = 300)
     private String memo;
 
     // 목욕시설 (Y/N)
-    @Column(length = 3)
+    @Column(length = 300)
     private String bathFlag;
 
     // 비품제공 (Y/N)
-    @Column(length = 3)
+    @Column(length = 300)
     private String provisionFlag;
 
     // 펫 동반식당 (Y/N)
-    @Column(length = 3)
+    @Column(length = 300)
     private String petFlag;
 
     // 제한 몸무게 (kg)
     @Column
-    private int petWeight;
+    private String petWeight;
 
     // 견종 (현재 사용 안함)
-    @Column(length = 30)
+    @Column(length = 300)
     private String petBreed;
 
     // 응급 수칙 (Y/N)
-    @Column(length = 3)
+    @Column(length = 300)
     private String emergencyFlag;
 
     // 입장료 (Y/N)
-    @Column(length = 3)
+    @Column(length = 300)
     private String entranceFlag;
 
     // 주차장 (Y/N)
-    @Column(length = 3)
+    @Column(length = 300)
     private String parkingFlag;
 
     // 실내 외 구분 (IN/OUT)
-    @Column(length = 10)
+    @Column(length = 100)
     private String inOutFlag;
 
     // 이미지 목록

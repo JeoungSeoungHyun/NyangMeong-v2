@@ -5,7 +5,6 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring.project.nyangmong.domain.image.Image;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,7 +34,7 @@ public class PlaceDto {
     private String bathFlag;
     private String provisionFlag;
     private String petFlag;
-    private int petWeight;
+    private String petWeight;
     private String petBreed;
     private String emergencyFlag;
     private String entranceFlag;
@@ -43,7 +42,4 @@ public class PlaceDto {
     private String inOutFlag;
     private List<ImageDto> imageList;
 
-    public void toImageList() {
-
-    }
 }
