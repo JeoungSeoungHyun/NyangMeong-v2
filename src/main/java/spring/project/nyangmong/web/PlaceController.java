@@ -45,4 +45,10 @@ public class PlaceController {
         // model.addAttribute("hospitals", hosList);
         return "pages/list";
     }
+
+    @GetMapping("/detail")
+    public String detail(){
+        return "pages/detail/activityDetail";
+    }
+
 }
