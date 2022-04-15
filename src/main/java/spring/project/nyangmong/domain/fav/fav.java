@@ -1,13 +1,11 @@
-package spring.project.nyangmong.domain.image;
+package spring.project.nyangmong.domain.fav;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -15,31 +13,31 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.domain.user.User;
 
-@Builder
+// 즐겨찾기
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 // @Table(uniqueConstraints = {
-// @UniqueConstraint(name = "image_UK", columnNames = { "placeId" })
+// @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
 // })
-public class Image {
+public class fav {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // 이미지 링크
-    @Lob
-    @Column
-    private String imgurl;
+    @JoinColumn(name = "userId")
+    @ManyToOne
+    private User user;
 
-    @JoinColumn(name = "contentSeq")
+    @JoinColumn(name = "placesId")
     @ManyToOne
     private Places places;
+
 }

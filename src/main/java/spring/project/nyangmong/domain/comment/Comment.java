@@ -1,4 +1,4 @@
-package spring.project.nyangmong.domain.image;
+package spring.project.nyangmong.domain.comment;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,37 +9,37 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.user.User;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 // @Table(uniqueConstraints = {
-// @UniqueConstraint(name = "image_UK", columnNames = { "placeId" })
+// @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "boardId" })
 // })
-public class Image {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // 이미지 링크
     @Lob
     @Column
-    private String imgurl;
+    private String content;
 
-    @JoinColumn(name = "contentSeq")
+    @JoinColumn(name = "userId")
     @ManyToOne
-    private Places places;
+    private User user;
+
+    @JoinColumn(name = "boardId")
+    @ManyToOne
+    private Boards boards;
 }
