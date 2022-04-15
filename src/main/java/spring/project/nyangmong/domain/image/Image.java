@@ -39,8 +39,7 @@ public class Image {
     @Column
     private String imgurl;
 
-    // 플레이스 id 인 seq값이 될 예정
-    @JoinColumn(name = "placeId")
+    @JoinColumn(name = "contentSeq")
     @ManyToOne
     private Places places;
 }

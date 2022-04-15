@@ -3,14 +3,11 @@ package spring.project.nyangmong;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
+import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.image.Image;
 import spring.project.nyangmong.domain.image.ImageRepository;
 import spring.project.nyangmong.domain.places.PlaceRepository;
@@ -20,6 +17,7 @@ import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 
 public class DownloadTest {
+
     private PlaceRepository placeRepository;
     private ImageRepository imageRepository;
 
@@ -35,6 +33,7 @@ public class DownloadTest {
         System.out.println(responseDto);
     }
 
+    @Autowired
     @Test
     public void test2() {
         RestTemplate rt = new RestTemplate();
@@ -84,20 +83,16 @@ public class DownloadTest {
         // List<Places> a = placeRepository.findAll();
         // System.out.println(a);
 
-        placeRepository.save(place);
+        // List<Image> images = new ArrayList<>();
+        // for (int i = 0; i < placeDto.getImageList().size(); i++) {
+        // Image image = Image.builder()
+        // .imgurl(placeDto.getImageList().get(i).getImage())
+        // .places(placeEntity) // <- placeEntity
+        // .build();
+        // images.add(image);
+        // }
 
-        Places placeEntity = placeRepository.save(place); // id 찾으려구
-        List<Image> images = new ArrayList<>();
-
-        for (int i = 0; i < placeDto.getImageList().size(); i++) {
-            Image image = Image.builder()
-                    .imgurl(placeDto.getImageList().get(i).getImage())
-                    .places(placeEntity) // <- placeEntity
-                    .build();
-            images.add(image);
-        }
-
-        imageRepository.saveAll(images);
+        // imageRepository.saveAll(images);
 
     }
 
