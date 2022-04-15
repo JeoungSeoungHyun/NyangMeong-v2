@@ -102,7 +102,7 @@ public class PlaceController {
 
     @GetMapping("/detail")
     public String detail(){
-        return "pages/user/loginForm";
+        return "pages/mainPage";
     }
 
 }
