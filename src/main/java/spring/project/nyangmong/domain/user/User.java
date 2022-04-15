@@ -68,26 +68,26 @@ public class User {
     private String userAuth;
 
     // // 장소 좋아요 한 목록 -연결
-    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    // private List<fav> FavList;
+    @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    private List<fav> FavList;
 
     // // 쓴 댓글 목록 -연결
-    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    // private List<Comment> CommentList;
+    @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    private List<Comment> CommentList;
     // // 쓴 게시글 목록 -연결
-    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    // private List<Boards> BoardList;
+    @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    private List<Boards> BoardList;
     // // 반려동물 목록 - 연결
-    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    // private List<Pet> petList;
+    @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    private List<Pet> petList;
     // // 게시글 좋아요 -연결
-    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    // private List<BoardLikes> BoardLikesList;
+    @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    private List<BoardLikes> BoardLikesList;
 
     // // @LastModifiedDate // update 할때만 동작
     // // private LocalDateTime updateDate;

@@ -73,13 +73,13 @@ public class Boards {
     @ManyToOne
     private User user;
 
-    // @JsonIgnoreProperties({ "boards" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
+    @JsonIgnoreProperties({ "boards" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
     // 변수명
-    // private List<BoardLikes> boardLikesList;
+    private List<BoardLikes> boardLikesList;
 
-    // @JsonIgnoreProperties({ "comment" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE) // 연관관계의 주인의
+    @JsonIgnoreProperties({ "boards" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
     // 변수명
-    // private List<Comment> commentList;
+    private List<Comment> commentList;
 }
