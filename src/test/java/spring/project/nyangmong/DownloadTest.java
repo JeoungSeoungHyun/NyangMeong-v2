@@ -15,6 +15,7 @@ import spring.project.nyangmong.domain.image.Image;
 import spring.project.nyangmong.domain.image.ImageRepository;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.web.dto.craw.ImageDto;
 import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 
@@ -135,14 +136,18 @@ public class DownloadTest {
                 .entranceFlag(placeDto.getEntranceFlag())
                 .parkingFlag(placeDto.getParkingFlag())
                 .inOutFlag(placeDto.getInOutFlag())
-                // 추가
                 .build();
 
         System.out.println(place);
 
-        Places placeEntity = placeRepository.save(place); // id 찾으려구
+        // List<Places> a = placeRepository.findAll();
+        // System.out.println(a);
 
+        placeRepository.save(place);
+
+        Places placeEntity = placeRepository.save(place); // id 찾으려구
         List<Image> images = new ArrayList<>();
+
         for (int i = 0; i < placeDto.getImageList().size(); i++) {
             Image image = Image.builder()
                     .imgurl(placeDto.getImageList().get(i).getImage())

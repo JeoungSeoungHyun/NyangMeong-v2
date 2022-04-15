@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.Null;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.places.Places;
@@ -43,6 +44,42 @@ public class PlaceDto {
     private String entranceFlag;
     private String parkingFlag;
     private String inOutFlag;
-    private List<ImageDto> imageList = null;
+    private List<ImageDto> imageList;
+
+    @Builder
+    public Places builder() {
+        return Places.builder()
+                .contentSeq(contentSeq)
+                .areaName(areaName)
+                .partName(partName)
+                .title(title)
+                .keyword(keyword)
+                .address(address)
+                .tel(tel)
+                .latitude(latitude)
+                .longitude(longitude)
+                .usedTime(usedTime)
+                .homePage(homePage)
+                .content(content)
+                .provisionSupply(provisionSupply)
+                .petFacility(petFacility)
+                .restaurant(restaurant)
+                .parkingLog(parkingLog)
+                .mainFacility(mainFacility)
+                .usedCost(usedCost)
+                .policyCautions(policyCautions)
+                .emergencyResponse(emergencyResponse)
+                .memo(memo)
+                .bathFlag(bathFlag)
+                .provisionFlag(provisionFlag)
+                .petFlag(petFlag)
+                .petWeight(petWeight)
+                .petBreed(petBreed)
+                .emergencyFlag(emergencyFlag)
+                .entranceFlag(entranceFlag)
+                .parkingFlag(parkingFlag)
+                .inOutFlag(inOutFlag)
+                .build();
+    }
 
 }
