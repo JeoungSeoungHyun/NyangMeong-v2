@@ -2,12 +2,10 @@ package spring.project.nyangmong.web.dto.craw;
 
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.domain.image.Image;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +41,9 @@ public class PlaceDto {
     private String entranceFlag;
     private String parkingFlag;
     private String inOutFlag;
-    private List<ImageDto> imageList = null;
+    private List<ImageDto> imageList;
 
+    public void toImageList() {
+
+    }
 }

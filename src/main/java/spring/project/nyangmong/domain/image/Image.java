@@ -25,9 +25,9 @@ import spring.project.nyangmong.domain.places.Places;
 @Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "image_UK", columnNames = { "placeId" })
-})
+// @Table(uniqueConstraints = {
+// @UniqueConstraint(name = "image_UK", columnNames = { "placeId" })
+// })
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
