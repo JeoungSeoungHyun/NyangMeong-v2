@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlaceRepository extends JpaRepository<Places, Integer> {
-    @Query(value = "SELECT * FROM user WHERE id = :id", nativeQuery = true)
-    Places findIdPlaces(@Param("id") Integer id);
+
 }
