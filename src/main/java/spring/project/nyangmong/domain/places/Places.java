@@ -137,7 +137,7 @@ public class Places {
 
     // 제한 몸무게 (kg)
     @Column
-    private int petWeight;
+    private String petWeight;
 
     // 견종 (현재 사용 안함)
     @Column(length = 30)
