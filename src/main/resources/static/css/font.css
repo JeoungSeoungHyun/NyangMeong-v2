@@ -1,0 +1,20 @@
+/* 폰트 사이즈 */
+.m_font_xxl {
+    font-size: xx-large;
+}
+
+.m_font_xl{
+    font-size: x-large;
+}
+.m_font_lg{
+    font-size: large;
+}
+
+.m_font_md {
+    font-size: medium;
+}
+
+/* 폰트 굵기 */
+.m_font_bold {
+    font-weight: bold;
+}

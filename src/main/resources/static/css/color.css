@@ -1,0 +1,24 @@
+/* 배경색  */
+
+.m_bg_primary {
+    background-color: #FFE082;
+}
+
+.m_bg_secondary {
+    background-color: #E1E2E1;
+}
+
+.m_bg_active {
+    background-color: #FFDEA0;
+}
+
+.m_bg_inactive {
+    background-color: #ebeaea;
+}
+
+
+/* 폰트 색 */
+
+.m_text_dark {
+    color: rgb(25, 25, 25);
+}
