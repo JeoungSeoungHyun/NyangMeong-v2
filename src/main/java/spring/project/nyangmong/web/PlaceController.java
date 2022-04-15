@@ -44,7 +44,7 @@ public class PlaceController {
                 String url = "http://www.pettravel.kr/api/detailSeqPart.do?partCode=PC0" + k + "&contentNum="
                         + contentSeqList.get(j);
 
-                System.out.println("url : " + url);
+                // System.out.println("url : " + url);
 
                 Result[] responseDtos = rt.getForObject(url, Result[].class);
 
@@ -88,10 +88,11 @@ public class PlaceController {
                         // 추가
                         .build();
 
-                System.out.println(place);
+                // System.out.println(place);
 
                 Places placeEntity = placeRepository.save(place); // id 찾으려구
 
+                // PC05 => 병원 이미지 하나도 없어서 이미지 저장 안해야됨 => 놔두면 nullpointerexception 발생
                 if (k != 5) {
 
                     List<Image> images = new ArrayList<>();

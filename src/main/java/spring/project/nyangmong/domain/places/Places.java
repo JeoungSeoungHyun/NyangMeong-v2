@@ -6,8 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -87,7 +85,7 @@ public class Places {
 
     // 반려동물 시설
     @Lob
-    @Column()
+    @Column
     private String petFacility;
 
     // 식당
@@ -101,7 +99,7 @@ public class Places {
 
     // 주요시설
     @Lob
-    @Column()
+    @Column
     private String mainFacility;
 
     // 이용요금

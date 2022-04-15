@@ -1,4 +1,4 @@
-package spring.project.nyangmong.web.dto.my;
+package spring.project.nyangmong.web.dto.count;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

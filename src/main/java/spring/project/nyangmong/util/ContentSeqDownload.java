@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import spring.project.nyangmong.web.dto.my.Outer;
-import spring.project.nyangmong.web.dto.my.ResultList;
+import spring.project.nyangmong.web.dto.count.CountDto;
+import spring.project.nyangmong.web.dto.count.ResultList;
 
 @Component
 public class ContentSeqDownload {
@@ -17,7 +17,7 @@ public class ContentSeqDownload {
         RestTemplate tempRt = new RestTemplate();
 
         String tempUrl = "http://www.pettravel.kr/api/listPart.do?page=1&pageBlock=1&partCode=PC0" + num;
-        Outer[] tempResponseDtos = tempRt.getForObject(tempUrl, Outer[].class);
+        CountDto[] tempResponseDtos = tempRt.getForObject(tempUrl, CountDto[].class);
 
         int count = tempResponseDtos[0].getTotalCount();
 
@@ -25,11 +25,11 @@ public class ContentSeqDownload {
 
         RestTemplate rt = new RestTemplate();
         String url = "http://www.pettravel.kr/api/listPart.do?page=1&pageBlock=" + count + "&partCode=PC0" + num;
-        Outer[] responseDtos = rt.getForObject(url, Outer[].class);
+        CountDto[] responseDtos = rt.getForObject(url, CountDto[].class);
 
         List<ResultList> resultList = responseDtos[0].getResultList();
 
-        System.out.println(resultList);
+        // System.out.println(resultList);
 
         for (int i = 0; i < resultList.size(); i++) {
             numList.add(resultList.get(i).getContentSeq());

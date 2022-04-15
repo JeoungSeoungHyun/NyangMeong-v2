@@ -1,4 +1,4 @@
-package spring.project.nyangmong.web.dto.my;
+package spring.project.nyangmong.web.dto.count;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Outer {
+public class CountDto {
 
     private List<ResultList> resultList;
     private Integer totalCount;
