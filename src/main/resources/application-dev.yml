@@ -8,16 +8,12 @@ server:
       timeout: 30
 
 spring:
-  security:
-    user:
-      name: test
-      password: 1234
   mustache:
     expose-session-attributes: true
   datasource:
-      url: jdbc:mariadb://localhost:3306/greendb 
+      url: jdbc:mariadb://localhost:3326/greendb 
       driver-class-name: org.mariadb.jdbc.Driver
-      username: green
+      username: root
       password: green1234
 
   jpa:

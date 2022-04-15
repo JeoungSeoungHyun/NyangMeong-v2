@@ -10,17 +10,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.apache.catalina.User;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.domain.user.User;
 
 // 즐겨찾기
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
-})
+// @Table(uniqueConstraints = {
+// @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
+// })
 public class fav {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

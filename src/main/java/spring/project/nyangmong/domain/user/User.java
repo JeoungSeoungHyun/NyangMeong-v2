@@ -1,20 +1,34 @@
 package spring.project.nyangmong.domain.user;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Value;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import spring.project.nyangmong.domain.boardlikes.BoardLikes;
+import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.comment.Comment;
+import spring.project.nyangmong.domain.fav.fav;
+import spring.project.nyangmong.domain.pet.Pet;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
 @Entity
 public class User {
@@ -50,10 +64,32 @@ public class User {
 
     // 유저 권한
     @Column(length = 20)
-    @ColumnDefault("일반")
+    // @ColumnDefault("일반")
     private String userAuth;
 
-    // @LastModifiedDate // update 할때만 동작
-    // private LocalDateTime updateDate;
+    // // 장소 좋아요 한 목록 -연결
+    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
+    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    // private List<fav> FavList;
+
+    // // 쓴 댓글 목록 -연결
+    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
+    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    // private List<Comment> CommentList;
+    // // 쓴 게시글 목록 -연결
+    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
+    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    // private List<Boards> BoardList;
+    // // 반려동물 목록 - 연결
+    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
+    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    // private List<Pet> petList;
+    // // 게시글 좋아요 -연결
+    // @JsonIgnoreProperties({ "User" }) // messageConverter에게 알려주는 어노테이션
+    // @OneToMany(mappedBy = "User", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
+    // private List<BoardLikes> BoardLikesList;
+
+    // // @LastModifiedDate // update 할때만 동작
+    // // private LocalDateTime updateDate;
 
 }
