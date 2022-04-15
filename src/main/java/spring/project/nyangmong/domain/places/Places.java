@@ -105,7 +105,8 @@ public class Places {
     private String mainFacility;
 
     // 이용요금
-    @Column(length = 30)
+    @Lob
+    @Column
     private String usedCost;
 
     // 애견정책 및 주의사항
@@ -113,12 +114,13 @@ public class Places {
     private String policyCautions;
 
     // 응급상황 대처 여부
-    @Column(length = 30)
+    @Lob
+    @Column
     private String emergencyResponse;
 
     // 기타(메모)
     @Lob
-    @Column(length = 30)
+    @Column
     private String memo;
 
     // 목욕시설 (Y/N)

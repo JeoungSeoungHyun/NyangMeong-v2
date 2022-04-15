@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -34,7 +35,8 @@ public class Image {
     private Integer id;
 
     // 이미지 링크
-    @Column(length = 300)
+    @Lob
+    @Column
     private String imgurl;
 
     // 플레이스 id 인 seq값이 될 예정
