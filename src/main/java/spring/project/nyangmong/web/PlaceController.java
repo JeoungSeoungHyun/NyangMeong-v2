@@ -32,8 +32,6 @@ public class PlaceController {
 
     @GetMapping("/place/{id}")
     public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
-        Places placesEntity = 
-
 
         return "";
     }
