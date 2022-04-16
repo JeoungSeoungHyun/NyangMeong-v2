@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
@@ -71,4 +72,10 @@ public class BoardsApiController {
         return new ResponseDto<>(1, "성공", null);
     }
 
+    @GetMapping("/api/likelist")
+    public ResponseDto<?> likeList(Integer page) {
+        Page<Boards> board = boardsService.게시글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        return new ResponseDto<>(1, "성공", board);
+    }
 }

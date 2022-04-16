@@ -27,7 +27,7 @@ import spring.project.nyangmong.domain.user.User;
 // @Table(uniqueConstraints = {
 // @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
 // })
-public class fav {
+public class Fav {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

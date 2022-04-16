@@ -8,5 +8,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlaceRepository extends JpaRepository<Places, Integer> {
     @Query(value = "SELECT * FROM places WHERE contentSeq = :contentSeq", nativeQuery = true)
-    Places placesDetail(@Param("contentSeq") String contentSeq);
+    Places placesDetail(@Param("contentSeq") int contentSeq);
+
+    @Query(value = "SELECT * FROM places WHERE partName = :partName", nativeQuery = true)
+    Places searchPartName(@Param("partName") String partName);
+
+    @Query(value = "SELECT count() FROM places WHERE partName = :partName", nativeQuery = true)
+    long countPartName(@Param("partName") String partName);
 }

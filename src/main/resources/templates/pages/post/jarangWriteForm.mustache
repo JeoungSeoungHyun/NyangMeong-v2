@@ -1,6 +1,6 @@
 {{> /layout/header}}
 
-<body>
+
 
     <div class="container mt-3">
         <br>
@@ -15,7 +15,7 @@
             <!-- 글쓰기 폼 시작 -->
             <form action="#" method="post">
                 <div class="m_mb_md">
-                    <input type="text" class="form-control" placeholder="Enter title" name="title">
+                    <input id="title" type="text" class="form-control" placeholder="Enter title" name="title">
                 </div>
                 <div class="m_mb_md">
                     <textarea name="content" rows="10" class="form-control" id="summernote"></textarea>
@@ -33,6 +33,6 @@
             height: 500
         });
     </script>
-</body>
+       <script src="js/board.js"></script>
 
 {{> /layout/footer}}

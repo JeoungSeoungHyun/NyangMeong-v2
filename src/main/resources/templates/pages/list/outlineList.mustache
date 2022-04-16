@@ -19,19 +19,7 @@
                             </ul>
                             <form class="navbar-form navbar-right" role="search">
                                 <div class="form-group d-flex">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            카테고리
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="hotelList.mustache">숙박지</a></li>
-                                            <li><a class="dropdown-item" href="cafeList.mustache">식음료</a></li>
-                                            <li><a class="dropdown-item" href="spotList.mustache">관광지</a></li>
-                                            <li><a class="dropdown-item" href="activityList.mustache">체험</a></li>
-                                            <li><a class="dropdown-item" href="hospitalList.mustache">동물병원</a></li>
-                                        </ul>
-                                    </div>
+                                    {{>layout/dropDownItem}}
                                 </div>
                             </form>
 

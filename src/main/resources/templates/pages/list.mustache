@@ -1,0 +1,39 @@
+{{>/layout/header}}
+
+<!-- 리스트 박스 시작 -->
+<div class="container mt-3">
+    <table class="table table-striped">
+        <!-- 테이블 메뉴 시작 -->
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>지역명</th>
+                <th>분야명</th>
+                <th>업체</th>
+                <th>주소</th>
+                <th>위도</th>
+                <th>경도</th>
+                <th>전화번호</th>
+            </tr>
+        </thead>
+        <!-- 테이블 메뉴 끝 -->
+        <!-- 테이블 내용 시작 -->
+        <tbody>
+            {{#places}}
+            <tr>
+                <td>{{areaName}}</td>
+                <td>{{partName}}</td>
+                <td>{{title}}</td>
+                <td>{{address}}</td>
+                <td>{{latitude}}</td>
+                <td>{{longitude}}</td>
+                <td>{{tel}}</td>
+            </tr>
+            {{/places}}
+        </tbody>
+    </table>
+    <!-- 테이블 내용 끝 -->
+</div>
+<!-- 리스트 박스 끝 -->
+
+{{>/layout/footer}}

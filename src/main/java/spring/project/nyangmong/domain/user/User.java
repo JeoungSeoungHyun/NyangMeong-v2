@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.comment.Comment;
-import spring.project.nyangmong.domain.fav.fav;
+import spring.project.nyangmong.domain.fav.Fav;
 import spring.project.nyangmong.domain.pet.Pet;
 
 @AllArgsConstructor
@@ -70,7 +70,7 @@ public class User {
     // // 장소 좋아요 한 목록 -연결
     @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    private List<fav> FavList;
+    private List<Fav> FavList;
 
     // // 쓴 댓글 목록 -연결
     @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션

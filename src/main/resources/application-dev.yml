@@ -7,6 +7,7 @@ server:
     session:
       timeout: 30
 
+
 spring:
   mustache:
     expose-session-attributes: true

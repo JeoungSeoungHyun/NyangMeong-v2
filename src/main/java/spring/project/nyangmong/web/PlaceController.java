@@ -3,10 +3,13 @@ package spring.project.nyangmong.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -14,30 +17,71 @@ import spring.project.nyangmong.domain.image.ImageRepository;
 import spring.project.nyangmong.domain.image.PublicDataImage;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.service.PlaceService;
 import spring.project.nyangmong.util.ContentSeqDownload;
 import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
+import spring.project.nyangmong.web.dto.places.ImageListDto;
 
 @RequiredArgsConstructor
 @Controller
 public class PlaceController {
-
+    private final PlaceService placeService;
     private final PlaceRepository placeRepository;
     private final ImageRepository imageRepository;
+    private final HttpSession session;
 
-    @GetMapping("/")
-    public String main() {
-        return "pages";
-    }
+    // 상세보기
 
-    @GetMapping("/place/{id}")
+    @GetMapping("/place/{contentSeq}")
     public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
-        Places placesEntity = 
+        Places places = placeService.상세보기(contentSeq);
+        List<PublicDataImage> imageList = imageRepository.ImagecontentSeq(contentSeq);
 
+        ImageListDto dto = new ImageListDto();
+        dto.setPublicDataImage(imageList);
+        dto.setBathFlagShow(placeService.옵션표시(places.getBathFlag()));
+        dto.setParkingFlagShow(placeService.옵션표시(places.getParkingFlag()));
+        dto.setEntranceFlagShow(placeService.옵션표시(places.getEntranceFlag()));
+        dto.setEmergencyFlagShow(placeService.옵션표시(places.getEmergencyFlag()));
+        dto.setProvisionFlagShow(placeService.옵션표시(places.getProvisionFlag()));
+        dto.setInOutFlagShow(placeService.옵션표시(places.getInOutFlag()));
+        dto.setPetFlagShow(placeService.옵션표시(places.getPetFlag()));
 
-        return "";
+        // List<PlaceDto> placesDto = new ArrayList<>();
+
+        model.addAttribute("imageList", dto);
+        model.addAttribute("places", places);
+        return "pages/detail/placeDetail";
     }
 
+    // 검색- 쿼리스트링 이용가능
+    // 단, 직접적으로 검색을 하려 할 시 , 한글이 깨지는 현상 발생중
+    // 받아온 결과가 한개가 아니라 여러개라서 에러가 터지는 상태.
+    @GetMapping("/place/search")
+    public String searchPartName(@RequestParam String partName, Model model) {
+        Places places = placeService.분류검색(partName);
+        // long count = placeRepository.countPartName(partName);
+        // model.addAttribute("count", count);
+        model.addAttribute("places", places);
+
+        if (partName.equals("관광지")) {
+            return "pages/detail/spotList";
+        } else if (partName.equals("동물병원")) {
+            return "pages/detail/hospitalList";
+        } else if (partName.equals("식음료")) {
+            return "pages/detail/cafeList";
+        } else if (partName.equals("체험")) {
+            return "pages/detail/activityList";
+        } else if (partName.equals("숙박")) {
+            return "pages/detail/hotelList";
+        } else {
+            throw new RuntimeException("해당 관광정보를 찾을 수 없습니다");
+        }
+    }
+
+    // 데이터베이스 받아오는 url 들어갈때 시간이 많이 걸립니다.
+    // 모두 받아오고 둘러보기로 이동.
     @GetMapping("/list")
     public String download(Model model) {
 
@@ -118,12 +162,7 @@ public class PlaceController {
 
             }
         }
-        return "pages/list";
-    }
-
-    @GetMapping("/detail")
-    public String detail() {
-        return "pages/detail/placeDetail";
+        return "pages/list/outlineList";
     }
 
 }

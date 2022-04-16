@@ -49,17 +49,22 @@ public class BoardsController {
 
         model.addAttribute("comments", comments);
         model.addAttribute("boardId", id);
-        return "boards/detail";
+        return "pages/detail/jarangDetail";
     }
 
     @GetMapping("/s/boards/writeForm")
     public String writeForm() {
-        return "boards/writeForm";
+        return "pages/post/jarangWriteForm";
     }
 
-    @GetMapping({ "/", "/boards" })
+    @GetMapping("/notice")
+    public String noticeRead() {
+        return "pages/post/noticeForm";
+    }
+
+    @GetMapping({ "/boards" })
     public String home() {
-        return "boards/list";
+        return "pages/list/jarangList";
     }
 
 }
