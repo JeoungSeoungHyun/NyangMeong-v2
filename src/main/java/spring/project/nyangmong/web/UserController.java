@@ -22,15 +22,15 @@ public class UserController {
     // return "redirect:/";
     // }
 
-    @GetMapping("/joinForm")
-    public String joinForm() {
-        return "user/joinForm";
-    }
+    // @GetMapping("/joinForm")
+    // public String joinForm() {
+    // return "user/joinForm";
+    // }
 
-    @GetMapping("/loginForm")
-    public String loginForm() {
-        return "user/loginForm";
-    }
+    // @GetMapping("/loginForm")
+    // public String loginForm() {
+    // return "user/loginForm";
+    // }
 
     @GetMapping("/user-username/{username}/exists")
     public ResponseEntity<Boolean> checkusernameDuplicate(@PathVariable String username) {

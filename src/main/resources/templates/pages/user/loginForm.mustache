@@ -1,4 +1,4 @@
-{{> //layout/header}}
+{{> /layout/header}}
 
 <body class="m_center">
 
@@ -15,30 +15,30 @@
         <!-- 로그인 폼 시작 -->
         <form>
             <div class="mb-3 mt-3">
-                <input id="username" type="text" class=" my_auth_form_box_input form-control" name="username"
-                    placeholder="Enter ID" required maxlength="20">
+                <input id="username" type="text" class=" my_auth_form_box_input form-control" name="username" placeholder="Enter ID" required maxlength="20">
             </div>
             <div class="mb-3">
-                <input id="password" type="password" class="form-control my_auth_form_box_input" name="password"
-                    placeholder="Enter PASSWORD" required maxlength="20">
+                <input id="password" type="password" class="form-control my_auth_form_box_input" name="password" placeholder="Enter PASSWORD" required maxlength="20">
             </div>
             <div class="form-check mb-3">
                 <label class="form-check-label">
                     <input id="remember" class="form-check-input" type="checkbox"> Remember me
                 </label>
             </div>
-            <button style="background-color: #E1E2E1; float: right;" id="btn-login" type="button"
-                class="btn">로그인</button>
+            <div class="d-flex" style="justify-content: space-between;">
+                <div class="m_pt_sm">
+                    <a href="findIdForm" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
+                        아이디 찾기
+                    </a>
+                    <span> | </span>
+                    <a href="findPwForm" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
+                        비밀번호 찾기
+                    </a>
+                </div>
+                <button style="background-color: #E1E2E1;" id="btn-login" type="button" class="btn">로그인</button>
+            </div>
         </form>
         <!-- 로그인 폼 끝 -->
-        <br><br><br>
-        <a href="findid.html" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
-            아이디 찾기
-        </a>
-        <span> | </span>
-        <a href="findpw.html" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
-            비밀번호 찾기
-        </a>
     </div>
 
     <!-- 컨테이너 끝 -->

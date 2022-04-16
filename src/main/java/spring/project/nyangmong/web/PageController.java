@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
+
     @GetMapping("/mainPage")
     public String mainPage() {
         return "pages/mainPage";
@@ -74,4 +75,50 @@ public class PageController {
     public String spotList() {
         return "pages/place/spotList";
     }
+
+    @GetMapping("/favoriteList")
+    public String favoriteList() {
+        return "pages/user/favoriteList";
+    }
+
+    @GetMapping("/findIdForm")
+    public String findIdForm() {
+        return "pages/user/findIdForm";
+    }
+
+    @GetMapping("/findPwForm")
+    public String findPwForm() {
+        return "pages/user/findPwForm";
+    }
+
+    @GetMapping("/joinForm")
+    public String joinForm() {
+        return "pages/user/joinForm";
+    }
+
+    @GetMapping("/likeList")
+    public String likeList() {
+        return "pages/user/likeList";
+    }
+
+    @GetMapping("/loginForm")
+    public String loginForm() {
+        return "pages/user/loginForm";
+    }
+
+    @GetMapping("/userChange")
+    public String userChange() {
+        return "pages/user/userChange";
+    }
+
+    @GetMapping("/userDetail")
+    public String userDetail() {
+        return "pages/user/userDetail";
+    }
+
+    @GetMapping("/commentList")
+    public String commentList() {
+        return "pages/user/commentList";
+    }
+
 }
