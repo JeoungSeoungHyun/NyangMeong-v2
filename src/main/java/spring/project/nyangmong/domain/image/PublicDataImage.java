@@ -29,11 +29,7 @@ import spring.project.nyangmong.domain.places.Places;
 // @Table(uniqueConstraints = {
 // @UniqueConstraint(name = "image_UK", columnNames = { "placeId" })
 // })
-<<<<<<< HEAD:src/main/java/spring/project/nyangmong/domain/image/PublicDataImage.java
 public class PublicDataImage {
-=======
-public class Image {
->>>>>>> 84e42047386591da72a244b1ed2e7d9424deb609:src/main/java/spring/project/nyangmong/domain/image/Image.java
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

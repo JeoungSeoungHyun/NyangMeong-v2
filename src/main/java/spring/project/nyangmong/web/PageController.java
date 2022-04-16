@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
-    
+
     @GetMapping("/main")
-    public String main(){
-        return "pages/list/activityList";
+    public String main() {
+        return "pages/mainPage";
     }
 }

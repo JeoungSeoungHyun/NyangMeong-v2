@@ -27,6 +27,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.comment.Comment;
+import spring.project.nyangmong.domain.image.BoardsImage;
 import spring.project.nyangmong.domain.user.User;
 
 // 댕댕이 자랑 게시판, 공지사항 합친거
@@ -73,7 +74,6 @@ public class Boards {
     @ManyToOne
     private User user;
 
-<<<<<<< HEAD
     @JsonIgnoreProperties({ "boards" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
     // 변수명
@@ -83,15 +83,8 @@ public class Boards {
     @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
     // 변수명
     private List<Comment> commentList;
-=======
-    // @JsonIgnoreProperties({ "boards" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
+    @JsonIgnoreProperties({ "boards" }) // messageConverter에게 알려주는 어노테이션
+    @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE) // 연관관계의 주인의
     // 변수명
-    // private List<BoardLikes> boardLikesList;
-
-    // @JsonIgnoreProperties({ "comment" }) // messageConverter에게 알려주는 어노테이션
-    // @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE) // 연관관계의 주인의
-    // 변수명
-    // private List<Comment> commentList;
->>>>>>> 84e42047386591da72a244b1ed2e7d9424deb609
+    private List<BoardsImage> boardsImageList;
 }

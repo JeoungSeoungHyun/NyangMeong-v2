@@ -31,13 +31,13 @@ public class CommentsController {
         return new ResponseDto<>(1, "성공", null);
     }
 
-    @PostMapping("/s/post/{postId}/comment")
+    @PostMapping("/s/boards/{postId}/comment")
     public String write(@PathVariable Integer boardstId, Comment comment) { // x-www-form~~
         User principal = (User) session.getAttribute("principal");
 
         comment.setUser(principal);
         commentService.댓글쓰기(comment, boardstId);
-        return "redirect:/post/" + boardstId;
+        return "redirect:/boards/" + boardstId;
     }
 
 }

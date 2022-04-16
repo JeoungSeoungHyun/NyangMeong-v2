@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
-=======
-import spring.project.nyangmong.domain.image.Image;
->>>>>>> 84e42047386591da72a244b1ed2e7d9424deb609
 import spring.project.nyangmong.domain.image.ImageRepository;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;

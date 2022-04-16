@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlaceRepository extends JpaRepository<Places, Integer> {
-
+    @Query(value = "SELECT * FROM places WHERE contentSeq = :contentSeq", nativeQuery = true)
+    Places placesDetail(@Param("contentSeq") String contentSeq);
 }
