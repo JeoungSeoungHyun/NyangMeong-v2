@@ -19,7 +19,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+<<<<<<< HEAD
 import spring.project.nyangmong.domain.image.PublicDataImage;
+=======
+import spring.project.nyangmong.domain.image.Image;
+>>>>>>> 84e42047386591da72a244b1ed2e7d9424deb609
 import spring.project.nyangmong.domain.placelikes.PlaceLikes;
 
 @Builder
