@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring.project.nyangmong.domain.image.Image;
+import spring.project.nyangmong.domain.image.PublicDataImage;
 import spring.project.nyangmong.domain.placelikes.PlaceLikes;
 
 @Builder
@@ -162,7 +162,7 @@ public class Places {
     // 이미지 목록
     @JsonIgnoreProperties({ "places" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE) // 연관관계의 주인의변수명
-    private List<Image> imageList;
+    private List<PublicDataImage> imageList;
 
     @JsonIgnoreProperties({ "places" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명

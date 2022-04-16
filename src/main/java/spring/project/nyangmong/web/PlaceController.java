@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.nyangmong.domain.image.Image;
 import spring.project.nyangmong.domain.image.ImageRepository;
+import spring.project.nyangmong.domain.image.PublicDataImage;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.util.ContentSeqDownload;
@@ -95,9 +95,9 @@ public class PlaceController {
                 // PC05 => 병원 이미지 하나도 없어서 이미지 저장 안해야됨 => 놔두면 nullpointerexception 발생
                 if (k != 5) {
 
-                    List<Image> images = new ArrayList<>();
+                    List<PublicDataImage> images = new ArrayList<>();
                     for (int i = 0; i < placeDto.getImageList().size(); i++) {
-                        Image image = Image.builder()
+                        PublicDataImage image = PublicDataImage.builder()
                                 .imgurl(placeDto.getImageList().get(i).getImage())
                                 .places(placeEntity) // <- placeEntity
                                 .build();
