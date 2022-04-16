@@ -8,6 +8,13 @@ public class PageController {
 
     @GetMapping("/main")
     public String main() {
-        return "pages/mainPage";
+        return "pages/welcomePage";
     }
+
+
+    @GetMapping("/testjuwon")
+    public String detail() {
+        return "pages/user/findPwForm";
+    }
+
 }
