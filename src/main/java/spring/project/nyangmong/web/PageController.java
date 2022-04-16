@@ -11,10 +11,9 @@ public class PageController {
         return "pages/welcomePage";
     }
 
-
     @GetMapping("/testjuwon")
     public String detail() {
-        return "pages/user/findPwForm";
+        return "pages/user/loginForm";
     }
 
 }
