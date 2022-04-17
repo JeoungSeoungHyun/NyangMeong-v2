@@ -21,3 +21,11 @@
     outline: none;
     border-bottom: 1px solid rgb(26, 26, 26);
 }
+
+.m_auth_imgbox_pet {
+    width: 35%;
+}
+
+.m_auth_inputbox_pet {
+    width: 65%;
+}

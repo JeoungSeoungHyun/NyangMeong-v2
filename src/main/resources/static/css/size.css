@@ -164,3 +164,87 @@
 .m_mb_lg {
     margin-bottom: 40px;
 }
+
+
+/* 마진 xl */
+
+.m_m_xl {
+    margin: 60px;
+}
+
+.m_mh_xl {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.m_ml_xl {
+    margin-left: 60px;
+}
+
+.m_mr_xl {
+    margin-right: 60px;
+}
+
+.m_mt_xl {
+    margin-top: 60px;
+}
+
+.m_mb_xl {
+    margin-bottom: 60px;
+}
+
+
+/* 마진 xxl */
+
+.m_m_xxl {
+    margin: 100px;
+}
+
+.m_mh_xxl {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.m_ml_xxl {
+    margin-left: 100px;
+}
+
+.m_mr_xxl {
+    margin-right: 100px;
+}
+
+.m_mt_xxl {
+    margin-top: 100px;
+}
+
+.m_mb_xxl {
+    margin-bottom: 100px;
+}
+
+
+/* 마진 xxxl */
+
+.m_m_xxxl {
+    margin: 200px;
+}
+
+.m_mh_xxxl {
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.m_ml_xxxl {
+    margin-left: 200px;
+}
+
+.m_mr_xxxl {
+    margin-right: 200px;
+}
+
+.m_mt_xxxl {
+    margin-top: 200px;
+}
+
+.m_mb_xxxl {
+    margin-bottom: 200px;
+}

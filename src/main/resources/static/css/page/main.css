@@ -179,14 +179,14 @@ body {
 .carousel-inner,
 .carousel,
 .carousel-container {
-    height: 500px;
+    height: 600px;
     width: 100%;
     background-position: center center;
     background-size: cover;
 }
 
 .carousel-item {
-    height: 97%;
+    height: 97.5%;
     width: 100%;
     background-position: center center;
     background-size: cover;
