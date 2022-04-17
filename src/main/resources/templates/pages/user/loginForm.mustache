@@ -13,9 +13,9 @@
     <div class="container mt-3" style="width: 400px;">
 
         <!-- 로그인 폼 시작 -->
-        <form>
+        <form action="/login" method="post">
             <div class="mb-3 mt-3">
-                <input id="username" type="text" class=" my_auth_form_box_input form-control" name="username"
+                <input id="user-id" type="text" class=" my_auth_form_box_input form-control" name="userId"
                     placeholder="Enter ID" required maxlength="20">
             </div>
             <div class="mb-3">
@@ -27,7 +27,7 @@
                     <input id="remember" class="form-check-input" type="checkbox"> Remember me
                 </label>
             </div>
-            <button style="background-color: #E1E2E1; float: right;" id="btn-login" type="button"
+            <button style="background-color: #E1E2E1; float: right;" id="btn-login" type="submit"
                 class="btn">로그인</button>
         </form>
         <!-- 로그인 폼 끝 -->

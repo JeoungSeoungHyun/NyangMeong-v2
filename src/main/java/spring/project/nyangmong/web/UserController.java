@@ -26,6 +26,14 @@ public class UserController {
     // return "redirect:/";
     // }
 
+    // 로그인
+    @PostMapping("/login")
+    public String login(User user) {
+        User userEntity = userService.로그인(user);
+        session.setAttribute("principal", userEntity);
+        return "redirect:/";
+    }
+
     // 회원가입
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
