@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
 
-<<<<<<< HEAD
     @GetMapping({ "/", "main" })
     public String main() {
         return "pages/mainPage";
@@ -21,7 +20,7 @@ public class PageController {
     public String outline() {
         return "pages/list/outlineList";
     }
-=======
+
     @GetMapping("/mainPage")
     public String mainPage() {
         return "pages/mainPage";
@@ -107,20 +106,20 @@ public class PageController {
         return "pages/user/findPwForm";
     }
 
-    @GetMapping("/joinForm")
-    public String joinForm() {
-        return "pages/user/joinForm";
-    }
+    // @GetMapping("/joinForm")
+    // public String joinForm() {
+    // return "pages/user/joinForm";
+    // }
 
     @GetMapping("/likeList")
     public String likeList() {
         return "pages/user/likeList";
     }
 
-    @GetMapping("/loginForm")
-    public String loginForm() {
-        return "pages/user/loginForm";
-    }
+    // @GetMapping("/loginForm")
+    // public String loginForm() {
+    // return "pages/user/loginForm";
+    // }
 
     @GetMapping("/userChange")
     public String userChange() {
@@ -147,5 +146,4 @@ public class PageController {
         return "pages/post/noticeUpdateForm";
     }
 
->>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023
 }
