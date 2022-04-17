@@ -32,13 +32,13 @@ public class UserApiController {
         return new ResponseDto<>(1, "성공", null);
     }
 
-    @PostMapping("/join")
-    public ResponseDto<?> join(@RequestBody JoinDto joinDto) {
+    // @PostMapping("/join")
+    // public ResponseDto<?> join(@RequestBody JoinDto joinDto) {
 
-        userService.회원가입(joinDto);
+    // userService.회원가입(joinDto);
 
-        return new ResponseDto<>(1, "회원가입성공", null);
-    }
+    // return new ResponseDto<>(1, "회원가입성공", null);
+    // }
 
     @PostMapping("/login")
     public ResponseDto<?> login(@RequestBody LoginDto loginDto, HttpServletResponse response) {

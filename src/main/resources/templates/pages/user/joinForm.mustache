@@ -10,18 +10,16 @@
             <div class="my_error_box my_hidden">
             </div>
             <form action="/join" method="post" onsubmit="return validation()">
-                <input id="username" class="my_auth_form_box_input" type="text" name="username" placeholder="Enter ID"
+                <input class="my_auth_form_box_input" type="text" name="userId" placeholder="Enter ID" maxlength="20"
+                    required />
+                <input class="my_auth_form_box_input" type="text" name="userName" placeholder="Enter NAME"
+                    maxlength="40" required />
+                <input class="my_auth_form_box_input" type="password" name="password" placeholder="Enter PASSWORD"
                     maxlength="20" required />
-                <input id="password" class="my_auth_form_box_input" type="password" name="password"
-                    placeholder="Enter PASSWORD" maxlength="20" required />
-                <input id="same-password" class="my_auth_form_box_input" type="password" name=""
-                    placeholder="Check PASSWORD" maxlength="20" required />
-                <input class="my_auth_form_box_input" type="text" name="phonenumber" placeholder="Enter PHONENUMBER"
+                <input class="my_auth_form_box_input" type="password" name="" placeholder="Check PASSWORD"
                     maxlength="20" required />
                 <input class="my_auth_form_box_input" type="email" name="email" placeholder="Enter EMAIL" maxlength="60"
                     required />
-                <input class="my_auth_form_box_input" type="text" name="addr" placeholder="Enter ADDRESS"
-                    maxlength="100" required />
                 <button type="submit" style="background-color: #E1E2E1; float: right; margin-top: 20px;"
                     class="btn">회원가입</button>
             </form>
@@ -30,6 +28,6 @@
     </div>
     <br />
 </div>
-<script src="/js/joinform.js"></script>
+<!-- <script src="/js/joinform.js"></script> -->
 
 {{> /layout/footer}}

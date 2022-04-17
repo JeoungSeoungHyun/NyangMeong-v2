@@ -9,15 +9,17 @@ import spring.project.nyangmong.domain.user.User;
 @NoArgsConstructor
 @Data
 public class JoinDto {
+    private String userId;
     private String userName;
     private String password;
-    private String phoneNum;
+    private String email;
 
     public User toEntity() {
         User user = new User();
-        user.setUserName(this.userName);
-        user.setPassword(this.password);
-        user.setPhoneNum(this.phoneNum);
+        user.setUserId(userId);
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setEmail(email);
         return user;
     }
 }

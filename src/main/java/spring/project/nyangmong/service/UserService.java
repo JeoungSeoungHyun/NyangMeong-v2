@@ -1,5 +1,10 @@
 package spring.project.nyangmong.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +19,9 @@ import spring.project.nyangmong.web.dto.members.user.LoginDto;
 public class UserService {
     private final UserRepository userRepository;
 
+    // 회원가입
     @Transactional
     public void 회원가입(JoinDto joinDto) {
-        // save하면 db에 insert하고 insert된 결과를 다시 return 해준다.
         userRepository.save(joinDto.toEntity());
     }
 
