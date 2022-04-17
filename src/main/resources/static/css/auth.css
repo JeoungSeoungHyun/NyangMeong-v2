@@ -1,24 +1,31 @@
-.my_auth_box{
+.my_auth_box {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.my_auth_form_box{
+.my_auth_form_box {
     width: 900px;
-    height: 550px;
     padding: 70px;
 }
 
-.my_auth_form_box_input{
+.my_auth_form_box_input {
     height: 50px;
     width: 100%;
     display: block;
     border: none;
-    border-bottom: 1px solid rgb(185,185,185);
+    border-bottom: 1px solid rgb(185, 185, 185);
 }
 
-.my_auth_form_box_input:focus{
+.my_auth_form_box_input:focus {
     outline: none;
-    border-bottom: 1px solid rgb(26,26,26);
+    border-bottom: 1px solid rgb(26, 26, 26);
+}
+
+.m_auth_imgbox_pet {
+    width: 35%;
+}
+
+.m_auth_inputbox_pet {
+    width: 65%;
 }

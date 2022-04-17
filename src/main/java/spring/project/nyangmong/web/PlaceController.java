@@ -47,7 +47,6 @@ public class PlaceController {
         dto.setProvisionFlagShow(placeService.옵션표시(places.getProvisionFlag()));
         dto.setInOutFlagShow(placeService.옵션표시(places.getInOutFlag()));
         dto.setPetFlagShow(placeService.옵션표시(places.getPetFlag()));
-
         // List<PlaceDto> placesDto = new ArrayList<>();
 
         model.addAttribute("imageList", dto);

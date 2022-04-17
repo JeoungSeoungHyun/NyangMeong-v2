@@ -4,19 +4,28 @@
     font-family: 'Do Hyeon', sans-serif;
 }
 
-.m_txt_info{
+.m_txt_info {
     font-family: 'Poor Story', cursive;
 }
 
-.m_txt_main{
+.m_txt_main {
     font-family: 'Black Han Sans', sans-serif;
 }
+
 
 /* a 태그 밑줄 없애기 + 색 */
 
 a {
     text-decoration: none;
     color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+i:hover {
+    cursor: pointer;
 }
 
 
@@ -35,21 +44,23 @@ a {
     border-top-right-radius: 25px;
 }
 
+
 /* 박스 테두리 */
+
 .m_box_outline {
     border: 1px solid black;
 }
 
 
 /* 로그인,회원가입,아이디비밀번호 찾기 아우터 */
-.m_outer_notice_category{
+
+.m_outer_notice_category {
     width: 400px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .m_box_notice_category {
     padding: 40px;
-    background-color: #FFE082;
     text-align: center;
 }
 
@@ -86,15 +97,33 @@ a {
 /* 버튼 */
 
 .m_btn {
-    background-color: #E1E2E1;
+    background-color: #6D595A;
     border-radius: 10px;
-    margin-bottom: 20px;
-    float: right;
+    margin-bottom: 10px;
+    color: #E1E2E1;
 }
 
+
 /* 알아보기 및 상세보기, 댕냥이자랑 페이지 이미지박스 */
-.m_box_image{
+
+.m_box_image {
     width: 100%;
     height: 100%;
     margin-top: 25px;
+}
+
+
+/* content 높이 (푸터 하단 고정) */
+
+.m_box_outer {
+    height: 70vh;
+}
+
+.m_box_auth {
+    height: 70vh;
+    border: 1px solid #b4b2b2;
+    border-radius: 10px;
+    padding: 20px;
+    width: 500px;
+    margin-top: 40px;
 }

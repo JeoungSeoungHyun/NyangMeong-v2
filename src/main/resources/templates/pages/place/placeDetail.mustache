@@ -7,20 +7,21 @@
         <!-- 메뉴 박스 아우터 시작-->
         <div class="m_outer_menu_detail" style="margin-bottom: 80px; margin-top: 30px;">
             <!-- 메뉴 박스 시작 -->
-            <div class="m_box_menu_detail m_bg_primary">
-                <a href="spotlist.mustache" class="m_txt_title">관광지</a>
+            <!-- 메뉴 박스 시작 -->
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a href="/places/spot" class="m_txt_title">관광지</a>
             </div>
             <div class=" m_box_menu_detail m_bg_secondary">
-                <a href="hotellist.mustache" class="m_txt_title">숙박</a>
+                <a href="/places/hotel" class="m_txt_title">숙박</a>
             </div>
             <div class="m_box_menu_detail m_bg_secondary">
-                <a href="cafelist.mustache" class="m_txt_title">식음료</a>
+                <a href="/places/cafe" class="m_txt_title">식음료</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_primary">
+                <a href="/places/activity" class="m_txt_title">체험</a>
             </div>
             <div class="m_box_menu_detail m_bg_secondary">
-                <a href="playlist.mustache" class="m_txt_title">체험</a>
-            </div>
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="hospitallist.mustache" class="m_txt_title">동물병원</a>
+                <a href="/places/hospital" class="m_txt_title">동물병원</a>
             </div>
             <!-- 메뉴 박스  끝-->
         </div>
@@ -32,11 +33,17 @@
     <div class="mx-auto m_mh_md">
         <div class="d-flex m_pt_lg " style="justify-content: space-evenly; align-items: center ">
             <div class="col-lg-6" style="height: 100%;">
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
                 <div id="demo" class="carousel slide container" style="width: 100%;" data-bs-ride="carousel">
+=======
+                <div id="demo" class="slide container" style="width: 100%;" data-bs-ride="carousel">
+
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                     <!-- The slideshow/carousel -->
                     {{#imageList}}
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="2000">
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
                             <img style=" border-radius: 25px; object-fit:cover; width: 100%; height:400px"
                                  alt="#" class="m_box_img_slide">
                         </div>
@@ -58,18 +65,39 @@
             <!-- 좋아요,즐찾버튼 시작 -->
             <div class="m_bg_primary col-lg-5 d-flex" style=" border-radius: 25px;  padding: 20px">
                 <div style="position: relative;">
+=======
+                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petexperience.jpg" alt="#" class="m_box_img_slide m_mh_lg">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img style=" border-radius: 25px; object-fit:cover;  height:90%; border: 8px solid #b4b2b2;" src="images/petcafe.jpg" alt="#" class="m_box_img_slide m_mh_lg">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img style=" border-radius: 25px; object-fit:cover;  height:90%; border: 8px solid #b4b2b2;" src="images/pethotel.jpg" alt="#" class="m_box_img_slide m_mh_lg">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petclinic.jpg" alt="#" class="m_box_img_slide m_mh_lg">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petoutdoor.jpg" alt="#" class="m_box_img_slide m_mh_lg">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="m_bg_primary col-lg-5 d-flex" style=" border-radius: 25px;  padding: 20px; ">
+                <div style="position: relative">
+                    <!-- 좋아요,즐찾버튼 시작 -->
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                     <div class="d-flex" style="position: absolute; left: 350px; top: -35px">
-                        <div class="d-flex bg-light"
-                            style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i class="large fas fa-heart"></i>
+                        <div class="d-flex bg-light" style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
+                            <i id="btn-like" class="material-icons">favorite_border</i>
                         </div>
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i class="large fas fa-star"></i>
+                        <div class="d-flex bg-light m_ml_sm" style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
+                            <i id="btn-favorite" class="material-icons">star_border</i>
                         </div>
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i class="fa-solid fa-gear"></i>
+                        <div class="d-flex bg-light m_ml_sm" style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
+                            <i id="btn-setting" class="fa-solid fa-gear"></i>
                         </div>
                     </div>
                     <!-- 좋아요, 즐찾버튼 끝 -->
@@ -97,50 +125,67 @@
                     </div>
 
 
-                    <div class="m_ph_sm d-flex">
+                    <div class="m_ph_sm d-flex col-lg-7" style="overflow-x:auto; ">
                         <!-- 여러개인경우 슬라이드?-->
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
                             <img src="images/shower.png" style="width: 50px; height: 50px;">
                             <div id="bathFlag" style="font-size: small;">목욕가능</div>
                         </div>
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
 
                         <div class="d-flex bg-light m_ml_sm"
                             style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+=======
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                             <img src="images/parking.png" style="width: 50px; height: 50px;">
                             <div id="parkingFlag" style="font-size: small;">주차</div>
                         </div>
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
 
                         <div class="d-flex bg-light m_ml_sm"
                             style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+=======
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                             <img src="images/entrancefee.png" style="width: 50px; height: 50px;">
                             <div id="entranceFlag" style="font-size: small;">유료</div>
                         </div>
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
 
                         <div class="d-flex bg-light m_ml_sm"
                             style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+=======
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                             <img src="images/limitweight.png" style="width: 50px; height: 50px;">
                             <div id="petWeight" style="font-size: small;">무게제한</div>
                         </div>
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
 
                         <div class="d-flex bg-light m_ml_sm"
                             style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+=======
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                             <img src="images/emergency.png" style="width: 50px; height: 50px;">
                             <div id="emergencyFlag" style="font-size: small;">응급수칙</div>
                         </div>
+<<<<<<< HEAD:src/main/resources/templates/pages/detail/placeDetail.mustache
 
                         <div class="d-flex bg-light m_ml_sm"
                             style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+=======
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/place/placeDetail.mustache
                             <img src="images/inventory.png" style="width: 50px; height: 50px;">
                             <div id="provisionFlag" style="font-size: small;">비품제공</div>
                         </div>
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
                             <img src="images/outdoor.png" style="width: 50px; height: 50px;">
                             <div id="inOutFlag" style="font-size: small;">실외</div>
                         </div>
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
+                        <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
                             <img src="images/petrestaurant.png" style="width: 50px; height: 50px;">
                             <div id="petFlag" style="font-size: small;">펫 식당</div>
                         </div>
@@ -209,9 +254,28 @@
 </div>
 
 <script>
-    $("#btn-search").click(() => {
-        $("#panel").slideToggle("slow");
+    //  좋아요 버튼 활성화, 비활성화
+    $("#btn-like").click((event) => {
+        let status = $("#btn-like")[0].innerText;
+        console.log(status);
+        if (status == "favorite_border") {
+            $("#btn-like")[0].innerText = 'favorite';
+        } else {
+            $("#btn-like")[0].innerText = 'favorite_border';
+        }
     });
+    // 즐겨찾기 버튼 활성화, 비활성화
+    $("#btn-favorite").click((event) => {
+        let status = $("#btn-favorite")[0].innerText;
+        console.log(status);
+        if (status == "star_border") {
+            $("#btn-favorite")[0].innerText = 'star';
+        } else {
+            $("#btn-favorite")[0].innerText = 'star_border';
+        }
+    });
+
+
 
     var latitude = {{places.latitude}};
     var longitude =  {{places.longitude}};

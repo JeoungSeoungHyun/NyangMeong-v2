@@ -8,12 +8,16 @@
     background-color: #E1E2E1;
 }
 
+.m_bg_third {
+    background-color: #6D595A;
+}
+
 .m_bg_active {
     background-color: #FFDEA0;
 }
 
 .m_bg_inactive {
-    background-color: #ebeaea;
+    background-color: #b4b2b2;
 }
 
 
@@ -21,4 +25,8 @@
 
 .m_text_dark {
     color: rgb(25, 25, 25);
+}
+
+.m_text_white {
+    color: #E1E2E1;
 }

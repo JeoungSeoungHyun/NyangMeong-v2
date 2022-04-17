@@ -1,12 +1,43 @@
 {{> /layout/header}}
 
 <body>
+<<<<<<< HEAD:src/main/resources/templates/pages/list/likeList.mustache
                 <br>
             <br>
     <h1 class="text-center m_txt_title  m_ph_md">내가 좋아요한 글</h1>
     <hr>
             {{>/layout/userDetailMenu}} 
+=======
+
+    <!-- 상세보기 메뉴 시작-->
+    <div class="container mx-auto m_mh_lg ">
+        <!-- 메뉴 박스 아우터 시작-->
+        <div class="m_outer_menu_detail">
+            <!-- 메뉴 박스 시작 -->
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/detail">회원정보</a>
+            </div>
+            <div class=" m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/boardlike">좋아요</a>
+            </div>
+            <div class="m_box_menu_detail bg-warning">
+                <a class="m_txt_title" href="/s/user/{{id}}/commentlist">내가 쓴 댓글</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/favlist">즐겨찾기</a>
+            </div>
+            <!-- 메뉴 박스  끝-->
+        </div>
+        <!-- 메뉴 박스 아우터 끝-->
+    </div>
+    <!-- 상세보기 메뉴 끝-->
+
+    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">좋아요</h1>
+
+
+>>>>>>> dfdea1f47fffd5e2a7e10e4e43189e9b7a538023:src/main/resources/templates/pages/user/likeList.mustache
     <div class="container m_pt_md">
+        <hr>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
@@ -19,8 +50,7 @@
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group d-flex">
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     카테고리
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -50,8 +80,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -62,8 +92,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -74,8 +104,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -86,8 +116,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -98,8 +128,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -110,8 +140,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -122,8 +152,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -134,8 +164,8 @@
                         <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                     </a>
                     <div class="caption">
-                        <div class="m_txt_info m_lg_font m_font_bold">이름</div>
-                        <div class="m_txt_info"><i class="fa-solid fa-location-dot"></i>주소</div>
+                        <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
+                        <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
 
                     </div>
                 </div>
@@ -144,6 +174,4 @@
         </div>
 
     </div>
-</body>
-
-{{> /layout/footer}}
+    {{> /layout/footer}}

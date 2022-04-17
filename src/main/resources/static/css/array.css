@@ -1,11 +1,13 @@
-/* 오른쪽 정렬 */
+/* 오른쪽 정렬 박스 */
 
-.m_right {
-    float: right;
+.m_box_right {
+    display: flex;
+    justify-content: end;
 }
+
 
 /* 가운데정렬 */
 
-.m_center{
+.m_center {
     margin: 0 auto;
 }
