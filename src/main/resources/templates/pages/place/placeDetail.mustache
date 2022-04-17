@@ -69,13 +69,13 @@
                     <!-- 좋아요,즐찾버튼 시작 -->
                     <div class="d-flex" style="position: absolute; left: 350px; top: -35px">
                         <div class="d-flex bg-light" style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i class="large fas fa-heart"></i>
+                            <i id="btn-like" class="material-icons">favorite_border</i>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i class="large fas fa-star"></i>
+                            <i id="btn-favorite" class="material-icons">star_border</i>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i class="fa-solid fa-gear"></i>
+                            <i id="btn-setting" class="fa-solid fa-gear"></i>
                         </div>
                     </div>
                     <!-- 좋아요, 즐찾버튼 끝 -->
@@ -180,9 +180,30 @@
 </div>
 
 <script>
-    $("#btn-search").click(() => {
-        $("#panel").slideToggle("slow");
+    //  좋아요 버튼 활성화, 비활성화
+    $("#btn-like").click((event) => {
+        let status = $("#btn-like")[0].innerText;
+        console.log(status);
+        if (status == "favorite_border") {
+            $("#btn-like")[0].innerText = 'favorite';
+        } else {
+            $("#btn-like")[0].innerText = 'favorite_border';
+        }
     });
+    // 즐겨찾기 버튼 활성화, 비활성화
+    $("#btn-favorite").click((event) => {
+        let status = $("#btn-favorite")[0].innerText;
+        console.log(status);
+        if (status == "star_border") {
+            $("#btn-favorite")[0].innerText = 'star';
+        } else {
+            $("#btn-favorite")[0].innerText = 'star_border';
+        }
+    });
+    $("#btn-setting").click((event) => {
+        alert(event);
+    })
+
 
     //지도 옵션
     var mapOptions = {

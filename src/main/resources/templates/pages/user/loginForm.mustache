@@ -1,32 +1,28 @@
 {{> /layout/header}}
+<div class="m_box_auth mx-auto">
 
-<body class="m_center">
-
-    <div class="container mt-3">
-        <br>
-        <h1 class="text-center m_txt_title">로그인</h1>
-        <br>
+    <div class="m_pt_md text-center">
+        <h1 class="m_txt_title m_ph_lg">로그인</h1>
     </div>
-    <br>
 
     <!-- 컨테이너 시작 -->
-    <div class="container mt-3" style="width: 400px;">
+    <div class="mx-auto" style="width: 400px;">
 
         <!-- 로그인 폼 시작 -->
         <form>
-            <div class="mb-3 mt-3">
+            <div class="m_mh_md">
                 <input id="username" type="text" class=" my_auth_form_box_input form-control" name="username" placeholder="Enter ID" required maxlength="20">
             </div>
-            <div class="mb-3">
+            <div class="m_mb_md">
                 <input id="password" type="password" class="form-control my_auth_form_box_input" name="password" placeholder="Enter PASSWORD" required maxlength="20">
             </div>
-            <div class="form-check mb-3">
+            <div class="form-check m_mb_md">
                 <label class="form-check-label">
                     <input id="remember" class="form-check-input" type="checkbox"> Remember me
                 </label>
             </div>
             <div class="d-flex" style="justify-content: space-between;">
-                <div class="m_pt_sm">
+                <div class="m_pt_md">
                     <a href="findIdForm" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
                         아이디 찾기
                     </a>
@@ -35,13 +31,12 @@
                         비밀번호 찾기
                     </a>
                 </div>
-                <button style="background-color: #E1E2E1;" id="btn-login" type="button" class="btn">로그인</button>
+                <button id="btn-login" type="button" class="btn m_bg_secondary">로그인</button>
             </div>
         </form>
         <!-- 로그인 폼 끝 -->
     </div>
-
-    <!-- 컨테이너 끝 -->
-</body>
+</div>
+<!-- 컨테이너 끝 -->
 
 {{> /layout/footer}}
