@@ -121,4 +121,14 @@ public class PageController {
         return "pages/user/commentList";
     }
 
+    @GetMapping("/noticeDetail")
+    public String noticeDetail() {
+        return "pages/post/noticeDetail";
+    }
+
+    @GetMapping("/noticeUpdateForm")
+    public String noticeUpdateForm() {
+        return "pages/post/noticeUpdateForm";
+    }
+
 }
