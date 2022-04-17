@@ -11,4 +11,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User mLogin(@Param("username") String username, @Param("password") String password);
 
     boolean existsByuserName(String userName);
+
 }

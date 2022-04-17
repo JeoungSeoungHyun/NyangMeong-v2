@@ -2,21 +2,21 @@
 
 <div>
     <!-- 상세보기 메뉴 시작-->
-    <div class="container mx-auto  m_mhk_lg ">
+    <div class="container mx-auto m_mh_lg ">
         <!-- 메뉴 박스 아우터 시작-->
         <div class="m_outer_menu_detail">
             <!-- 메뉴 박스 시작 -->
-            <div class="m_box_menu_detail bg-warning">
-                <a class="m_txt_title" href="/userDetail">회원정보</a>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/detail">회원정보</a>
             </div>
             <div class=" m_box_menu_detail m_bg_secondary">
-                <a class="m_txt_title" href="/likeList">좋아요</a>
+                <a class="m_txt_title" href="/s/user/{{id}}/boardlike">좋아요</a>
+            </div>
+            <div class="m_box_menu_detail bg-warning">
+                <a class="m_txt_title" href="/s/user/{{id}}/commentlist">내가 쓴 댓글</a>
             </div>
             <div class="m_box_menu_detail m_bg_secondary">
-                <a class="m_txt_title" href="/commentList">내가 쓴 댓글</a>
-            </div>
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a class="m_txt_title" href="/favoriteList">즐겨찾기</a>
+                <a class="m_txt_title" href="/s/user/{{id}}/favlist">즐겨찾기</a>
             </div>
             <!-- 메뉴 박스  끝-->
         </div>
@@ -28,9 +28,6 @@
     <div class="container mx-auto m_outer_info_detail m_mt_xl">
         <!-- 이미지 박스 시작-->
         <div class="col-lg-6 m_mt_lg">
-            <div class="m_box_right">
-                <button class="btn m_btn">사진 수정</button>
-            </div>
 
             <div class="m_box_profile">
                 <img class="m_img_profile" src="/images/cat.jpg" alt="프로필 이미지">
@@ -60,7 +57,7 @@
             <!-- 유저 정보 박스 끝-->
             <div class="m_box_right">
                 <button class="btn m_btn">
-                    <a href="/userChange">상세보기</a> 
+                    <a class="m_text_white" href="/#">상세보기</a> 
                 </button>
             </div>
             <div class="m_inner_info_detail">
@@ -88,7 +85,7 @@
             <!-- 반려동물 정보 박스 끝-->
             <div class="m_box_right">
                 <button class="btn m_btn">
-                    <a href="/userChange">상세보기</a> 
+                    <a class="m_text_white" href="/#">상세보기</a> 
                 </button>
             </div>
         </div>

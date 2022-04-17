@@ -10,9 +10,9 @@ let valid = {
 }
 
 
-$("#username").focusout(() => {
-    usernameSameCheck();
-});
+// $("#userId").focusout(() => {
+//     usernameSameCheck();
+// });
 
 $("#password").focusout(() => {
     passwordSameCheck();
@@ -39,7 +39,7 @@ function validation() {
 
 
 async function usernameSameCheck() {
-    let username = $("#username").val();
+    let username = $("#userId").val();
 
     let response = await fetch(`/api/user/username-same-check?username=${username}`);
     let responseParse = await response.json();

@@ -9,19 +9,19 @@
             <!-- 메뉴 박스 시작 -->
             <!-- 메뉴 박스 시작 -->
             <div class="m_box_menu_detail m_bg_secondary">
-                <a href="/spotList" class="m_txt_title">관광지</a>
+                <a href="/places/spot" class="m_txt_title">관광지</a>
             </div>
             <div class=" m_box_menu_detail m_bg_secondary">
-                <a href="/hotelList" class="m_txt_title">숙박</a>
+                <a href="/places/hotel" class="m_txt_title">숙박</a>
             </div>
             <div class="m_box_menu_detail m_bg_secondary">
-                <a href="/cafeList" class="m_txt_title">식음료</a>
+                <a href="/places/cafe" class="m_txt_title">식음료</a>
             </div>
             <div class="m_box_menu_detail m_bg_primary">
-                <a href="/activityList" class="m_txt_title">체험</a>
+                <a href="/places/activity" class="m_txt_title">체험</a>
             </div>
             <div class="m_box_menu_detail m_bg_secondary">
-                <a href="/hospitalList" class="m_txt_title">동물병원</a>
+                <a href="/places/hospital" class="m_txt_title">동물병원</a>
             </div>
             <!-- 메뉴 박스  끝-->
         </div>
@@ -54,13 +54,7 @@
                             <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petoutdoor.jpg" alt="#" class="m_box_img_slide m_mh_lg">
                         </div>
                     </div>
-                    <!-- Left and right controls/icons -->
-                    <button class="carousel-control-prev " type="button" data-bs-target="#demo" data-bs-slide="prev">
-                        <!-- <span class="carousel-control-prev-icon"></span> -->
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                        <!-- <span class="carousel-control-next-icon"></span> -->
-                    </button>
+
                 </div>
             </div>
 
@@ -200,9 +194,7 @@
             $("#btn-favorite")[0].innerText = 'star_border';
         }
     });
-    $("#btn-setting").click((event) => {
-        alert(event);
-    })
+
 
 
     //지도 옵션
