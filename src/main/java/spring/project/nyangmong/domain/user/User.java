@@ -50,9 +50,9 @@ public class User {
     @Column(length = 20, nullable = false)
     private String password;
 
-    // 회원가입 시 받을 전화번호
+    // 회원가입 시 받을 이메일
     @Column(length = 60, nullable = false)
-    private String phoneNum;
+    private String email;
 
     // 프로필 사진 경로 저장
     @Column(length = 300)
