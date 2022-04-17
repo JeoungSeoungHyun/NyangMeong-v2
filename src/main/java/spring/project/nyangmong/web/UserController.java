@@ -4,11 +4,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.UserService;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
 
@@ -68,11 +70,12 @@ public class UserController {
         return "pages/list/commentlist";
     }
 
-    // 유저가 상세보기 - 일단은 mapping만 해둔 상태
-    @GetMapping("/user/detail")
-    public String userDetail() {
-
-        return "pages/detail/userDetail";
+    // 마이페이지 (회원정보 수정페이지)
+    @GetMapping("/s/user/{id}/detail")
+    public String userDetail(@PathVariable Integer id, Model model) {
+        User userEntity = userService.회원정보(id);
+        model.addAttribute("user", userEntity);
+        return "pages/user/userChange";
     }
 
     // 아이디 찾기- 일단은 mapping만 해둔 상태
