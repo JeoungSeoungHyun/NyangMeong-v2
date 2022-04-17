@@ -37,10 +37,6 @@ public class Pet {
     @Column(length = 60)
     private String petSpices;
 
-    // 반려동물 이미지 url
-    @Column(length = 300)
-    private String petImgurl;
-
     // 반려동물 나이
     @Column(length = 300)
     private String petAge;

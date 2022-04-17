@@ -59,7 +59,7 @@ public class UserController {
         return "pages/list/commentlist";
     }
 
-    // 유저가 상세보기 - 일단은 mapping만 해둔 상태
+    // 유저 상세보기 - 일단은 mapping만 해둔 상태
     @GetMapping("/user/detail")
     public String userDetail() {
 
