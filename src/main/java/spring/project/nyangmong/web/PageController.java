@@ -38,7 +38,7 @@ public class PageController {
 
     @GetMapping("/noticeWriteForm")
     public String noticeWriteForm() {
-        return "pages/place/noticeWriteForm";
+        return "pages/post/noticeWriteForm";
     }
 
     @GetMapping("/activityList")

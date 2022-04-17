@@ -62,34 +62,34 @@
                 <h3 class="m_txt_title">검색</h3>
             </div>
             <form class="container">
-                <input class="form-control m_ph_sm" type="text" placeholder="주소 또는 명칭으로 검색하실 수 있습니다">
+                <input class="form-control m_ph_sm " type="text" placeholder="주소 또는 명칭으로 검색하실 수 있습니다">
             </form>
             <div class="d-flex m_box_search_category">
-                <a href="#">
+                <a href="/spotList">
                     <div>
                         <i class="fa-solid fa-flag"></i>
                     </div>
                     <div>관광</div>
                 </a>
-                <a href="#">
+                <a href="/hotelList">
                     <div>
                         <i class="fa-solid fa-bed"></i>
                     </div>
                     <div>숙박</div>
                 </a>
-                <a href="#">
+                <a href="/cafeList">
                     <div>
                         <i class="fa-solid fa-mug-hot"></i>
                     </div>
                     <div>식음료</div>
                 </a>
-                <a href="#">
+                <a href="/activityList">
                     <div>
                         <i class="fa-solid fa-volleyball"></i>
                     </div>
                     <div>체험</div>
                 </a>
-                <a href="#">
+                <a href="/hospitalList">
                     <div>
                         <i class="fa-solid fa-house-chimney-medical"></i>
                     </div>

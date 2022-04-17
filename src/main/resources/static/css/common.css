@@ -89,10 +89,10 @@ a {
 /* 버튼 */
 
 .m_btn {
-    background-color: #E1E2E1;
+    background-color: #6D595A;
     border-radius: 10px;
-    margin-bottom: 20px;
-    float: right;
+    margin-bottom: 10px;
+    color: #E1E2E1;
 }
 
 
