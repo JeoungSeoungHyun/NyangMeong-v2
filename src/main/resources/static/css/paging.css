@@ -1,0 +1,8 @@
+.paging-div { 
+    padding: 15px 0 5px 10px; 
+    display: table; 
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: 30px;
+    text-align: center; 
+}
