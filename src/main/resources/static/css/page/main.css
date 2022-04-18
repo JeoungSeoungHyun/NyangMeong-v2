@@ -342,5 +342,38 @@ body {
 
 /* 이미지 슬라이드 끝*/
 
+/* 좋아요 이미지 탭 키  */
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	background: #FFE082;
+	color: #222;    
+    border: 1px solid #E1E2E1;
+}
+
+.tab-content{
+	display: none;
+	background: white;
+	padding: 15px;
+    border: 2px solid #E1E2E1;
+}
+
+.tab-content.current{
+	display: inherit;
+}
+
+
+
 
 /* 메인 페이지 끝 */
