@@ -145,9 +145,17 @@
         var marker = new naver.maps.Marker(markerOptions);
 
         //좋아요 탭
-        $("#mytabs>ul>li>a").each(function(i) {
-            $(this).attr("href", "#mytab" + i)
+
+    $(document).ready(function () {
+
+        $('ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#" + tab_id).addClass('current');
         })
-        $("#mytabs>div>div").each(function(i) {
-            $(this).attr("id", "mytab" + i)
-        })
+
+    })
