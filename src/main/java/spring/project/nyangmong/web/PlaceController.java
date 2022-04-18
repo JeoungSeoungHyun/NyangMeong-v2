@@ -37,7 +37,7 @@ public class PlaceController {
     // 상세보기
 
     @GetMapping("/place/{contentSeq}")
-    public @ResponseBody Places detailPlaces(@PathVariable Integer contentSeq, Model model) {
+    public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
         Places places = placeService.상세보기(contentSeq);
         List<PublicDataImage> imageList = imageRepository.ImagecontentSeq(contentSeq);
         ImageListDto dto = new ImageListDto();
@@ -53,7 +53,7 @@ public class PlaceController {
 
         model.addAttribute("imageList", dto);
         model.addAttribute("places", places);
-        return places;
+        return "pages/place/placeDetail";
     }
 
     // 검색- 쿼리스트링 이용가능
