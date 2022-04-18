@@ -8,27 +8,27 @@
         <div class="m_outer_menu_detail" style="margin-bottom: 80px; margin-top: 30px;">
             <!-- 메뉴 박스 시작 -->
             <!-- 메뉴 박스 시작 -->
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="/places/spot" class="m_txt_title">관광지</a>
+            <div id="box-관광지" class="m_box_menu_detail m_bg_secondary">
+                <a id="spot" href="/places/spot" class="m_txt_title">관광지</a>
             </div>
-            <div class=" m_box_menu_detail m_bg_secondary">
-                <a href="/places/hotel" class="m_txt_title">숙박</a>
+            <div id="box-숙박" class=" m_box_menu_detail m_bg_secondary">
+                <a id="hotel" href="/places/hotel" class="m_txt_title">숙박</a>
             </div>
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="/places/cafe" class="m_txt_title">식음료</a>
+            <div id="box-식음료" class="m_box_menu_detail m_bg_secondary">
+                <a id="cafe" href="/places/cafe" class="m_txt_title">식음료</a>
             </div>
-            <div class="m_box_menu_detail m_bg_primary">
-                <a href="/places/activity" class="m_txt_title">체험</a>
+            <div id="box-체험" class="m_box_menu_detail m_bg_primary">
+                <a id="activity" href="/places/activity" class="m_txt_title">체험</a>
             </div>
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="/places/hospital" class="m_txt_title">동물병원</a>
+            <div id="box-동물병원" class="m_box_menu_detail m_bg_secondary">
+                <a id="hospital" href="/places/hospital" class="m_txt_title">동물병원</a>
             </div>
             <!-- 메뉴 박스  끝-->
         </div>
 
     </div>
     {{#places}}
-    <h2 class="text-center m_txt_title ">{{partName}}</h2>
+        <h2 id="title"  class="text-center m_txt_title ">{{partName}}</h2>
     <hr>
     <div class="mx-auto m_mh_md">
         <div class="d-flex m_pt_lg " style="justify-content: space-evenly; align-items: center ">
@@ -36,25 +36,13 @@
                 <div id="demo" class="slide container" style="width: 100%;" data-bs-ride="carousel">
 
                     <!-- The slideshow/carousel -->
-                    {{#imageList}}
                     <div class="carousel-inner">
+                        {{#imageList}}
                         <div class="carousel-item active" data-bs-interval="2000">
-                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petexperience.jpg" alt="#" class="m_box_img_slide m_mh_lg">
+                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="{{imgurl}}" alt="#" class="m_box_img_slide m_mh_lg">
                         </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img style=" border-radius: 25px; object-fit:cover;  height:90%; border: 8px solid #b4b2b2;" src="images/petcafe.jpg" alt="#" class="m_box_img_slide m_mh_lg">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img style=" border-radius: 25px; object-fit:cover;  height:90%; border: 8px solid #b4b2b2;" src="images/pethotel.jpg" alt="#" class="m_box_img_slide m_mh_lg">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="5000">
-                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petclinic.jpg" alt="#" class="m_box_img_slide m_mh_lg">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="5000">
-                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;" src="images/petoutdoor.jpg" alt="#" class="m_box_img_slide m_mh_lg">
-                        </div>
+                        {{/imageList}}
                     </div>
-
                 </div>
             </div>
 
@@ -100,35 +88,35 @@
                     <div class="m_ph_sm d-flex col-lg-7" style="overflow-x:auto; ">
                         <!-- 여러개인경우 슬라이드?-->
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/shower.png" style="width: 50px; height: 50px;">
+                            <img src="/images/shower.png" style="width: 50px; height: 50px;">
                             <div id="bathFlag" style="font-size: small;">목욕가능</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/parking.png" style="width: 50px; height: 50px;">
+                            <img src="/images/parking.png" style="width: 50px; height: 50px;">
                             <div id="parkingFlag" style="font-size: small;">주차</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/entrancefee.png" style="width: 50px; height: 50px;">
+                            <img src="/images/entrancefee.png" style="width: 50px; height: 50px;">
                             <div id="entranceFlag" style="font-size: small;">유료</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/limitweight.png" style="width: 50px; height: 50px;">
+                            <img src="/images/limitweight.png" style="width: 50px; height: 50px;">
                             <div id="petWeight" style="font-size: small;">무게제한</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/emergency.png" style="width: 50px; height: 50px;">
+                            <img src="/images/emergency.png" style="width: 50px; height: 50px;">
                             <div id="emergencyFlag" style="font-size: small;">응급수칙</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/inventory.png" style="width: 50px; height: 50px;">
+                            <img src="/images/inventory.png" style="width: 50px; height: 50px;">
                             <div id="provisionFlag" style="font-size: small;">비품제공</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/outdoor.png" style="width: 50px; height: 50px;">
+                            <img src="/images/outdoor.png" style="width: 50px; height: 50px;">
                             <div id="inOutFlag" style="font-size: small;">실외</div>
                         </div>
                         <div class="d-flex bg-light m_ml_sm" style="flex-direction:column;  border-radius: 10px; width:80px; height:80px; justify-content: center; align-items: center; padding:10px">
-                            <img src="images/petrestaurant.png" style="width: 50px; height: 50px;">
+                            <img src="/images/petrestaurant.png" style="width: 50px; height: 50px;">
                             <div id="petFlag" style="font-size: small;">펫 식당</div>
                         </div>
                     </div>
@@ -140,7 +128,7 @@
                 <!-- 여기서부터 같은 박스 7개-->
                 <div class="d-flex">
                     <div>
-                        <img src="images/pet.png" style="width: 25px; height: 25px;" alt="">
+                        <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
                     </div>
                     <div class="m_pl_md m_txt_title m_font_xl">소개</div>
                 </div>
@@ -150,7 +138,7 @@
             <div class="m_pt_lg">
                 <!-- 여기서부터 같은 박스 7개-->
                 <div class="d-flex">
-                    <div> <img src="images/pet.png" style="width: 25px; height: 25px;" alt="">
+                    <div> <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
                     </div>
                     <div class="m_pl_md m_txt_title m_font_xl ">주요시설</div>
                 </div>
@@ -161,7 +149,7 @@
                 <!-- 여기서부터 같은 박스 7개-->
                 <div class="d-flex">
                     <div>
-                        <img src="images/pet.png" style="width: 25px; height: 25px;" alt="">
+                        <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
                     </div>
                     <div class="m_pl_md m_txt_title m_font_xl">이용요금</div>
                 </div>
@@ -172,7 +160,7 @@
                 <!-- 여기서부터 같은 박스 7개-->
                 <div class="d-flex">
                     <div>
-                        <img src="images/pet.png" style="width: 25px; height: 25px;" alt="">
+                        <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
                     </div>
                     <div class="m_pl_md m_txt_title m_font_xl">애견 정책 및 주의사항</div>
                 </div>
@@ -182,7 +170,7 @@
             <div class="m_pt_lg">
                 <!-- 여기서부터 같은 박스 7개-->
                 <div class="d-flex">
-                    <div> <img src="images/pet.png" style="width: 25px; height: 25px;" alt="">
+                    <div> <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
                     </div>
                     <div class="m_pl_md m_txt_title m_font_xl" >지도</div>
                 </div>
@@ -246,6 +234,31 @@
         icon: './img/pin_default.png'
     };
     var marker = new naver.maps.Marker(markerOptions);
+
+    // 카테고리 색 변화
+    let changeSecondary = (category)=>{
+        if($(`#box-${category}`).hasClass("m_bg_primary")==true){
+            $(`#box-${category}`).removeClass("m_bg_primary");
+            $(`#box-${category}`).addClass("m_bg_secondary");
+        };
+    }
+    let changePrimary = (category)=>{
+        $(`#box-${category}`).removeClass("m_bg_secondary");
+        $(`#box-${category}`).addClass("m_bg_primary");
+
+    }
+
+    let changeColorBox = () =>{
+
+        let list = ["숙박","관광지","체험","동물병원","식음료"];
+        for(category of list){
+            changeSecondary(category);
+        }
+        let title = $("#title").html();
+        changePrimary(`${title}`);
+    };
+    changeColorBox();
+    
 </script>
      {{/places}}
 {{>layout/footer}}

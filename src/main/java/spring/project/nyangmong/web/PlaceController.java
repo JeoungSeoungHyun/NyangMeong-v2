@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.service.PlaceService;
 import spring.project.nyangmong.util.ContentSeqDownload;
+import spring.project.nyangmong.util.OptionChange;
 import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 import spring.project.nyangmong.web.dto.places.ImageListDto;
@@ -30,14 +32,14 @@ public class PlaceController {
     private final PlaceRepository placeRepository;
     private final ImageRepository imageRepository;
     private final HttpSession session;
+    private final OptionChange change;
 
     // 상세보기
 
     @GetMapping("/place/{contentSeq}")
-    public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
+    public @ResponseBody Places detailPlaces(@PathVariable Integer contentSeq, Model model) {
         Places places = placeService.상세보기(contentSeq);
         List<PublicDataImage> imageList = imageRepository.ImagecontentSeq(contentSeq);
-
         ImageListDto dto = new ImageListDto();
         dto.setPublicDataImage(imageList);
         dto.setBathFlagShow(placeService.옵션표시(places.getBathFlag()));
@@ -51,7 +53,7 @@ public class PlaceController {
 
         model.addAttribute("imageList", dto);
         model.addAttribute("places", places);
-        return "pages/detail/placeDetail";
+        return places;
     }
 
     // 검색- 쿼리스트링 이용가능
@@ -128,15 +130,15 @@ public class PlaceController {
                         .policyCautions(placeDto.getPolicyCautions())
                         .emergencyResponse(placeDto.getEmergencyResponse())
                         .memo(placeDto.getMemo())
-                        .bathFlag(placeDto.getBathFlag())
-                        .provisionFlag(placeDto.getProvisionFlag())
-                        .petFlag(placeDto.getPetFlag())
+                        .bathFlag(new OptionChange().change(placeDto.getBathFlag()))
+                        .provisionFlag(new OptionChange().change(placeDto.getProvisionFlag()))
+                        .petFlag(new OptionChange().change(placeDto.getPetFlag()))
                         .petWeight(placeDto.getPetWeight())
                         .petBreed(placeDto.getPetBreed())
-                        .emergencyFlag(placeDto.getEmergencyFlag())
-                        .entranceFlag(placeDto.getEntranceFlag())
-                        .parkingFlag(placeDto.getParkingFlag())
-                        .inOutFlag(placeDto.getInOutFlag())
+                        .emergencyFlag(new OptionChange().change(placeDto.getEmergencyFlag()))
+                        .entranceFlag(new OptionChange().change(placeDto.getEntranceFlag()))
+                        .parkingFlag(new OptionChange().change(placeDto.getParkingFlag()))
+                        .inOutFlag(new OptionChange().change(placeDto.getInOutFlag()))
                         // 추가
                         .build();
 
