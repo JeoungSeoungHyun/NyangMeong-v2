@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 import spring.project.nyangmong.web.dto.places.ImageListDto;
 import spring.project.nyangmong.web.dto.places.PlaceListDto;
+import spring.project.nyangmong.web.dto.places.PlaceMapDto;
+import spring.project.nyangmong.web.dto.places.PlacesOptionDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -32,17 +35,52 @@ public class PlaceController {
     private final ImageRepository imageRepository;
     private final HttpSession session;
 
+    // 맵 연습중
+    // @GetMapping({ "/", "main", "mainPage" })
+    // public @ResponseBody List<String> load() {
+    // List<Places> pList = placeRepository.findAll();
+    // List<String> points = new ArrayList<>();
+    // for (int i = 0; i < pList.size(); i++) {
+    // points.add(pList.get(i).getLatitude());
+    // points.add(pList.get(i).getLongitude());
+    // }
+    // return points;
+    // }
+
     // 상세보기
 
-    @GetMapping("/place/{contentSeq}")
+    // @GetMapping("/place/{contentSeq}")
+    // public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
+    // Places places = placeService.상세보기(contentSeq);
+    // List<PublicDataImage> imageList =
+    // imageRepository.ImagecontentSeq(contentSeq);
+    // ImageListDto dto = new ImageListDto();
+    // dto.setPublicDataImage(imageList);
+
+    // // List<PlaceDto> placesDto = new ArrayList<>();
+
+    // model.addAttribute("imageList", dto);
+    // model.addAttribute("places", places);
+    // return "pages/place/placeDetail";
+    // }
+
+    @GetMapping("/place/{contentSeq}") // 이거 JSON 불러오는데 맞나요?
     public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
         Places places = placeService.상세보기(contentSeq);
         List<PublicDataImage> imageList = imageRepository.ImagecontentSeq(contentSeq);
         ImageListDto dto = new ImageListDto();
         dto.setPublicDataImage(imageList);
 
+        PlacesOptionDto option = new PlacesOptionDto();
+        option.setBathFlagShow(placeService.옵션표시(places.getBathFlag()));
+        option.setParkingFlagShow(placeService.옵션표시(places.getParkingFlag()));
+        option.setEntranceFlagShow(placeService.옵션표시(places.getEntranceFlag()));
+        option.setEmergencyFlagShow(placeService.옵션표시(places.getEmergencyFlag()));
+        option.setProvisionFlagShow(placeService.옵션표시(places.getProvisionFlag()));
+        option.setInOutFlagShow(placeService.옵션표시(places.getInOutFlag()));
+        option.setPetFlagShow(placeService.옵션표시(places.getPetFlag()));
         // List<PlaceDto> placesDto = new ArrayList<>();
-
+        model.addAttribute("option", option);
         model.addAttribute("imageList", dto);
         model.addAttribute("places", places);
         return "pages/place/placeDetail";
@@ -99,6 +137,8 @@ public class PlaceController {
     @GetMapping("/outline/search")
     public String searchOutLine(@RequestParam String keyword, Model model) {
         if (keyword == null) {
+            List<Places> places = placeRepository.findAll();
+            model.addAttribute("places", places);
             return "pages/list/outlineList";
         }
         List<Places> places = placeRepository.searchPlaces(keyword, keyword);

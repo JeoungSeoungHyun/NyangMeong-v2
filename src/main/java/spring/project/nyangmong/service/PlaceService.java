@@ -34,11 +34,6 @@ public class PlaceService {
         return pList;
     }
 
-    public List<Places> 네이버맵(String partName) {
-        List<Places> pList = placeRepository.searchPartName(partName);
-        return pList;
-    }
-
     public List<Places> 전체보기() {
         List<Places> plist = placeRepository.findAll();
         return plist;

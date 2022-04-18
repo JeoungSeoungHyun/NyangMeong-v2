@@ -1,14 +1,20 @@
 package spring.project.nyangmong.web;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import spring.project.nyangmong.domain.places.PlaceRepository;
+import spring.project.nyangmong.domain.places.Places;
 
 @Controller
 public class PageController {
 
+    // 메인 페이지 맵
     @GetMapping({ "/", "main", "mainPage" })
     public String main() {
-
         return "pages/mainPage";
     }
 

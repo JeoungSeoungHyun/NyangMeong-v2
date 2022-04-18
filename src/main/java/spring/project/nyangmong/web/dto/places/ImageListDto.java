@@ -13,12 +13,4 @@ import spring.project.nyangmong.domain.image.PublicDataImage;
 public class ImageListDto {
     private List<PublicDataImage> publicDataImage;
     private PublicDataImage ShowupImage;
-    private boolean bathFlagShow;
-    private boolean parkingFlagShow;
-    private boolean entranceFlagShow;
-    private boolean petWeightShow;
-    private boolean emergencyFlagShow;
-    private boolean provisionFlagShow;
-    private boolean inOutFlagShow;
-    private boolean petFlagShow;
 }
