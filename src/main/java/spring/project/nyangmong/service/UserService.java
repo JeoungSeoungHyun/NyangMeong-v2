@@ -33,8 +33,7 @@ public class UserService {
         userRepository.save(joinDto.toEntity());
     }
 
-    // 테스트중
-    // 로그인
+    // 로그인하기
     public User 로그인(User user) {
         // 로그인 처리 쿼리를 JPA에서 제공해주지 않는다.
         // SELECT * FROM user WHERE username=:username AND password = :password

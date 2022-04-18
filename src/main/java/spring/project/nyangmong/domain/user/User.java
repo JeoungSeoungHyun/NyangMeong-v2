@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -91,5 +92,10 @@ public class User {
 
     // // @LastModifiedDate // update 할때만 동작
     // // private LocalDateTime updateDate;
+
+    // DB테이블과 상관없음
+    // 로그인할 때 유저아이디 Remember me 하려고 추가함
+    @Transient
+    private String remember;
 
 }

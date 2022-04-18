@@ -15,16 +15,16 @@
         <!-- 로그인 폼 시작 -->
         <form action="/login" method="post">
             <div class="mb-3 mt-3">
-                <input id="user-id" type="text" class=" my_auth_form_box_input form-control" name="userId"
-                    placeholder="Enter ID" required maxlength="20">
+                <input type="text" class=" my_auth_form_box_input form-control" name="userId" placeholder="Enter ID"
+                    value="{{#remember}}{{remember}}{{/remember}}" required maxlength="20">
             </div>
             <div class="mb-3">
-                <input id="password" type="password" class="form-control my_auth_form_box_input" name="password"
+                <input type="password" class="form-control my_auth_form_box_input" name="password"
                     placeholder="Enter PASSWORD" required maxlength="20">
             </div>
             <div class="form-check mb-3">
                 <label class="form-check-label">
-                    <input id="remember" class="form-check-input" type="checkbox"> Remember me
+                    <input name="remember" class="form-check-input" type="checkbox"> Remember me
                 </label>
             </div>
             <button style="background-color: #E1E2E1; float: right;" id="btn-login" type="submit"

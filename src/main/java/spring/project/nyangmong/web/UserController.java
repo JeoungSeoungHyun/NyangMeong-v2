@@ -1,5 +1,8 @@
 package spring.project.nyangmong.web;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
@@ -28,9 +31,15 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(User user) {
+    public String login(User user, HttpServletResponse response) {
+
         User userEntity = userService.로그인(user);
         session.setAttribute("principal", userEntity);
+
+        // Remember me - userId 쿠키에 저장
+        if (user.getRemember() != null && user.getRemember().equals("on")) {
+            response.addHeader("Set-Cookie", "remember=" + user.getUserId());
+        }
         return "redirect:/";
     }
 
@@ -41,13 +50,24 @@ public class UserController {
         return "redirect:/loginForm";
     }
 
-    @GetMapping("/joinForm")
+    // 회원가입 페이지
+    @GetMapping("/join-form")
     public String joinForm() {
         return "pages/user/joinForm";
     }
 
-    @GetMapping("/loginForm")
-    public String loginForm() {
+    // 로그인 페이지
+    @GetMapping("/login-form")
+    public String loginForm(HttpServletRequest request, Model model) {
+        // 쿠키로 아이디 기억하기
+        if (request.getCookies() != null) {
+            Cookie[] cookies = request.getCookies(); // JSessionID, remember 2개를 내부적으로 split 해주는 메서드
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("remember")) {
+                    model.addAttribute("remember", cookie.getValue());
+                }
+            }
+        }
         return "pages/user/loginForm";
     }
 
