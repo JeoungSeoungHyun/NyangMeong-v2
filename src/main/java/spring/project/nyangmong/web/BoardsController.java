@@ -59,7 +59,7 @@ public class BoardsController {
 
     @GetMapping("/notice")
     public String noticeRead() {
-        return "pages/post/noticeForm";
+        return "pages/post/noticeList";
     }
 
     @GetMapping({ "/boards" })

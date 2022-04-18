@@ -31,12 +31,12 @@ public class UserController {
         return "redirect:/loginForm";
     }
 
-    @GetMapping("/joinForm")
+    @GetMapping("/join-form")
     public String joinForm() {
         return "pages/user/joinForm";
     }
 
-    @GetMapping("/loginForm")
+    @GetMapping("/login-form")
     public String loginForm() {
         return "pages/user/loginForm";
     }
