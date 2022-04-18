@@ -29,11 +29,11 @@
                                             카테고리
                                         </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="/places/hotel">숙박지</a></li>
-                                                <li><a class="dropdown-item" href="/places/cafe">식음료</a></li>
-                                                <li><a class="dropdown-item" href="/places/spot">관광지</a></li>
-                                                <li><a class="dropdown-item" href="/places/activity">체험</a></li>
-                                                <li><a class="dropdown-item" href="/places/hospital">동물병원</a></li>
+                                                <li><a class="dropdown-item" href="javascript:list('숙박지')">숙박지</a></li>
+                                                <li><a class="dropdown-item" href="javascript:list('식음료')">식음료</a></li>
+                                                <li><a class="dropdown-item" href="javascript:list('관광지')">관광지</a></li>
+                                                <li><a class="dropdown-item" href="javascript:list('체험')">체험</a></li>
+                                                <li><a class="dropdown-item" href="javascript:list('동물병원')">동물병원</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -50,291 +50,111 @@
                     <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
                         <div class="m_font_xl m_font_bold">숙박지(@건)</div>
                         <button class="btn m_bg_secondary">
-                            <a href="/places/hotel">+ 더보기</a>
+                            <a href="javascript:linkListGo('숙박')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
+                        {{#placesHotel}}
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <a href="/places/{id}">
+                                <a href="/place/{{contentSeq}}">
                                     <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                                 </a>
                                 <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
+                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-
+                        {{/placesHotel}}
                     </div>
                     <hr/>
                     <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
                         <div class="m_font_xl m_font_bold">식음료(@건)</div>
                         <button class="btn m_bg_secondary">
-                            <a href="/places/cafe">+ 더보기</a>
+                            <a href="javascript:linkListGo('식음료')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
+                        {{#placesCafe}}
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <a href="/places/{id}">
+                                <a href="/place/{{contentSeq}}">
                                     <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                                 </a>
                                 <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
+                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-
+                        {{/placesCafe}}
                     </div>
                     <hr/>
                     <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
                         <div class="m_font_xl m_font_bold">관광지(@건)</div>
                         <button class="btn m_bg_secondary">
-                            <a href="/places/spot">+ 더보기</a>
+                            <a href="javascript:linkListGo('관광지')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
+                        {{#placesSpot}}
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <a href="/places/{id}">
+                                <a href="/place/{{contentSeq}}">
                                     <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                                 </a>
                                 <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
+                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-
+                        {{/placesSpot}}
                     </div>
                     <hr/>
                     <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
                         <div class="m_font_xl m_font_bold">체험(@건)</div>
                         <button class="btn m_bg_secondary">
-                            <a href="/places/activity">+ 더보기</a>
+                            <a href="javascript:linkListGo('체험')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
+                        {{#placesActivity}}
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <a href="/places/{id}">
+                                <a href="/place/{{contentSeq}}">
                                     <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                                 </a>
                                 <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
+                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-
+                        {{/placesActivity}}
                     </div>
                     <hr/>
                     <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
                         <div class="m_font_xl m_font_bold">동물병원(@건)</div>
                         <button class="btn m_bg_secondary">
-                            <a href="/places/hospital">+ 더보기</a>
+                            <a href="javascript:linkListGo('동물병원')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
+                     {{#placesHospital}}
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <a href="/places/{id}">
+                                <a href="/place/{{contentSeq}}">
                                     <img class="m_img_fit m_mt_md" src="images/cat.jpg">
                                 </a>
                                 <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
+                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="/places/{id}">
-                                    <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                                </a>
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">이름</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> 주소</div>
-
-                                </div>
-                            </div>
-                        </div>
-
+                        {{/placesHospital}}
                     </div>
                 </div>
             </div>

@@ -29,9 +29,19 @@ public class PlaceService {
         }
     }
 
-    public Places 분류검색(String partName) {
-        Places placesOp = placeRepository.searchPartName(partName);
-        return placesOp;
+    public List<Places> 분류검색(String partName) {
+        List<Places> pList = placeRepository.searchPartName(partName);
+        return pList;
+    }
+
+    public List<Places> 네이버맵(String partName) {
+        List<Places> pList = placeRepository.searchPartName(partName);
+        return pList;
+    }
+
+    public List<Places> 전체보기() {
+        List<Places> plist = placeRepository.findAll();
+        return plist;
     }
 
     public boolean 옵션표시(String yesOrNO) {
