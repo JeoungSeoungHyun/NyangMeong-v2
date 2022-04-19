@@ -21,4 +21,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     // 아이디와 이메일로 비밀번호 찾기
     @Query(value = "SELECT * FROM user WHERE userId = :userId AND email = :email", nativeQuery = true)
     Optional<User> findPw(@Param("userId") String userId, @Param("email") String email);
+
 }

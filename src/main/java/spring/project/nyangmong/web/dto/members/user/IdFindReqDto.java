@@ -1,4 +1,4 @@
-package spring.project.nyangmong.web.dto.user;
+package spring.project.nyangmong.web.dto.members.user;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

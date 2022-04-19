@@ -15,8 +15,14 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.user.User;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Pet {
@@ -39,6 +45,10 @@ public class Pet {
     // 반려동물 나이
     @Column(length = 300)
     private String petAge;
+
+    // 프로필 사진 경로 저장
+    @Column(length = 300)
+    private String petImgurl;
 
     // 입력한때
     @CreatedDate // insert 할때만 동작

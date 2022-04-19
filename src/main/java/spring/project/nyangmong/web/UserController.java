@@ -15,18 +15,41 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.pet.Pet;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.service.PetService;
 import spring.project.nyangmong.service.UserService;
 import spring.project.nyangmong.util.UtilValid;
+import spring.project.nyangmong.web.dto.members.user.IdFindReqDto;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
-import spring.project.nyangmong.web.dto.user.IdFindReqDto;
-import spring.project.nyangmong.web.dto.user.PwFindReqDto;
+import spring.project.nyangmong.web.dto.members.user.PwFindReqDto;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
+    private final PetService petService;
+
+    // 회원 정보 수정 페이지
+    @GetMapping("/s/user/{id}/update-form")
+    public String userChangeForm(@PathVariable Integer id, Model model) {
+        User userEntity = userService.회원정보보기(id);
+        Pet petEntity = petService.펫정보보기(id);
+        model.addAttribute("user", userEntity);
+        model.addAttribute("pet", petEntity);
+        return "pages/user/userChange";
+    }
+
+    // 회원 정보 페이지
+    @GetMapping("/s/user/{id}/detail")
+    public String userDetail(@PathVariable Integer id, Model model) {
+        User userEntity = userService.회원정보보기(id);
+        Pet petEntity = petService.펫정보보기(id);
+        model.addAttribute("user", userEntity);
+        model.addAttribute("pet", petEntity);
+        return "pages/user/userDetail";
+    }
 
     // 로그아웃하기
     @GetMapping("/logout")
@@ -102,14 +125,6 @@ public class UserController {
     public String commentList() {
 
         return "pages/list/commentlist";
-    }
-
-    // 마이페이지 (회원정보 수정페이지)
-    @GetMapping("/s/user/{id}/detail")
-    public String userDetail(@PathVariable Integer id, Model model) {
-        User userEntity = userService.회원정보(id);
-        model.addAttribute("user", userEntity);
-        return "pages/user/userChange";
     }
 
     // 아이디 찾기 페이지

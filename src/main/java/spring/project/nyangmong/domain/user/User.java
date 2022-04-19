@@ -55,10 +55,6 @@ public class User {
     @Column(length = 60, nullable = false)
     private String email;
 
-    // 프로필 사진 경로 저장
-    @Column(length = 300)
-    private String userImgurl;
-
     // 아이디 생성 날짜
     @CreatedDate // insert 할때만 동작
     private LocalDateTime createDate;
