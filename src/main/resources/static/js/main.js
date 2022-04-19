@@ -35,8 +35,11 @@
             event.preventDefault();
         });
 
-
         // 이미지 슬라이드 끝
+
+
+
+
 
 
         //지도 옵션
@@ -137,12 +140,12 @@
         });
 
         // 마커 생성
-        var markerOptions = {
-            position: new naver.maps.LatLng(35.159665, 129.060447),
-            map: map,
-            icon: './img/pin_default.png'
-        };
-        var marker = new naver.maps.Marker(markerOptions);
+        // var markerOptions = {
+        //     position: new naver.maps.LatLng(35.159665, 129.060447),
+        //     map: map,
+        //     icon: './img/pin_default.png'
+        // };
+        // var marker = new naver.maps.Marker(markerOptions);
 
         //좋아요 탭
 

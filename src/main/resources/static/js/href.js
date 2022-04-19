@@ -20,7 +20,7 @@ async function pageGo(Name) {
     location.href=response;
 }
 
-function list(partName) {
+function linkListGo(partName) {
     let response = `/place/search?partName=${partName}`;
     location.href=response;
 }
