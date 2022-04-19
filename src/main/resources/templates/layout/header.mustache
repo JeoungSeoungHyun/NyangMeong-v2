@@ -83,7 +83,9 @@
 
     <!-- 검색 박스 시작 -->
     <div id="panel">
-        <input type="text" class="m_box_input_search m_txt_title" placeholder="  검색어를 입력해주세요 ">
-        <button class="m_btn_search m_txt_title">검색</button>
+        <form action="/outline/search" method="get">
+        <input name="keyword" type="text" class="m_box_input_search m_txt_title" placeholder="  검색어를 입력해주세요 ">
+        <button class="m_btn_search m_txt_title" type="submit">검색</button>
+        </form>
     </div>
     <!-- 검색 박스 끝 -->

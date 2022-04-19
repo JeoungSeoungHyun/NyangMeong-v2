@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -151,8 +152,8 @@ public class PlaceController {
     }
 
     @GetMapping("/outline/search")
-    public String searchOutLine(@RequestParam String keyword, Model model) {
-        if (keyword == null) {
+    public String searchOutLine(@RequestParam(defaultValue = "") String keyword, Model model) {
+        if (keyword.equals("")) {
             List<Places> places = placeRepository.findAll();
             model.addAttribute("places", places);
             return "pages/list/outlineList";
