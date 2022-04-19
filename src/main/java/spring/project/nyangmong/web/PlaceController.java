@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.service.PlaceService;
 import spring.project.nyangmong.util.ContentSeqDownload;
+import spring.project.nyangmong.util.OptionChange;
+import spring.project.nyangmong.web.dto.craw.ImageDto;
 import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 import spring.project.nyangmong.web.dto.places.ImageListDto;
@@ -35,6 +38,7 @@ public class PlaceController {
     private final PlaceRepository placeRepository;
     private final ImageRepository imageRepository;
     private final HttpSession session;
+    private final OptionChange change;
 
     // 맵 연습중
     @GetMapping({ "/", "main", "mainPage" })
@@ -83,19 +87,31 @@ public class PlaceController {
 
     @GetMapping("/outline")
     public String outline(Model model) {
+        long count = placeRepository.count();
+        model.addAttribute("count", count);
         List<Places> placesSpot = placeRepository.placeTop4("관광지");
+        long countSpot = placeRepository.countPartName("관광지");
+        model.addAttribute("countSpot", countSpot);
         model.addAttribute("placesSpot", placesSpot);
 
         List<Places> placesHospital = placeRepository.placeTop4("동물병원");
+        long countHos = placeRepository.countPartName("동물병원");
+        model.addAttribute("countHos", countHos);
         model.addAttribute("placesHospital", placesHospital);
 
         List<Places> placesCafe = placeRepository.placeTop4("식음료");
+        long countCafe = placeRepository.countPartName("식음료");
+        model.addAttribute("countCafe", countCafe);
         model.addAttribute("placesCafe", placesCafe);
 
         List<Places> placesActivity = placeRepository.placeTop4("체험");
+        long countAct = placeRepository.countPartName("체험");
+        model.addAttribute("countAct", countAct);
         model.addAttribute("placesActivity", placesActivity);
 
         List<Places> placesHotel = placeRepository.placeTop4("숙박");
+        long countHotel = placeRepository.countPartName("숙박");
+        model.addAttribute("countHotel", countHotel);
         model.addAttribute("placesHotel", placesHotel);
         return "pages/place/outlineList";
     }
@@ -103,6 +119,7 @@ public class PlaceController {
     @GetMapping("/place/search")
     public String searchPartName(@RequestParam String partName, Model model) {
         List<Places> places = placeService.분류검색(partName);
+        long count = placeRepository.countPartName(partName);
         // long count = placeRepository.countPartName(partName);
         // model.addAttribute("count", count);
         PlaceListDto placeDto = new PlaceListDto();
@@ -111,7 +128,7 @@ public class PlaceController {
             placeDto.setTitle(places.get(i).getTitle());
             placeDto.setAddress(places.get(i).getAddress());
         }
-
+        model.addAttribute("count", count);
         model.addAttribute("pdto", placeDto);
         model.addAttribute("places", places);
         if (partName.equals("관광지")) {
@@ -130,8 +147,8 @@ public class PlaceController {
     }
 
     @GetMapping("/outline/search")
-    public String searchOutLine(@RequestParam String keyword, Model model) {
-        if (keyword == null) {
+    public String searchOutLine(@RequestParam(defaultValue = "") String keyword, Model model) {
+        if (keyword.equals("")) {
             List<Places> places = placeRepository.findAll();
             model.addAttribute("places", places);
             return "pages/list/outlineList";
@@ -198,15 +215,15 @@ public class PlaceController {
                         .policyCautions(placeDto.getPolicyCautions())
                         .emergencyResponse(placeDto.getEmergencyResponse())
                         .memo(placeDto.getMemo())
-                        .bathFlag(placeDto.getBathFlag())
-                        .provisionFlag(placeDto.getProvisionFlag())
-                        .petFlag(placeDto.getPetFlag())
+                        .bathFlag(new OptionChange().change(placeDto.getBathFlag()))
+                        .provisionFlag(new OptionChange().change(placeDto.getProvisionFlag()))
+                        .petFlag(new OptionChange().change(placeDto.getPetFlag()))
                         .petWeight(placeDto.getPetWeight())
                         .petBreed(placeDto.getPetBreed())
-                        .emergencyFlag(placeDto.getEmergencyFlag())
-                        .entranceFlag(placeDto.getEntranceFlag())
-                        .parkingFlag(placeDto.getParkingFlag())
-                        .inOutFlag(placeDto.getInOutFlag())
+                        .emergencyFlag(new OptionChange().change(placeDto.getEmergencyFlag()))
+                        .entranceFlag(new OptionChange().change(placeDto.getEntranceFlag()))
+                        .parkingFlag(new OptionChange().change(placeDto.getParkingFlag()))
+                        .inOutFlag(new OptionChange().change(placeDto.getInOutFlag()))
                         // 추가
                         .build();
 

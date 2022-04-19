@@ -1,9 +1,15 @@
 package spring.project.nyangmong.web;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.UserService;
+import spring.project.nyangmong.util.UtilValid;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
+import spring.project.nyangmong.web.dto.user.IdFindReqDto;
+import spring.project.nyangmong.web.dto.user.PwFindReqDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -19,26 +28,52 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
-    // @GetMapping("/logout")
-    // public String logout() {
-    // session.invalidate(); // 세션 무효화 (세션 아이디 영역의 데이터를 다 삭제해)
-    // return "redirect:/";
-    // }
+    // 로그아웃하기
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate(); // 영역 전체를 날리는 것
+        return "redirect:/";
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public String login(User user, HttpServletResponse response) {
+
+        User userEntity = userService.로그인(user);
+        session.setAttribute("principal", userEntity);
+
+        // Remember me - userId 쿠키에 저장
+        if (user.getRemember() != null && user.getRemember().equals("on")) {
+            response.addHeader("Set-Cookie", "remember=" + user.getUserId());
+        }
+        return "redirect:/";
+    }
 
     // 회원가입
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
         userService.회원가입(joinDto);
-        return "redirect:/loginForm";
+        return "redirect:/login-form";
     }
 
+    // 회원가입 페이지
     @GetMapping("/join-form")
     public String joinForm() {
         return "pages/user/joinForm";
     }
 
+    // 로그인 페이지
     @GetMapping("/login-form")
-    public String loginForm() {
+    public String loginForm(HttpServletRequest request, Model model) {
+        // 쿠키로 아이디 기억하기
+        if (request.getCookies() != null) {
+            Cookie[] cookies = request.getCookies(); // JSessionID, remember 2개를 내부적으로 split 해주는 메서드
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("remember")) {
+                    model.addAttribute("remember", cookie.getValue());
+                }
+            }
+        }
         return "pages/user/loginForm";
     }
 
@@ -69,25 +104,44 @@ public class UserController {
         return "pages/list/commentlist";
     }
 
-    // 유저 상세보기 - 일단은 mapping만 해둔 상태
-    @GetMapping("/user/detail")
-    public String userDetail() {
-
-        return "pages/detail/userDetail";
+    // 마이페이지 (회원정보 수정페이지)
+    @GetMapping("/s/user/{id}/detail")
+    public String userDetail(@PathVariable Integer id, Model model) {
+        User userEntity = userService.회원정보(id);
+        model.addAttribute("user", userEntity);
+        return "pages/user/userChange";
     }
 
-    // 아이디 찾기- 일단은 mapping만 해둔 상태
-    @GetMapping("/find/id")
-    public String findId() {
-
+    // 아이디 찾기 페이지
+    @GetMapping("/find/id-form")
+    public String findIdForm() {
         return "pages/user/findIdForm";
     }
 
-    // 비밀번호 찾기 - 일단은 mapping만 해둔 상태
-    @GetMapping("/find/pw")
-    public String findPw() {
+    // 아이디 찾기 요청
+    @PostMapping("/find/id")
+    public String idFind(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
 
+        UtilValid.요청에러처리(bindingResult);
+        String findUserId = userService.아이디찾기(idFindReqDto);
+        model.addAttribute("findUserId", findUserId);
+        return "pages/user/showIdForm";
+    }
+
+    // 비밀번호 찾기 페이지
+    @GetMapping("/find/pw-form")
+    public String findPwForm() {
         return "pages/user/findPwForm";
+    }
+
+    // 비밀번호 찾기 요청
+    @PostMapping("/find/pw")
+    public String idFind(@Valid PwFindReqDto pwFindReqDto, BindingResult bindingResult, Model model) {
+
+        UtilValid.요청에러처리(bindingResult);
+        String findPassword = userService.패스워드찾기(pwFindReqDto);
+        model.addAttribute("findPassword", findPassword);
+        return "pages/user/showPwForm";
     }
 
 }

@@ -1,4 +1,4 @@
-package spring.project.nyangmong.domain.places;
+package spring.project.nyangmong.util;
 
 import org.springframework.stereotype.Component;
 

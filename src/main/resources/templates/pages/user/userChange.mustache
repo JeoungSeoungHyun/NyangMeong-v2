@@ -9,6 +9,7 @@
             <div class="my_error_box my_hidden">
             </div>
             <form>
+
                 <input id="username" class="my_auth_form_box_input" type="text" name="userId" placeholder="Enter ID" maxlength="20" readonly />
                 <input id="username" class="my_auth_form_box_input" type="text" name="userName" placeholder="Enter NickName" maxlength="40"  />
                 <input id="password" class="my_auth_form_box_input" type="password" name="password" placeholder="Enter PASSWORD" maxlength="20" required />
@@ -34,7 +35,8 @@
                 </div>
                 <!-- 파일등록 -->
                 <div class="form-group" style="margin: 8px 0 8px; ">
-                    <input id="fileName" class="form-control " value="파일 선택" disabled="disabled" style="width:60%; display: inline;">
+                    <input id="fileName" class="form-control " value="파일 선택" disabled="disabled"
+                        style="width:60%; display: inline;">
                     <div class="fileRegiBtn">
                         <label for="myFileUp">사진 업로드</label>
                         <input type="file" id="myFileUp">
@@ -45,12 +47,17 @@
 
             <div class="m_auth_inputbox_pet">
                 <form>
-                    <input class="my_auth_form_box_input" type="text" name="petname" placeholder="반려동물의 이름을 입력하세요" maxlength="20" required />
-                    <input class="my_auth_form_box_input" type="text" name="petsex" placeholder="반려동물의 성별을 입력하세요" maxlength="20" required />
-                    <input class="my_auth_form_box_input" type="email" name="age" placeholder="반려동물의 나이를 입력하세요" maxlength="12" required />
-                    <input class="my_auth_form_box_input" type="text" name="species" placeholder="반려동물의 종을 입력하세요" maxlength="100" required />
+                    <input class="my_auth_form_box_input" type="text" name="petname" placeholder="반려동물의 이름을 입력하세요"
+                        maxlength="20" required />
+                    <input class="my_auth_form_box_input" type="text" name="petsex" placeholder="반려동물의 성별을 입력하세요"
+                        maxlength="20" required />
+                    <input class="my_auth_form_box_input" type="email" name="age" placeholder="반려동물의 나이를 입력하세요"
+                        maxlength="12" required />
+                    <input class="my_auth_form_box_input" type="text" name="species" placeholder="반려동물의 종을 입력하세요"
+                        maxlength="100" required />
                 </form>
-                <button type="submit" style="background-color: #E1E2E1; float: right; margin-top: 20px;" class="btn">완료</button>
+                <button id="btn_update" type="submit" style="background-color: #E1E2E1; float: right; margin-top: 20px;"
+                    class="btn">완료</button>
             </div>
 
         </div>
@@ -61,5 +68,6 @@
 
 
 <script src="/js/joinform.js"></script>
+<script src="/js/updateform.js"></script>
 
 {{> /layout/footer}}

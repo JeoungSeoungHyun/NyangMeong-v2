@@ -11,3 +11,10 @@
 .m_center {
     margin: 0 auto;
 }
+
+/* 세로 가운데 정렬 */
+
+.m_center_column{
+    display: flex;
+    align-items: center;
+}
