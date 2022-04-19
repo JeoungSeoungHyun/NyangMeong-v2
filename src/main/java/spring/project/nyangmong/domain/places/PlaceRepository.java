@@ -21,8 +21,8 @@ public interface PlaceRepository extends JpaRepository<Places, Integer> {
     @Query(value = "SELECT * FROM places WHERE partName = :partName ORDER BY contentSeq ASC LIMIT 3 ", nativeQuery = true)
     List<Places> placeTop3(@Param("partName") String partName);
 
-    @Query(value = "SELECT * FROM places WHERE keyword Like :%keyword% OR mainFacility Like :%mainFacility%  ", nativeQuery = true)
-    List<Places> searchPlaces(@Param("keyword") String keyword, @Param("mainFacility") String mainFacility);
+    @Query(value = "SELECT * FROM places WHERE keyword Like %:keyword% OR mainFacility  %:keyword%  ", nativeQuery = true)
+    List<Places> searchPlaces(@Param("keyword") String keyword);
 
     @Query(value = "SELECT count(*) FROM places WHERE partName = :partName", nativeQuery = true)
     long countPartName(@Param("partName") String partName);
