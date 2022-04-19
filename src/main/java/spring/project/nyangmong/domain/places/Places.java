@@ -167,4 +167,5 @@ public class Places {
     @JsonIgnoreProperties({ "places" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
     private List<PlaceLikes> placesLikesList;
+
 }
