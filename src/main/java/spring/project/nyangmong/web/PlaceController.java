@@ -141,7 +141,7 @@ public class PlaceController {
     }
 
     @GetMapping("/outline/search")
-    public String searchOutLine(@RequestParam(defaultValue = "") String keyword, Model model) {
+    public String searchOutLine(@RequestParam(defaultValue = " ") String keyword, Model model) {
         if (keyword.equals("")) {
             List<Places> places = placeRepository.findAll();
             model.addAttribute("places", places);

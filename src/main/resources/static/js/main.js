@@ -154,7 +154,7 @@
          };      
 
          // 좌표를 만드는 함수
-        let makeMarker = () => { 
+        let makeMarker = (points) => { 
             console.log(points);
             // 좌표값으로 마커 생성
             for (point of points) {
@@ -186,3 +186,15 @@
             $(this).attr("id", "mytab" + i)
         })
 
+    $(document).ready(function () {
+
+        $('ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#" + tab_id).addClass('current');
+        })
+        }) 
