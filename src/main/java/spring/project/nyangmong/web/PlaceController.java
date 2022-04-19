@@ -141,23 +141,26 @@ public class PlaceController {
     }
 
     @GetMapping("/outline/search")
-    public String searchOutLine(@RequestParam(defaultValue = " ") String keyword, Model model) {
+    public String searchOutLine(@RequestParam(defaultValue = "") String keyword, Model model) {
         if (keyword.equals("")) {
             List<Places> places = placeRepository.findAll();
+            long count = placeRepository.count();
+            model.addAttribute("count", count);
             model.addAttribute("places", places);
-            return "pages/list/outlineList";
+            return "pages/place/search";
         }
-        List<Places> places = placeRepository.searchPlaces(keyword, keyword);
+        List<Places> places = placeRepository.searchPlaces("%keyword%");
         PlaceListDto placeDto = new PlaceListDto();
         placeDto.setPlaces(places);
         for (int i = 0; i < places.size(); i++) {
             placeDto.setTitle(places.get(i).getTitle());
             placeDto.setAddress(places.get(i).getAddress());
         }
-
+        long count = placeRepository.count();
+        model.addAttribute("count", count);
         model.addAttribute("pdto", placeDto);
         model.addAttribute("places", places);
-        return "pages/place/outlineList";
+        return "pages/place/search";
     }
 
     // 데이터베이스 받아오는 url 들어갈때 시간이 많이 걸립니다.
