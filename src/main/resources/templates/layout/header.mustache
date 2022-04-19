@@ -66,10 +66,19 @@
                 <div>
                     <li class="nav-item">
                         <div>
+                            <!-- {{#principal}} -->
+                            <div class="m_box_login">
+                                <a class="m_txt_title m_font_lg" href="/login-form" style="margin-right: 15px;">내 정보</a>
+                                <a class="m_txt_title m_font_lg" href="/join-form">로그아웃</a>
+                            </div>
+                            <!-- {{/principal}} -->
+                            <!-- {{^principal}} -->
                             <div class="m_box_login">
                                 <a class="m_txt_title m_font_lg" href="/login-form" style="margin-right: 15px;">로그인</a>
                                 <a class="m_txt_title m_font_lg" href="/join-form">회원가입</a>
                             </div>
+                            <!-- {{/principal}} -->
+
                             <i id="btn-search" class="fa-solid fa-magnifying-glass m_box_search"
                                 style="cursor: pointer; size: 15px;"></i>
                         </div>

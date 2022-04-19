@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
@@ -65,6 +66,11 @@ public class BoardsController {
     @GetMapping({"/boards"})
     public String home() {
         return "pages/list/jarangList";
+    }
+
+    @GetMapping("/s/notice/write-form")
+    public String noticeWrite(){
+        return "pages/post/noticeWriteForm";
     }
 
 }
