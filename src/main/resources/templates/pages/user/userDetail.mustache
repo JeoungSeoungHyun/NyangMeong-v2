@@ -1,0 +1,98 @@
+{{> /layout/header}}
+
+<div>
+    <!-- 상세보기 메뉴 시작-->
+    <div class="container mx-auto m_mh_lg ">
+        <!-- 메뉴 박스 아우터 시작-->
+        <div class="m_outer_menu_detail">
+            <!-- 메뉴 박스 시작 -->
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/detail">회원정보</a>
+            </div>
+            <div class=" m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/boardlike">좋아요</a>
+            </div>
+            <div class="m_box_menu_detail bg-warning">
+                <a class="m_txt_title" href="/s/user/{{id}}/commentlist">내가 쓴 댓글</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/favlist">즐겨찾기</a>
+            </div>
+            <!-- 메뉴 박스  끝-->
+        </div>
+        <!-- 메뉴 박스 아우터 끝-->
+    </div>
+    <!-- 상세보기 메뉴 끝-->
+
+    <!-- 회원정보 아우터  시작 -->
+    <div class="container mx-auto m_outer_info_detail m_mt_xl">
+        <!-- 이미지 박스 시작-->
+        <div class="col-lg-6 m_mt_lg">
+
+            <div class="m_box_profile">
+                <img class="m_img_profile" src="/images/cat.jpg" alt="프로필 이미지">
+            </div>
+        </div>
+        <!-- 이미지 박스 끝-->
+        <!-- 정보 박스 시작-->
+        <div class="col-lg-6 m_box_info_detail">
+            <div class="m_inner_info_detail">
+                <!-- 유저 정보 박스 시작-->
+                <div class="m_txt_title m_font_xl">
+                    [회원 정보]
+                </div>
+                <div>
+                    <div class="m_box_text_info  m_font_lg">아이디 </div>
+                    <div>댕댕이조아</div>
+                </div>
+                <div>
+                    <div class="m_box_text_info  m_font_lg">이름 </div>
+                    <div>김댕댕</div>
+                </div>
+                <div>
+                    <div class="m_box_text_info  m_font_lg">전화번호</div>
+                    <div>555-5000</div>
+                </div>
+            </div>
+            <!-- 유저 정보 박스 끝-->
+            <div class="m_box_right">
+                <button class="btn m_btn">
+                    <a class="m_text_white" href="/#">상세보기</a> 
+                </button>
+            </div>
+            <div class="m_inner_info_detail">
+                <!-- 반려동물 정보 박스 시작-->
+                <div class="m_txt_title m_font_xl">
+                    [펫 정보]
+                </div>
+                <div>
+                    <div class="m_box_text_info m_font_lg">이름 </div>
+                    <div>댕댕이</div>
+                </div>
+                <div>
+                    <div class="m_box_text_info m_font_lg">성별 </div>
+                    <div>남</div>
+                </div>
+                <div>
+                    <div class="m_box_text_info m_font_lg"> 나이</div>
+                    <div>2</div>
+                </div>
+                <div>
+                    <div class="m_box_text_info m_font_lg"> 종</div>
+                    <div>포메라니안</div>
+                </div>
+            </div>
+            <!-- 반려동물 정보 박스 끝-->
+            <div class="m_box_right">
+                <button class="btn m_btn">
+                    <a class="m_text_white" href="/#">상세보기</a> 
+                </button>
+            </div>
+        </div>
+        <!-- 정보 박스 끝-->
+
+    </div>
+    <!-- 회원정보 아우터 끝 -->
+</div>
+
+{{> /layout/footer}}

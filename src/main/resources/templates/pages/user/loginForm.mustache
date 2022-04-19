@@ -1,19 +1,16 @@
-{{> //layout/header}}
+{{> /layout/header}}
+<div class="m_box_auth mx-auto">
 
-<body class="m_center">
-
-    <div class="container mt-3">
-        <br>
-        <h1 class="text-center m_txt_title">로그인</h1>
-        <br>
+    <div class="m_pt_md text-center">
+        <h1 class="m_txt_title m_ph_lg">로그인</h1>
     </div>
-    <br>
 
     <!-- 컨테이너 시작 -->
-    <div class="container mt-3" style="width: 400px;">
+    <div class="mx-auto" style="width: 400px;">
 
         <!-- 로그인 폼 시작 -->
         <form action="/login" method="post">
+
             <div class="mb-3 mt-3">
                 <input type="text" class=" my_auth_form_box_input form-control" name="userId" placeholder="Enter ID"
                     value="{{#remember}}{{remember}}{{/remember}}" required maxlength="20">
@@ -21,8 +18,9 @@
             <div class="mb-3">
                 <input type="password" class="form-control my_auth_form_box_input" name="password"
                     placeholder="Enter PASSWORD" required maxlength="20">
+
             </div>
-            <div class="form-check mb-3">
+            <div class="form-check m_mb_md">
                 <label class="form-check-label">
                     <input name="remember" class="form-check-input" type="checkbox"> Remember me
                 </label>
@@ -31,17 +29,8 @@
                 class="btn">로그인</button>
         </form>
         <!-- 로그인 폼 끝 -->
-        <br><br><br>
-        <a href="findid.html" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
-            아이디 찾기
-        </a>
-        <span> | </span>
-        <a href="findpw.html" onclick="window.open(this.href, '_blank', 'width=450, height=400'); return false;">
-            비밀번호 찾기
-        </a>
     </div>
-
-    <!-- 컨테이너 끝 -->
-</body>
+</div>
+<!-- 컨테이너 끝 -->
 
 {{> /layout/footer}}

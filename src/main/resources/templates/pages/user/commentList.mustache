@@ -1,0 +1,73 @@
+{{> /layout/header}}
+
+
+<div class="container" style="height: 70vh;">
+
+    <!-- 상세보기 메뉴 시작-->
+    <div class=" mx-auto m_mh_lg ">
+        <!-- 메뉴 박스 아우터 시작-->
+        <div class="m_outer_menu_detail">
+            <!-- 메뉴 박스 시작 -->
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/detail">회원정보</a>
+            </div>
+            <div class=" m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/boardlike">좋아요</a>
+            </div>
+            <div class="m_box_menu_detail bg-warning">
+                <a class="m_txt_title" href="/s/user/{{id}}/commentlist">내가 쓴 댓글</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a class="m_txt_title" href="/s/user/{{id}}/favlist">즐겨찾기</a>
+            </div>
+            <!-- 메뉴 박스  끝-->
+        </div>
+        <!-- 메뉴 박스 아우터 끝-->
+    </div>
+    <!-- 상세보기 메뉴 끝-->
+
+    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">내가 쓴 댓글</h1>
+
+    <div class="m_mb_lg">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <div>작성댓글: 총 @@건</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-lg-2">#</th>
+                <th class="col-lg-6">글 제목</th>
+                <th class="col-lg-2">작성자</th>
+                <th class="col-lg-2">작성일자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>id</th>
+                <td>Title</td>
+                <td>username</td>
+                <td>createdate</td>
+            </tr>
+            <tr>
+                <th>id</th>
+                <td>Title</td>
+                <td>username</td>
+                <td>createdate</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+{{> /layout/footer}}

@@ -50,6 +50,7 @@ public class UserController {
         return "redirect:/loginForm";
     }
 
+
     // 회원가입 페이지
     @GetMapping("/join-form")
     public String joinForm() {

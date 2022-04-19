@@ -1,0 +1,346 @@
+/* 메인 페이지 시작 */
+
+
+/* 헤더 박스 */
+
+.m_outer_menu_header {
+    display: flex;
+    width: 75%;
+    /* justify-content: space-evenly; */
+    font-size: x-large;
+    align-items: center;
+    margin-left: 80px;
+}
+
+
+/* 로고 박스 */
+
+.m_box_logo {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    width: 100px;
+    height: 100px;
+}
+
+
+/* 로그인 회원가입 박스 */
+
+.m_box_login {
+    text-align: center;
+    font-size: medium;
+    position: relative;
+    top: 10px;
+    right: 40px;
+}
+
+
+/* 검색 돋보기 박스 */
+
+.m_box_search {
+    text-align: center;
+    position: relative;
+    left: 50px;
+    top: 15px;
+}
+
+
+/* 검색 버튼 */
+
+.m_btn_search {
+    height: 40px;
+    width: 80px;
+    border-radius: 5px;
+    margin-left: 20px;
+    background-color: #FFDEA0;
+    border: 2px solid black;
+}
+
+
+/* 검색창 박스 */
+
+.m_box_input_search {
+    height: 40px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    font-size: x-large;
+    position: relative;
+    top: 6px;
+    width: 50%;
+}
+
+
+/* 맵 검색 상자 */
+
+.m_box_search_map {
+    width: 400px;
+    height: 500px;
+    box-shadow: 5px 5px 3px 3px gray;
+    border-radius: 25px;
+    background-color: white;
+}
+
+
+/* 텍스트 옆 수평선 만들기 */
+
+.hr-sect {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    margin: 10px 0px;
+    font-size: x-large;
+    color: black;
+}
+
+.hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgb(0, 0, 0);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 16px;
+}
+
+
+/* 카테고리 검색 박스 */
+
+.m_box_search_category {
+    justify-content: space-evenly;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+/* 카테고리 체크 박스 */
+
+.m_box_check_category {
+    font-size: x-large;
+    padding-top: 30px;
+    border-end-end-radius: 25px;
+}
+
+
+/* 슬라이드 이미지 박스 */
+
+.m_box_img_slide {
+    width: 100%;
+    height: 700px;
+    padding: 50px;
+}
+
+
+/* 검색 아우터 */
+
+#panel {
+    padding: 5px;
+    text-align: center;
+    background-color: #FFE082;
+}
+
+#panel {
+    padding: 30px;
+    display: none;
+    justify-content: center;
+}
+
+
+/* 이미지 슬라이드 시작 */
+
+
+/* html,
+body {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    animation: hide-scroll 5s backwards;
+}
+
+@keyframes hide-scroll {
+    0% {
+        overflow: hidden;
+    }
+    100% {
+        overflow: auto;
+    }
+} */
+
+.container {
+    width: 80%;
+    /* height: 80%; */
+}
+
+.carousel {
+    border: 8px solid rgb(212, 212, 212);
+    border-radius: 10px;
+}
+
+.carousel-inner,
+.carousel,
+.carousel-container {
+    height: 600px;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+
+.carousel-item {
+    height: 97.5%;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+
+.carousel-item-prev:not(.carousel-item-end),
+.active.carousel-item-start {
+    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    -ms-transform: translate3d(0, -100%, 0);
+    -o-transform: translate3d(0, -100%, 0);
+}
+
+.carousel-item-next:not(.carousel-item-start),
+.active.carousel-item-end {
+    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 100%, 0);
+    -ms-transform: translate3d(0, 100%, 0);
+    -moz-transform: translate3d(0, 100%, 0);
+    -o-transform: translate3d(0, 100%, 0);
+}
+
+.carousel-indicators {
+    top: 0;
+    margin: auto;
+    height: 20px;
+    right: 10px;
+    left: auto;
+    display: block;
+}
+
+
+/* 이미지 슬라이드 선택 버튼 */
+
+.carousel-indicators [data-bs-target] {
+    background: none;
+    border: 2px solid white;
+    border-radius: 12px;
+    width: 12px;
+    height: 12px;
+    margin-bottom: 5px;
+}
+
+
+/* 버튼 활성화시 효과 */
+
+.carousel-indicators li.active {
+    background: white;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    width: 4rem;
+    height: 4rem;
+    position: fixed;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    z-index: -1;
+}
+
+.carousel-control-prev-icon {
+    top: 5%;
+}
+
+.unclickable {
+    pointer-events: none;
+}
+
+.clickable {
+    pointer-events: all;
+}
+
+.btn-style {
+    border-color: white;
+    content: url("./images/GitHub-Mark-Light-120px-plus.png");
+    width: calc(1.475rem + 2.7vw);
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 4px;
+}
+
+.btn-style:hover {
+    background-color: black;
+    content: url("./images/GitHub-Mark-Light-120px-plus.png");
+    width: calc(1.475rem + 2.7vw);
+}
+
+.img-style {
+    width: calc(1.475rem + 2.7vw);
+}
+
+.img-style:hover {
+    width: calc(1.475rem + 2.7vw);
+}
+
+.roll-in-blurred-right {
+    -webkit-animation: roll-in-blurred-right 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+    animation: roll-in-blurred-right 1s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+
+
+/* ----------------------------------------------
+   * Generated by Animista on 2022-2-15 0:50:8
+   * Licensed under FreeBSD License.
+   * See http://animista.net/license for more info. 
+   * w: http://animista.net, t: @cssanimista
+   * ---------------------------------------------- */
+
+
+/**
+   * ----------------------------------------
+   * animation roll-in-blurred-right
+   * ----------------------------------------
+   */
+
+@-webkit-keyframes roll-in-blurred-right {
+    0% {
+        -webkit-transform: translateX(1000px) rotate(720deg);
+        transform: translateX(1000px) rotate(720deg);
+        -webkit-filter: blur(50px);
+        filter: blur(50px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0) rotate(0deg);
+        transform: translateX(0) rotate(0deg);
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+@keyframes roll-in-blurred-right {
+    0% {
+        -webkit-transform: translateX(1000px) rotate(720deg);
+        transform: translateX(1000px) rotate(720deg);
+        -webkit-filter: blur(50px);
+        filter: blur(50px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0) rotate(0deg);
+        transform: translateX(0) rotate(0deg);
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+
+/* 이미지 슬라이드 끝*/
+
+
+/* 메인 페이지 끝 */

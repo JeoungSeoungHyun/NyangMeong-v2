@@ -5,12 +5,14 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring.project.nyangmong.domain.image.PublicDataImage;
+import spring.project.nyangmong.domain.places.Places;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ImageListDto {
-    private List<PublicDataImage> publicDataImage;
-    private PublicDataImage ShowupImage;
+public class PlaceListDto {
+    private List<Places> places;
+    private String title;
+    private String address;
+    private String imgurl;
 }

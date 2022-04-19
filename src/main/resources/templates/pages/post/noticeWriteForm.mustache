@@ -1,15 +1,13 @@
 {{> /layout/header}}
 
-<body>
-    <div class="container mt-3">
-        <br>
-        <h1 class="text-center m_txt_title">공지사항</h1>
-        <br>
+<div class="container mt-3">
+    <br>
+    <h1 class="text-center m_txt_title">공지사항 작성</h1>
+    <br>
 
-        <br>
 
-        <!-- 글쓰기 아우터 시작 -->
-        <div class="m_mt_md">
+    <!-- 글쓰기 아우터 시작 -->
+    <div class="m_mt_md">
 
             <!-- 글쓰기 폼 시작 -->
             <form action="#" method="post">
@@ -19,14 +17,16 @@
                 <div class="m_mb_md">
                     <textarea id="summernote" name="content" rows="10" class="form-control" ></textarea>
                 </div>
-                <button id="btn-write" class="btn m_bg_secondary m_right" type="submit">완료</button>
+                <div class="m_box_right">
+                <button id="btn-write" class="btn m_bg_secondary" type="submit">완료</button>
+            </div>
             </form>
             <!-- 글쓰기 폼 끝 -->
 
-        </div>
     </div>
-    <!-- 글쓰기 아우터  끝 -->
-    </div>
+</div>
+<!-- 글쓰기 아우터  끝 -->
+</div>
 
     <script>
         $("#summernote").summernote({

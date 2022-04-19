@@ -1,0 +1,34 @@
+{{> /layout/header}}
+
+<!-- 컨테이너 시작 -->
+
+<div class="text-center m_txt_title m_font_xxl m_ph_lg">공지사항 수정</div>
+
+<div class="container mt-3">
+
+    <!--  글쓰기 수정 폼 시작 -->
+    <form>
+        <div class="mb-3 mt-3">
+            <input type="text" class="form-control" placeholder="Enter title" value="제목입니다">
+        </div>
+        <div class="mb-3">
+            <textarea id="content" rows="10" class="form-control">
+              it's 내용
+            </textarea>
+        </div>
+        <div class="m_box_right ">
+            <button type="button" class="btn m_bg_secondary m_mt_md">수정완료</button>
+
+        </div>
+    </form>
+    <!-- 글쓰기 수정 폼 끝 -->
+
+</div>
+<!-- 컨테이너 끝 -->
+<script>
+    $("#content").summernote({
+        height: 400
+    });
+</script>
+
+{{> /layout/footer}}
