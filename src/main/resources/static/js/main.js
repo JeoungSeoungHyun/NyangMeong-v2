@@ -139,24 +139,22 @@
             customControl.setMap(map);
         });
 
-         // 좌표 생성 
-         let points;
-
-         let loadPoints = async() =>{
-             let response = await fetch("/api/place/points");
+         // 좌표 요청 함수
+             let loadPoints = async() =>{ 
+             let response = await fetch("/api/place/points"); // 패치 요청으로 좌표를 배열로 받아온다
      
              let responseParse = await response.json();
      
-             points = responseParse;
+             let points = responseParse; // 응답 받은 데이터를 json으로 변환 하여 변수에 저장
      
-             console.log(points);
+            //  console.log(points);
      
-             makeMarker();
+             makeMarker(points); // 좌표를 만드는 함수로 전달
      
-         };
-     
-         loadPoints();
-        let makeMarker = () => {
+         };      
+
+         // 좌표를 만드는 함수
+        let makeMarker = () => { 
             console.log(points);
             // 좌표값으로 마커 생성
             for (point of points) {
@@ -176,6 +174,8 @@
                 });
             };
         };
+
+        loadPoints();
 
         //좋아요 탭
         $("#mytabs>ul>li>a").each(function(i) {
