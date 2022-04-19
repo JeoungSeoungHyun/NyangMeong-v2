@@ -119,41 +119,18 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="hotel">
 
+                {{#placesHotel}}
                 <div class="col-md-3">
                     <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
+                        <a href="/place/{{contentSeq}}">
                         </a>
                         <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
+                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
+                {{/placesHotel}}
 
             </div>
         </div>
@@ -163,41 +140,18 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="hotel">
 
+                {{#placesCafe}}
                 <div class="col-md-3">
                     <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
+                        <a href="/place/{{contentSeq}}">
                         </a>
                         <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
+                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
+                {{/placesCafe}}
 
             </div>
 
@@ -208,41 +162,18 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="hotel">
 
+                {{#placesSpot}}
                 <div class="col-md-3">
                     <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
+                        <a href="/place/{{contentSeq}}">
                         </a>
                         <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
+                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
+                {{/placesSpot}}
 
             </div>
 
@@ -252,41 +183,19 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="hotel">
 
+                {{#placesActivity}}
                 <div class="col-md-3">
                     <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
+                        <a href="/place/{{contentSeq}}">
                         </a>
                         <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
+                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
                         </div>
                     </div>
                 </div>
+                {{/placesActivity}}
 
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="#">
-                            <img class="m_img_fit m_mt_md" src="images/cat.jpg">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">이름</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>주소</div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
