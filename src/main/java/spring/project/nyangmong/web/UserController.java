@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.UserService;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
 

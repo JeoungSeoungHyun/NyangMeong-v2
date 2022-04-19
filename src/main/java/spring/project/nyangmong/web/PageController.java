@@ -13,10 +13,10 @@ import spring.project.nyangmong.domain.places.Places;
 public class PageController {
 
     // 메인 페이지 맵
-    @GetMapping({ "/", "main", "mainPage" })
-    public String main() {
-        return "pages/mainPage";
-    }
+    // @GetMapping({ "/", "main", "mainPage" })
+    // public String main() {
+    // return "pages/mainPage";
+    // }
 
     @GetMapping("/welcome")
     public String welcome() {

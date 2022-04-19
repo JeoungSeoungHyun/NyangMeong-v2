@@ -44,8 +44,8 @@
 
         //지도 옵션
         var mapOptions = {
-            center: new naver.maps.LatLng(35.159665, 129.060447),
-            zoom: 15,
+            center: new naver.maps.LatLng(37.8810600584646, 127.745003799391),
+            zoom: 10,
             // 커스텀 컨트롤러 생성
 
 
@@ -139,13 +139,43 @@
             customControl.setMap(map);
         });
 
-        // 마커 생성
-        // var markerOptions = {
-        //     position: new naver.maps.LatLng(35.159665, 129.060447),
-        //     map: map,
-        //     icon: './img/pin_default.png'
-        // };
-        // var marker = new naver.maps.Marker(markerOptions);
+         // 좌표 생성 
+         let points;
+
+         let loadPoints = async() =>{
+             let response = await fetch("/api/place/points");
+     
+             let responseParse = await response.json();
+     
+             points = responseParse;
+     
+             console.log(points);
+     
+             makeMarker();
+     
+         };
+     
+         loadPoints();
+        let makeMarker = () => {
+            console.log(points);
+            // 좌표값으로 마커 생성
+            for (point of points) {
+                var markerOptions = {
+                    position: new naver.maps.LatLng(point[0], point[1]),
+                    map: map,
+                    icon: './img/pin_default.png'
+                };
+                var marker = new naver.maps.Marker(markerOptions);
+                // 마커 리스너 생성 (마커와 지도 클릭이 별개로 구분되어 필요)
+                naver.maps.Event.addListener(marker, 'click', function(event) {
+                    x = event.coord.x;
+                    y = event.coord.y;
+                    map.setCenter(new naver.maps.LatLng(y, x));
+                    console.log(event.coord);
+                    map.setZoom(map.zoom + 3);
+                });
+            };
+        };
 
         //좋아요 탭
         $("#mytabs>ul>li>a").each(function(i) {
@@ -155,21 +185,3 @@
             $(this).attr("id", "mytab" + i)
         })
 
-
-        let points; // 다운받는 좌표값 저장해놓는 변수
-        let x, y; // 지도클릭시 위치 확인 위한 좌표 변수
-
-        // 데이터 다운 함수
-        let loading = async() => {
-
-            let response = await fetch("/loading");
-            let responseParse = await response.json();
-
-            points = responseParse;
-
-            console.log(points);
-
-            makeMarker();
-
-        };
-        loading();
