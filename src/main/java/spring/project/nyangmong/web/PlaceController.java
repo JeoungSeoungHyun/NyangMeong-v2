@@ -40,12 +40,6 @@ public class PlaceController {
     private final HttpSession session;
     private final OptionChange change;
 
-    // 맵 연습중
-    @GetMapping({ "/", "main", "mainPage" })
-    public String main() {
-        return "pages/mainPage";
-    }
-
     // 상세보기
 
     // @GetMapping("/place/{contentSeq}")
