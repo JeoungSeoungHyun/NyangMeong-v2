@@ -23,11 +23,12 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
-    // @GetMapping("/logout")
-    // public String logout() {
-    // session.invalidate(); // 세션 무효화 (세션 아이디 영역의 데이터를 다 삭제해)
-    // return "redirect:/";
-    // }
+    // 로그아웃하기
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate(); // 영역 전체를 날리는 것
+        return "redirect:/";
+    }
 
     // 로그인
     @PostMapping("/login")
@@ -47,9 +48,8 @@ public class UserController {
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
         userService.회원가입(joinDto);
-        return "redirect:/loginForm";
+        return "redirect:/login-form";
     }
-
 
     // 회원가입 페이지
     @GetMapping("/join-form")
