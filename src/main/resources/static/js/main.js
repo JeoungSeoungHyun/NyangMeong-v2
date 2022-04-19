@@ -44,8 +44,8 @@
 
         //지도 옵션
         var mapOptions = {
-            center: new naver.maps.LatLng(35.159665, 129.060447),
-            zoom: 15,
+            center: new naver.maps.LatLng(37.8810600584646, 127.745003799391),
+            zoom: 10,
             // 커스텀 컨트롤러 생성
 
 
@@ -139,26 +139,50 @@
             customControl.setMap(map);
         });
 
-        // 마커 생성
-        // var markerOptions = {
-        //     position: new naver.maps.LatLng(35.159665, 129.060447),
-        //     map: map,
-        //     icon: './img/pin_default.png'
-        // };
-        // var marker = new naver.maps.Marker(markerOptions);
+         // 좌표 요청 함수
+             let loadPoints = async() =>{ 
+             let response = await fetch("/api/place/points"); // 패치 요청으로 좌표를 배열로 받아온다
+     
+             let responseParse = await response.json();
+     
+             let points = responseParse; // 응답 받은 데이터를 json으로 변환 하여 변수에 저장
+     
+            //  console.log(points);
+     
+             makeMarker(points); // 좌표를 만드는 함수로 전달
+     
+         };      
+
+         // 좌표를 만드는 함수
+        let makeMarker = () => { 
+            console.log(points);
+            // 좌표값으로 마커 생성
+            for (point of points) {
+                var markerOptions = {
+                    position: new naver.maps.LatLng(point[0], point[1]),
+                    map: map,
+                    icon: './img/pin_default.png'
+                };
+                var marker = new naver.maps.Marker(markerOptions);
+                // 마커 리스너 생성 (마커와 지도 클릭이 별개로 구분되어 필요)
+                naver.maps.Event.addListener(marker, 'click', function(event) {
+                    x = event.coord.x;
+                    y = event.coord.y;
+                    map.setCenter(new naver.maps.LatLng(y, x));
+                    console.log(event.coord);
+                    map.setZoom(map.zoom + 3);
+                });
+            };
+        };
+
+        loadPoints();
 
         //좋아요 탭
 
-    $(document).ready(function () {
-
-        $('ul.tabs li').click(function () {
-            var tab_id = $(this).attr('data-tab');
-
-            $('ul.tabs li').removeClass('current');
-            $('.tab-content').removeClass('current');
-
-            $(this).addClass('current');
-            $("#" + tab_id).addClass('current');
+        $("#mytabs>ul>li>a").each(function(i) {
+            $(this).attr("href", "#mytab" + i)
+        })
+        $("#mytabs>div>div").each(function(i) {
+            $(this).attr("id", "mytab" + i)
         })
 
-    })

@@ -2,6 +2,7 @@ package spring.project.nyangmong.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
@@ -40,16 +41,10 @@ public class PlaceController {
     private final OptionChange change;
 
     // 맵 연습중
-    // @GetMapping({ "/", "main", "mainPage" })
-    // public @ResponseBody List<String> load() {
-    // List<Places> pList = placeRepository.findAll();
-    // List<String> points = new ArrayList<>();
-    // for (int i = 0; i < pList.size(); i++) {
-    // points.add(pList.get(i).getLatitude());
-    // points.add(pList.get(i).getLongitude());
-    // }
-    // return points;
-    // }
+    @GetMapping({ "/", "main", "mainPage" })
+    public String main() {
+        return "pages/mainPage";
+    }
 
     // 상세보기
 

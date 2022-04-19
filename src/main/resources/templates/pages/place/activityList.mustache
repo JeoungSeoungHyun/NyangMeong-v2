@@ -6,22 +6,23 @@
         <!-- 메뉴 박스 아우터 시작-->
         <div class="m_outer_menu_detail m_mh_md">
             <!-- 메뉴 박스 시작 -->
-
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="javascript:linkListGo('관광지')" onclick="ListGo('관광지')" class="m_txt_title">관광지</a>
-            </div>
-            <div class=" m_box_menu_detail m_bg_secondary">
-                <a href="javascript:linkListGo('숙박')" onclick="ListGo('숙박')" class="m_txt_title">숙박</a>
-            </div>
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="javascript:linkListGo('식음료')" onclick="ListGo('식음료')" class="m_txt_title">식음료</a>
-            </div>
-            <div class="m_box_menu_detail m_bg_primary">
-                <a href="javascript:linkListGo('체험')" onclick="ListGo('체험')" class="m_txt_title">체험</a>
-            </div>
-            <div class="m_box_menu_detail m_bg_secondary">
-                <a href="javascript:linkListGo('동물병원')" onclick="ListGo('동물병원')" class="m_txt_title">동물병원</a>
-            </div>
+                <!-- 메뉴 박스 시작 -->
+                <div class="m_box_menu_detail m_bg_secondary">
+                    <a href="javascript:linkListGo('관광지')" onclick="ListGo('관광지')" class="m_txt_title">관광지</a>
+                </div>
+                <div class=" m_box_menu_detail m_bg_secondary">
+                    <a href="javascript:linkListGo('숙박')" onclick="ListGo('숙박')" class="m_txt_title">숙박</a>
+                </div>
+                <div class="m_box_menu_detail m_bg_secondary">
+                    <a href="javascript:linkListGo('식음료')" onclick="ListGo('식음료')" class="m_txt_title">식음료</a>
+                </div>
+                <div class="m_box_menu_detail m_bg_primary">
+                    <a href="javascript:linkListGo('체험')" onclick="ListGo('체험')" class="m_txt_title">체험</a>
+                </div>
+                <div class="m_box_menu_detail m_bg_secondary">
+                    <a href="javascript:linkListGo('동물병원')" onclick="ListGo('동물병원')" class="m_txt_title">동물병원</a>
+                </div>
+                <!-- 메뉴 박스  끝-->
 
             <!-- 메뉴 박스  끝-->
         </div>
@@ -56,14 +57,19 @@
         </div>
         <div class="row">
                     {{#places}}
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                        <div class=""><i class="fa-solid fa-location-dot"></i> {{address}} </div>
+                    <div  class="col-sm-6 col-md-3 m_mb_md">
+                        <div class="m_box_info_place">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    {{#imgeList}}
+                                    <img src="{{imgurl}}" alt="#">
+                                    {{/imgeList}}
+                                    <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}} </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
                     {{/places}}
         </div>
     </div>
