@@ -37,11 +37,13 @@
         
     <br>
     <div>
+
         </div>
         <div class="row">
                     {{#places}}
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
+
                     <div class="caption">
                         <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
                         <div class=""><i class="fa-solid fa-location-dot"></i> {{address}} </div>
@@ -51,10 +53,15 @@
                     {{/places}}
         </div>
     </div>
-        </div>
-                </div>
-                        </div>
-                                </div>
-                                        </div>
+    <div class="paging-div">
+ <ul class="pagination" id="pagination">
+    <li class="page-item"><a class="page-link" href="">이전</a></li>
+    <li class="page-item"><a class="page-link" href="">1</a></li>
+    <li class="page-item"><a class="page-link" href="">2</a></li>
+    <li class="page-item"><a class="page-link" href="">3</a></li>
+    <li><a class="page-link" href="">다음</a></li>
+</ul>
+    </div>
+</div>
 
 {{> /layout/footer}}

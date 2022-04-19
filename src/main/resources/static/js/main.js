@@ -148,28 +148,17 @@
         // var marker = new naver.maps.Marker(markerOptions);
 
         //좋아요 탭
-        $("#mytabs>ul>li>a").each(function(i) {
-            $(this).attr("href", "#mytab" + i)
+
+    $(document).ready(function () {
+
+        $('ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#" + tab_id).addClass('current');
         })
-        $("#mytabs>div>div").each(function(i) {
-            $(this).attr("id", "mytab" + i)
-        })
 
-
-        let points; // 다운받는 좌표값 저장해놓는 변수
-        let x, y; // 지도클릭시 위치 확인 위한 좌표 변수
-
-        // 데이터 다운 함수
-        let loading = async() => {
-
-            let response = await fetch("/loading");
-            let responseParse = await response.json();
-
-            points = responseParse;
-
-            console.log(points);
-
-            makeMarker();
-
-        };
-        loading();
+    })

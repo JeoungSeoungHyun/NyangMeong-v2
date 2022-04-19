@@ -20,6 +20,7 @@ import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.service.PlaceService;
 import spring.project.nyangmong.util.ContentSeqDownload;
+import spring.project.nyangmong.util.OptionChange;
 import spring.project.nyangmong.web.dto.craw.ImageDto;
 import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
@@ -35,6 +36,7 @@ public class PlaceController {
     private final PlaceRepository placeRepository;
     private final ImageRepository imageRepository;
     private final HttpSession session;
+    private final OptionChange change;
 
     // 맵 연습중
     // @GetMapping({ "/", "main", "mainPage" })
@@ -217,15 +219,15 @@ public class PlaceController {
                         .policyCautions(placeDto.getPolicyCautions())
                         .emergencyResponse(placeDto.getEmergencyResponse())
                         .memo(placeDto.getMemo())
-                        .bathFlag(placeDto.getBathFlag())
-                        .provisionFlag(placeDto.getProvisionFlag())
-                        .petFlag(placeDto.getPetFlag())
+                        .bathFlag(new OptionChange().change(placeDto.getBathFlag()))
+                        .provisionFlag(new OptionChange().change(placeDto.getProvisionFlag()))
+                        .petFlag(new OptionChange().change(placeDto.getPetFlag()))
                         .petWeight(placeDto.getPetWeight())
                         .petBreed(placeDto.getPetBreed())
-                        .emergencyFlag(placeDto.getEmergencyFlag())
-                        .entranceFlag(placeDto.getEntranceFlag())
-                        .parkingFlag(placeDto.getParkingFlag())
-                        .inOutFlag(placeDto.getInOutFlag())
+                        .emergencyFlag(new OptionChange().change(placeDto.getEmergencyFlag()))
+                        .entranceFlag(new OptionChange().change(placeDto.getEntranceFlag()))
+                        .parkingFlag(new OptionChange().change(placeDto.getParkingFlag()))
+                        .inOutFlag(new OptionChange().change(placeDto.getInOutFlag()))
                         // 추가
                         .build();
 

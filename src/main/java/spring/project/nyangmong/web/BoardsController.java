@@ -62,7 +62,7 @@ public class BoardsController {
         return "pages/post/noticeList";
     }
 
-    @GetMapping({ "/boards" })
+    @GetMapping({"/boards"})
     public String home() {
         return "pages/list/jarangList";
     }
