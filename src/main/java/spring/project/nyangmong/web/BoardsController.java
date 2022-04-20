@@ -30,26 +30,6 @@ public class BoardsController {
         User principal = (User) session.getAttribute("principal");
 
         List<CommentResponseDto> comments = new ArrayList<>();
-
-        for (Comment comment : boardsEntity.getCommentList()) {
-            CommentResponseDto commentDto = new CommentResponseDto();
-            commentDto.setComment(comment);
-
-            if (principal != null) {
-                if (principal.getId() == comment.getUser().getId()) {
-                    commentDto.setAuth(true); // or false
-                } else {
-                    commentDto.setAuth(false); // or false
-                }
-            } else {
-                commentDto.setAuth(false); // or false
-            }
-
-            comments.add(commentDto);
-        }
-
-        model.addAttribute("comments", comments);
-        model.addAttribute("boardId", id);
         return "pages/detail/jarangDetail";
     }
 
@@ -63,13 +43,13 @@ public class BoardsController {
         return "pages/post/noticeList";
     }
 
-    @GetMapping({"/boards"})
+    @GetMapping({ "/boards" })
     public String home() {
         return "pages/list/jarangList";
     }
 
     @GetMapping("/s/notice/write-form")
-    public String noticeWrite(){
+    public String noticeWrite() {
         return "pages/post/noticeWriteForm";
     }
 

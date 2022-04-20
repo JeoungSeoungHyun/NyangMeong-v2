@@ -79,16 +79,16 @@
     <div class="paging-div">
  <ul class="pagination" id="pagination">
      {{#places.first}}
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName=체험&page={{previewPage}}">이전</a></li>
+    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{previewPage}}">이전</a></li>
          {{/places.first}}
          {{^places.first}}
-   <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName=체험&page={{previewPage}}">이전</a></li>
+   <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{previewPage}}">이전</a></li>
          {{/places.first}}
      {{#places.last}}    
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName=체험&page={{nextPage}}">다음</a></li>
+    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>
          {{/places.last}}
          {{^places.last}}
-    <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName=체험&page={{nextPage}}">다음</a></li>         
+    <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>         
          {{/places.last}}
 </ul>
     </div>

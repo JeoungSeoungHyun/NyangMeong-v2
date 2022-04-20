@@ -55,7 +55,7 @@
     <div>
         </div>
         <div class="row">
-            {{#places}}
+                    {{#places.content}}
                     <div  class="col-sm-6 col-md-3 m_mb_md">
                         <div class="m_box_info_place">
                             <div class="thumbnail">
@@ -71,25 +71,26 @@
                             </div>
                         </div>
                     </div>
-            {{/places}}
+                    {{/places.content}}
         </div>
     </div>
 </div>
     <div class="paging-div">
  <ul class="pagination" id="pagination">
      {{#places.first}}
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName=체험&page={{previewPage}}">이전</a></li>
+    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{previewPage}}">이전</a></li>
          {{/places.first}}
          {{^places.first}}
-   <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName=체험&page={{previewPage}}">이전</a></li>
+   <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{previewPage}}">이전</a></li>
          {{/places.first}}
      {{#places.last}}    
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName=체험&page={{nextPage}}">다음</a></li>
+    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>
          {{/places.last}}
          {{^places.last}}
-    <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName=체험&page={{nextPage}}">다음</a></li>         
+    <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>         
          {{/places.last}}
 </ul>
+    </div>
 </div>
 
 

@@ -2,10 +2,8 @@ package spring.project.nyangmong.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.Null;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,7 +57,7 @@ public class PlaceController {
     // return "pages/place/placeDetail";
     // }
 
-    @GetMapping("/place/{contentSeq}") // 이거 JSON 불러오는데 맞나요?
+    @GetMapping("/place/{contentSeq}")
     public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
         Places places = placeService.상세보기(contentSeq);
         List<PublicDataImage> imageList = imageRepository.ImagecontentSeq(contentSeq);
@@ -115,16 +113,17 @@ public class PlaceController {
     @GetMapping("test/place/list")
     public @ResponseBody Page<Places> listTest(@RequestParam(defaultValue = "0") Integer page) {
         PageRequest pq = PageRequest.of(page, 24);
-        return placeRepository.findAll(pq);
+        return placeRepository.searchPartName("식음료", pq);
     }
 
     @GetMapping("/place/search")
     public String searchPartName(@RequestParam String partName, @RequestParam(defaultValue = "0") Integer page,
             Model model) {
         long count = placeRepository.countPartName(partName);
-        PageRequest pq = PageRequest.of(page, 24);
+        PageRequest pq = PageRequest.of(page, 16);
 
         model.addAttribute("count", count);
+        model.addAttribute("partName", partName);
         model.addAttribute("places", placeRepository.searchPartName(partName, pq));
         model.addAttribute("nextPage", page + 1);
         model.addAttribute("previewPage", page - 1);
@@ -144,25 +143,21 @@ public class PlaceController {
     }
 
     @GetMapping("/outline/search")
-    public String searchOutLine(@RequestParam(defaultValue = "") String keyword, Model model) {
+    public String searchOutLine(@RequestParam(defaultValue = "") String keyword,
+            @RequestParam(defaultValue = "0") Integer page, Model model) {
         if (keyword.equals("")) {
-            List<Places> places = placeRepository.findAll();
             long count = placeRepository.count();
+            PageRequest pq = PageRequest.of(page, 16);
+            model.addAttribute("nextPage", page + 1);
+            model.addAttribute("previewPage", page - 1);
             model.addAttribute("count", count);
-            model.addAttribute("places", places);
+            model.addAttribute("places", placeRepository.findAll(pq));
             return "pages/place/search";
         }
-        List<Places> places = placeRepository.searchPlaces("%keyword%");
-        PlaceListDto placeDto = new PlaceListDto();
-        placeDto.setPlaces(places);
-        for (int i = 0; i < places.size(); i++) {
-            placeDto.setTitle(places.get(i).getTitle());
-            placeDto.setAddress(places.get(i).getAddress());
-        }
-        long count = placeRepository.count();
+        PageRequest pq = PageRequest.of(page, 16);
+        long count = placeRepository.countSearch(keyword);
         model.addAttribute("count", count);
-        model.addAttribute("pdto", placeDto);
-        model.addAttribute("places", places);
+        model.addAttribute("places", placeRepository.searchPlaces(keyword, pq));
         return "pages/place/search";
     }
 
