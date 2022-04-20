@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -110,21 +112,22 @@ public class PlaceController {
         return "pages/place/outlineList";
     }
 
+    @GetMapping("test/place/list")
+    public @ResponseBody Page<Places> listTest(@RequestParam(defaultValue = "0") Integer page) {
+        PageRequest pq = PageRequest.of(page, 24);
+        return placeRepository.findAll(pq);
+    }
+
     @GetMapping("/place/search")
-    public String searchPartName(@RequestParam String partName, Model model) {
-        List<Places> places = placeService.분류검색(partName);
+    public String searchPartName(@RequestParam String partName, @RequestParam(defaultValue = "0") Integer page,
+            Model model) {
         long count = placeRepository.countPartName(partName);
-        // long count = placeRepository.countPartName(partName);
-        // model.addAttribute("count", count);
-        PlaceListDto placeDto = new PlaceListDto();
-        placeDto.setPlaces(places);
-        for (int i = 0; i < places.size(); i++) {
-            placeDto.setTitle(places.get(i).getTitle());
-            placeDto.setAddress(places.get(i).getAddress());
-        }
+        PageRequest pq = PageRequest.of(page, 24);
+
         model.addAttribute("count", count);
-        model.addAttribute("pdto", placeDto);
-        model.addAttribute("places", places);
+        model.addAttribute("places", placeRepository.searchPartName(partName, pq));
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("previewPage", page - 1);
         if (partName.equals("관광지")) {
             return "pages/place/spotList";
         } else if (partName.equals("동물병원")) {

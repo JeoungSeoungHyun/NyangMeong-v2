@@ -3,6 +3,7 @@ package spring.project.nyangmong.web.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.service.PlaceService;
+import spring.project.nyangmong.web.dto.members.ResponseDto;
 
 @RequiredArgsConstructor
 @RestController
 public class PlaceApiController {
 
     private final PlaceRepository placeRepository;
+    private final PlaceService placeService;
 
     @GetMapping("/api/place/points")
     public ResponseEntity<?> loadPoints() {
