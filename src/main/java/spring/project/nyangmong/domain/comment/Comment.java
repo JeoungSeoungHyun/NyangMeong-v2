@@ -1,15 +1,16 @@
 package spring.project.nyangmong.domain.comment;
 
-import javax.persistence.Column;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
@@ -21,25 +22,23 @@ import spring.project.nyangmong.domain.user.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
 @EntityListeners(AuditingEntityListener.class)
-// @Table(uniqueConstraints = {
-// @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "boardId" })
-// })
-public class Comment {
+@Entity
+public class Comment { // Post 1 1, Comment N 1
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Lob
-    @Column
     private String content;
+
+    @JoinColumn(name = "postId")
+    @ManyToOne
+    private Boards boards;
 
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
-    @JoinColumn(name = "boardId")
-    @ManyToOne
-    private Boards boards;
+    @CreatedDate // insert
+    private LocalDateTime createDate;
 }

@@ -21,7 +21,7 @@ public class CommentsController {
     private final HttpSession session;
 
     // data를 리턴하면 CommentApiController를 원래 만들어야 한다.
-    @DeleteMapping("/s/api/comment/{id}")
+    @DeleteMapping("/s/api/comment/{id}/delete")
     public @ResponseBody ResponseDto<?> deleteById(@PathVariable Integer id) {
 
         // 세션의 id와 comment의 userId와 비교
@@ -31,13 +31,12 @@ public class CommentsController {
         return new ResponseDto<>(1, "성공", null);
     }
 
-    @PostMapping("/s/boards/{postId}/comment")
-    public String write(@PathVariable Integer boardstId, Comment comment) { // x-www-form~~
+    @PostMapping("/s/boards/{boardsId}/comment")
+    public String write(@PathVariable Integer boardsId, Comment comment) {
         User principal = (User) session.getAttribute("principal");
 
         comment.setUser(principal);
-        commentService.댓글쓰기(comment, boardstId);
-        return "redirect:/boards/" + boardstId;
+        commentService.댓글쓰기(comment, boardsId);
+        return "redirect:/boards/" + boardsId;
     }
-
 }

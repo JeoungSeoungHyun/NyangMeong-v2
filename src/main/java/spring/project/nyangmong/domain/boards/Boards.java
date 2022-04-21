@@ -54,7 +54,7 @@ public class Boards { // N (드라이빙 테이블, FK의 주인)
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column
     private Integer pageCount; // 조회수
 
     // @JsonIgnoreProperties({ "boards" })

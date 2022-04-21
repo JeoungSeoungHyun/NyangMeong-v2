@@ -9,14 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
 @Data
 public class BoardsInfoDto {
-
     private long id;
     private String text;
     private String tag;

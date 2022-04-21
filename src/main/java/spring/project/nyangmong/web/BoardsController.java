@@ -5,14 +5,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
@@ -23,6 +26,7 @@ import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 public class BoardsController {
     private final BoardsService boardsService;
     private final HttpSession session;
+    private final BoardsRepository boardsRepositoty;
 
     @GetMapping("/boards/{id}")
     public String detail(@PathVariable Integer id, Model model) {
@@ -30,27 +34,44 @@ public class BoardsController {
         User principal = (User) session.getAttribute("principal");
 
         List<CommentResponseDto> comments = new ArrayList<>();
-        return "pages/detail/jarangDetail";
+
+        for (Comment comment : boardsEntity.getComments()) {
+            CommentResponseDto dto = new CommentResponseDto();
+            dto.setComment(comment);
+
+            if (principal != null) {
+                if (principal.getId() == comment.getId()) {
+                    dto.setAuth(true); // or false
+                } else {
+                    dto.setAuth(false); // or false
+                }
+            } else {
+                dto.setAuth(false); // or false
+            }
+
+            comments.add(dto);
+        }
+
+        model.addAttribute("comments", comments);
+        model.addAttribute("boardsId", id);
+        return "pages/post/jarangDetail";
     }
 
-    @GetMapping("/s/boards/writeForm")
+    // 페이지 주기
+    // /s 붙었으니까 자동으로 인터셉터가 인증 체크함. (완료)
+    @GetMapping("/s/boards/write")
     public String writeForm() {
         return "pages/post/jarangWriteForm";
     }
 
-    @GetMapping("/notice")
-    public String noticeRead() {
-        return "pages/post/noticeList";
-    }
-
-    @GetMapping({ "/boards" })
-    public String home() {
-        return "pages/list/jarangList";
-    }
-
-    @GetMapping("/s/notice/write-form")
-    public String noticeWrite() {
-        return "pages/post/noticeWriteForm";
+    @GetMapping("/boards")
+    public @ResponseBody Page<Boards> list(Integer page, Model model) {
+        Page<Boards> boards = boardsService.게시글목록(page);
+        PageRequest pq = PageRequest.of(page, 10);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("board", boards);
+        // return "pages/post/jarangList";
+        return boardsRepositoty.findAll(pq);
     }
 
 }

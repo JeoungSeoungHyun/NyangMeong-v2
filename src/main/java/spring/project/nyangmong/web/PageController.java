@@ -42,11 +42,6 @@ public class PageController {
         return "pages/welcomePage";
     }
 
-    @GetMapping("/welcomePage")
-    public String welcomePage() {
-        return "pages/welcomePage";
-    }
-
     @GetMapping("/jarangDetail")
     public String jarangDetail() {
         return "pages/post/jarangDetail";

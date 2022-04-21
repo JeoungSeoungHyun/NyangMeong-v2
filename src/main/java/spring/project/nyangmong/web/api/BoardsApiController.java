@@ -2,19 +2,22 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
+import spring.project.nyangmong.service.PlaceLikesService;
 import spring.project.nyangmong.web.dto.members.ResponseDto;
 import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteDto;
@@ -23,45 +26,40 @@ import spring.project.nyangmong.web.dto.members.boards.WriteDto;
 @RestController
 public class BoardsApiController {
     private final BoardsService boardsService;
+    private final PlaceLikesService placelikesService;
+
     private final HttpSession session;
 
-    @DeleteMapping("/s/api/post/{id}")
+    // UPDATE 글수정 /post/{id} - 글상세보기 페이지가기 - 인증 O
+    @PutMapping("/s/api/boards/{id}/update")
+    public @ResponseBody ResponseDto<String> update(@PathVariable Integer id, @RequestBody Boards boards) {
+
+        // 인증
+        User principal = (User) session.getAttribute("principal");
+        if (principal == null) {
+            return new ResponseDto<String>(-1, "로그인 되지 않았습니다.", null);
+        }
+
+        // 권한
+        Boards boardsEntity = boardsService.글상세보기(id);
+
+        if (boardsEntity.getUser().getId() != principal.getId()) {
+            return new ResponseDto<String>(-1, "해당 게시글을 수정할 권한이 없습니다.", null);
+        }
+
+        boardsService.글수정하기(boards, id);
+
+        return new ResponseDto<String>(1, "수정 성공", null);
+    }
+
+    @DeleteMapping("/s/api/boards/{id}/delete")
     public ResponseDto<?> deleteById(@PathVariable Integer id) {
         boardsService.글삭제하기(id);
 
         return new ResponseDto<>(1, "성공", null);
     }
 
-    //
-    @GetMapping("/api/post/{id}")
-    public ResponseDto<?> detail(@PathVariable Integer id) {
-        //
-
-        Boards boardsEntity = boardsService.글상세보기(id);
-        User principal = (User) session.getAttribute("principal");
-        boolean auth = false;
-
-        if (principal != null) {
-
-            if (principal.getId() == boardsEntity.getUser().getId()) {
-                auth = true;
-            }
-        }
-
-        DetailResponseDto detailResponseDto = new DetailResponseDto(boardsEntity, auth); // comment null
-        return new ResponseDto<>(1, "성공", detailResponseDto); // comment 생성됨 = MessageConverter
-        //
-    }
-    //
-
-    @GetMapping("/api/post")
-    public ResponseDto<?> list(Integer page) {
-        Page<Boards> boards = boardsService.게시글목록(page);
-        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
-        return new ResponseDto<>(1, "성공", boards);
-    }
-
-    @PostMapping("/s/post")
+    @PostMapping("/s/boards/write")
     public ResponseDto<?> write(@RequestBody WriteDto writeDto) {
 
         User principal = (User) session.getAttribute("principal");
@@ -72,10 +70,13 @@ public class BoardsApiController {
         return new ResponseDto<>(1, "성공", null);
     }
 
-    @GetMapping("/api/likelist")
-    public ResponseDto<?> likeList(Integer page) {
-        Page<Boards> board = boardsService.게시글목록(page);
-        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
-        return new ResponseDto<>(1, "성공", board);
+    @PostMapping("/s/user/{id}/boardlike")
+    public void likes(@PathVariable long boardsId, Authentication authentication) {
+        placelikesService.placelikes(boardsId, authentication.getUsername());
+    }
+
+    @DeleteMapping("/s/user/{id}/unboardlike")
+    public void unLikes(@PathVariable long boardsId, Authentication authentication) {
+        placelikesService.unplacelikes(boardsId, authentication.getUsername());
     }
 }
