@@ -1,10 +1,10 @@
 {{> /layout/header}}
 
-    <div class="container">
+<div class="container">
     <br>
     <div class="text-center m_txt_title m_font_xxl m_ph_lg">공지사항</div>
     <br>
-    <hr >
+    <hr>
 
     <main class="mb-4">
         <div class=" px-4 px-lg-5">
@@ -22,7 +22,8 @@
                     <div class="board-container">
                         <br>
                         <p class="content" style="word-break:break-all;">
-                            안녕하세요. 냥도놀러가고싶댕이 오픈했습니다. <br> 반려동물과 함께 즐거운 강원도 여행 되시길 바랍니다. <br> 홈페이지 사용 시 궁금한 점이 있거나 불편한 점이 있으면 아래 번호로 연락주세요.<br> 010-2222-3333
+                            안녕하세요. 냥도놀러가고싶댕이 오픈했습니다. <br> 반려동물과 함께 즐거운 강원도 여행 되시길 바랍니다. <br> 홈페이지 사용 시 궁금한 점이 있거나 불편한 점이
+                            있으면 아래 번호로 연락주세요.<br> 010-2222-3333
                             <br> 앞으로 발전하는 냥도놀러가고싶댕이 되겠습니다. <br> 이용해 주셔서 감사합니다.
 
                         </p>
@@ -30,14 +31,17 @@
                     <br>
                     <br>
 
-                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">목록으로</button>
-                    <!-- {{#auth}} -->
-                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">삭제</button>
-                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">수정</button>
-                    <!-- {{/auth}} -->
+                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">목록으로</button>
+                    {{#userAuth}}
+                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">삭제</button>
+                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">수정</button>
+                    {{/userAuth}}
                     <br><br><br>
                     <div class="list-group" style="margin-top: 20px; margin-bottom: 20px;">
-                       <a href="#" class="list-group-item">이전글: </a>
+                        <a href="#" class="list-group-item">이전글: </a>
                         <a href="#" class="list-group-item">다음글: </a>
                     </div>
 
@@ -49,19 +53,6 @@
     </main>
 </div>
 
-<!-- <script>
-     async function deleteComment(commentId) {
-        let response = await fetch(`/s/api/comment/${commentId}`, {
-            method: "DELETE"
-        });
-        let responseParse = await response.json();
-        if (responseParse.code == 1) {
-            alert("삭제 성공");
-            location.reload(); // ajax + ssr
-        } else {
-            alert("삭제 실패");
-        }
-    }
-</script> -->
+<script src="/js/admin.js"></script>
 
 {{> /layout/footer}}

@@ -12,19 +12,17 @@
                     <hr>
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
-                        <p class="col-8" style="word-break:break-all;"> 우리집 멍멍이를 소개합니다. </p>
-                        <p class="col-1"> 작성일 </p>
-                        <p class="col-1">작성자</p>
-                        <p class="col-1">조회수</p>
+                        <p class="col-8" style="word-break:break-all;"> {{boards.title}}</p>
+                        <p class="col-1"> {{boards.createDate}} </p>
+                        <p class="col-1">{{boards.user.userName}}</p>
+                        <p class="col-1">{{boards.pageCount}}</p>
                     </div>
 
 
                     <div class="board-container">
                         <br>
                         <p class="content" style="word-break:break-all;">
-                            우리집 강아지 이름은 고양이입니다. 고양이처럼 귀엽기 때무니져. <br> 고양이 사진 <br> 강아지 사진<br> 고양이 사진 <br> 강아지 사진 <br>
-                            내용내용내용content내용
-
+                            {{{post.content}}}
                         </p>
                     </div>
                     <br>
@@ -40,12 +38,12 @@
 
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
                         class="btn">목록으로</button>
-                    <!-- {{#auth}} -->
-                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                    {{#auth}}
+                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
                         class="btn">삭제</button>
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
                         class="btn">수정</button>
-                    <!-- {{/auth}} -->
+                    {{/auth}}
                     <br><br><br>
 
                     <!-- 댓글 시작 -->
@@ -55,31 +53,36 @@
                         <div class="card-header bg-light">
                             <i class="fa fa-comment fa"></i> COMMENT
                         </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    <button style="float:right; " type="button" class="btn btn-dark mt-3"
-                                        onClick="javascript:addReply();">post reply</button>
-                                </li>
-                            </ul>
-                        </div>
+                        <form action="/s/boards/{{postId}}/comment" method="post">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                            rows="3"></textarea>
+                                        <button style="float:right; " type="submit"
+                                            class="btn btn-dark mt-3">등록</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                     <br />
                     <div class="card">
                         <div class="card-header"><i class="fa fa-comment fa"></i> COMMENT LIST</div>
                         <ul id="reply-box" class="list-group">
-                            <!-- {{#comments}} -->
+                            {{#comments}}
                             <li class="list-group-item d-flex justify-content-between">
-                                <div>고양이 정말 이쁘네요 냥줍하고싶어요</div>
+                                <div>{{comment.content}}</div>
                                 <div class="d-flex">
-                                    <div class="font-italic"> <i class="far fa-user-circle"></i> 집사또원 &nbsp;</div>
-                                    <!-- {{#auth}} -->
-                                    <!-- <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button> -->
-                                    <!-- {{/auth}} -->
+                                    <div class="font-italic"> <i class="far fa-user-circle"></i>
+                                        {{comment.user.username}} &nbsp;</div>
+                                    {{#auth}}
+                                    <button class="badge bg-primary"
+                                        onclick="deleteComment('{{comment.id}}');">삭제</button>
+                                    {{/auth}}
                                 </div>
                             </li>
-                            <!-- {{/comments}} -->
+                            {{/comments}}
                         </ul>
                     </div>
                     <br>
@@ -96,24 +99,7 @@
     </main>
 </div>
 
-<!-- <script>
-  $('.like-container > .feeling_a, .dislike-container  > .feeling_a').on('click', function () {
-    event.preventDefault();
-    $('.active').removeClass('active');
-    $(this).addClass('active');
-  });
-     async function deleteComment(commentId) {
-        let response = await fetch(`/s/api/comment/${commentId}`, {
-            method: "DELETE"
-        });
-        let responseParse = await response.json();
-        if (responseParse.code == 1) {
-            alert("삭제 성공");
-            location.reload(); // ajax + ssr
-        } else {
-            alert("삭제 실패");
-        }
-    }
-</script> -->
+<script src="/js/comment.js"></script>
+<script src="/js/boards.js"></script>
 
 {{> /layout/footer}}

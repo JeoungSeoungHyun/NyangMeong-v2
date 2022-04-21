@@ -62,22 +62,28 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark m_txt_title m_font_xl" href="/welcome">냥도놀러가고싶댕 소개</a>
                     </li>
+                    {{#userAuth }}
+                    <li class="nav-item">
+                        <a class="nav-link text-dark m_txt_title m_font_xl" href="/s/admin/main">관리자페이지</a>
+                    </li>
+                    {{/userAuth}}
                 </div>
                 <div>
                     <li class="nav-item">
                         <div>
-                            <!-- {{#principal}} -->
+                            {{#principal}}
                             <div class="m_box_login">
-                                <a class="m_txt_title m_font_lg" href="/login-form" style="margin-right: 15px;">내 정보</a>
-                                <a class="m_txt_title m_font_lg" href="/join-form">로그아웃</a>
+                                <a class="m_txt_title m_font_lg" href="/s/user/{{id}}/detail"
+                                    style="margin-right: 15px;">내 정보</a>
+                                <a class="m_txt_title m_font_lg" href="/">로그아웃</a>
                             </div>
-                            <!-- {{/principal}} -->
-                            <!-- {{^principal}} -->
+                            {{/principal}}
+                            {{^principal}}
                             <div class="m_box_login">
                                 <a class="m_txt_title m_font_lg" href="/login-form" style="margin-right: 15px;">로그인</a>
                                 <a class="m_txt_title m_font_lg" href="/join-form">회원가입</a>
                             </div>
-                            <!-- {{/principal}} -->
+                            {{/principal}}
 
                             <i id="btn-search" class="fa-solid fa-magnifying-glass m_box_search"
                                 style="cursor: pointer; size: 15px;"></i>
@@ -93,8 +99,8 @@
     <!-- 검색 박스 시작 -->
     <div id="panel">
         <form action="/outline/search" method="get">
-        <input name="keyword" type="text" class="m_box_input_search m_txt_title" placeholder="  검색어를 입력해주세요 ">
-        <button class="m_btn_search m_txt_title" type="submit">검색</button>
+            <input name="keyword" type="text" class="m_box_input_search m_txt_title" placeholder="  검색어를 입력해주세요 ">
+            <button class="m_btn_search m_txt_title" type="submit">검색</button>
         </form>
     </div>
     <!-- 검색 박스 끝 -->

@@ -1,0 +1,72 @@
+{{>/layout/header}}
+
+<div class="container" style="height: 70vh;">
+
+    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">댕냥이자랑 게시글 관리</h1>
+
+    <div class="m_box_right m_pb_lg">
+        <button class="btn m_bg_secondary m_p_sm m_mr_md">
+            <a href="/s/notice/write-form">글쓰기</a>
+        </button>
+        <button class="btn m_bg_secondary m_p_sm">
+            <a href="#">삭제</a>
+        </button>
+    </div>
+
+    <div class="m_mb_lg">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <div>작성글: 총 @@건</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td><input type="checkbox" id="checkall" /></td>
+                <th class="col-lg-2">#</th>
+                <th class="col-lg-6">글 제목</th>
+                <th class="col-lg-2">작성자</th>
+                <th class="col-lg-2">작성일자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" name="chk" /></td>
+                <th>id</th>
+                <td>Title</td>
+                <td>username</td>
+                <td>createdate</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="chk" /></td>
+                <th>id</th>
+                <td>Title</td>
+                <td>username</td>
+                <td>createdate</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="paging-div">
+        <ul class="pagination" id="pagination">
+            <li class="page-item"><a class="page-link" href="">이전</a></li>
+            <li class="page-item"><a class="page-link" href="">1</a></li>
+            <li class="page-item"><a class="page-link" href="">2</a></li>
+            <li class="page-item"><a class="page-link" href="">3</a></li>
+            <li><a class="page-link" href="">다음</a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="/js/admin.js"></script>
+{{>/layout/footer}}
