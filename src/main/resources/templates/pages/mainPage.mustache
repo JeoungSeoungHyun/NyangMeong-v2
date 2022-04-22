@@ -119,18 +119,23 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="hotel">
 
-                {{#placesHotel}}
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="/place/{{contentSeq}}">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
+                {{#HotelInfoListRespDto}}
+                <div class="col-md-3 m_mb_md">
+                    <div class="m_box_like_place">
+                        <a href="/place/{{place.contentSeq}}">
+                        <div>
+                            <div>
+                                <img class="m_img_fit" src="{{image}}">
+                            </div>                                    
+                            <div class="caption m_p_sm">
+                                <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                            </div>
                         </div>
+                        </a>
                     </div>
                 </div>
-                {{/placesHotel}}
+                {{/HotelInfoListRespDto}}
 
             </div>
         </div>
@@ -140,18 +145,23 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="cafe">
 
-                {{#placesCafe}}
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="/place/{{contentSeq}}">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
+                {{#CafeInfoListRespDto}}
+                <div class="col-md-3 m_mb_md">
+                    <div class="m_box_like_place">
+                        <a href="/place/{{place.contentSeq}}">
+                        <div>
+                            <div>
+                                <img class="m_img_fit" src="{{image}}">
+                            </div>                                    
+                            <div class="caption m_p_sm">
+                                <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                            </div>
                         </div>
+                        </a>
                     </div>
                 </div>
-                {{/placesCafe}}
+                {{/CafeInfoListRespDto}}
 
             </div>
 
@@ -162,18 +172,23 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="spot">
 
-                {{#placesSpot}}
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="/place/{{contentSeq}}">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
+                {{#SpotInfoListRespDto}}
+                <div class="col-md-3 m_mb_md">
+                    <div class="m_box_like_place">
+                        <a href="/place/{{place.contentSeq}}">
+                        <div>
+                            <div>
+                                <img class="m_img_fit" src="{{image}}">
+                            </div>                                    
+                            <div class="caption m_p_sm">
+                                <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                            </div>
                         </div>
+                        </a>
                     </div>
                 </div>
-                {{/placesSpot}}
+                {{/SpotInfoListRespDto}}
 
             </div>
 
@@ -183,18 +198,23 @@
 
             <div class="tab-pane fade show active d-flex" style="justify-content: space-around;" id="activity">
 
-                {{#placesActivity}}
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <a href="/place/{{contentSeq}}">
-                        </a>
-                        <div class="caption">
-                            <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                            <div class=""><i class="fa-solid fa-location-dot"></i>{{address}}</div>
+                {{#ActivityInfoListRespDto}}
+                <div class="col-md-3 m_mb_md">
+                    <div class="m_box_like_place">
+                        <a href="/place/{{place.contentSeq}}">
+                        <div>
+                            <div>
+                                <img class="m_img_fit" src="{{image}}">
+                            </div>                                    
+                            <div class="caption m_p_sm">
+                                <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                            </div>
                         </div>
+                        </a>
                     </div>
                 </div>
-                {{/placesActivity}}
+                {{/ActivityInfoListRespDto}}
 
 
             </div>

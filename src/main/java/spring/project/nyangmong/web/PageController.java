@@ -1,5 +1,6 @@
 package spring.project.nyangmong.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.service.PlaceService;
+import spring.project.nyangmong.util.ChooseImg;
+import spring.project.nyangmong.web.dto.places.InfoRespDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,20 +23,50 @@ public class PageController {
     // 메인 페이지 맵
     @GetMapping({ "/", "main", "mainPage" })
     public String main(Model model) {
+
+        List<Places> placesHotel = placeRepository.placeTop3("숙박");
+        List<String> placesHotelImages = ChooseImg.imgList(placesHotel);
+        List<InfoRespDto> HotelInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesHotel.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesHotel.get(i), placesHotelImages.get(i));
+            HotelInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("HotelInfoListRespDto", HotelInfoListRespDto);
+        model.addAttribute("placesHotel", placesHotel);
+
+        List<Places> placesCafe = placeRepository.placeTop3("식음료");
+        List<String> placesCafeImages = ChooseImg.imgList(placesCafe);
+        List<InfoRespDto> CafeInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesCafe.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesCafe.get(i), placesCafeImages.get(i));
+            CafeInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("CafeInfoListRespDto", CafeInfoListRespDto);
+        model.addAttribute("placesCafe", placesCafe);
+
         List<Places> placesSpot = placeRepository.placeTop3("관광지");
+        List<String> placesSpotImages = ChooseImg.imgList(placesSpot);
+        List<InfoRespDto> SpotInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesSpot.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesSpot.get(i), placesSpotImages.get(i));
+            SpotInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("SpotInfoListRespDto", SpotInfoListRespDto);
         model.addAttribute("placesSpot", placesSpot);
+
+        List<Places> placesActivity = placeRepository.placeTop3("체험");
+        List<String> placesAcitivityImages = ChooseImg.imgList(placesActivity);
+        List<InfoRespDto> ActivityInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesActivity.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesActivity.get(i), placesAcitivityImages.get(i));
+            ActivityInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("ActivityInfoListRespDto", ActivityInfoListRespDto);
+        model.addAttribute("placesActivity", placesActivity);
 
         List<Places> placesHospital = placeRepository.placeTop3("동물병원");
         model.addAttribute("placesHospital", placesHospital);
 
-        List<Places> placesCafe = placeRepository.placeTop3("식음료");
-        model.addAttribute("placesCafe", placesCafe);
-
-        List<Places> placesActivity = placeRepository.placeTop3("체험");
-        model.addAttribute("placesActivity", placesActivity);
-
-        List<Places> placesHotel = placeRepository.placeTop3("숙박");
-        model.addAttribute("placesHotel", placesHotel);
         return "pages/mainPage";
     }
 

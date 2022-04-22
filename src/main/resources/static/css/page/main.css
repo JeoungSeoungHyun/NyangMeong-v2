@@ -185,6 +185,15 @@ body {
     background-size: cover;
 }
 
+.m_carousel-inner,
+.m_carousel,
+.m_carousel-container{
+    height: 600px;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+
 .carousel-item {
     height: 97.5%;
     width: 100%;
@@ -373,6 +382,9 @@ ul.tabs li.current{
 	display: inherit;
 }
 
+.m_box_like_place {
+    border: 2px solid  #b4b2b2;;
+}
 
 
 /* 메인 페이지 끝 */

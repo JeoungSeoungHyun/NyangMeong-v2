@@ -129,8 +129,5 @@ i:hover {
 }
 
 .m_box_info_place {
-    padding-left: 10px;
-    padding-top: 10px;
     border: 1px solid gray; 
-    height: 120px;
 }

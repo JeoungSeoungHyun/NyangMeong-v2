@@ -55,9 +55,9 @@
     <div>
         </div>
         <div class="row">
-                    {{#places.content}}
+            {{#InfoListRespDto}}
                     <div  class="col-sm-6 col-md-3 m_mb_md">
-                        <div class="m_box_info_place">
+                        <div class="m_box_info_place m_p_sm">
                             <div class="thumbnail">
                                 <a href="/place/{{contentSeq}}">
                                 <div class="caption">
@@ -65,13 +65,14 @@
                                     <img src="{{imgurl}}" alt="#">
                                     {{/imgeList}}
                                     <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}} </div>
+                                    <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{address}} </div>
                                 </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    {{/places.content}}
+
+            {{/InfoListRespDto}}
         </div>
     </div>
 </div>

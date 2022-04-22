@@ -8,3 +8,9 @@
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+/* 주소 박스 */
+
+.m_outlineList_box_addr{
+    height: 50px;
+}

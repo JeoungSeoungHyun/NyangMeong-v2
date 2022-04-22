@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -21,14 +20,14 @@ import spring.project.nyangmong.domain.image.PublicDataImage;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.service.PlaceService;
+import spring.project.nyangmong.util.ChooseImg;
 import spring.project.nyangmong.util.ContentSeqDownload;
 import spring.project.nyangmong.util.OptionChange;
-import spring.project.nyangmong.web.dto.craw.ImageDto;
 import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 import spring.project.nyangmong.web.dto.places.ImageListDto;
+import spring.project.nyangmong.web.dto.places.InfoRespDto;
 import spring.project.nyangmong.web.dto.places.PlaceListDto;
-import spring.project.nyangmong.web.dto.places.PlaceMapDto;
 import spring.project.nyangmong.web.dto.places.PlacesOptionDto;
 
 @RequiredArgsConstructor
@@ -81,33 +80,67 @@ public class PlaceController {
 
     @GetMapping("/outline")
     public String outline(Model model) {
+        // 총 카운트
         long count = placeRepository.count();
         model.addAttribute("count", count);
-        List<Places> placesSpot = placeRepository.placeTop4("관광지");
-        long countSpot = placeRepository.countPartName("관광지");
-        model.addAttribute("countSpot", countSpot);
-        model.addAttribute("placesSpot", placesSpot);
 
-        List<Places> placesHospital = placeRepository.placeTop4("동물병원");
-        long countHos = placeRepository.countPartName("동물병원");
-        model.addAttribute("countHos", countHos);
-        model.addAttribute("placesHospital", placesHospital);
+        // 숙박 TOP 4 정보
+        long countHotel = placeRepository.countPartName("숙박");
+        List<Places> placesHotel = placeRepository.placeTop4("숙박");
+        List<String> placesHotelImages = ChooseImg.imgList(placesHotel);
+        List<InfoRespDto> HotelInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesHotel.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesHotel.get(i), placesHotelImages.get(i));
+            HotelInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("HotelInfoListRespDto", HotelInfoListRespDto);
+        model.addAttribute("countHotel", countHotel);
+        model.addAttribute("placesHotel", placesHotel);
 
-        List<Places> placesCafe = placeRepository.placeTop4("식음료");
+        // 식음료 TOP 4 정보
         long countCafe = placeRepository.countPartName("식음료");
+        List<Places> placesCafe = placeRepository.placeTop4("식음료");
+        List<String> placesCafeImages = ChooseImg.imgList(placesCafe);
+        List<InfoRespDto> CafeInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesCafe.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesCafe.get(i), placesCafeImages.get(i));
+            CafeInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("CafeInfoListRespDto", CafeInfoListRespDto);
         model.addAttribute("countCafe", countCafe);
         model.addAttribute("placesCafe", placesCafe);
 
-        List<Places> placesActivity = placeRepository.placeTop4("체험");
+        // 관광지 TOP 4 정보
+        long countSpot = placeRepository.countPartName("관광지");
+        List<Places> placesSpot = placeRepository.placeTop4("관광지");
+        List<String> placesSpotImages = ChooseImg.imgList(placesSpot);
+        List<InfoRespDto> SpotInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesSpot.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesSpot.get(i), placesSpotImages.get(i));
+            SpotInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("SpotInfoListRespDto", SpotInfoListRespDto);
+        model.addAttribute("countSpot", countSpot);
+        model.addAttribute("placesSpot", placesSpot);
+        // 체험 TOP 4 정보
         long countAct = placeRepository.countPartName("체험");
+        List<Places> placesActivity = placeRepository.placeTop4("체험");
+        List<String> placesAcitivityImages = ChooseImg.imgList(placesActivity);
+        List<InfoRespDto> ActivityInfoListRespDto = new ArrayList<>();
+        for (int i = 0; i < placesActivity.size(); i++) {
+            InfoRespDto infoRespDto = new InfoRespDto(placesActivity.get(i), placesAcitivityImages.get(i));
+            ActivityInfoListRespDto.add(infoRespDto);
+        }
+        model.addAttribute("ActivityInfoListRespDto", ActivityInfoListRespDto);
         model.addAttribute("countAct", countAct);
         model.addAttribute("placesActivity", placesActivity);
 
-        List<Places> placesHotel = placeRepository.placeTop4("숙박");
-        long countHotel = placeRepository.countPartName("숙박");
-        model.addAttribute("countHotel", countHotel);
-        model.addAttribute("placesHotel", placesHotel);
-        return "pages/place/outlineList";
+        // 동물병원 TOP 4 정보
+        long countHos = placeRepository.countPartName("동물병원");
+        List<Places> placesHospital = placeRepository.placeTop4("동물병원");
+        model.addAttribute("countHos", countHos);
+        model.addAttribute("placesHospital", placesHospital);
+        return "/pages/place/outlineList";
     }
 
     @GetMapping("test/place/list")
@@ -117,16 +150,29 @@ public class PlaceController {
     }
 
     @GetMapping("/place/search")
-    public String searchPartName(@RequestParam String partName, @RequestParam(defaultValue = "0") Integer page,
-            Model model) {
+    public String searchPartName(@RequestParam String partName, Model model) {
         long count = placeRepository.countPartName(partName);
-        PageRequest pq = PageRequest.of(page, 16);
-
+        List<Places> places = placeService.분류검색(partName);
+        if (!partName.equals("동물병원")) {
+            List<InfoRespDto> InfoListRespDto = new ArrayList<>();
+            List<String> placesImages = ChooseImg.imgList(places);
+            for (int i = 0; i < places.size(); i++) {
+                InfoRespDto infoRespDto = new InfoRespDto(places.get(i), placesImages.get(i));
+                InfoListRespDto.add(infoRespDto);
+            }
+            model.addAttribute("InfoListRespDto", InfoListRespDto);
+        } else {
+            model.addAttribute("InfoListRespDto", places);
+        }
+        // long count = placeRepository.countPartName(partName);
+        // model.addAttribute("count", count);
+        // PlaceListDto placeDto = new PlaceListDto();
+        // placeDto.setPlaces(places);
+        // placeDto.setTitle(places.get(i).getTitle());
+        // placeDto.setAddress(places.get(i).getAddress());
+        // model.addAttribute("pdto", placeDto);
+        // model.addAttribute("places", places);
         model.addAttribute("count", count);
-        model.addAttribute("partName", partName);
-        model.addAttribute("places", placeRepository.searchPartName(partName, pq));
-        model.addAttribute("nextPage", page + 1);
-        model.addAttribute("previewPage", page - 1);
         if (partName.equals("관광지")) {
             return "pages/place/spotList";
         } else if (partName.equals("동물병원")) {
@@ -154,11 +200,19 @@ public class PlaceController {
             model.addAttribute("places", placeRepository.findAll(pq));
             return "pages/place/search";
         }
-        PageRequest pq = PageRequest.of(page, 16);
-        long count = placeRepository.countSearch(keyword);
-        model.addAttribute("count", count);
-        model.addAttribute("places", placeRepository.searchPlaces(keyword, pq));
-        return "pages/place/search";
+
+        List<Places> places = placeRepository.searchPlaces(keyword);
+        PlaceListDto placeDto = new PlaceListDto();
+        placeDto.setPlaces(places);
+        for (int i = 0; i < places.size(); i++) {
+            placeDto.setTitle(places.get(i).getTitle());
+            placeDto.setAddress(places.get(i).getAddress());
+        }
+
+        model.addAttribute("pdto", placeDto);
+        model.addAttribute("places", places);
+        return "pages/place/outlineList";
+
     }
 
     // 데이터베이스 받아오는 url 들어갈때 시간이 많이 걸립니다.
@@ -243,7 +297,7 @@ public class PlaceController {
 
             }
         }
-        return "pages/place/outlineList";
+        return "redirect:/";
     }
 
 }

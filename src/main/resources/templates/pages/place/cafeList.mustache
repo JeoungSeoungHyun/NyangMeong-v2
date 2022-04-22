@@ -57,23 +57,25 @@
 
         </div>
         <div class="row">
-                    {{#places.content}}
-                    <div  class="col-sm-6 col-md-3 m_mb_md">
-                        <div class="m_box_info_place">
-                            <div class="thumbnail">
-                                <a href="/place/{{contentSeq}}">
-                                <div class="caption">
-                                    {{#imgeList}}
-                                    <img src="{{imgurl}}" alt="#">
-                                    {{/imgeList}}
-                                    <div class="m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}} </div>
-                                </div>
-                                </a>
-                            </div>
+
+            {{#InfoListRespDto}}
+            <div class="col-md-3 m_mb_md">
+                <div class="m_box_info_place">
+                    <a href="/place/{{place.contentSeq}}">
+                    <div>
+                        <div>
+                            <img class="m_img_fit" src="{{image}}">
+                        </div>                                    
+                        <div class="caption m_p_sm">
+                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                            <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
                         </div>
                     </div>
-                    {{/places.content}}
+                    </a>
+                </div>
+            </div>
+            {{/InfoListRespDto}}
+
         </div>
     </div>
     <div class="paging-div">

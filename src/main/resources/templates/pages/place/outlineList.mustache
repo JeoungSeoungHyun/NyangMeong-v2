@@ -47,100 +47,112 @@
 
 
                 <div class="m_mt_md">
-                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
+                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_ph_md">
                         <div class="m_font_xl m_font_bold">숙박지({{countHotel}}건)</div>
                         <button class="btn m_bg_secondary">
                             <a href="javascript:linkListGo('숙박')">+ 더보기</a>
                         </button>
                     </div>
-                    <div class="row m_pb_md">
-                        {{#placesHotel}}
+                    <div class="row m_pb_md">                 
+                        {{#HotelInfoListRespDto}}
                         <div class="col-md-3">
                             <div class="m_box_info_place">
-                            <div class="thumbnail">
-                                <a href="/place/{{contentSeq}}">
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                <div>
+                                    <div>
+                                        <img class="m_img_fit" src="{{image}}">
+                                    </div>                                    
+                                    <div class="caption m_p_sm">
+                                        <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                        <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                    </div>
                                 </div>
                                 </a>
                             </div>
-                            </div>
                         </div>
-                        {{/placesHotel}}
+                        {{/HotelInfoListRespDto}}
                     </div>
                     <hr/>
-                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
+                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_ph_md">
                         <div class="m_font_xl m_font_bold">식음료({{countCafe}}건)</div>
                         <button class="btn m_bg_secondary">
                             <a href="javascript:linkListGo('식음료')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
-                        {{#placesCafe}}
+                        {{#CafeInfoListRespDto}}
                         <div class="col-md-3">
                             <div class="m_box_info_place">
-                            <div class="thumbnail">
-                                <a href="/place/{{contentSeq}}">
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                <div>
+                                    <div>
+                                        <img class="m_img_fit" src="{{image}}">
+                                    </div>                                    
+                                    <div class="caption m_p_sm">
+                                        <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                        <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                    </div>
                                 </div>
                                 </a>
                             </div>
-                            </div>
                         </div>
-                        {{/placesCafe}}
+                        {{/CafeInfoListRespDto}}
 
                     </div>
                     <hr/>
-                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
+                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_ph_md">
                         <div class="m_font_xl m_font_bold">관광지({{countSpot}}건)</div>
                         <button class="btn m_bg_secondary">
                             <a href="javascript:linkListGo('관광지')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
-                        {{#placesSpot}}
+                        {{#SpotInfoListRespDto}}
                         <div class="col-md-3">
                             <div class="m_box_info_place">
-                            <div class="thumbnail">
-                                <a href="/place/{{contentSeq}}">
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                <div>
+                                    <div>
+                                        <img class="m_img_fit" src="{{image}}">
+                                    </div>                                    
+                                    <div class="caption m_p_sm">
+                                        <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                        <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                    </div>
                                 </div>
                                 </a>
                             </div>
-                            </div>
                         </div>
-                        {{/placesSpot}}
+                        {{/SpotInfoListRespDto}}
                     </div>
                     <hr/>
-                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
+                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_ph_md">
                         <div class="m_font_xl m_font_bold">체험({{countAct}}건)</div>
                         <button class="btn m_bg_secondary">
                             <a href="javascript:linkListGo('체험')">+ 더보기</a>
                         </button>
                     </div>
                     <div class="row m_pb_md">
-                        {{#placesActivity}}
+                        {{#ActivityInfoListRespDto}}
                         <div class="col-md-3">
                             <div class="m_box_info_place">
-                            <div class="thumbnail">
-                                <a href="/place/{{contentSeq}}">
-                                <div class="caption">
-                                    <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                <div>
+                                    <div>
+                                        <img class="m_img_fit" src="{{image}}">
+                                    </div>                                    
+                                    <div class="caption m_p_sm">
+                                        <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                        <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                    </div>
                                 </div>
                                 </a>
                             </div>
-                            </div>
                         </div>
-                        {{/placesActivity}}
+                        {{/ActivityInfoListRespDto}}
                     </div>
                     <hr/>
-                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_pt_md">
+                    <div class="d-flex justify-content-between m_pl_sm m_pr_sm align-items-center m_ph_md">
                         <div class="m_font_xl m_font_bold">동물병원({{countHos}}건)</div>
                         <button class="btn m_bg_secondary">
                             <a href="javascript:linkListGo('동물병원')">+ 더보기</a>
@@ -152,9 +164,9 @@
                             <div class="m_box_info_place">
                             <div class="thumbnail">
                                 <a href="/place/{{contentSeq}}">
-                                <div class="caption">
+                                <div class="caption m_p_sm">
                                     <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                    <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
+                                    <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                 </div>
                                 </a>
                             </div>
