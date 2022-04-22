@@ -20,9 +20,12 @@
                     maxlength="20" required />
                 <input id="email" class="my_auth_form_box_input" type="email" name="email" placeholder="Enter EMAIL"
                     value="{{user.email}}" maxlength="60" required />
-                <button id="btn-update" type="button" style="background-color: #E1E2E1; float: right; margin-top: 20px;"
-                    class="btn">완료</button>
-
+                <div class="m_box_right">
+                    <button id="btn-update" type="button" style="background-color: #E1E2E1;  margin-top: 20px;"
+                        class="btn ">수정</button>
+                    <button type="button" style="background-color: #E1E2E1;  margin-top: 20px;" class="btn m_ml_md"
+                        onclick="deleteUser('{{user.id}}')">탈퇴</button>
+                </div>
             </form>
 
         </div>
@@ -73,7 +76,6 @@
     </div>
 
 </div>
-
 
 <script src="/js/joinform.js"></script>
 <script src="/js/updateform.js"></script>

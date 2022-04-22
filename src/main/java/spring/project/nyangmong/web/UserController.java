@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.pet.Pet;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.PetService;
 import spring.project.nyangmong.service.UserService;
 import spring.project.nyangmong.util.UtilValid;
@@ -34,21 +35,35 @@ public class UserController {
     // 회원 정보 수정 페이지
     @GetMapping("/s/user/{id}/update-form")
     public String userChangeForm(@PathVariable Integer id, Model model) {
-        User userEntity = userService.회원정보보기(id);
-        Pet petEntity = petService.펫정보보기(id);
-        model.addAttribute("user", userEntity);
-        model.addAttribute("pet", petEntity);
-        return "pages/user/userChange";
+        // 권한
+        User principal = (User) session.getAttribute("principal");
+        if (principal.getId() == id) {
+            User userEntity = userService.회원정보보기(id);
+            Pet petEntity = petService.펫정보보기(id);
+            model.addAttribute("user", userEntity);
+            model.addAttribute("pet", petEntity);
+            return "pages/user/userChange";
+        } else {
+            throw new CustomException("수정할 권한이 없습니다.");
+        }
     }
 
     // 회원 정보 페이지
     @GetMapping("/s/user/{id}/detail")
     public String userDetail(@PathVariable Integer id, Model model) {
-        User userEntity = userService.회원정보보기(id);
-        Pet petEntity = petService.펫정보보기(id);
-        model.addAttribute("user", userEntity);
-        model.addAttribute("pet", petEntity);
-        return "pages/user/userDetail";
+
+        // 권한
+        User principal = (User) session.getAttribute("principal");
+        if (principal.getId() == id) {
+            User userEntity = userService.회원정보보기(id);
+            Pet petEntity = petService.펫정보보기(id);
+            model.addAttribute("user", userEntity);
+            model.addAttribute("pet", petEntity);
+            return "pages/user/userDetail";
+        } else {
+            throw new CustomException("회원 정보 보기 권한이 없습니다.");
+        }
+
     }
 
     // 로그아웃하기

@@ -19,6 +19,12 @@ import spring.project.nyangmong.web.dto.members.user.UpdateDto;
 public class UserService {
     private final UserRepository userRepository;
 
+    // 회원 탈퇴하기
+    @Transactional
+    public void 회원탈퇴(Integer id) {
+        userRepository.deleteById(id);
+    }
+
     // 아이디 찾기
     @Transactional
     public String 아이디찾기(IdFindReqDto idFindReqDto) {
@@ -65,7 +71,7 @@ public class UserService {
 
     // 회원정보 수정
     @Transactional
-    public void 회원수정(Integer id, UpdateDto updateDto) {
+    public User 회원수정(Integer id, UpdateDto updateDto) {
 
         Optional<User> userOp = userRepository.findById(id);
 
@@ -75,6 +81,7 @@ public class UserService {
             userEntity.setUserName(updateDto.getUserName());
             userEntity.setPassword(updateDto.getPassword());
             userEntity.setEmail(updateDto.getEmail());
+            return userEntity;
         } else {
             throw new RuntimeException("아이디를 찾을 수 없습니다.");
         }

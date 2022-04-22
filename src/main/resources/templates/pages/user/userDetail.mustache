@@ -55,16 +55,13 @@
                 </div>
             </div>
             <!-- 유저 정보 박스 끝-->
-            <div class="m_box_right">
-                <button class="btn m_btn">
-                    <a class="m_text_white" href="/#">상세보기</a>
-                </button>
-            </div>
+
             <div class="m_inner_info_detail">
                 <!-- 반려동물 정보 박스 시작-->
                 <div class="m_txt_title m_font_xl">
                     [펫 정보]
                 </div>
+                {{#pet}}
                 <div>
                     <div class="m_box_text_info m_font_lg">이름 </div>
                     <div>{{pet.petName}}</div>
@@ -81,11 +78,12 @@
                     <div class="m_box_text_info m_font_lg"> 종</div>
                     <div>{{pet.petSpices}}</div>
                 </div>
+                {{/pet}}
             </div>
             <!-- 반려동물 정보 박스 끝-->
             <div class="m_box_right">
                 <button class="btn m_btn">
-                    <a class="m_text_white" href="/#">상세보기</a>
+                    <a class="m_text_white" href="/s/user/{{user.id}}/update-form">상세보기</a>
                 </button>
             </div>
         </div>
