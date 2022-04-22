@@ -47,7 +47,7 @@ public class Pet {
     private String petAge;
 
     // 프로필 사진 경로 저장
-    @Column(length = 300)
+    @Column(length = 300, nullable = true) // 사진 등록 안 할 수도 있으니까 null 허용
     private String petImgurl;
 
     // 입력한때

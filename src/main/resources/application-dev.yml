@@ -6,6 +6,8 @@ server:
       charset: utf-8
     session:
       timeout: 30
+      tracking-modes:
+      - cookie
 
 
 spring:
@@ -30,3 +32,5 @@ spring:
   output:
     ansi:
       enabled: always
+
+      

@@ -1,5 +1,5 @@
 {{> /layout/header}}
-<div class="m_box_auth mx-auto" >
+<div class="m_box_auth mx-auto">
 
     <div class="m_pt_md text-center">
         <h1 class="m_txt_title m_ph_lg">로그인</h1>
@@ -12,7 +12,7 @@
         <form action="/login" method="post">
             <div class="m_mh_md">
                 <input id="userId" type="text" class=" my_auth_form_box_input form-control" name="userId"
-                    placeholder="Enter ID" required maxlength="20">
+                    placeholder="Enter ID" value="{{#remember}}{{remember}}{{/remember}}" required maxlength="20">
             </div>
             <div class="m_mb_md">
                 <input id="password" type="password" class="form-control my_auth_form_box_input" name="password"
@@ -20,7 +20,7 @@
             </div>
             <div class="form-check m_mb_md">
                 <label class="form-check-label">
-                    <input id="remember" class="form-check-input" type="checkbox"> Remember me
+                    <input name="remember" class="form-check-input" type="checkbox"> Remember me
                 </label>
             </div>
             <div class="d-flex" style="justify-content: space-between;">

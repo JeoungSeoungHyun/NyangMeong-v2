@@ -64,11 +64,12 @@ public class UserController {
 
         User userEntity = userService.로그인(user);
         session.setAttribute("principal", userEntity);
-
+        // System.out.println("Remember me : " + user.getRemember());
         // Remember me - userId 쿠키에 저장
         if (user.getRemember() != null && user.getRemember().equals("on")) {
             response.addHeader("Set-Cookie", "remember=" + user.getUserId());
         }
+
         return "redirect:/";
     }
 
