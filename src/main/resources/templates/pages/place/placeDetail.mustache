@@ -31,14 +31,14 @@
 
     </div>
     {{#places}}
-    <input id="latitude" type="hidden" value="{{latitude}} " />
-    <input id="longitude" type="hidden" value="{{longitude}} " />
+    <input id="latitude" type="hidden" value="{{latitude}}" />
+    <input id="longitude" type="hidden" value="{{longitude}}" />
     <h2 id="title" class="text-center m_txt_title ">{{partName}}</h2>
     <hr>
     <div class="mx-auto m_mh_md ">
         <div class="d-flex m_pt_lg align-items-center " style="justify-content: space-evenly; align-items: center ">
             <div class="col-lg-7 ">
-                <div id="demo" class="slide container " style="width: 100%; " data-bs-ride="carousel ">
+                <div id="demo" class="slide container " style="width: 100%; " data-bs-ride="carousel">
 
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner">
@@ -205,25 +205,25 @@
     $("#btn-like ").click((event) => {
         let status = $("#btn-like ")[0].innerText;
         console.log(status);
-        if (status == "favorite_border ") {
+        if (status == "favorite_border") {
             console.log($("#btn-like "));
             $("#btn-like ")[0].innerText = 'favorite';
-            $("#btn-like ").addClass("text-danger ");
+            $("#btn-like ").addClass("text-danger");
         } else {
             $("#btn-like ")[0].innerText = 'favorite_border';
-            $("#btn-like ").removeClass("text-danger ");
+            $("#btn-like ").removeClass("text-danger");
         }
     });
     // 즐겨찾기 버튼 활성화, 비활성화
     $("#btn-favorite ").click((event) => {
         let status = $("#btn-favorite ")[0].innerText;
         console.log(status);
-        if (status == "star_border ") {
+        if (status == "star_border") {
             $("#btn-favorite ")[0].innerText = 'star';
-            $("#btn-favorite ").addClass("text-warning ");
+            $("#btn-favorite ").addClass("text-warning");
         } else {
             $("#btn-favorite ")[0].innerText = 'star_border';
-            $("#btn-favorite ").removeClass("text-warning ");
+            $("#btn-favorite ").removeClass("text-warning");
         }
     });
 
