@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -150,9 +151,16 @@ public class PlaceController {
     }
 
     @GetMapping("/place/search")
-    public String searchPartName(@RequestParam String partName, Model model) {
+    public @ResponseBody Page<Places> searchPartName(@RequestParam String partName,
+            @RequestParam(defaultValue = "0") Integer page,
+            Model model) {
+        PageRequest pq = PageRequest.of(page, 24);
         long count = placeRepository.countPartName(partName);
-        List<Places> places = placeService.분류검색(partName);
+        Page<Places> placesPaging = placeService.분류검색(partName, pq);
+        List<Places> places = new ArrayList<>();
+        // for(Page page : placesPaging){
+
+        // }
         if (!partName.equals("동물병원")) {
             List<InfoRespDto> InfoListRespDto = new ArrayList<>();
             List<String> placesImages = ChooseImg.imgList(places);
@@ -173,47 +181,48 @@ public class PlaceController {
         // model.addAttribute("pdto", placeDto);
         // model.addAttribute("places", places);
         model.addAttribute("count", count);
-        if (partName.equals("관광지")) {
-            return "pages/place/spotList";
-        } else if (partName.equals("동물병원")) {
-            return "pages/place/hospitalList";
-        } else if (partName.equals("식음료")) {
-            return "pages/place/cafeList";
-        } else if (partName.equals("체험")) {
-            return "pages/place/activityList";
-        } else if (partName.equals("숙박")) {
-            return "pages/place/hotelList";
-        } else {
-            throw new RuntimeException("해당 관광정보를 찾을 수 없습니다");
-        }
+        // if (partName.equals("관광지")) {
+        // return "pages/place/spotList";
+        // } else if (partName.equals("동물병원")) {
+        // return "pages/place/hospitalList";
+        // } else if (partName.equals("식음료")) {
+        // return "pages/place/cafeList";
+        // } else if (partName.equals("체험")) {
+        // return "pages/place/activityList";
+        // } else if (partName.equals("숙박")) {
+        // return "pages/place/hotelList";
+        // } else {
+        // throw new RuntimeException("해당 관광정보를 찾을 수 없습니다");
+        // }
+        return placesPaging;
     }
 
-    @GetMapping("/outline/search")
-    public String searchOutLine(@RequestParam(defaultValue = "") String keyword,
-            @RequestParam(defaultValue = "0") Integer page, Model model) {
-        if (keyword.equals("")) {
-            long count = placeRepository.count();
-            PageRequest pq = PageRequest.of(page, 16);
-            model.addAttribute("nextPage", page + 1);
-            model.addAttribute("previewPage", page - 1);
-            model.addAttribute("count", count);
-            model.addAttribute("places", placeRepository.findAll(pq));
-            return "pages/place/search";
-        }
+    // @GetMapping("/outline/search")
+    // public String searchOutLine(@RequestParam(defaultValue = "") String keyword,
+    // @RequestParam(defaultValue = "0") Integer page, Model model) {
+    // if (keyword.equals("")) {
+    // long count = placeRepository.count();
+    // PageRequest pq = PageRequest.of(page, 16);
+    // model.addAttribute("nextPage", page + 1);
+    // model.addAttribute("previewPage", page - 1);
+    // model.addAttribute("count", count);
+    // model.addAttribute("places", placeRepository.findAll(pq));
+    // return "pages/place/search";
+    // }
 
-        List<Places> places = placeRepository.searchPlaces(keyword);
-        PlaceListDto placeDto = new PlaceListDto();
-        placeDto.setPlaces(places);
-        for (int i = 0; i < places.size(); i++) {
-            placeDto.setTitle(places.get(i).getTitle());
-            placeDto.setAddress(places.get(i).getAddress());
-        }
+    // List<Places> places = placeRepository.searchPlaces(keyword);
+    // PlaceListDto placeDto = new PlaceListDto();
+    // placeDto.setPlaces(places);
+    // for (int i = 0; i < places.size(); i++) {
+    // placeDto.setTitle(places.get(i).getTitle());
+    // placeDto.setAddress(places.get(i).getAddress());
+    // }
 
-        model.addAttribute("pdto", placeDto);
-        model.addAttribute("places", places);
-        return "pages/place/outlineList";
+    // model.addAttribute("pdto", placeDto);
+    // model.addAttribute("places", places);
+    // return "pages/place/outlineList";
 
-    }
+    // }
 
     // 데이터베이스 받아오는 url 들어갈때 시간이 많이 걸립니다.
     // 모두 받아오고 둘러보기로 이동.

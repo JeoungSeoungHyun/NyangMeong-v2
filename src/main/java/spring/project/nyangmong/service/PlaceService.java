@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +33,11 @@ public class PlaceService {
     public List<Places> 전체보기() {
         List<Places> plist = placeRepository.findAll();
         return plist;
+    }
+
+    public Page<Places> 분류검색(String partName, Pageable page) {
+        Page<Places> pList = placeRepository.searchPartName(partName, page);
+        return pList;
     }
 
     public boolean 옵션표시(String yesOrNO) {
