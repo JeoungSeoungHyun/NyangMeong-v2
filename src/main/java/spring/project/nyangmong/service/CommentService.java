@@ -1,5 +1,6 @@
 package spring.project.nyangmong.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -34,6 +35,13 @@ public class CommentService {
             throw new RuntimeException("해당 댓글이 없습니다");
         }
         commentRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void 관리자댓글삭제( List<String> ids ) {
+        for (String id : ids) {
+            commentRepository.deleteById(Integer.parseInt(id));
+        }
     }
 
     @Transactional

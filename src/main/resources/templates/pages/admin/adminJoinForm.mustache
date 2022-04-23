@@ -3,14 +3,14 @@
 <div class="container m_box_outer">
 
     <div class="m_pt_lg">
-        <h1 class="text-center m_txt_title m_ph_lg">회원가입</h1>
+        <h1 class="text-center m_txt_title m_ph_lg">관리자 회원가입</h1>
     </div>
 
     <div class="my_auth_box">
         <div class="my_auth_form_box">
             <div class="my_error_box my_hidden">
             </div>
-            <form action="/join" method="post">
+            <form action="/s/admin/join" method="post">
                 <input id="userId" class="my_auth_form_box_input" type="text" name="userId" placeholder="Enter ID"
                     maxlength="20" required />
                 <input id="userName" class="my_auth_form_box_input" type="text" name="userName"
@@ -21,17 +21,14 @@
                     maxlength="20" required />
                 <input class="my_auth_form_box_input" type="email" name="email" placeholder="Enter EMAIL" maxlength="60"
                     required />
+                <input id="userAuth" class="my_auth_form_box_input" type="text" name="adminCode"
+                    placeholder="관리자코드를 입력하세요" maxlength="60" />
                 <button type="submit" style="background-color: #E1E2E1; float: right; margin-top: 20px;"
                     class="btn">회원가입</button>
             </form>
 
         </div>
     </div>
-
-    <button style="background-color: #E1E2E1; float: right; margin-top: 20px;" class="btn">
-        <a href="/s/admin/join-form">
-            관리자
-            회원가입 </a></button>
 </div>
 
 {{> /layout/footer}}

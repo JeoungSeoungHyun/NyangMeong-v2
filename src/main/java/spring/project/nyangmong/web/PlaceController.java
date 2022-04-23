@@ -295,6 +295,8 @@ public class PlaceController {
                 }
             }
         }
-        return "redirect:/";
+
+        return "redirect:/s/admin/adminMain";
+
     }
 }

@@ -5,8 +5,8 @@
     <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">댓글 관리</h1>
 
     <div class="m_box_right m_pb_lg">
-        <button class="btn m_bg_secondary m_p_sm">
-            <a href="#">삭제</a>
+        <button class="btn m_bg_secondary m_p_sm" onclick="deleteValue();">
+            삭제
         </button>
     </div>
 
@@ -29,26 +29,35 @@
         <thead>
             <tr>
                 <td><input type="checkbox" id="checkall" /></td>
-                <th class="col-lg-2">#</th>
-                <th class="col-lg-6">글 제목</th>
-                <th class="col-lg-2">작성자</th>
-                <th class="col-lg-2">작성일자</th>
+                <th class="col-1">#</th>
+                <th class="col-6">글 제목</th>
+                <th class="col-2">작성자</th>
+                <th class="col-2">작성일자</th>
+                <th class="col-1">상세보기</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="checkbox" name="chk" /></td>
+                <td><input type="checkbox" name="chk" id="chk" /></td>
                 <th>id</th>
                 <td>Title</td>
                 <td>username</td>
                 <td>createdate</td>
+                <td>
+                    <a href="/#">더보기
+                    </a>
+                </td>
             </tr>
             <tr>
-                <td><input type="checkbox" name="chk" /></td>
+                <td><input type="checkbox" name="chk" id="chk" /></td>
                 <th>id</th>
                 <td>Title</td>
                 <td>username</td>
                 <td>createdate</td>
+                <td>
+                    <a href="/#">더보기
+                    </a>
+                </td>
             </tr>
 
         </tbody>
@@ -65,5 +74,39 @@
     </div>
 </div>
 
+<script>
+    function deleteValue() {
+        let url = "delete";
+        let valueArr = new Array();
+        let list = $("input[name='RowCheck']");
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].checked) {
+                valueArr.push(list[i].value);
+            }
+        }
+        if (valueArr.length == 0) {
+            alert("선택된 글이 없습니다");
+        } else {
+            let chk = confirm("정말 삭제하겠습니까?");
+            $.ajax({
+                url:  ,
+                type: 'POST',
+                traditional: true,
+                data: {
+                    valueArr: valueArr
+                },
+                success: function (jdata) {
+                    if (jdata = 1) {
+                        alert("삭제성공");
+                        location.replace("list")
+                    }
+                    else {
+                        alert("삭제실패");
+                    }
+                }
+            });
+        }
+    }
+</script>
 <script src="/js/admin.js"></script>
 {{>/layout/footer}}
