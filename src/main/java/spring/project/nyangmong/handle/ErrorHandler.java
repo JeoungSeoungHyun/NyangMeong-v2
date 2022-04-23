@@ -13,5 +13,4 @@ public class ErrorHandler {
     public ResponseDto<String> error1(RuntimeException e) {
         return new ResponseDto<String>(-1, "실패", e.getMessage());
     }
-
 }

@@ -14,7 +14,6 @@ $(document).ready(function(){
 })
 
 
-
 $("#btn-delete").click(() => {
     deletePost();
 });

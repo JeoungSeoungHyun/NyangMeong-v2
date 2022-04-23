@@ -1,6 +1,5 @@
 //공지사항 및 댕냥이자랑 게시판
 
-
 //이벤트 리스너 - 공지사항 등록 
 $("#btn-write").click(() => {
     write();
@@ -10,10 +9,10 @@ async function write() {
         title: $("#title").val(),
         content: $("#summernote").val()
     }
-
-    //console.log(writeDto);
-
-    let response = await fetch("/s/post", {
+ let id = $("#userId").val();
+    console.log(writeDto);
+    console.log(id);
+    let response = await fetch(`/s/boards/${id}/update`, {
         method: "POST",
         body: JSON.stringify(writeDto),
         headers: {
@@ -29,7 +28,6 @@ async function write() {
         alert("게시글 등록 실패");
     }
 }
-
 
 //게시글 삭제 (댕냥이자랑)
 

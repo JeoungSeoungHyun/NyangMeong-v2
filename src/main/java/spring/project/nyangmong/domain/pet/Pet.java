@@ -59,5 +59,4 @@ public class Pet {
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-
 }

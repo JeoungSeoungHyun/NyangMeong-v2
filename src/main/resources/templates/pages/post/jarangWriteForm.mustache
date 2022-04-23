@@ -1,24 +1,27 @@
 {{> /layout/header}}
 
-
 <div class="container mt-3">
     <br>
     <h1 class="text-center m_txt_title">댕냥이자랑 하기</h1>
     <br>
 
     <!-- 글쓰기 아우터 시작 -->
+    
     <div class="m_mt_md">
 
         <!-- 글쓰기 폼 시작 -->
-        <form action="/s/boards/{id}/update" method="post">
+           
+            {{#user}}
+            <input id="userId" type="hidden" value="{{id}}" />
+            {{/user}}
             <div class="m_mb_md">
-                <input type="text" class="form-control" placeholder="Enter title" name="title">
+                <input id="title" type="text" class="form-control" placeholder="Enter title" name="title">
             </div>
             <div class="m_mb_md">
-                <textarea name="content" rows="10" class="form-control" id="summernote"></textarea>
+                <textarea  id="summernote"  class="form-control" name="content" rows="10"></textarea>
             </div>
             <div class="m_box_right">
-                <button class="btn m_bg_secondary" type="submit">완료</button>
+                <button id="btn-write" class="btn m_bg_secondary" type="button">완료</button>
             </div>
         </form>
         <!-- 글쓰기 폼 끝 -->
@@ -26,6 +29,7 @@
     </div>
     <!-- 글쓰기 아우터  끝 -->
 </div>
+ 
 <!-- 글쓰기 아우터  끝 -->
 </div>
 

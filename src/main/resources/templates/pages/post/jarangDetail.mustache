@@ -10,23 +10,24 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="container List-container">
                     <hr>
+                    {{#boards}}
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
-                        <p class="col-8" style="word-break:break-all;"> {{boards.title}}</p>
-                        <p class="col-1"> {{boards.createDate}} </p>
-                        <p class="col-1">{{boards.user.userName}}</p>
-                        <p class="col-1">{{boards.pageCount}}</p>
+                        <p class="col-8" style="word-break:break-all;"> title</p>
+                        <p class="col-1"> createDate </p>
+                        <p class="col-1">userName</p>
+                        <p class="col-1">pageCount</p>
                     </div>
-
-
+{{/boards}}
+{{#boards}}
                     <div class="board-container">
                         <br>
                         <p class="content" style="word-break:break-all;">
-                            {{{post.content}}}
+                            content
                         </p>
                     </div>
+                   
                     <br>
-
 
                     <div class="m_feeling_div">
                         <div class="button-container like-container m_ml_md">
@@ -35,7 +36,7 @@
                         </div>
                     </div>
                     <br>
-
+ {{/boards}}
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
                         class="btn">목록으로</button>
                     {{#auth}}
@@ -47,7 +48,6 @@
                     <br><br><br>
 
                     <!-- 댓글 시작 -->
-
 
                     <div class="card mb-2">
                         <div class="card-header bg-light">

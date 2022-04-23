@@ -76,10 +76,11 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public String login(User user, HttpServletResponse response) {
-
         User userEntity = userService.로그인(user);
         session.setAttribute("principal", userEntity);
+
         // System.out.println("Remember me : " + user.getRemember());
+
         // Remember me - userId 쿠키에 저장
         if (user.getRemember() != null && user.getRemember().equals("on")) {
             response.addHeader("Set-Cookie", "remember=" + user.getUserId());
@@ -125,21 +126,18 @@ public class UserController {
     // 유저가 즐겨찾기 한 장소 - 일단은 mapping만 해둔 상태
     @GetMapping("/user/favlist")
     public String likeList() {
-
         return "pages/list/favoriteList";
     }
 
     // 유저가 마음에 들어한 댕냥이자랑 게시판 - 일단은 mapping만 해둔 상태.
     @GetMapping("/user/boardlike")
     public String boardLikeList() {
-
         return "pages/list/likeList";
     }
 
     // 유저가 적은 댓글 보기 - 일단은 mapping만 해둔 상태
     @GetMapping("/user/commentlist")
     public String commentList() {
-
         return "pages/list/commentlist";
     }
 
@@ -152,7 +150,6 @@ public class UserController {
     // 아이디 찾기 요청
     @PostMapping("/find/id")
     public String idFind(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
-
         UtilValid.요청에러처리(bindingResult);
         String findUserId = userService.아이디찾기(idFindReqDto);
         model.addAttribute("findUserId", findUserId);
@@ -168,11 +165,9 @@ public class UserController {
     // 비밀번호 찾기 요청
     @PostMapping("/find/pw")
     public String idFind(@Valid PwFindReqDto pwFindReqDto, BindingResult bindingResult, Model model) {
-
         UtilValid.요청에러처리(bindingResult);
         String findPassword = userService.패스워드찾기(pwFindReqDto);
         model.addAttribute("findPassword", findPassword);
         return "pages/user/showPwForm";
     }
-
 }

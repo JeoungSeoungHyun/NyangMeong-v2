@@ -1,5 +1,3 @@
-
-
 async function deleteComment(commentId) {
     let response = await fetch(`/s/api/comment/${commentId}`, {
         method: "DELETE"

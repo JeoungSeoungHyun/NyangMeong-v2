@@ -32,7 +32,7 @@ public class BoardsImage {
     @Column
     private String imgurl;
 
-    @JoinColumn(name = "boardId")
+    @JoinColumn(name = "boardsId")
     @ManyToOne
     private Boards boards;
 }

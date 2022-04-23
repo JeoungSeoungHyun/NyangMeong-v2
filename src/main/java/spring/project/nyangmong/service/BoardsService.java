@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
@@ -70,33 +71,33 @@ public class BoardsService {
      * param loginEmail 현재 로그인한 사용자의 email
      * return 현재 포스트의 정보와 로그인한 사용자와의 관계를 담은 dto 반환
      */
-    @Transactional
-    public BoardsInfoDto getBoardsInfoDto(long boardsId, String loginEmail) {
-        BoardsInfoDto boardsInfoDto = new BoardsInfoDto();
-        boardsInfoDto.setId(boardsId);
+    // @Transactional
+    // public BoardsInfoDto getBoardsInfoDto(long boardsId, String loginEmail) {
+    // BoardsInfoDto boardsInfoDto = new BoardsInfoDto();
+    // boardsInfoDto.setId(boardsId);
 
-        Boards boards = boardsRepository.findBoardsById(boardsId);
-        boardsInfoDto.setTag(boards.getTag());
-        boardsInfoDto.setText(boards.getText());
-        boardsInfoDto.setCreatedate(boards.getCreateDate());
+    // Boards boards = boardsRepository.findBoardsById(boardsId);
+    // boardsInfoDto.setTag(boards.getTag());
+    // boardsInfoDto.setText(boards.getText());
+    // boardsInfoDto.setCreatedate(boards.getCreateDate());
 
-        // 포스트 정보 요청시 포스트 엔티티의 likesCount도 설정해준다.
-        boards.setPlaceLikesCount(boards.getPlaceLikesCount());
-        boardsInfoDto.setLikesCount(boards.getPlaceLikesCount());
+    // 포스트 정보 요청시 포스트 엔티티의 likesCount도 설정해준다.
+    // boards.setPlaceLikesCount(boards.getPlaceLikesCount());
+    // boardsInfoDto.setLikesCount(boards.getPlaceLikesCount());
 
-        User user = userRepository.findUserByEmail(loginEmail);
-        if (user.getId() == boards.getUser().getId())
-            boardsInfoDto.setUploader(true);
-        else
-            boardsInfoDto.setUploader(false);
+    // User user = userRepository.findUserByEmail(loginEmail);
+    // if (user.getId() == boards.getUser().getId())
+    // boardsInfoDto.setUploader(true);
+    // else
+    // boardsInfoDto.setUploader(false);
 
-        if (placelikesRepository.findPlaceLikesByBoardsAndUser(boards, user) != null)
-            boardsInfoDto.setLikeState(true);
-        else
-            boardsInfoDto.setLikeState(false);
+    // if (placelikesRepository.findPlaceLikesByBoardsAndUser(boards, user) != null)
+    // boardsInfoDto.setLikeState(true);
+    // else
+    // boardsInfoDto.setLikeState(false);
 
-        return boardsInfoDto;
-    }
+    // return boardsInfoDto;
+    // }
 
     // User user = userRepository.findUserById(id);
     // boardsRepository.save(Boards.builder()

@@ -18,15 +18,16 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import spring.project.nyangmong.domain.comment.Comment;
+import spring.project.nyangmong.domain.placelikes.PlaceLikes;
 import spring.project.nyangmong.domain.user.User;
 
 /**
@@ -44,8 +45,8 @@ public class Boards { // N (드라이빙 테이블, FK의 주인)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String tag;
-    private String text;
+    // private String tag;
+    // private String text;
 
     @Column(length = 300, nullable = false)
     private String title;
@@ -63,17 +64,17 @@ public class Boards { // N (드라이빙 테이블, FK의 주인)
 
     private long PlaceLikesCount; // 좋아요 수
 
-    @Builder
-    public Boards(String tag, String text, User user, long PlaceLikesCount) {
-        this.tag = tag;
-        this.text = text;
-        this.user = user;
-        this.PlaceLikesCount = PlaceLikesCount;
-    }
+    // @Builder
+    // public Boards(String tag, String text, User user, long PlaceLikesCount) {
+    // this.tag = tag;
+    // this.text = text;
+    // this.user = user;
+    // this.PlaceLikesCount = PlaceLikesCount;
+    // }
 
-    public void setPlaceLikesCount(long PlaceLikesCount) {
-        this.PlaceLikesCount = PlaceLikesCount;
-    }
+    // public void setPlaceLikesCount(long PlaceLikesCount) {
+    // this.PlaceLikesCount = PlaceLikesCount;
+    // }
 
     @JsonIgnoreProperties({ "password" })
     // @JsonIgnoreProperties({"boardsList"})

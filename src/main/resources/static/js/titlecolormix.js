@@ -19,4 +19,3 @@
         changePrimary(`${title}`);
     };
     changeColorBox();
-    

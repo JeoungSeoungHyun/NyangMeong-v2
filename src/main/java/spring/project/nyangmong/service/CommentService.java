@@ -1,4 +1,3 @@
-
 package spring.project.nyangmong.service;
 
 import java.util.Optional;
@@ -12,6 +11,7 @@ import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
 @RequiredArgsConstructor
 @Service
@@ -49,4 +49,27 @@ public class CommentService {
         }
         commentRepository.save(comment);
     }
+
+    /* UPDATE */
+    @Transactional
+    public void 댓글수정(Integer userId, CommentResponseDto dto) {
+        Comment comment = commentRepository.findByuserId(
+                userId);
+
+    }
+
+    // 댓글 수정
+    // @Transactional
+    // public void 댓글수정(Comment comment, Integer boardsId) {
+
+    // Optional<Boards> boardsOp = boardsRepository.findById(boardsId);
+
+    // if (boardsOp.isPresent()) {
+    // Boards boardsEntity = boardsOp.get();
+    // comment.setBoards(boardsEntity);
+    // } else {
+    // throw new RuntimeException("없는 게시글에 댓글을 수정할 수 없습니다");
+    // }
+    // commentRepository.save(comment);
+    // }
 }

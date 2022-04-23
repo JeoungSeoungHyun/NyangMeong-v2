@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CountDto {
-
     private List<ResultList> resultList;
     private Integer totalCount;
     private String message;

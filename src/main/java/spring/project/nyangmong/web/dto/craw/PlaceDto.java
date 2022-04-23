@@ -3,7 +3,6 @@ package spring.project.nyangmong.web.dto.craw;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -42,5 +41,4 @@ public class PlaceDto {
     private String parkingFlag;
     private String inOutFlag;
     private List<ImageDto> imageList;
-
 }

@@ -81,14 +81,17 @@ public class User {
     @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
     private List<Comment> CommentList;
+
     // // 쓴 게시글 목록 -연결
     @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
     private List<Boards> BoardList;
+
     // // 반려동물 목록 - 연결
     @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
     private List<Pet> petList;
+
     // // 게시글 좋아요 -연결
     @JsonIgnoreProperties({ "user" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
@@ -108,5 +111,4 @@ public class User {
     // 로그인할 때 유저아이디 Remember me 하려고 추가함
     @Transient
     private String remember;
-
 }

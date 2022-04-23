@@ -11,7 +11,6 @@ import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 
 public class DownloadTest {
-
     private PlaceRepository placeRepository;
     private ImageRepository imageRepository;
 
@@ -87,7 +86,5 @@ public class DownloadTest {
         // }
 
         // imageRepository.saveAll(images);
-
     }
-
 }
