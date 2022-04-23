@@ -1,5 +1,5 @@
 {{> /layout/header}}
-<div class="container"  style="height: max-content;">
+<div class="container" style="height: max-content;">
 
     <div class="m_ph_md">
 
@@ -39,21 +39,21 @@
                         <li class="nav-item">총 {{count}}건
                         </li>
                     </ul>
-        <form class="navbar-form navbar-right" role="search" action="/outline/search" method="get" >
+                    <form class="navbar-form navbar-right" role="search" action="/outline/search" method="get">
                         <div class="form-group d-flex">
-                                <div class="form-group d-flex">
-                                </div>
+                            <div class="form-group d-flex">
+                            </div>
                             <input type="text" class="form-control m_ml_sm" placeholder="Search">
                             <button type="submit" class="btn btn-secondary m_ml_sm" style="width: 100px;">검색</button>
                         </div>
-            </form>
+                    </form>
                 </div>
             </div>
         </nav>
 
-        
-    <br>
-    <div>
+
+        <br>
+        <div>
 
         </div>
         <div class="row">
@@ -62,15 +62,15 @@
             <div class="col-md-3 m_mb_md">
                 <div class="m_box_info_place">
                     <a href="/place/{{place.contentSeq}}">
-                    <div>
                         <div>
-                            <img class="m_img_fit" src="{{image}}">
-                        </div>                                    
-                        <div class="caption m_p_sm">
-                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
-                            <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                            <div>
+                                <img class="m_img_fit" src="{{image}}">
+                            </div>
+                            <div class="caption m_p_sm">
+                                <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                            </div>
                         </div>
-                    </div>
                     </a>
                 </div>
             </div>
@@ -79,22 +79,16 @@
         </div>
     </div>
     <div class="paging-div">
- <ul class="pagination" id="pagination">
-     {{#places.first}}
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{previewPage}}">이전</a></li>
-         {{/places.first}}
-         {{^places.first}}
-   <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{previewPage}}">이전</a></li>
-         {{/places.first}}
-     {{#places.last}}    
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>
-         {{/places.last}}
-         {{^places.last}}
-    <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>         
-         {{/places.last}}
-</ul>
+        <ul class="pagination" id="pagination">
+            {{#paging.first}}
+            <li id="li-prev" class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{prevPage}}">이전</a></li>
+            {{/paging.first}} {{^paging.first}}
+            <li id="li-prev" class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{prevPage}}">이전</a></li>
+            {{/paging.first}} {{#paging.last}}
+            <li id="li-prev" class="page-item disabled"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>
+            {{/paging.last}} {{^paging.last}}
+            <li id="li-prev" class="page-item"><a id="btn-prev" class="page-link" href="?partName={{partName}}&page={{nextPage}}">다음</a></li>
+            {{/paging.last}}
+        </ul>
     </div>
-</div>>
-
-
-{{> /layout/footer}}
+</div>> {{> /layout/footer}}
