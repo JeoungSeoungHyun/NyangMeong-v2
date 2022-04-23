@@ -1,5 +1,6 @@
 package spring.project.nyangmong.web.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,12 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.service.PlaceService;
-
-
 import spring.project.nyangmong.util.MakePoints;
 import spring.project.nyangmong.web.dto.places.MapSearchDto;
-
-
 
 @RequiredArgsConstructor
 @RestController
@@ -31,6 +28,7 @@ public class PlaceApiController {
 
         MakePoints mp = new MakePoints();
 
+        List<List<String>> points = mp.make(places);
 
         for (Places place : places) {
             List<String> point = new ArrayList<>();
@@ -38,10 +36,6 @@ public class PlaceApiController {
             point.add(place.getLongitude());
             points.add(point);
         }
-        return new ResponseEntity<>(points, HttpStatus.OK);
-    }
-}
-        List<List<String>> points = mp.make(places);
 
         return new ResponseEntity<>(points, HttpStatus.OK);
     }

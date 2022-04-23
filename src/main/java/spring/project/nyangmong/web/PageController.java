@@ -91,11 +91,6 @@ public class PageController {
         return "pages/post/jarangWriteForm";
     }
 
-    @GetMapping("/noticeList")
-    public String main6() {
-        return "pages/post/noticeList";
-    }
-
     @GetMapping("/noticeWriteForm")
     public String noticeWriteForm() {
         return "pages/post/noticeWriteForm";
@@ -151,6 +146,11 @@ public class PageController {
         return "pages/post/noticeDetail";
     }
 
+    @GetMapping("/noticeList")
+    public String noticeList() {
+        return "pages/post/noticeList";
+    }
+
     @GetMapping("/noticeUpdateForm")
     public String noticeUpdateForm() {
         return "pages/post/noticeUpdateForm";
@@ -161,6 +161,3 @@ public class PageController {
         return "";
     }
 }
-
-}
-
