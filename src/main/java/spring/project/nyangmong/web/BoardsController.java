@@ -5,15 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
@@ -28,25 +27,36 @@ import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 public class BoardsController {
     private final BoardsService boardsService;
     private final HttpSession session;
-    private final BoardsRepository boardsRepository;
+    private final BoardsRepository boardsRepositoty;
 
     @GetMapping("/boards/{id}")
     public String detail(@PathVariable Integer id, Model model) {
-              return "pages/detail/jarangDetail";
+        Boards boardsEntity = boardsService.글상세보기(id);
+        User principal = (User) session.getAttribute("principal");
 
+        List<CommentResponseDto> comments = new ArrayList<>();
+
+        for (Comment comment : boardsEntity.getComments()) {
+            CommentResponseDto dto = new CommentResponseDto();
+            dto.setComment(comment);
+
+            if (principal != null) {
+                if (principal.getId() == comment.getId()) {
+                    dto.setAuth(true); // or false
+                } else {
+                    dto.setAuth(false); // or false
+                }
+            } else {
+                dto.setAuth(false); // or false
+            }
+
+            comments.add(dto);
+        }
+
+        model.addAttribute("comments", comments);
+        model.addAttribute("boardsId", id);
+        return "pages/post/jarangDetail";
     }
-
-    @GetMapping("/notice/{id}")
-    public String noticedetail(@PathVariable Integer id, Model model) {
-        PageRequest pq = PageRequest.of(id, 3);
-        // Boards boardsEntity = boardsService.글상세보기(id);
-        // List<Boards> boards = boardsRepository.findAll(pq);
-        // WriteDto dto = new WriteDto();
-        // dto.setContent(boards);
-        model.addAttribute("noticedetail", boardsRepository.findAll(pq));
-        return "pages/post/noticeDetail";
-    }
-
 
     // 댕냥이 자랑 글쓰기 페이지 이동
     // /s 붙었으니까 자동으로 인터셉터가 인증 체크함. (완료)
@@ -69,6 +79,4 @@ public class BoardsController {
     public String notice() {
         return "/pages/post/noticeList";
     }
-
 }
-

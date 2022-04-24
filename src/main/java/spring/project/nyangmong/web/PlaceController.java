@@ -141,7 +141,7 @@ public class PlaceController {
         List<Places> placesHospital = placeRepository.placeTop4("동물병원");
         model.addAttribute("countHos", countHos);
         model.addAttribute("placesHospital", placesHospital);
-        return "pages/place/outlineList";
+        return "/pages/place/outlineList";
     }
 
     @GetMapping("test/place/list")
@@ -165,7 +165,6 @@ public class PlaceController {
         // 플레이스와 대표이미지 하나를 리스트로 저장하여 전달하는 Dto
         List<InfoRespDto> InfoListRespDto = new ArrayList<>();
         // 동물병원은 대표이미지가 없으니 제외
-
         if (!partName.equals("동물병원")) {
             // 플레이스의 이미지들 중 첫번째 이미지만 가져와 리스트로 만든다.
             List<String> placesImages = ChooseImg.imgList(places);
@@ -188,22 +187,20 @@ public class PlaceController {
         model.addAttribute("partName", partName);
         // 카테고리별 개수 전달 위한 model
         model.addAttribute("count", count);
-        // if (partName.equals("관광지")) {
-        // return "pages/place/spotList";
-        // } else if (partName.equals("동물병원")) {
-        // return "pages/place/hospitalList";
-        // } else if (partName.equals("식음료")) {
-        // return "pages/place/cafeList";
-        // } else if (partName.equals("체험")) {
-        // return "pages/place/activityList";
-        // } else if (partName.equals("숙박")) {
-        // return "pages/place/hotelList";
-        // } else {
-        // throw new RuntimeException("해당 관광정보를 찾을 수 없습니다");
-        // }
-        return placesPaging;
+        if (partName.equals("관광지")) {
+            return "pages/place/spotList";
+        } else if (partName.equals("동물병원")) {
+            return "pages/place/hospitalList";
+        } else if (partName.equals("식음료")) {
+            return "pages/place/cafeList";
+        } else if (partName.equals("체험")) {
+            return "pages/place/activityList";
+        } else if (partName.equals("숙박")) {
+            return "pages/place/hotelList";
+        } else {
+            throw new RuntimeException("해당 관광정보를 찾을 수 없습니다");
+        }
     }
-
 
     @GetMapping("/outline/search")
     public String searchOutLine(@RequestParam(defaultValue = "") String keyword,
@@ -227,12 +224,11 @@ public class PlaceController {
             placeDto.setAddress(places.get(i).getAddress());
         }
 
+        model.addAttribute("pdto", placeDto);
+        model.addAttribute("places", places);
+        return "pages/place/outlineList";
 
-    // model.addAttribute("pdto", placeDto);
-    // model.addAttribute("places", places);
-    // return "pages/place/outlineList";
-
-    // }
+    }
 
     // 데이터베이스 받아오는 url 들어갈때 시간이 많이 걸립니다.
     // 모두 받아오고 둘러보기로 이동.
