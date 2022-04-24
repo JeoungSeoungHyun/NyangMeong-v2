@@ -24,13 +24,13 @@ public class AdminController {
 
     private final AdminService adminService;
 
-       @GetMapping("/s/admin/join-form")
-    public String adminjoinForm() {
-        return "pages/admin/adminjoinForm";
+    @GetMapping("/admin/join-form")
+  public String adminjoinForm() {
+        return "pages/admin/adminJoinForm";
     }
-    
-        @PostMapping("/s/admin/join")
-        public String adminjoin(AdminUserDto adminUserDto) {
+
+    @PostMapping("/admin/join")
+ public String adminjoin(AdminUserDto adminUserDto) {
             System.out.println(adminUserDto);
 
             if (adminUserDto.getAdminCode().equals("juwongenius")) {
