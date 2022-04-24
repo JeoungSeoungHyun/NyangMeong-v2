@@ -16,13 +16,13 @@
             <div id="box-숙박" class=" m_box_menu_detail m_bg_secondary">
                 <a id="hotel" href="javascript:linkListGo('숙박')" class=" m_txt_title ">숙박</a>
             </div>
-            <div id="box-식음료 " class="m_box_menu_detail m_bg_secondary ">
+            <div id="box-식음료" class="m_box_menu_detail m_bg_secondary ">
                 <a id="cafe " href="javascript:linkListGo( '식음료') " class="m_txt_title ">식음료</a>
             </div>
-            <div id="box-체험 " class="m_box_menu_detail m_bg_secondary ">
+            <div id="box-체험" class="m_box_menu_detail m_bg_secondary ">
                 <a id="activity " href="javascript:linkListGo( '체험') " class="m_txt_title ">체험</a>
             </div>
-            <div id="box-동물병원 " class="m_box_menu_detail m_bg_secondary ">
+            <div id="box-동물병원" class="m_box_menu_detail m_bg_secondary ">
                 <a id="hospital " href="javascript:linkListGo( '동물병원') " class="m_txt_title ">동물병원</a>
             </div>
 
@@ -47,8 +47,8 @@
                             <img src="{{imgurl}} " alt="# " class="m_box_img_slide " style="object-fit:cover; height:90%; ">
                         </div>
                         {{/imageList}}
-                        <div class="carousel-item active " data-bs-interval="3000">
-                            <img style="object-fit:cover; height:90%; " src="/images/logo.png " alt="# " class="m_box_img_slide m_mh_lg ">
+                        <div class="carousel-item active " data-bs-interval="100">
+                            <img style="object-fit:cover; height:90%; " src="#" alt="# " class="m_box_img_slide m_mh_lg ">
                         </div>
                     </div>
                 </div>
@@ -257,15 +257,14 @@
 
     // 카테고리 색 변화
     let changePrimary = (category) => {
-        $(`#box-${category}`).removeClass("m_bg_secondary ");
-        $(`#box-${category}`).addClass("m_bg_primary ");
-
+        $(`#box-${category}`).removeClass("m_bg_secondary");
+        $(`#box-${category}`).addClass("m_bg_primary");
     }
 
     let changeColorBox = () => {
-        let title = $("#title").html();
-        console.log(title);
-        changePrimary(`${title}`);
+        let category = $("#title").html();
+        console.log(category);
+        changePrimary(category);
     };
     changeColorBox();
 </script>
