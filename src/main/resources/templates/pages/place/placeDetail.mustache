@@ -11,19 +11,21 @@
 
             <!-- 메뉴 박스 시작 -->
             <div id="box-관광지" class="m_box_menu_detail m_bg_secondary">
-                <a id="spot" href="/place/search?partName=관광지" class="m_txt_title">관광지</a>
+
+                <a id="spot" href="javascript:linkListGo('관광지')" class="m_txt_title">관광지</a>
             </div>
             <div id="box-숙박" class=" m_box_menu_detail m_bg_secondary">
-                <a id="hotel" href="/place/search?partName=숙박" class="m_txt_title">숙박</a>
+                <a id="hotel" href="javascript:linkListGo('숙박')" class=" m_txt_title ">숙박</a>
             </div>
-            <div id="box-식음료" class="m_box_menu_detail m_bg_secondary">
-                <a id="cafe" href="/place/search?partName=식음료" class="m_txt_title">식음료</a>
+            <div id="box-식음료" class="m_box_menu_detail m_bg_secondary ">
+                <a id="cafe " href="javascript:linkListGo( '식음료') " class="m_txt_title ">식음료</a>
             </div>
-            <div id="box-체험" class="m_box_menu_detail m_bg_primary">
-                <a id="activity" href="/place/search?partName=체험" class="m_txt_title">체험</a>
+            <div id="box-체험" class="m_box_menu_detail m_bg_secondary ">
+                <a id="activity " href="javascript:linkListGo( '체험') " class="m_txt_title ">체험</a>
             </div>
-            <div id="box-동물병원" class="m_box_menu_detail m_bg_secondary">
-                <a id="hospital" href="/place/search?partName=동물병원" class="m_txt_title">동물병원</a>
+            <div id="box-동물병원" class="m_box_menu_detail m_bg_secondary ">
+                <a id="hospital " href="javascript:linkListGo( '동물병원') " class="m_txt_title ">동물병원</a>
+
             </div>
 
             <!-- 메뉴 박스  끝-->
@@ -31,129 +33,116 @@
 
     </div>
     {{#places}}
+
+    <input id="latitude" type="hidden" value="{{latitude}}" />
+    <input id="longitude" type="hidden" value="{{longitude}}" />
+
     <h2 id="title" class="text-center m_txt_title ">{{partName}}</h2>
     <hr>
-    <div class="mx-auto m_mh_md">
-        <div class="d-flex m_pt_lg align-items-center" style="justify-content: space-evenly; align-items: center ">
-            <div class="col-lg-7">
-                <div id="demo" class="slide container" style="width: 100%;" data-bs-ride="carousel">
+    <div class="mx-auto m_mh_md ">
+        <div class="d-flex m_pt_lg align-items-center " style="justify-content: space-evenly; align-items: center ">
+            <div class="col-lg-7 ">
+                <div id="demo" class="slide container " style="width: 100%; " data-bs-ride="carousel">
 
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner">
                         {{#imageList}}
 
-                        <div class="carousel-item active" data-bs-interval="2000">
-                            <img style=" border-radius: 25px; object-fit:cover; height:90%; border: 8px solid #b4b2b2;"
-                                src="{{imgurl}}" alt="#" class="m_box_img_slide m_mh_lg">
+                        <div class="carousel-item m_mt_lg " data-bs-interval="3000">
+                            <img src="{{imgurl}} " alt="# " class="m_box_img_slide " style="object-fit:cover; height:90%; ">
 
                         </div>
                         {{/imageList}}
-                        <div class="carousel-item active" data-bs-interval="3000">
-                            <img style="object-fit:cover; height:90%;" src="/images/logo.png" alt="#" class="m_box_img_slide m_mh_lg">
+                        <div class="carousel-item active " data-bs-interval="100">
+                            <img style="object-fit:cover; height:90%; " src="#" alt="# " class="m_box_img_slide m_mh_lg ">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="m_bg_primary col-lg-5 d-flex" style=" border-radius: 25px;  padding: 20px; height:430px">
-                <div style="position: relative">
+            <div class="m_bg_primary col-lg-5 d-flex " style=" border-radius: 25px; padding: 20px; height:500px ">
+                <div style="position: relative ">
                     <!-- 좋아요,즐찾버튼 시작 -->
-                    <div class="d-flex" style="position: absolute; left: 350px; top: -35px">
-                        <div class="d-flex bg-light"
-                            style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i id="btn-like" class="material-icons">favorite_border</i>
+
+                    <div class="d-flex " style="position: absolute; left: 350px; top: -35px ">
+                        <div class="d-flex bg-light " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
+                            <i id="btn-like" class="material-icons ">favorite_border</i>
                         </div>
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i id="btn-favorite" class="material-icons">star_border</i>
+                        <div class="d-flex bg-light m_ml_sm " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
+                            <i id="btn-favorite" class="material-icons ">star_border</i>
                         </div>
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="width: 40px; height:40px;  justify-content: center; align-items: center;  border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset">
-                            <i id="btn-setting" class="fa-solid fa-gear"></i>
+                        <div class="d-flex bg-light m_ml_sm " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
+                            <i id="btn-setting" class="fa-solid fa-gear "></i>
+
                         </div>
                     </div>
                     <!-- 좋아요, 즐찾버튼 끝 -->
 
 
-                    <div class="m_ph_sm m_txt_title m_font_xxl">{{partName}}</div>
-                    <div class="m_ph_sm m_center_column">
-                        <div class="m_txt_title m_font_xl">주소</div>
-                        <div class="m_pl_sm m_font_md">{{address}}</div>
+                    <div class="m_ph_sm m_txt_title m_font_xxl ">{{title}}</div>
+                    <div class="m_ph_sm m_center_column ">
+                        <div class="m_txt_title m_font_xl ">주소</div>
+                        <div class="m_pl_sm m_font_md ">{{address}}</div>
                     </div>
-                    <div class="m_ph_sm m_center_column">
-                        <div class="m_txt_title m_font_xl">문의처</div>
-                        <div class="m_pl_sm">{{tel}}</div>
+                    <div class="m_ph_sm m_center_column ">
+                        <div class="m_txt_title m_font_xl ">문의처</div>
+                        <div class="m_pl_sm ">{{tel}}</div>
                     </div>
-                    <div class="m_ph_sm m_center_column">
-                        <div class="m_txt_title m_font_xl">이용시간</div>
-                        <div class="m_pl_sm m_font_md">{{usedTime}}</div>
+                    <div class="m_ph_sm m_center_column ">
+                        <div class="m_txt_title m_font_xl ">이용시간</div>
+                        <div class="m_pl_sm m_font_md ">{{usedTime}}</div>
                     </div>
-                    <div class="m_ph_sm m_center_column">
-                        <div class="m_txt_title m_font_xl">홈페이지</div>
-                        <div class="m_pl_sm m_font_md">{{homePage}}</div>
+                    <div class="m_ph_sm m_center_column ">
+                        <div class="m_txt_title m_font_xl ">홈페이지</div>
+                        <div class="m_pl_sm m_font_md ">{{homePage}}</div>
                     </div>
-                    <div class="m_ph_sm m_center_column">
-                        <div class="m_txt_title m_font_xl">연관키워드</div>
-                        <div class="m_pl_sm m_font_md">{{keyword}}</div>
-
+                    <div class="m_ph_sm m_center_column ">
+                        <div class="m_txt_title m_font_xl ">연관키워드</div>
+                        <div class="m_pl_sm m_font_md ">{{keyword}}</div>
                     </div>
                     {{#option}}
-                    <div class="m_ph_sm d-flex col-lg-7" style="overflow-x:100%; ">
+                    <div class="m_ph_sm d-flex col-lg-7 " style="overflow-x:100%; ">
                         <!-- 여러개인경우 슬라이드?-->
                         {{#bathFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width: 100px;; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/shower.png" style="width: 80px; height: 80px;">
-                            <div id="bathFlag" style="font-size: small;">목욕가능</div>
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width: 100px;; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/shower.png " style="width: 80px; height: 80px; ">
+                            <div id="bathFlag " style="font-size: small; ">목욕가능</div>
                         </div>
-                        {{/bathFlagShow}}
-                        {{#parkingFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/parking.png" style="width: 80px; height: 80px;">
-                            <div id="parkingFlag" style="font-size: small;">주차</div>
+                        {{/bathFlagShow}} {{#parkingFlagShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/parking.png " style="width: 80px; height: 80px; ">
+                            <div id="parkingFlag " style="font-size: small; ">주차</div>
                         </div>
-                        {{/parkingFlagShow}}
-                        {{#entranceFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/entrancefee.png" style="width: 80px; height: 80px;">
-                            <div id="entranceFlag" style="font-size: small;">유료</div>
+                        {{/parkingFlagShow}} {{#entranceFlagShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/entrancefee.png " style="width: 80px; height: 80px; ">
+                            <div id="entranceFlag " style="font-size: small; ">유료</div>
                         </div>
-                        {{/entranceFlagShow}}
-                        {{#petWeightShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/limitweight.png" style="width: 80px; height: 80px;">
-                            <div id="petWeight" style="font-size: small;">무게제한</div>
+                        {{/entranceFlagShow}} {{#petWeightShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/limitweight.png " style="width: 80px; height: 80px; ">
+                            <div id="petWeight " style="font-size: small; ">무게제한</div>
                         </div>
-                        {{/petWeightShow}}
-                        {{#emergencyFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/emergency.png" style="width: 80px; height: 80px;">
-                            <div id="emergencyFlag" style="font-size: small;">응급수칙</div>
+                        {{/petWeightShow}} {{#emergencyFlagShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/emergency.png " style="width: 80px; height: 80px; ">
+                            <div id="emergencyFlag " style="font-size: small; ">응급수칙</div>
                         </div>
-                        {{/emergencyFlagShow}}
-                        {{#provisionFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/inventory.png" style="width: 80px; height: 80px;">
-                            <div id="provisionFlag" style="font-size: small;">비품제공</div>
+                        {{/emergencyFlagShow}} {{#provisionFlagShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/inventory.png " style="width: 80px; height: 80px; ">
+                            <div id="provisionFlag " style="font-size: small; ">비품제공</div>
                         </div>
-                        {{/provisionFlagShow}}
-                        {{#inOutFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/outdoor.png" style="width: 80px; height: 80px;">
-                            <div id="inOutFlag" style="font-size: small;">실외</div>
+                        {{/provisionFlagShow}} {{#inOutFlagShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/outdoor.png " style="width: 80px; height: 80px; ">
+                            <div id="inOutFlag " style="font-size: small; ">실외</div>
                         </div>
-                        {{/inOutFlagShow}}
-                        {{#petFlagShow}}
-                        <div class="d-flex bg-light m_ml_sm"
-                            style="flex-direction:column;  border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px">
-                            <img src="/images/petrestaurant.png" style="width: 80px; height: 80px;">
-                            <div id="petFlag" style="font-size: small;">펫 식당</div>
+                        {{/inOutFlagShow}} {{#petFlagShow}}
+                        <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
+                            <img src="/images/petrestaurant.png " style="width: 80px; height: 80px; ">
+                            <div id="petFlag " style="font-size: small; ">펫 식당</div>
+
                         </div>
                         {{/petFlagShow}}
                     </div>
@@ -162,23 +151,23 @@
             </div>
         </div>
         <div>
-            <div class="m_pt_lg">
+            <div class="m_pt_lg ">
                 <!-- 여기서부터 같은 박스 7개-->
-                <div class="d-flex">
+                <div class="d-flex ">
                     <div>
-                        <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
+                        <img src="/images/pet.png " style="width: 25px; height: 25px; " alt=" ">
                     </div>
-                    <div class="m_pl_md m_txt_title m_font_xl">소개</div>
+                    <div class="m_pl_md m_txt_title m_font_xl ">소개</div>
                 </div>
                 <hr />
 
                 <div class="m_font_md">{{content}}</div>
 
             </div>
-            <div class="m_pt_lg">
+            <div class="m_pt_lg ">
                 <!-- 여기서부터 같은 박스 7개-->
-                <div class="d-flex">
-                    <div> <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
+                <div class="d-flex ">
+                    <div> <img src="/images/pet.png " style="width: 25px; height: 25px; " alt=" ">
                     </div>
                     <div class="m_pl_md m_txt_title m_font_xl ">주요시설</div>
                 </div>
@@ -187,39 +176,45 @@
                 <div class="m_font_md">{{mainFacility}}</div>
 
             </div>
-            <div class="m_pt_lg">
+
+            <div class="m_pt_lg ">
+
                 <!-- 여기서부터 같은 박스 7개-->
-                <div class="d-flex">
+                <div class="d-flex ">
                     <div>
-                        <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
+                        <img src="/images/pet.png " style="width: 25px; height: 25px; " alt=" ">
                     </div>
-                    <div class="m_pl_md m_txt_title m_font_xl">이용요금</div>
+                    <div class="m_pl_md m_txt_title m_font_xl ">이용요금</div>
                 </div>
                 <hr />
                 <div class="m_font_md ">{{usedCost}}</div>
             </div>
-            <div class="m_pt_lg">
+
+            <div class="m_pt_lg ">
+
                 <!-- 여기서부터 같은 박스 7개-->
-                <div class="d-flex">
+                <div class="d-flex ">
                     <div>
-                        <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
+                        <img src="/images/pet.png " style="width: 25px; height: 25px; " alt=" ">
                     </div>
-                    <div class="m_pl_md m_txt_title m_font_xl">애견 정책 및 주의사항</div>
+                    <div class="m_pl_md m_txt_title m_font_xl ">애견 정책 및 주의사항</div>
                 </div>
                 <hr />
 
                 <div class="m_font_md">{{policyCautions}}</div>
 
             </div>
-            <div class="m_pt_lg">
+            <div class="m_pt_lg ">
                 <!-- 여기서부터 같은 박스 7개-->
-                <div class="d-flex">
-                    <div> <img src="/images/pet.png" style="width: 25px; height: 25px;" alt="">
+                <div class="d-flex ">
+                    <div> <img src="/images/pet.png " style="width: 25px; height: 25px; " alt=" ">
                     </div>
-                    <div class="m_pl_md m_txt_title m_font_xl">지도</div>
+
+                    <div class="m_pl_md m_txt_title m_font_xl ">지도</div>
+
                 </div>
                 <hr />
-                <div id="map" style="width:100%;height:300px;"></div>
+                <div id="map" style="width:100%;height:300px; "></div>
             </div>
 
 
@@ -229,35 +224,35 @@
 
 <script>
     //  좋아요 버튼 활성화, 비활성화
-    $("#btn-like").click((event) => {
-        let status = $("#btn-like")[0].innerText;
+    $("#btn-like ").click((event) => {
+        let status = $("#btn-like ")[0].innerText;
         console.log(status);
         if (status == "favorite_border") {
-            console.log($("#btn-like"));
-            $("#btn-like")[0].innerText = 'favorite';
-            $("#btn-like").addClass("text-danger");
+            console.log($("#btn-like "));
+            $("#btn-like ")[0].innerText = 'favorite';
+            $("#btn-like ").addClass("text-danger");
         } else {
-            $("#btn-like")[0].innerText = 'favorite_border';
-            $("#btn-like").removeClass("text-danger");
+            $("#btn-like ")[0].innerText = 'favorite_border';
+            $("#btn-like ").removeClass("text-danger");
         }
     });
     // 즐겨찾기 버튼 활성화, 비활성화
-    $("#btn-favorite").click((event) => {
-        let status = $("#btn-favorite")[0].innerText;
+    $("#btn-favorite ").click((event) => {
+        let status = $("#btn-favorite ")[0].innerText;
         console.log(status);
         if (status == "star_border") {
-            $("#btn-favorite")[0].innerText = 'star';
-            $("#btn-favorite").addClass("text-warning");
+            $("#btn-favorite ")[0].innerText = 'star';
+            $("#btn-favorite ").addClass("text-warning");
         } else {
-            $("#btn-favorite")[0].innerText = 'star_border';
-            $("#btn-favorite").removeClass("text-warning");
+            $("#btn-favorite ")[0].innerText = 'star_border';
+            $("#btn-favorite ").removeClass("text-warning");
         }
     });
 
 
+    let latitude = $("#latitude").val();
+    let longitude = $("#longitude").val();
 
-    var latitude = {{ places.latitude }};
-    var longitude = {{ places.longitude }};
 
     //지도 옵션
     var mapOptions = {
@@ -285,29 +280,26 @@
     var marker = new naver.maps.Marker(markerOptions);
 
     // 카테고리 색 변화
+
     let changeSecondary = (category) => {
         if ($(`#box-${category}`).hasClass("m_bg_primary") == true) {
             $(`#box-${category}`).removeClass("m_bg_primary");
             $(`#box-${category}`).addClass("m_bg_secondary");
         };
     }
+
     let changePrimary = (category) => {
         $(`#box-${category}`).removeClass("m_bg_secondary");
         $(`#box-${category}`).addClass("m_bg_primary");
-
     }
 
     let changeColorBox = () => {
 
-        let list = ["숙박", "관광지", "체험", "동물병원", "식음료"];
-        for (category of list) {
-            changeSecondary(category);
-        }
-        let title = $("#title").html();
-        changePrimary(`${title}`);
+        let category = $("#title").html();
+        console.log(category);
+        changePrimary(category);
     };
     changeColorBox();
-
 </script>
-{{/places}}
-{{>layout/footer}}
+{{/places}} {{>layout/footer}}
+

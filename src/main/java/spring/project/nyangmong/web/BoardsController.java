@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.boards.BoardsRepository;
@@ -44,51 +47,28 @@ public class BoardsController {
         return "pages/post/noticeDetail";
     }
 
-    // PageRequest pq = PageRequest.of(page, 3);
-    // model.addAttribute("boardswrite", boardsRepository.findAll(pq));
-    // return "pages/post/jarangWriteForm";
 
-    // User principal = (User) session.getAttribute("principal");
-
-    // List<CommentResponseDto> comments = new ArrayList<>();
-
-    // for (Comment comment : boardsEntity.getComments()) {
-    // CommentResponseDto dto = new CommentResponseDto();
-    // dto.setComment(comment);
-
-    // if (principal != null) {
-    // if (principal.getId() == comment.getId()) {
-    // dto.setAuth(true); // or false
-    // } else {
-    // dto.setAuth(false); // or false
-    // }
-    // } else {
-    // dto.setAuth(false); // or false
-    // }
-    // comments.add(dto);
-    // }
-    // model.addAttribute("comments", comments);
-    // model.addAttribute("boardsId", id);
-    // return "pages/post/jarangDetail";
-    // }
-
-    // 페이지 주기
+    // 댕냥이 자랑 글쓰기 페이지 이동
     // /s 붙었으니까 자동으로 인터셉터가 인증 체크함. (완료)
     @GetMapping("/s/boards/write-form")
-    public String writeForm(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        PageRequest pq = PageRequest.of(page, 3);
-        model.addAttribute("boardswrite", boardsRepository.findAll(pq));
+    public String writeForm() {
         return "pages/post/jarangWriteForm";
     }
 
-    @GetMapping("/s/notice/write-form")
-    public String noticewriteForm(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        PageRequest pq = PageRequest.of(page, 3);
-        model.addAttribute("noticewrite", boardsRepository.findAll(pq));
-        return "pages/post/noticeWriteForm";
+    // 댕냥이 자랑 글리스트 전달 메서드 (페이징 처리 필요)
+    @GetMapping("/boards")
+    public String list(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        PageRequest pq = PageRequest.of(page, 10);
+        Page<Boards> boards = boardsService.게시글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("board", boards);
+        return "/pages/post/jarangList";
     }
 
-
+    @GetMapping("/notice")
+    public String notice() {
+        return "/pages/post/noticeList";
+    }
 
 }
 

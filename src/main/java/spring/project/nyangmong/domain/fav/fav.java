@@ -1,3 +1,4 @@
+
 package spring.project.nyangmong.domain.fav;
 
 import javax.persistence.Entity;
