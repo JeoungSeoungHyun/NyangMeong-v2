@@ -91,6 +91,7 @@ public class UserController {
     // 회원가입
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
+        System.out.println("조인디티오 : " + joinDto);
         userService.회원가입(joinDto);
         return "redirect:/login-form";
     }
