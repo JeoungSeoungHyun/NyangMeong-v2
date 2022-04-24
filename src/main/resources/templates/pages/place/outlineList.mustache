@@ -25,9 +25,7 @@
                                 <form class="navbar-form navbar-right" role="search">
                                     <div class="form-group d-flex">
                                         <div class="dropdown">
-                                            <button class="btn m_bg_secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
+                                            <button class="btn m_bg_secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 카테고리
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -39,8 +37,7 @@
                                                 </li>
                                                 <li><a class="dropdown-item" href="javascript:linkListGo('체험')">체험</a>
                                                 </li>
-                                                <li><a class="dropdown-item"
-                                                        href="javascript:linkListGo('동물병원')">동물병원</a></li>
+                                                <li><a class="dropdown-item" href="javascript:linkListGo('동물병원')">동물병원</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -60,19 +57,21 @@
                             <a href="javascript:linkListGo('숙박')">+ 더보기</a>
                         </button>
                     </div>
-                    <div class="row m_pb_md">                 
+                    <div class="row m_pb_md">
                         {{#HotelInfoListRespDto}}
-                        <div class="col-md-3">
+                        <div class="col-md-3 m_mb_md">
                             <div class="m_box_info_place">
-
-                                <div class="thumbnail">
-                                    <a href="/place/{{place.contentSeq}}">
-                                        <div class="caption">
-                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
-                                            <div class=""><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                    <div>
+                                        <div>
+                                            <img class="m_img_fit" src="{{image}}">
                                         </div>
-                                    </a>
-                                </div>
+                                        <div class="caption m_p_sm">
+                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                            <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {{/HotelInfoListRespDto}}
@@ -87,18 +86,19 @@
                     </div>
                     <div class="row m_pb_md">
                         {{#CafeInfoListRespDto}}
-                        <div class="col-md-3">
+                        <div class="col-md-3 m_mb_md">
                             <div class="m_box_info_place">
-
-                                <div class="thumbnail">
-                                    <a href="/place/{{place.contentSeq}}">
-                                        <div class="caption">
-                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
-                                            <div class=""><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                    <div>
+                                        <div>
+                                            <img class="m_img_fit" src="{{image}}">
                                         </div>
-                                    </a>
-                                </div>
-
+                                        <div class="caption m_p_sm">
+                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                            <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {{/CafeInfoListRespDto}}
@@ -115,18 +115,19 @@
                     </div>
                     <div class="row m_pb_md">
                         {{#SpotInfoListRespDto}}
-                        <div class="col-md-3">
+                        <div class="col-md-3 m_mb_md">
                             <div class="m_box_info_place">
-
-                                <div class="thumbnail">
-                                    <a href="/place/{{place.contentSeq}}">
-                                        <div class="caption">
-                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
-                                            <div class=""><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                    <div>
+                                        <div>
+                                            <img class="m_img_fit" src="{{image}}">
                                         </div>
-                                    </a>
-                                </div>
-
+                                        <div class="caption m_p_sm">
+                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                            <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {{/SpotInfoListRespDto}}
@@ -142,17 +143,19 @@
                     </div>
                     <div class="row m_pb_md">
                         {{#ActivityInfoListRespDto}}
-                        <div class="col-md-3">
+                        <div class="col-md-3 m_mb_md">
                             <div class="m_box_info_place">
-                                <div class="thumbnail">
-                                    <a href="/place/{{place.contentSeq}}">
-                                        <div class="caption">
-                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
-                                            <div class=""><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                <a href="/place/{{place.contentSeq}}">
+                                    <div>
+                                        <div>
+                                            <img class="m_img_fit" src="{{image}}">
                                         </div>
-                                    </a>
-                                </div>
-
+                                        <div class="caption m_p_sm">
+                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
+                                            <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {{/ActivityInfoListRespDto}}
@@ -171,10 +174,11 @@
                         <div class="col-md-3">
                             <div class="m_box_info_place">
                                 <div class="thumbnail">
-                                    <a href="/place/{{place.contentSeq}}">
+                                    <a href="/place/{{contentSeq}}">
+                                        <div class="caption m_p_sm"></div>
                                         <div class="caption">
-                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{place.title}}</div>
-                                            <div class=""><i class="fa-solid fa-location-dot"></i> {{place.address}}</div>
+                                            <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                            <div class=""><i class="fa-solid fa-location-dot"></i> {{address}}</div>
                                         </div>
                                     </a>
 
