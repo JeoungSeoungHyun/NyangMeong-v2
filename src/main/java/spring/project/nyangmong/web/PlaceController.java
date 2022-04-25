@@ -144,10 +144,10 @@ public class PlaceController {
         return "/pages/place/outlineList";
     }
 
-    @GetMapping("test/place/list")
+    @GetMapping("/test/place/list")
     public @ResponseBody Page<Places> listTest(@RequestParam(defaultValue = "0") Integer page) {
         PageRequest pq = PageRequest.of(page, 24);
-        return placeRepository.searchPartName("식음료", pq);
+        return placeRepository.searchPlaces("원주", pq);
     }
 
     @GetMapping("/place/search")
