@@ -20,10 +20,12 @@ public interface BoardsRepository extends JpaRepository<Boards, Integer> {
 
     void deleteBoardsById(long id);
 
+    // 댕냥이 자랑 리스트 찾기
     @Query(value = "SELECT * FROM boards WHERE classification='자랑' ", nativeQuery = true)
-    List<Boards> listJarang();
+    List<Boards> listJarang(Pageable pq);
 
+    // 공지사항 리스트 찾기
     @Query(value = "SELECT * FROM boards WHERE classification='공지사항' ", nativeQuery = true)
-    List<Boards> listNotice();
+    List<Boards> listNotice(Pageable pq);
 
 }

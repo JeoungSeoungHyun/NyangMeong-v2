@@ -5,6 +5,11 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -48,14 +53,14 @@ public class BoardsService {
         // 인기 게시물 처리~!!
     }
 
-    public List<Boards> 게시글목록() {
-        // PageRequest pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
-        return boardsRepository.listJarang();
+    public List<Boards> 게시글목록(Integer page) {
+        Pageable pq = PageRequest.of(page, 12, Sort.by(Direction.DESC, "id"));
+        return boardsRepository.listJarang(pq);
     }
 
-    public List<Boards> 공지사항목록() {
-        // PageRequest pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
-        return boardsRepository.listNotice();
+    public List<Boards> 공지사항목록(Integer page) {
+        PageRequest pq = PageRequest.of(page, 15, Sort.by(Direction.DESC, "id"));
+        return boardsRepository.listNotice(pq);
     }
 
     @Transactional

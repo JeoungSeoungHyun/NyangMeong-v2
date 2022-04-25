@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,22 +69,18 @@ public class BoardsController {
         return "pages/post/jarangWriteForm";
     }
 
-    // 댕냥이 자랑 글리스트 전달 메서드 (페이징 처리 필요)
+    // 댕냥이 자랑 글리스트 전달 메서드
     @GetMapping("/boards")
-    public String list(Model model) {
-        // PageRequest pq = PageRequest.of(page, 10);
-        List<Boards> boards = boardsService.게시글목록();
-        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+    public String list(Model model, @RequestParam(defaultValue = "0") Integer page) {
+        List<Boards> boards = boardsService.게시글목록(page);
         model.addAttribute("boards", boards);
         return "/pages/post/jarangList";
     }
 
-    // 공지사항 글리스트 전달 메서드(페이징 처리 필요)
+    // 공지사항 글리스트 전달 메서드
     @GetMapping("/notice")
-    public String adminNotice(Model model) {
-        // PageRequest pq = PageRequest.of(page, 10);
-        List<Boards> boards = boardsService.공지사항목록();
-        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+    public String adminNotice(Model model, @RequestParam(defaultValue = "0") Integer page) {
+        List<Boards> boards = boardsService.공지사항목록(page);
         model.addAttribute("notice", boards);
         return "/pages/post/noticeList";
     }

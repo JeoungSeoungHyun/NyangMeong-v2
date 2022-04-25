@@ -2,17 +2,14 @@
 
 //이벤트 리스너 - 공지사항 등록 
 $("#btn-writeJarang").click(() => {
-    alert("자랑버튼")
     writeJarang();
 });
 
 $("#btn-writeNotice").click(() => {
-    alert("공지버튼")
     writeNotice();
 });
 // 자랑글쓰기 
 async function writeJarang() {
-    alert("자랑실행")
     let writeDto = {
         title: $("#title").val(),
         content: $("#summernote").val() 
@@ -38,7 +35,6 @@ async function writeJarang() {
 }
 // 공지사항 쓰기 
 async function writeNotice() {
-    alert("공지실행")
     let writeDto = {
         title: $("#title").val(),
         content: $("#summernote").val()

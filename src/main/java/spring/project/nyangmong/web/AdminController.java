@@ -34,8 +34,7 @@ public class AdminController {
 
     @GetMapping("/s/admin/notice-manage")
     public String adminNotice(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        PageRequest pq = PageRequest.of(page, 10);
-        List<Boards> boards = boardsService.공지사항목록();
+        List<Boards> boards = boardsService.공지사항목록(page);
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
         model.addAttribute("notice", boards);
         return "/pages/admin/noticeManage";
