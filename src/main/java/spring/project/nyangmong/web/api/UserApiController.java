@@ -30,6 +30,8 @@ public class UserApiController {
         if (principal.getId() != id) {
             throw new RuntimeException("삭제 권한이 없습니다.");
         } else {
+            userService.회원탈퇴(id);
+            session.invalidate();
             return new ResponseDto<>(1, "성공", null);
         }
 

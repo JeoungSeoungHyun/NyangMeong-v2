@@ -147,7 +147,7 @@ public class PlaceController {
     @GetMapping("/test/place/list")
     public @ResponseBody Page<Places> listTest(@RequestParam(defaultValue = "0") Integer page) {
         PageRequest pq = PageRequest.of(page, 24);
-        return placeRepository.searchPlaces("원주", pq);
+        return placeRepository.findAll(pq);
     }
 
     @GetMapping("/place/search")
@@ -223,9 +223,11 @@ public class PlaceController {
             placeDto.setTitle(places.get(i).getTitle());
             placeDto.setAddress(places.get(i).getAddress());
         }
-
+        model.addAttribute("count", count);
         model.addAttribute("pdto", placeDto);
         model.addAttribute("places", places);
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("previewPage", page - 1);
         return "pages/place/outlineList";
 
     }
