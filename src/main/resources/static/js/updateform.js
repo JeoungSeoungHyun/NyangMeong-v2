@@ -12,16 +12,15 @@ async function update() {
         email: $("#email").val()
     }
 
-    let response = await fetch(`/s/api/user/${id}/update`, {
+    let response = await fetch(/s/api/user/${id}/update, {
         method: "PUT",
         body: JSON.stringify(updateDto),
         headers: {
             "Content-Type": "application/json; charset=utf-8"
         }
 
-    }
-
     });
+
     // console.log(response);
 
     let responseParse = await response.json();
@@ -29,7 +28,7 @@ async function update() {
 
     if (responseParse.code == 1) {
         alert("업데이트 성공");
-        location.href = `/s/user/${id}/update-form`;
+        location.href = /s/user/${id}/update-form;
     } else {
         alert("업데이트 실패");
     }
@@ -37,7 +36,7 @@ async function update() {
 
 // 회원 탈퇴 함수
 async function deleteUser(userId) {
-    let response = await fetch(`/s/api/user/${userId}/delete`, {
+    let response = await fetch(/s/api/user/${userId}/delete, {
         method: "DELETE",
     });
     // console.log(response);
