@@ -26,6 +26,9 @@ public interface PlaceRepository extends JpaRepository<Places, Integer> {
         @Query(value = "SELECT * FROM places WHERE keyword Like %:keyword% OR mainFacility LIKE %:keyword%  ", countQuery = "SELECT * FROM places WHERE keyword Like %:keyword% OR mainFacility LIKE %:keyword%  ", nativeQuery = true)
         Page<Places> searchPlaces(@Param("keyword") String keyword, Pageable page);
 
+        @Query(value = "SELECT * FROM places WHERE keyword Like %:keyword% OR mainFacility LIKE %:keyword%  ", nativeQuery = true)
+        long countSearch(@Param("keyword") String keyword);
+
         @Query(value = "SELECT count(*) FROM places WHERE partName = :partName", nativeQuery = true)
         long countPartName(@Param("partName") String partName);
 

@@ -147,7 +147,7 @@ public class PlaceController {
     @GetMapping("/test/place/list")
     public @ResponseBody Page<Places> listTest(@RequestParam(defaultValue = "0") Integer page) {
         PageRequest pq = PageRequest.of(page, 24);
-        return placeRepository.findAll(pq);
+        return placeRepository.searchPlaces("원주", pq);
     }
 
     @GetMapping("/place/search")
@@ -206,29 +206,19 @@ public class PlaceController {
     public String searchOutLine(@RequestParam(defaultValue = "") String keyword,
             @RequestParam(defaultValue = "0") Integer page, Model model) {
         PageRequest pq = PageRequest.of(page, 16);
-        long count = placeRepository.count();
         if (keyword.equals("")) {
+            long count = placeRepository.count();
             model.addAttribute("nextPage", page + 1);
             model.addAttribute("previewPage", page - 1);
             model.addAttribute("count", count);
             model.addAttribute("places", placeRepository.findAll(pq));
             return "pages/place/search";
         }
-
-        Page<Places> placesPaging = placeRepository.searchPlaces(keyword, pq);
-        List<Places> places = placesPaging.getContent();
-        PlaceListDto placeDto = new PlaceListDto();
-        placeDto.setPlaces(places);
-        for (int i = 0; i < places.size(); i++) {
-            placeDto.setTitle(places.get(i).getTitle());
-            placeDto.setAddress(places.get(i).getAddress());
-        }
-        model.addAttribute("count", count);
-        model.addAttribute("pdto", placeDto);
-        model.addAttribute("places", places);
+        // Page<Places> placesPaging = placeRepository.searchPlaces(keyword, pq);
+        model.addAttribute("places", placeRepository.searchPlaces(keyword, pq));
         model.addAttribute("nextPage", page + 1);
         model.addAttribute("previewPage", page - 1);
-        return "pages/place/outlineList";
+        return "pages/place/search";
 
     }
 
