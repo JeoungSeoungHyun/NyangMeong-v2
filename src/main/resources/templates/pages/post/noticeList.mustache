@@ -1,69 +1,101 @@
-{{> /layout/header}}
+{{>/layout/header}}
 
-<div class="container" style="height:80vh">
+<div class="container" style="height:70vh">
 
-  <h1 class="text-center m_txt_title m_ph_lg">공지사항</h1>
+    <h1 class="text-center m_txt_title m_ph_lg">공지사항</h1>
 
+{{#principal}}
+    {{#userAuth}}
+    <div class="m_box_right m_pb_lg">
+        <button class="btn m_bg_secondary m_p_sm m_mr_md">
+            <a href="/s/admin/write-form">글쓰기</a>
+        </button>
+        <button class="btn m_bg_secondary m_p_sm" onclick="deleteValue();">
+            삭제
+        </button>
+    </div>
+       {{/userAuth}}
+    {{/principal}}
 
+    <form action="/s/admin/notice-delete">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="checkall" /></td>
+                    <th class="col-1">#</th>
+                    <th class="col-6">제목</th>
+                    <th class="col-2">작성자</th>
+                    <th class="col-2">작성일자</th>
+                    <th class="col-1">상세보기</th>
+                </tr>
+            </thead>
 
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th class="col-1">#</th>
-        <th class="col-6">제목</th>
-        <th class="col-2">작성자</th>
-        <th class="col-2">작성일자</th>
-        <th class="col-1">상세보기</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">id</th>
-        <td> Title</td>
-        <td>username</td>
-        <td>createdate</td>
-        <td>
-          <a href="/noticeDetail">더보기
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">id</th>
-        <td> Title</td>
-        <td>username</td>
-        <td>createdate</td>
-        <td>
-          <a href="/noticeDetail">더보기
-          </a>
-        </td>
-      </tr>
+  {{#notice}}
+            <tbody>
+                <tr>
+                    <td><input id="chk" type="checkbox" name="id" value="1" /></td>
+                    <th scope="row">{{id}}</th>
+                    <td> {{title}} </td>
+                    <td> {{user.userName}} </td>
+                    <td>{{formatCreateDate}}</td>
+                    <td>
+                        <a href="/boards/{{id}}">더보기
+                        </a>
+                    </td>
+                </tr>
 
-    </tbody>
-  </table>
-  <!-- <nav>
-  <ul class="pagination" style="justify-content: center;">
-    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav> -->
+            </tbody>
+              {{/notice}}
+        </table>
 
+    </form>
 
-  <div class="paging-div">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="">이전</a></li>
-      <li class="page-item"><a class="page-link" href="">1</a></li>
-      <li class="page-item"><a class="page-link" href="">2</a></li>
-      <li class="page-item"><a class="page-link" href="">3</a></li>
-      <li><a class="page-link" href="">다음</a></li>
-    </ul>
-  </div>
+    <div class="paging-div">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="">이전</a></li>
+            <li class="page-item"><a class="page-link" href="">1</a></li>
+            <li class="page-item"><a class="page-link" href="">2</a></li>
+            <li class="page-item"><a class="page-link" href="">3</a></li>
+            <li><a class="page-link" href="">다음</a></li>
+        </ul>
+    </div>
 
 </div>
 
+<script src="/js/admin.js"></script>
+<script>
+    function deleteValue() {
+        let url = "delete";
+        let valueArr = new Array();
+        let list = $("input[name='RowCheck']");
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].checked) {
+                valueArr.push(list[i].value);
+            }
+        }
+        if (valueArr.length == 0) {
+            alert("선택된 글이 없습니다");
+        } else {
+            let chk = confirm("정말 삭제하겠습니까?");
+            $.ajax({
+                url:  ,
+                type: 'POST',
+                traditional: true,
+                data: {
+                    valueArr: valueArr
+                },
+                success: function (jdata) {
+                    if (jdata = 1) {
+                        alert("삭제성공");
+                        location.replace("list")
+                    }
+                    else {
+                        alert("삭제실패");
+                    }
+                }
+            });
+        }
+    }
+</script>
 
-{{> /layout/footer}}
+{{>/layout/footer}}

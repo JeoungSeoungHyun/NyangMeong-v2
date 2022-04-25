@@ -2,8 +2,10 @@
 
 <div class="container" style="height:70vh">
 
-    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">공지사항 관리</h1>
+    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">공지사항</h1>
 
+{{#principal}}
+    {{#userAuth}}
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
             <a href="/s/admin/write-form">글쓰기</a>
@@ -12,6 +14,8 @@
             삭제
         </button>
     </div>
+       {{/userAuth}}
+    {{/principal}}
 
     <form action="/s/admin/notice-delete">
         <table class="table table-hover">
@@ -26,31 +30,22 @@
                 </tr>
             </thead>
 
+  {{#notice}}
             <tbody>
                 <tr>
                     <td><input id="chk" type="checkbox" name="id" value="1" /></td>
-                    <th scope="row">id</th>
-                    <td> title </td>
-                    <td> username </td>
-                    <td>createdate</td>
+                    <th scope="row">{{id}}</th>
+                    <td> {{title}} </td>
+                    <td> {{user.userName}} </td>
+                    <td>{{formatCreateDate}}</td>
                     <td>
-                        <a href="/#">더보기
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input id="chk" type="checkbox" name="id" value="2" /></td>
-                    <th scope="row">id</th>
-                    <td> Title</td>
-                    <td>username</td>
-                    <td>createdate</td>
-                    <td>
-                        <a href="/#">더보기
+                        <a href="/boards/{id}">더보기
                         </a>
                     </td>
                 </tr>
 
             </tbody>
+              {{/notice}}
         </table>
 
     </form>

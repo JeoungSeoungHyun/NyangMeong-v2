@@ -71,12 +71,16 @@ public class BoardsController {
         PageRequest pq = PageRequest.of(page, 10);
         Page<Boards> boards = boardsService.게시글목록(page);
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
-        model.addAttribute("board", boards);
+        model.addAttribute("boards", boards);
         return "/pages/post/jarangList";
     }
 
     @GetMapping("/notice")
-    public String notice() {
+    public String adminNotice(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        PageRequest pq = PageRequest.of(page, 10);
+        Page<Boards> boards = boardsService.게시글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("notice", boards);
         return "/pages/post/noticeList";
     }
 }
