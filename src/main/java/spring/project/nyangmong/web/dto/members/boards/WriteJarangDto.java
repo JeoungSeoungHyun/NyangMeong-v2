@@ -9,7 +9,7 @@ import spring.project.nyangmong.domain.user.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class WriteDto {
+public class WriteJarangDto {
     private String title;
     private String content;
 
@@ -24,6 +24,7 @@ public class WriteDto {
         board.setUser(principal);
         // System.out.println("ㅁㄴ아러ㅏㅣㅁㅇ널 : " + principal.getPassword());
         board.setPageCount(0); // 여기서 초기값 해주는게 나을 듯 함!!
+        board.setClassification("자랑");
         return board;
     }
 }

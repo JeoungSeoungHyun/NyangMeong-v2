@@ -63,6 +63,8 @@ public class Boards { // N (드라이빙 테이블, FK의 주인)
 
     private long PlaceLikesCount; // 좋아요 수
 
+    private String classification; // 공지사항, 댕냥이자랑 구분
+
     // @Builder
     // public Boards(String tag, String text, User user, long PlaceLikesCount) {
     // this.tag = tag;

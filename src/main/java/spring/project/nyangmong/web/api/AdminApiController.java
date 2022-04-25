@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.web.dto.members.ResponseDto;
-import spring.project.nyangmong.web.dto.members.boards.WriteDto;
+import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
 
 @RequiredArgsConstructor
 @RestController

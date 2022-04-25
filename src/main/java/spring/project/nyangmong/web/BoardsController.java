@@ -53,6 +53,7 @@ public class BoardsController {
             comments.add(dto);
         }
 
+        model.addAttribute("boards", boardsEntity);
         model.addAttribute("comments", comments);
         model.addAttribute("boardsId", id);
         return "pages/post/jarangDetail";
@@ -67,18 +68,19 @@ public class BoardsController {
 
     // 댕냥이 자랑 글리스트 전달 메서드 (페이징 처리 필요)
     @GetMapping("/boards")
-    public String list(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        PageRequest pq = PageRequest.of(page, 10);
-        Page<Boards> boards = boardsService.게시글목록(page);
+    public String list(Model model) {
+        // PageRequest pq = PageRequest.of(page, 10);
+        List<Boards> boards = boardsService.게시글목록();
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
         model.addAttribute("boards", boards);
         return "/pages/post/jarangList";
     }
 
+    // 공지사항 글리스트 전달 메서드(페이징 처리 필요)
     @GetMapping("/notice")
-    public String adminNotice(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        PageRequest pq = PageRequest.of(page, 10);
-        Page<Boards> boards = boardsService.게시글목록(page);
+    public String adminNotice(Model model) {
+        // PageRequest pq = PageRequest.of(page, 10);
+        List<Boards> boards = boardsService.공지사항목록();
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
         model.addAttribute("notice", boards);
         return "/pages/post/noticeList";

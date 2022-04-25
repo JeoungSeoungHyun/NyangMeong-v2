@@ -10,20 +10,21 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="container List-container">
                     <hr>
+                    <input id="id" type="hidden" value="{{#boardsId}}{{boardsId}}{{/boardsId}}"/>
                     {{#boards}}
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
-                        <p class="col-8" style="word-break:break-all;"> title</p>
-                        <p class="col-1"> createDate </p>
-                        <p class="col-1">userName</p>
-                        <p class="col-1">pageCount</p>
+                        <p id="title" class="col-6" style="word-break:break-all;">{{title}}</p>
+                        <p id="createDate" class="col-2">날짜 : {{formatCreateDate}} </p>
+                        <p id="userName" class="col-2">작성자 : {{user.userName}}</p>
+                        <p id="pageCount" class="col-1">조회수 : {{pageCount}}</p>
                     </div>
-{{/boards}}
-{{#boards}}
+                    {{/boards}}
+                    {{#boards}}
                     <div class="board-container">
                         <br>
-                        <p class="content" style="word-break:break-all;">
-                            content
+                        <p id="content" class="content" style="word-break:break-all;">
+                            {{{content}}}
                         </p>
                     </div>
                    
@@ -31,8 +32,8 @@
 
                     <div class="m_feeling_div">
                         <div class="button-container like-container m_ml_md">
-                            <button class="m_feeling_a">
-                                <i class="far fa-heart"> I LOOOOOVE THIS PICTURE</i> <i class="fas fa-heart"></i>
+                            <button id="btn-like" class="m_feeling_a">
+                                <i id="icon-like" class="far fa-heart"> I LOOOOOVE THIS PICTURE</i> <i id="icon-likee" class="far fa-heart"></i>
                         </div>
                     </div>
                     <br>
@@ -53,7 +54,7 @@
                         <div class="card-header bg-light">
                             <i class="fa fa-comment fa"></i> COMMENT
                         </div>
-                        <form action="/s/boards/{{postId}}/comment" method="post">
+                        <form action="/s/boards/{{boardsId}}/comment" method="post">
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
@@ -99,7 +100,32 @@
     </main>
 </div>
 
-<script src="/js/comment.js"></script>
+<script>
+    $("#btn-like").click(()=>{
+        if($("#icon-like").hasClass("far fa-heart")){
+            $("#icon-like").removeClass("far fa-heart");
+            $("#icon-like").addClass("fas fa-heart");
+        } else{
+            $("#icon-like").removeClass("fas fa-heart");
+            $("#icon-like").addClass("far fa-heart");
+        }
+        if($("#icon-likee").hasClass("far fa-heart")){
+            $("#icon-likee").removeClass("far fa-heart");
+            $("#icon-likee").addClass("fas fa-heart");
+        } else {
+            $("#icon-likee").removeClass("fas fa-heart");
+            $("#icon-likee").addClass("far fa-heart");
+        }
+    });
+    let dataRendering = async()=>{
+        let id = $("#id").val();
+        let response = await fetch(`/api/boards/${id}`);
+        console.log(response);
+        let responseParse = await response.json();
+        
+    };
+    dataRendering();
+</script>
+<script src="/js/comment.js"></script> 
 <script src="/js/boards.js"></script>
-
 {{> /layout/footer}}

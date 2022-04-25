@@ -1,23 +1,17 @@
 package spring.project.nyangmong.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.placelikes.PlaceLikesRepository;
-import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
-import spring.project.nyangmong.web.dto.members.boards.BoardsInfoDto;
 
 @RequiredArgsConstructor
 @Service // 컴포넌트 스캔시에 IoC 컨테이너에 등록됨 // 트랜잭션 관리하는 오브젝트임. 기능 모임
@@ -54,9 +48,14 @@ public class BoardsService {
         // 인기 게시물 처리~!!
     }
 
-    public Page<Boards> 게시글목록(Integer page) {
-        PageRequest pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
-        return boardsRepository.findAll(pq);
+    public List<Boards> 게시글목록() {
+        // PageRequest pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
+        return boardsRepository.listJarang();
+    }
+
+    public List<Boards> 공지사항목록() {
+        // PageRequest pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
+        return boardsRepository.listNotice();
     }
 
     @Transactional

@@ -2,11 +2,7 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +16,8 @@ import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.service.PlaceLikesService;
 import spring.project.nyangmong.web.dto.members.ResponseDto;
-import spring.project.nyangmong.web.dto.members.boards.WriteDto;
+import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
+import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
 
 @RequiredArgsConstructor
 @RestController
@@ -66,8 +63,21 @@ public class BoardsApiController {
         return new ResponseDto<>(1, "성공", null);
     }
 
+    // 자랑 글쓰기
     @PostMapping("/s/boards/{id}/update")
-    public ResponseDto<?> write(@RequestBody WriteDto writeDto) {
+    public ResponseDto<?> writeJarang(@RequestBody WriteJarangDto writeDto) {
+        // System.out.println("Dto : " + writeDto);
+        User principal = (User) session.getAttribute("principal");
+        Boards boards = writeDto.toEntity(principal);
+        // 원래는 그냥 dto바로 넘겼는데, 지금 dto를 넘기면 session값 두개 넘겨야 해서 하나로 합쳐서 넘김
+        boardsService.글쓰기(boards);
+
+        return new ResponseDto<>(1, "성공", null);
+    }
+
+    // 공지사항 쓰기
+    @PostMapping("/s/notice/{id}/update")
+    public ResponseDto<?> writeNotice(@RequestBody WriteNoticeDto writeDto) {
         // System.out.println("Dto : " + writeDto);
         User principal = (User) session.getAttribute("principal");
         Boards boards = writeDto.toEntity(principal);
