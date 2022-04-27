@@ -206,6 +206,7 @@ public class PlaceController {
     public String searchOutLine(@RequestParam(defaultValue = "") String keyword,
             @RequestParam(defaultValue = "0") Integer page, Model model) {
         PageRequest pq = PageRequest.of(page, 16);
+      
         if (keyword.equals("")) {
             long count = placeRepository.count();
             model.addAttribute("nextPage", page + 1);
@@ -214,12 +215,12 @@ public class PlaceController {
             model.addAttribute("places", placeRepository.findAll(pq));
             return "pages/place/search";
         }
+
         // Page<Places> placesPaging = placeRepository.searchPlaces(keyword, pq);
         model.addAttribute("places", placeRepository.searchPlaces(keyword, pq));
         model.addAttribute("nextPage", page + 1);
         model.addAttribute("previewPage", page - 1);
         return "pages/place/search";
-
     }
 
     // 데이터베이스 받아오는 url 들어갈때 시간이 많이 걸립니다.

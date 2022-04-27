@@ -70,6 +70,7 @@ public class BoardsController {
         return "pages/post/jarangWriteForm";
     }
 
+
     // 댕냥이 자랑 글리스트 전달 메서드
     @GetMapping("/boards")
     public String list(Model model, @RequestParam(defaultValue = "0") Integer page) {
@@ -91,3 +92,4 @@ public class BoardsController {
         return "/pages/post/noticeList";
     }
 }
+

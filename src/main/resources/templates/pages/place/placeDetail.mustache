@@ -11,7 +11,6 @@
 
             <!-- 메뉴 박스 시작 -->
             <div id="box-관광지" class="m_box_menu_detail m_bg_secondary">
-
                 <a id="spot" href="javascript:linkListGo('관광지')" class="m_txt_title">관광지</a>
             </div>
             <div id="box-숙박" class=" m_box_menu_detail m_bg_secondary">
@@ -25,7 +24,6 @@
             </div>
             <div id="box-동물병원" class="m_box_menu_detail m_bg_secondary ">
                 <a id="hospital " href="javascript:linkListGo( '동물병원') " class="m_txt_title ">동물병원</a>
-
             </div>
 
             <!-- 메뉴 박스  끝-->
@@ -47,10 +45,8 @@
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner">
                         {{#imageList}}
-
                         <div class="carousel-item m_mt_lg " data-bs-interval="3000">
                             <img src="{{imgurl}} " alt="# " class="m_box_img_slide " style="object-fit:cover; height:90%; ">
-
                         </div>
                         {{/imageList}}
                         <div class="carousel-item active " data-bs-interval="100">
@@ -63,7 +59,6 @@
             <div class="m_bg_primary col-lg-5 d-flex " style=" border-radius: 25px; padding: 20px; height:500px ">
                 <div style="position: relative ">
                     <!-- 좋아요,즐찾버튼 시작 -->
-
                     <div class="d-flex " style="position: absolute; left: 350px; top: -35px ">
                         <div class="d-flex bg-light " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
                             <i id="btn-like" class="material-icons ">favorite_border</i>
@@ -73,11 +68,9 @@
                         </div>
                         <div class="d-flex bg-light m_ml_sm " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
                             <i id="btn-setting" class="fa-solid fa-gear "></i>
-
                         </div>
                     </div>
                     <!-- 좋아요, 즐찾버튼 끝 -->
-
 
                     <div class="m_ph_sm m_txt_title m_font_xxl ">{{title}}</div>
                     <div class="m_ph_sm m_center_column ">
@@ -142,7 +135,6 @@
                         <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width:100px; height:100px; justify-content: center; align-items: center; padding:10px ">
                             <img src="/images/petrestaurant.png " style="width: 80px; height: 80px; ">
                             <div id="petFlag " style="font-size: small; ">펫 식당</div>
-
                         </div>
                         {{/petFlagShow}}
                     </div>
@@ -178,7 +170,6 @@
             </div>
 
             <div class="m_pt_lg ">
-
                 <!-- 여기서부터 같은 박스 7개-->
                 <div class="d-flex ">
                     <div>
@@ -249,7 +240,6 @@
         }
     });
 
-
     let latitude = $("#latitude").val();
     let longitude = $("#longitude").val();
 
@@ -281,13 +271,6 @@
 
     // 카테고리 색 변화
 
-    let changeSecondary = (category) => {
-        if ($(`#box-${category}`).hasClass("m_bg_primary") == true) {
-            $(`#box-${category}`).removeClass("m_bg_primary");
-            $(`#box-${category}`).addClass("m_bg_secondary");
-        };
-    }
-
     let changePrimary = (category) => {
         $(`#box-${category}`).removeClass("m_bg_secondary");
         $(`#box-${category}`).addClass("m_bg_primary");
@@ -301,5 +284,5 @@
     };
     changeColorBox();
 </script>
-{{/places}} {{>layout/footer}}
 
+{{/places}} {{>layout/footer}}
