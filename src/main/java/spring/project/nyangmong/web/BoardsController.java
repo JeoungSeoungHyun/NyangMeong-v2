@@ -23,6 +23,7 @@ import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
+import spring.project.nyangmong.web.dto.members.boards.NoticeListRespDto;
 import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
 @RequiredArgsConstructor
@@ -81,7 +82,12 @@ public class BoardsController {
     @GetMapping("/notice")
     public String adminNotice(Model model, @RequestParam(defaultValue = "0") Integer page) {
         List<Boards> boards = boardsService.공지사항목록(page);
-        model.addAttribute("notice", boards);
+        List<NoticeListRespDto> noticeDto = new ArrayList<>();
+        int size = boards.size();
+        for (int i = 0; i < size; i++) {
+            noticeDto.add(new NoticeListRespDto(size - i, boards.get(i)));
+        }
+        model.addAttribute("notices", noticeDto);
         return "/pages/post/noticeList";
     }
 }

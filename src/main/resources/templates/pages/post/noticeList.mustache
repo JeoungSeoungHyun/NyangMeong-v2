@@ -30,22 +30,23 @@
                 </tr>
             </thead>
 
-  {{#notice}}
+    {{#notices}}
             <tbody>
                 <tr>
                     <td><input id="chk" type="checkbox" name="id" value="1" /></td>
-                    <th scope="row">{{id}}</th>
-                    <td> {{title}} </td>
-                    <td> {{user.userName}} </td>
-                    <td>{{formatCreateDate}}</td>
+                    
+                    <th scope="row">{{num}}</th>
+                    <td> {{boards.title}} </td>
+                    <td> {{boards.user.userName}} </td>
+                    <td> {{boards.formatCreateDate}}</td>
                     <td>
-                        <a href="/boards/{{id}}">더보기
+                        <a href="/boards/{{boards.id}}">더보기
                         </a>
                     </td>
                 </tr>
 
             </tbody>
-              {{/notice}}
+    {{/notices}}
         </table>
 
     </form>

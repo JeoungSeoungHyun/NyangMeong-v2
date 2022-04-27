@@ -25,7 +25,7 @@ public interface BoardsRepository extends JpaRepository<Boards, Integer> {
     List<Boards> listJarang(Pageable pq);
 
     // 공지사항 리스트 찾기
-    @Query(value = "SELECT * FROM boards WHERE classification='공지사항' ", nativeQuery = true)
+    @Query(value = "SELECT ROW_NUMBER() OVER() AS rownum,b.* FROM boards b WHERE classification='공지사항' ", nativeQuery = true)
     List<Boards> listNotice(Pageable pq);
 
 }
