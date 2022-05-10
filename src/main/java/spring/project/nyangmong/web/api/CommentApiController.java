@@ -18,7 +18,7 @@ public class CommentApiController {
     private final CommentService commentService;
 
     /* UPDATE */
-    @PutMapping({ "/posts/{id}/comments/{id}" })
+    @PutMapping({ "/s/api/comment/{id}" })
     public ResponseEntity update(@PathVariable Integer id, @RequestBody CommentResponseDto dto) {
         commentService.댓글수정(id, dto);
         return ResponseEntity.ok(id);

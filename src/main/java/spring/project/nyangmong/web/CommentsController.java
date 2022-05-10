@@ -24,7 +24,7 @@ public class CommentsController {
     private final HttpSession session;
 
     // data를 리턴하면 CommentApiController를 원래 만들어야 한다.
-    @DeleteMapping("/s/api/comment/{id}/delete")
+    @DeleteMapping("/s/api/comment/{id}")
     public @ResponseBody ResponseDto<?> deleteById(@PathVariable Integer id) {
         // 세션의 id와 comment의 userId와 비교
         User principal = (User) session.getAttribute("principal");

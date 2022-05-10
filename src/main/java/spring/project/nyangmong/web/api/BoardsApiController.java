@@ -34,8 +34,8 @@ public class BoardsApiController {
     // return new ResponseDto<>(1, "성공", boards);
     // }
 
-    // UPDATE 글수정 /post/{id} - 글상세보기 페이지가기 - 인증 O
-    @PutMapping("/s/api/boards/{id}/update")
+    // 자랑 UPDATE 글수정 /post/{id} - 글상세보기 페이지가기 - 인증 O
+    @PutMapping("/s/api/boards/{id}")
     public @ResponseBody ResponseDto<String> update(@PathVariable Integer id, @RequestBody Boards boards) {
 
         // 인증
@@ -56,7 +56,7 @@ public class BoardsApiController {
         return new ResponseDto<String>(1, "수정 성공", null);
     }
 
-    @DeleteMapping("/s/api/boards/{id}/delete")
+    @DeleteMapping("/s/api/boards/{id}")
     public ResponseDto<?> deleteById(@PathVariable Integer id) {
         boardsService.글삭제하기(id);
 
@@ -64,7 +64,7 @@ public class BoardsApiController {
     }
 
     // 자랑 글쓰기
-    @PostMapping("/s/boards/{id}/update")
+    @PostMapping("/s/boards")
     public ResponseDto<?> writeJarang(@RequestBody WriteJarangDto writeDto) {
         // System.out.println("Dto : " + writeDto);
         User principal = (User) session.getAttribute("principal");
@@ -76,7 +76,7 @@ public class BoardsApiController {
     }
 
     // 공지사항 쓰기
-    @PostMapping("/s/notice/{id}/update")
+    @PostMapping("/s/notice")
     public ResponseDto<?> writeNotice(@RequestBody WriteNoticeDto writeDto) {
         // System.out.println("Dto : " + writeDto);
         User principal = (User) session.getAttribute("principal");
@@ -85,6 +85,18 @@ public class BoardsApiController {
         boardsService.글쓰기(boards);
 
         return new ResponseDto<>(1, "성공", null);
+    }
+
+    //공지사항 글 수정
+    @PutMapping("/s/api/notice/{id}")
+    public String noticeUpdate() {
+        return null;
+    }
+
+    //공지사항 글 삭제
+    @DeleteMapping("/s/api/notice/{id}")
+    public String noticeDelete() {
+        return null;
     }
 
     // @PostMapping("/s/user/{id}/boardlike")

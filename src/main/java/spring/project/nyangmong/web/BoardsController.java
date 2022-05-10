@@ -90,4 +90,16 @@ public class BoardsController {
         model.addAttribute("notices", noticeDto);
         return "/pages/post/noticeList";
     }
+
+    //댕냥이자랑 글 수정 페이지
+    @GetMapping("/s/boards/{id}/update-form")
+    public String jarangUpdateForm() {
+        return "/pages/post/jarangUpdateForm";
+    }
+
+    //공지사항 글 수정 페이지
+    @GetMapping("/s/notice/{id}/update-form")
+    public String noticeUpdateForm() {
+        return "/pages/post/noticeUpdateForm";
+    }
 }

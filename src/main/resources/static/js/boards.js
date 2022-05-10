@@ -17,7 +17,7 @@ async function writeJarang() {
  let id = $("#userId").val();
     console.log(writeDto);
     console.log(id);
-    let response = await fetch(`/s/boards/${id}/update`, {
+    let response = await fetch(`/s/boards`, {
         method: "POST",
         body: JSON.stringify(writeDto),
         headers: {
@@ -42,7 +42,7 @@ async function writeNotice() {
  let id = $("#userId").val();
     console.log(writeDto);
     console.log(id);
-    let response = await fetch(`/s/notice/${id}/update`, {
+    let response = await fetch(`/s/notice`, {
         method: "POST",
         body: JSON.stringify(writeDto),
         headers: {
