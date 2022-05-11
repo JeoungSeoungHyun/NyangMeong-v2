@@ -10,21 +10,23 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="container List-container">
                     <hr>
-                    <input id="id" type="hidden" value="{{boardsId}}" />
                     {{#boards}}
+                    <input id="id" type="hidden" value="{{boards.id}}" />
+
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
-                        <p id="title" class="col-6" style="word-break:break-all;">{{title}}</p>
-                        <p id="createDate" class="col-2">날짜 : {{formatCreateDate}} </p>
-                        <p id="userName" class="col-2">작성자 : {{user.userName}}</p>
-                        <p id="pageCount" class="col-1">조회수 : {{pageCount}}</p>
+                        <p id="title" class="col-6" style="word-break:break-all;">{{boards.title}}</p>
+                        <p id="createDate" class="col-2">날짜 : {{boards.formatCreateDate}} </p>
+                        <p id="userName" class="col-2">작성자 : {{boards.user.userName}}</p>
+                        <p id="pageCount" class="col-1">조회수 : {{boards.pageCount}}</p>
                     </div>
                     {{/boards}}
+
                     {{#boards}}
                     <div class="board-container">
                         <br>
                         <p id="content" class="content" style="word-break:break-all;">
-                            {{{content}}}
+                            {{{boards.content}}}
                         </p>
                     </div>
 
@@ -39,14 +41,19 @@
                     </div>
                     <br>
                     {{/boards}}
+
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
                         class="btn">목록으로</button>
+
+                    {{#boards}}
                     {{#auth}}
                     <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
                         class="btn">삭제</button>
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
                         class="btn">수정</button>
                     {{/auth}}
+                    {{/boards}}
+
                     <br><br><br>
 
                     <!-- 댓글 시작 -->
@@ -55,7 +62,7 @@
                         <div class="card-header bg-light">
                             <i class="fa fa-comment fa"></i> COMMENT
                         </div>
-                        <form action="/s/boards/{{boardsId}}/comment" method="post">
+                        <form action="/s/boards/{{boards.boards.id}}/comment" method="post">
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
@@ -78,10 +85,12 @@
                                 <div class="d-flex">
                                     <div class="font-italic"> <i class="far fa-user-circle"></i>
                                         {{comment.user.userName}} &nbsp;</div>
+
                                     {{#auth}}
                                     <button class="badge bg-primary"
                                         onclick="deleteComment('{{comment.id}}');">삭제</button>
                                     {{/auth}}
+
                                 </div>
                             </li>
                             {{/comments}}
@@ -126,6 +135,31 @@
 
     };
     dataRendering();
+</script>
+
+<script>
+
+    //게시글 삭제 (댕냥이자랑)
+
+    $("#btn-delete").click(() => {
+        deletePost();
+    });
+
+    async function deletePost() {
+        let postId = $("#postId").val();
+        let response = await fetch(`/s/api/post/${postId}`, {
+            method: "DELETE" // delete는 body가 없다.
+        });
+        let responseParse = await response.json();
+
+        if (responseParse.code == 1) {
+            alert("삭제성공");
+            location.href = "/";
+        } else {
+            alert("삭제실패");
+        }
+    }
+
 </script>
 <script src="/js/comment.js"></script>
 <script src="/js/boards.js"></script>

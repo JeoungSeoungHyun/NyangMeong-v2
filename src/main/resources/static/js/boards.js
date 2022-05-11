@@ -8,6 +8,12 @@ $("#btn-writeJarang").click(() => {
 $("#btn-writeNotice").click(() => {
     writeNotice();
 });
+
+//자랑 수정
+    $("#btn-updateJarang").click((event) => {
+        update();
+    });
+
 // 자랑글쓰기 
 async function writeJarang() {
     let writeDto = {
@@ -59,23 +65,30 @@ async function writeNotice() {
     }
 }
 
-//게시글 삭제 (댕냥이자랑)
 
-$("#btn-delete").click(() => {
-    deletePost();
-});
 
-async function deletePost() {
-    let postId = $("#postId").val();
-    let response = await fetch(`/s/api/post/${postId}`, {
-        method: "DELETE" // delete는 body가 없다.
-    });
-    let responseParse = await response.json();
-
-    if (responseParse.code == 1) {
-        alert("삭제성공");
-        location.href = "/";
-    } else {
-        alert("삭제실패");
+//자랑 수정
+ async function update() {
+        let id = $("#id").val();
+        let post = {
+            title: $("#title").val(),
+            content: $("#content").val()
+        }
+        console.log(post);
+        let postJson = JSON.stringify(post);
+        console.log(postJson);
+        let response = await fetch("/s/api/boards/{id}" + id, {
+            method: "PUT",
+            body: postJson,
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            }
+        });
+        let responseObject = await response.json();
+        if (responseObject.code == 1) {
+            alert("수정성공");
+            location.href = "/post/" + id;
+        } else {
+            alert("수정실패");
+        }
     }
-}

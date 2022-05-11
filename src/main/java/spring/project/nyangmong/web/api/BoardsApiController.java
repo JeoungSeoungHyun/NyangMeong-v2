@@ -2,6 +2,7 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.service.PlaceLikesService;
 import spring.project.nyangmong.web.dto.members.ResponseDto;
+import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
 
@@ -25,9 +27,9 @@ import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
 public class BoardsApiController {
     private final BoardsService boardsService;
     private final PlaceLikesService placelikesService;
-
     private final HttpSession session;
 
+    
     // @GetMapping("/s/api/boards/{id}")
     // public ResponseDto<?> list(Integer page) {
     // Page<Boards> boards = boardsService.게시글목록(page);

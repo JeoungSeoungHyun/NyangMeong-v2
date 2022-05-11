@@ -23,6 +23,7 @@ import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
+import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
 import spring.project.nyangmong.web.dto.members.boards.NoticeListRespDto;
 import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
@@ -38,6 +39,15 @@ public class BoardsController {
         Boards boardsEntity = boardsService.글상세보기(id);
         User principal = (User) session.getAttribute("principal");
 
+                boolean auth = false;
+                if (principal != null) {
+                    if (principal.getId() == boardsEntity.getUser().getId()) {
+                        auth = true;
+                    }
+                }
+                DetailResponseDto detailResponseDto = new DetailResponseDto(boardsEntity, auth);
+                detailResponseDto.setBoards(boardsEntity);
+                
         List<CommentResponseDto> comments = new ArrayList<>();
 
         for (Comment comment : boardsEntity.getComments()) {
@@ -45,7 +55,7 @@ public class BoardsController {
             dto.setComment(comment);
 
             if (principal != null) {
-                if (principal.getId() == comment.getId()) {
+                if (principal.getId() == comment.getUser().getId()) {
                     dto.setAuth(true); // or false
                 } else {
                     dto.setAuth(false); // or false
@@ -53,13 +63,12 @@ public class BoardsController {
             } else {
                 dto.setAuth(false); // or false
             }
-
             comments.add(dto);
         }
 
-        model.addAttribute("boards", boardsEntity);
+        model.addAttribute("boards", detailResponseDto);
         model.addAttribute("comments", comments);
-        model.addAttribute("boardsId", id);
+       
         return "pages/post/jarangDetail";
     }
 
