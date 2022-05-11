@@ -1,11 +1,12 @@
 package spring.project.nyangmong.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Page;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,8 +16,15 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.boards.BoardsRepository;
+import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.placelikes.PlaceLikesRepository;
+import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
+import spring.project.nyangmong.util.UtilFileUpload;
+import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
+import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
+import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
+import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
 @RequiredArgsConstructor
 @Service // 컴포넌트 스캔시에 IoC 컨테이너에 등록됨 // 트랜잭션 관리하는 오브젝트임. 기능 모임
@@ -24,6 +32,9 @@ public class BoardsService {
     private final BoardsRepository boardsRepository;
     private final PlaceLikesRepository placelikesRepository;
     private final UserRepository userRepository;
+
+    @Value("${file.path}")
+    String uploadFolder;
 
     @Transactional
     public void 글수정하기(Boards boards, Integer id) {
@@ -40,14 +51,33 @@ public class BoardsService {
         boardsRepository.deleteById(id);
     }
 
-    public Boards 글상세보기(Integer id) {
+    public DetailResponseDto 글상세보기(Integer id, User principal) {
         Optional<Boards> boardsOp = boardsRepository.findById(id);
+        Boards boardsEntity = null;
 
+        // 게시글 확인
         if (boardsOp.isPresent()) {
-            return boardsOp.get();
+            boardsEntity = boardsOp.get();
         } else {
             throw new RuntimeException("해당 게시글을 찾을 수 없습니다");
         }
+
+        // 게시글 수정,삭제 권한 확인
+        boolean boardAuth = mCheckAuth(principal, boardsEntity.getUser());
+
+        // 댓글 수정,삭제 권한 확인
+        List<CommentResponseDto> comments = new ArrayList<>();
+
+        for (Comment comment : boardsEntity.getComments()) {
+            CommentResponseDto dto = new CommentResponseDto();
+            dto.setComment(comment);
+
+            boolean auth = mCheckAuth(principal, comment.getUser());
+            dto.setAuth(auth);
+            comments.add(dto);
+        }
+        DetailResponseDto detailResponseDto = new DetailResponseDto(boardsEntity, comments, boardAuth);
+        return detailResponseDto;
         // 조회수 증가
 
         // 인기 게시물 처리~!!
@@ -64,7 +94,23 @@ public class BoardsService {
     }
 
     @Transactional
-    public void 글쓰기(Boards boards) {
+    public void 글쓰기(WriteJarangDto writeJarangDto, User principal) {
+        // 이미지 파일 저장 (UUID로 변경해서 저장)
+        String thumnail = null;
+        if (!writeJarangDto.getThumnailFile().isEmpty()) {
+            thumnail = UtilFileUpload.write(uploadFolder, writeJarangDto.getThumnailFile());
+        }
+
+        // boards DB 저장
+        Boards boards = writeJarangDto.toEntity(principal, thumnail);
+        boardsRepository.save(boards);
+    }
+
+    @Transactional
+    public void 공지사항쓰기(WriteNoticeDto writeNoticeDto, User principal) {
+
+        // boards DB 저장
+        Boards boards = writeNoticeDto.toEntity(principal);
         boardsRepository.save(boards);
     }
 
@@ -110,4 +156,14 @@ public class BoardsService {
     // .user(user)
     // .PlaceLikesCount(0)
     // .build());
+
+    private boolean mCheckAuth(User principal, User user) {
+        boolean auth = false;
+        if (principal != null) {
+            if (principal.getId() == user.getId()) {
+                auth = true;
+            }
+        }
+        return auth;
+    }
 }

@@ -29,7 +29,6 @@ public class BoardsApiController {
     private final PlaceLikesService placelikesService;
     private final HttpSession session;
 
-    
     // @GetMapping("/s/api/boards/{id}")
     // public ResponseDto<?> list(Integer page) {
     // Page<Boards> boards = boardsService.게시글목록(page);
@@ -38,42 +37,31 @@ public class BoardsApiController {
     // }
 
     // 자랑 UPDATE 글수정 /post/{id} - 글상세보기 페이지가기 - 인증 O
-    @PutMapping("/s/api/boards/{id}")
-    public @ResponseBody ResponseDto<String> update(@PathVariable Integer id, @RequestBody Boards boards) {
+    // @PutMapping("/s/api/boards/{id}")
+    // public @ResponseBody ResponseDto<String> update(@PathVariable Integer id,
+    // @RequestBody Boards boards) {
 
-        // 인증
-        User principal = (User) session.getAttribute("principal");
-        if (principal == null) {
-            return new ResponseDto<String>(-1, "로그인 되지 않았습니다.", null);
-        }
+    // // 인증
+    // User principal = (User) session.getAttribute("principal");
+    // if (principal == null) {
+    // return new ResponseDto<String>(-1, "로그인 되지 않았습니다.", null);
+    // }
 
-        // 권한
-        Boards boardsEntity = boardsService.글상세보기(id);
+    // // 권한
+    // Boards boardsEntity = boardsService.글상세보기(id);
 
-        if (boardsEntity.getUser().getId() != principal.getId()) {
-            return new ResponseDto<String>(-1, "해당 게시글을 수정할 권한이 없습니다.", null);
-        }
+    // if (boardsEntity.getUser().getId() != principal.getId()) {
+    // return new ResponseDto<String>(-1, "해당 게시글을 수정할 권한이 없습니다.", null);
+    // }
 
-        boardsService.글수정하기(boards, id);
+    // boardsService.글수정하기(boards, id);
 
-        return new ResponseDto<String>(1, "수정 성공", null);
-    }
+    // return new ResponseDto<String>(1, "수정 성공", null);
+    // }
 
     @DeleteMapping("/s/api/boards/{id}")
     public ResponseDto<?> deleteById(@PathVariable Integer id) {
         boardsService.글삭제하기(id);
-
-        return new ResponseDto<>(1, "성공", null);
-    }
-
-    // 자랑 글쓰기
-    @PostMapping("/s/boards")
-    public ResponseDto<?> writeJarang(@RequestBody WriteJarangDto writeDto) {
-        // System.out.println("Dto : " + writeDto);
-        User principal = (User) session.getAttribute("principal");
-        Boards boards = writeDto.toEntity(principal);
-        // 원래는 그냥 dto바로 넘겼는데, 지금 dto를 넘기면 session값 두개 넘겨야 해서 하나로 합쳐서 넘김
-        boardsService.글쓰기(boards);
 
         return new ResponseDto<>(1, "성공", null);
     }
@@ -85,18 +73,18 @@ public class BoardsApiController {
         User principal = (User) session.getAttribute("principal");
         Boards boards = writeDto.toEntity(principal);
         // 원래는 그냥 dto바로 넘겼는데, 지금 dto를 넘기면 session값 두개 넘겨야 해서 하나로 합쳐서 넘김
-        boardsService.글쓰기(boards);
+        boardsService.공지사항쓰기(writeDto, principal);
 
         return new ResponseDto<>(1, "성공", null);
     }
 
-    //공지사항 글 수정
+    // 공지사항 글 수정
     @PutMapping("/s/api/notice/{id}")
     public String noticeUpdate() {
         return null;
     }
 
-    //공지사항 글 삭제
+    // 공지사항 글 삭제
     @DeleteMapping("/s/api/notice/{id}")
     public String noticeDelete() {
         return null;
