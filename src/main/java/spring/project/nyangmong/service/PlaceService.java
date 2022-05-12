@@ -41,7 +41,7 @@ public class PlaceService {
     }
 
     public boolean 옵션표시(String yesOrNO) {
-        if (yesOrNO.equals("Y")) {
+        if (yesOrNO.equals("true")) {
             return true;
         }
         return false;

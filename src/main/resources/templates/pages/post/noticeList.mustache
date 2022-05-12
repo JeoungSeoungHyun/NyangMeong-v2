@@ -21,8 +21,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td><input type="checkbox" id="checkall" /></td>
-                    <th class="col-1">#</th>
+                    <th class="col-1">번호</th>
                     <th class="col-6">제목</th>
                     <th class="col-2">작성자</th>
                     <th class="col-2">작성일자</th>
@@ -33,8 +32,6 @@
     {{#notices}}
             <tbody>
                 <tr>
-                    <td><input id="chk" type="checkbox" name="id" value="1" /></td>
-                    
                     <th scope="row">{{num}}</th>
                     <td> {{boards.title}} </td>
                     <td> {{boards.user.userName}} </td>

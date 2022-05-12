@@ -2,10 +2,8 @@ package spring.project.nyangmong.domain.boards;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import spring.project.nyangmong.domain.user.User;
@@ -21,7 +19,7 @@ public interface BoardsRepository extends JpaRepository<Boards, Integer> {
     void deleteBoardsById(long id);
 
     // 댕냥이 자랑 리스트 찾기
-    @Query(value = "SELECT * FROM boards WHERE classification='자랑' ", nativeQuery = true)
+    @Query(value = "SELECT * FROM boards WHERE classification='댕냥이 자랑' ", nativeQuery = true)
     List<Boards> listJarang(Pageable pq);
 
     // 공지사항 리스트 찾기

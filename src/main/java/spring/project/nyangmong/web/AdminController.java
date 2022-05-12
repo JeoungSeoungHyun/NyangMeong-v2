@@ -77,13 +77,13 @@ public class AdminController {
 
     // 공지사항 쓰기
     @PostMapping("/s/notice")
-    public String writeNotice(@RequestBody WriteNoticeDto writeDto) {
+    public String writeNotice(WriteNoticeDto writeDto) {
         // System.out.println("Dto : " + writeDto);
         User principal = (User) session.getAttribute("principal");
 
         boardsService.공지사항쓰기(writeDto, principal);
 
-        return "redirect:/s/admin/main";
+        return "redirect:/notice";
     }
 
     // 댓글 관리페이지

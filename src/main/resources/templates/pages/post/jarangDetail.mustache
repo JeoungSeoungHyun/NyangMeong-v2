@@ -1,15 +1,17 @@
 {{> /layout/header}}
 
 <div>
+    {{#data}}
     <br>
-    <div class="text-center m_txt_title m_font_xxl m_ph_lg">댕냥이 자랑</div>
+
+    <div class="text-center m_txt_title m_font_xxl m_ph_lg">{{boards.classification}}</div>
     <br>
 
     <main class="mb-4">
         <div class=" px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="container List-container">
-                    <hr> {{#data}}
+                    <hr> 
                     <input id="id" type="hidden" value="{{boards.id}}" />
 
                     <div class="row mt-1 header">

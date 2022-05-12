@@ -24,7 +24,7 @@ public class WriteJarangDto {
         board.setUser(principal);
         board.setPageCount(0); // 여기서 초기값 해주는게 나을 듯 함!!
         board.setThumnail(thumnail);
-        board.setClassification("자랑");
+        board.setClassification("댕냥이 자랑");
         return board;
     }
 }
