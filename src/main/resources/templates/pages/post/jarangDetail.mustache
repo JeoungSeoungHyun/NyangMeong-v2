@@ -44,8 +44,8 @@
                     {{#auth}}
                     <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
                         class="btn">삭제</button>
-                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
-                        class="btn">수정</button>
+                    <a href="/s/boards/{{boards.id}}/update-form" class="btn"
+                        style="background-color: #E1E2E1; float: right; margin: 10px;">수정</a>
                     {{/auth}}
                     <br><br><br>
 
@@ -129,42 +129,6 @@
     dataRendering();
 </script>
 
-<script>
-    //게시글 삭제 (댕냥이자랑)
-
-    $("#btn-delete").click(() => {
-        deletePost();
-    });
-
-    async function deletePost() {
-        let boardsId = $("#boardsId").val();
-        let response = await fetch(`/s/api/boards/${boardsId}`, {
-            method: "DELETE" // delete는 body가 없다.
-        });
-        let responseParse = await response.json();
-
-        if (responseParse.code == 1) {
-            alert("삭제성공");
-            location.href = "/";
-        } else {
-            alert("삭제실패");
-        }
-    }
-
-    //댓글 삭제
-    async function deleteComment(commentId) {
-        let response = await fetch(`/s/api/comment/${commentId}`, {
-            method: "DELETE"
-        });
-        let responseParse = await response.json();
-        if (responseParse.code == 1) {
-            alert("삭제 성공");
-            location.reload(); // ajax + ssr
-        } else {
-            alert("삭제 실패");
-        }
-    }
-</script>
 <script src="/js/comment.js"></script>
 <script src="/js/boards.js"></script>
 {{> /layout/footer}}
