@@ -26,7 +26,21 @@ public class PetService {
         return petEntity;
     }
 
-    // 펫 정보 등록 및 수정
+    // 펫 정보 등록하기
+    @Transactional
+    public void 펫등록하기(Integer userId, Pet pet) {
+        // 유저아이디가 있으면 save
+        Optional<User> userOp = userRepository.findById(userId);
+        if (userOp.isPresent()) {
+            User userEntity = userOp.get();
+            pet.setUser(userEntity);
+        } else {
+            throw new RuntimeException("해당 유저는 존재하지 않아 등록할 수 없습니다.");
+        }
+        petRepository.save(pet);
+    }
+
+    // 펫 정보 수정
     // 수정페이지에서 펫 정보를 입력할 때 최초 입력은 insert, 이후는 update
     @Transactional
     public void 펫수정(Integer userId, PetUpdateDto petUpdateDto) {

@@ -61,6 +61,8 @@
                 <div class="m_txt_title m_font_xl">
                     [펫 정보]
                 </div>
+
+                <!-- 펫 정보가 있으면 모델에 담아온 pet 정보 뿌려주기 -->
                 {{#pet}}
                 <div>
                     <div class="m_box_text_info m_font_lg">이름 </div>
@@ -79,6 +81,23 @@
                     <div>{{pet.petSpices}}</div>
                 </div>
                 {{/pet}}
+
+                <!-- 펫 정보가 없을 때 최초 등록이 가능하도록 form:post -->
+                {{^pet}}
+                <form action="/s/pet/{{user.id}}/info" method="post">
+                    <input class="my_auth_form_box_input" type="text" name="petName" placeholder="반려동물의 이름을 입력하세요"
+                        value="" maxlength="20" required />
+                    <input class="my_auth_form_box_input" type="text" name="petName" placeholder="반려동물의 성별을 입력하세요"
+                        value="" maxlength="20" required />
+                    <input class="my_auth_form_box_input" type="text" name="petAge" placeholder="반려동물의 나이를 입력하세요"
+                        value="" maxlength="12" required />
+                    <input class="my_auth_form_box_input" type="text" name="petSpices" placeholder="반려동물의 종을 입력하세요"
+                        value="" maxlength="100" required />
+                    <button type="submit" style="background-color: #E1E2E1; float: right; margin-top: 20px;"
+                        class="btn">등록</button>
+                </form>
+                {{/pet}}
+
             </div>
             <!-- 반려동물 정보 박스 끝-->
             <div class="m_box_right">

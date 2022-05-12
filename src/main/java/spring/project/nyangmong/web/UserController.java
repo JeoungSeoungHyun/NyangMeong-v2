@@ -48,6 +48,20 @@ public class UserController {
         }
     }
 
+    // 회원 정보 페이지 - 반려동물 최초 등록하기
+    @PostMapping("/s/pet/{userId}/info")
+    public String petInfo(@PathVariable Integer userId, Pet pet) {
+        // 권한 (유저아이디로 접속했을 경우 등록 권한주기)
+        User principal = (User) session.getAttribute("principal");
+        if (principal.getId() == userId) {
+            petService.펫등록하기(userId, pet);
+            return "redirect:/s/user/{userId}/detail";
+        } else {
+            throw new CustomException("회원 정보 보기 권한이 없습니다.");
+        }
+    }
+
+    // 리팩토링 중...
     // 회원 정보 페이지
     @GetMapping("/s/user/{id}/detail")
     public String userDetail(@PathVariable Integer id, Model model) {
@@ -63,7 +77,6 @@ public class UserController {
         } else {
             throw new CustomException("회원 정보 보기 권한이 없습니다.");
         }
-
     }
 
     // 로그아웃하기
@@ -85,14 +98,12 @@ public class UserController {
         if (user.getRemember() != null && user.getRemember().equals("on")) {
             response.addHeader("Set-Cookie", "remember=" + user.getUserId());
         }
-
         return "redirect:/";
     }
 
     // 회원가입
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
-        System.out.println("조인디티오 : " + joinDto);
         userService.회원가입(joinDto);
         return "redirect:/login-form";
     }
