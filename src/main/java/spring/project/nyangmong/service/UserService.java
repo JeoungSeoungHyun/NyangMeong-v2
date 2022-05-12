@@ -24,9 +24,9 @@ public class UserService {
 
     // 프로필 사진 변경하기
     @Transactional
-    public void 프로필이미지변경(Integer id, MultipartFile petImgurl) {
+    public void 프로필이미지변경(Integer id, MultipartFile file) {
         // 1. 파일을 upload 폴더에 저장완료
-        String userImgurl = UtilFileUpload.write("src/main/resources/static/upload/", petImgurl);
+        String userImgurl = UtilFileUpload.write(file);
 
         // 2. 해당 경로를 User 테이블에 update 하면 됨.
         Optional<User> userOp = userRepository.findById(id);

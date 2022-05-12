@@ -92,7 +92,7 @@
                 <form action="/s/pet/{{user.id}}/info" method="post">
                     <input class="my_auth_form_box_input" type="text" name="petName" placeholder="반려동물의 이름을 입력하세요"
                         value="" maxlength="20" required />
-                    <input class="my_auth_form_box_input" type="text" name="petName" placeholder="반려동물의 성별을 입력하세요"
+                    <input class="my_auth_form_box_input" type="text" name="petGender" placeholder="반려동물의 성별을 입력하세요"
                         value="" maxlength="20" required />
                     <input class="my_auth_form_box_input" type="text" name="petAge" placeholder="반려동물의 나이를 입력하세요"
                         value="" maxlength="12" required />
@@ -107,7 +107,7 @@
             <!-- 반려동물 정보 박스 끝-->
             <div class="m_box_right">
                 <button class="btn m_btn">
-                    <a class="m_text_white" href="/s/user/{{user.id}}/update-form">상세보기</a>
+                    <a class="m_text_white" href="/s/user/{{user.id}}/update-form">수정하기</a>
                 </button>
             </div>
         </div>
