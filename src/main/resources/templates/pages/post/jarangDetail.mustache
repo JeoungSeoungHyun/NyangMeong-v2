@@ -10,7 +10,7 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="container List-container">
                     <hr> {{#data}}
-                    <input id="id" type="hidden" value="{{boards.id}}" />
+                    <input id="boardsId" type="hidden" value="{{boards.id}}" />
 
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
@@ -40,109 +40,131 @@
 
 
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
-                        class="btn">목록으로</button> {{#auth}}
-                            <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">삭제</button>
-                            <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">수정</button> {{/auth}}
-                            <br><br><br>
+                        class="btn">목록으로</button>
+                    {{#auth}}
+                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">삭제</button>
+                    <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">수정</button>
+                    {{/auth}}
+                    <br><br><br>
 
-                            <!-- 댓글 시작 -->
+                    <!-- 댓글 시작 -->
 
-                            <div class="card mb-2">
-                                <div class="card-header bg-light">
-                                    <i class="fa fa-comment fa"></i> COMMENT
-                                </div>
-                                <form action="/s/boards/{{boards.id}}/comment" method="post">
-                                    <div class="card-body">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                <button style="float:right; " type="submit" class="btn btn-dark mt-3">등록</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </form>
-                            </div>
-                            <br />
-                            <div class="card">
-                                <div class="card-header"><i class="fa fa-comment fa"></i> COMMENT LIST</div>
-                                <ul id="reply-box" class="list-group">
-                                    {{#comments}}
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div>{{comment.content}}</div>
-                                        <div class="d-flex">
-                                            <div class="font-italic"> <i class="far fa-user-circle"></i> {{comment.user.userName}} &nbsp;</div>
-
-                                            {{#auth}}
-                                            <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
-
-                                        </div>
+                    <div class="card mb-2">
+                        <div class="card-header bg-light">
+                            <i class="fa fa-comment fa"></i> COMMENT
+                        </div>
+                        <form action="/s/boards/{{boards.id}}/comment" method="post">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
+                                            rows="3"></textarea>
+                                        <button style="float:right; " type="submit"
+                                            class="btn btn-dark mt-3">등록</button>
                                     </li>
-                                    {{/comments}} {{/data}}
                                 </ul>
                             </div>
-                            <br>
-                            <!-- 댓글 끝 -->
+                        </form>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header"><i class="fa fa-comment fa"></i> COMMENT LIST</div>
+                        <ul id="reply-box" class="list-group">
+                            {{#comments}}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div>{{comment.content}}</div>
+                                <div class="d-flex">
+                                    <div class="font-italic"> <i class="far fa-user-circle"></i>
+                                        {{comment.user.userName}} &nbsp;</div>
+
+                                    {{#auth}}
+                                    <button class="badge bg-primary"
+                                        onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
+
+                                </div>
+                            </li>
+                            {{/comments}} {{/data}}
+                        </ul>
+                    </div>
+                    <br>
+                    <!-- 댓글 끝 -->
 
 
-                            <div class="list-group" style="margin-top: 20px; margin-bottom: 20px;">
-                                <a href="#" class="list-group-item">이전글: </a>
-                                <a href="#" class="list-group-item">다음글: </a>
-                            </div>
-                        </div>
+                    <div class="list-group" style="margin-top: 20px; margin-bottom: 20px;">
+                        <a href="#" class="list-group-item">이전글: </a>
+                        <a href="#" class="list-group-item">다음글: </a>
                     </div>
                 </div>
+            </div>
+        </div>
     </main>
-    </div>
+</div>
 
-    <script>
-        $("#btn-like").click(() => {
-            if ($("#icon-like").hasClass("far fa-heart")) {
-                $("#icon-like").removeClass("far fa-heart");
-                $("#icon-like").addClass("fas fa-heart");
-            } else {
-                $("#icon-like").removeClass("fas fa-heart");
-                $("#icon-like").addClass("far fa-heart");
-            }
-            if ($("#icon-likee").hasClass("far fa-heart")) {
-                $("#icon-likee").removeClass("far fa-heart");
-                $("#icon-likee").addClass("fas fa-heart");
-            } else {
-                $("#icon-likee").removeClass("fas fa-heart");
-                $("#icon-likee").addClass("far fa-heart");
-            }
-        });
-        let dataRendering = async() => {
-            let id = $("#id").val();
-            let response = await fetch(`/api/boards/${id}`);
-            console.log(response);
-            let responseParse = await response.json();
-
-        };
-        dataRendering();
-    </script>
-
-    <script>
-        //게시글 삭제 (댕냥이자랑)
-
-        $("#btn-delete").click(() => {
-            deletePost();
-        });
-
-        async function deletePost() {
-            let postId = $("#postId").val();
-            let response = await fetch(`/s/api/post/${postId}`, {
-                method: "DELETE" // delete는 body가 없다.
-            });
-            let responseParse = await response.json();
-
-            if (responseParse.code == 1) {
-                alert("삭제성공");
-                location.href = "/";
-            } else {
-                alert("삭제실패");
-            }
+<script>
+    $("#btn-like").click(() => {
+        if ($("#icon-like").hasClass("far fa-heart")) {
+            $("#icon-like").removeClass("far fa-heart");
+            $("#icon-like").addClass("fas fa-heart");
+        } else {
+            $("#icon-like").removeClass("fas fa-heart");
+            $("#icon-like").addClass("far fa-heart");
         }
-    </script>
-    <script src="/js/comment.js"></script>
-    <script src="/js/boards.js"></script>
-    {{> /layout/footer}}
+        if ($("#icon-likee").hasClass("far fa-heart")) {
+            $("#icon-likee").removeClass("far fa-heart");
+            $("#icon-likee").addClass("fas fa-heart");
+        } else {
+            $("#icon-likee").removeClass("fas fa-heart");
+            $("#icon-likee").addClass("far fa-heart");
+        }
+    });
+    let dataRendering = async () => {
+        let id = $("#id").val();
+        let response = await fetch(`/api/boards/${id}`);
+        console.log(response);
+        let responseParse = await response.json();
+
+    };
+    dataRendering();
+</script>
+
+<script>
+    //게시글 삭제 (댕냥이자랑)
+
+    $("#btn-delete").click(() => {
+        deletePost();
+    });
+
+    async function deletePost() {
+        let boardsId = $("#boardsId").val();
+        let response = await fetch(`/s/api/boards/${boardsId}`, {
+            method: "DELETE" // delete는 body가 없다.
+        });
+        let responseParse = await response.json();
+
+        if (responseParse.code == 1) {
+            alert("삭제성공");
+            location.href = "/";
+        } else {
+            alert("삭제실패");
+        }
+    }
+
+    //댓글 삭제
+    async function deleteComment(commentId) {
+        let response = await fetch(`/s/api/comment/${commentId}`, {
+            method: "DELETE"
+        });
+        let responseParse = await response.json();
+        if (responseParse.code == 1) {
+            alert("삭제 성공");
+            location.reload(); // ajax + ssr
+        } else {
+            alert("삭제 실패");
+        }
+    }
+</script>
+<script src="/js/comment.js"></script>
+<script src="/js/boards.js"></script>
+{{> /layout/footer}}
