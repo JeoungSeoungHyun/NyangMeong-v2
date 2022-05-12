@@ -17,6 +17,7 @@ import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
+import spring.project.nyangmong.web.dto.members.boards.JarangRespDto;
 import spring.project.nyangmong.web.dto.members.boards.NoticeListRespDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
 
@@ -29,8 +30,8 @@ public class BoardsController {
     // 댕냥이 자랑 글리스트 전달 메서드
     @GetMapping("/boards")
     public String list(Model model, @RequestParam(defaultValue = "0") Integer page) {
-        List<Boards> boards = boardsService.게시글목록(page);
-        model.addAttribute("boards", boards);
+        JarangRespDto jarangRespDto = boardsService.게시글목록(page);
+        model.addAttribute("data", jarangRespDto);
         return "/pages/post/jarangList";
     }
 

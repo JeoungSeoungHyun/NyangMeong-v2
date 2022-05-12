@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -24,6 +25,7 @@ import spring.project.nyangmong.handle.ex.CustomApiException;
 import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.util.UtilFileUpload;
 import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
+import spring.project.nyangmong.web.dto.members.boards.JarangRespDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
 import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
@@ -129,9 +131,19 @@ public class BoardsService {
         }
     }
 
-    public List<Boards> 게시글목록(Integer page) {
+    public JarangRespDto 게시글목록(Integer page) {
         Pageable pq = PageRequest.of(page, 12, Sort.by(Direction.DESC, "id"));
-        return boardsRepository.listJarang(pq);
+        Page<Boards> boardsEntity = boardsRepository.listJarang(pq);
+        List<Integer> pageNumbers = new ArrayList<>();
+        for (int i = 0; i < boardsEntity.getTotalPages(); i++) {
+            pageNumbers.add(i);
+        }
+        JarangRespDto jarangRespDto = new JarangRespDto(
+                boardsEntity,
+                boardsEntity.getNumber() - 1,
+                boardsEntity.getNumber() + 1, pageNumbers);
+
+        return jarangRespDto;
     }
 
     public List<Boards> 공지사항목록(Integer page) {
