@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
@@ -66,7 +65,10 @@ public class BoardsController {
 
     // 댕냥이자랑 글 수정 페이지
     @GetMapping("/s/boards/{id}/update-form")
-    public String jarangUpdateForm() {
+    public String jarangUpdateForm(@PathVariable Integer id, Model model) {
+        User principal = (User) session.getAttribute("principal");
+        Boards boardsEntity = boardsService.글한건보기(id, principal);
+        model.addAttribute("boards", boardsEntity);
         return "/pages/post/jarangUpdateForm";
     }
 

@@ -10,23 +10,23 @@
     <div class="m_mt_md">
 
         <!-- 글쓰기 수정 폼 시작 -->
-        <form>
-            {{#userAuth}}
-            <input id="userId" type="hidden" value="{{id}}" />
-            {{/userAuth}}
+        <form id="fileForm">
+            {{#boards}}
+            <input id="userId" type="hidden" value="{{id}}" /> 
             <div class="m_mb_md">
                 <input id="title" type="text" class="form-control" placeholder="Enter title" name="title"
-                    value="{{boards.title}}">
+                    value="{{title}}">
             </div>
             <div class="m_mb_md">
                 <textarea id="summernote" class="form-control" name="content" rows="10">
-                    {{boards.content}}
+                    {{{content}}}
                 </textarea>
             </div>
             <div class="m_box_right">
                 <div>썸네일 사진 등록 : <input type="file" name="thumnailFile"></div>
                 <button id="btn-updateJarang" class="btn m_bg_secondary" type="button">수정완료</button>
             </div>
+            {{/boards}}
         </form>
         <!-- 글쓰기 수정 폼 끝 -->
 

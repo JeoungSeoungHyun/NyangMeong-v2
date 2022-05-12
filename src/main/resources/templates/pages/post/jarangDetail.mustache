@@ -41,8 +41,8 @@
 
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
                         class="btn">목록으로</button> {{#auth}}
-                            <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">삭제</button>
-                            <button style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">수정</button> {{/auth}}
+                            <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="button" class="btn">삭제</button>
+                            <a href="/s/boards/{{boards.id}}/update-form" style="background-color: #E1E2E1; float: right; margin: 10px;" type="button" class="btn">수정</a> {{/auth}}
                             <br><br><br>
 
                             <!-- 댓글 시작 -->

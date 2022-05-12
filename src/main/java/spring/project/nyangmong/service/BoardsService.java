@@ -20,6 +20,8 @@ import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.placelikes.PlaceLikesRepository;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
+import spring.project.nyangmong.handle.ex.CustomApiException;
+import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.util.UtilFileUpload;
 import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
@@ -37,13 +39,36 @@ public class BoardsService {
     String uploadFolder;
 
     @Transactional
-    public void 글수정하기(Boards boards, Integer id) {
+    public void 글수정하기(WriteJarangDto writeJarangDto, Integer id, User principal) {
+        Boards boardsEntity = null;
+        String thumnail = null;
+
+        // 글확인
         Optional<Boards> boardsOp = boardsRepository.findById(id);
         if (boardsOp.isPresent()) {
-            Boards boardsEntity = boardsOp.get();
-            boardsEntity.setTitle(boards.getTitle());
-            boardsEntity.setContent(boards.getContent());
+            boardsEntity = boardsOp.get();
+        } else {
+            throw new CustomApiException("해당 게시글을 찾을 수 없습니다");
         }
+
+        // 권한 확인
+        boolean auth = mCheckAuth(principal, boardsEntity.getUser());
+        if (!auth) {
+            throw new CustomApiException("수정 권한이 없습니다.");
+        }
+
+        // 썸네일 변경 확인
+        if (writeJarangDto.getThumnailFile() != null) {
+            thumnail = UtilFileUpload.write(uploadFolder, writeJarangDto.getThumnailFile());
+            boardsEntity.setThumnail(thumnail);
+        }
+
+        // boards 수정
+        boardsEntity.setTitle(writeJarangDto.getTitle());
+        boardsEntity.setContent(writeJarangDto.getContent());
+
+        boardsRepository.save(boardsEntity);
+
     } // 더티체킹 완료 (수정됨)
 
     @Transactional
@@ -81,6 +106,27 @@ public class BoardsService {
         // 조회수 증가
 
         // 인기 게시물 처리~!!
+    }
+
+    public Boards 글한건보기(Integer id, User principal) {
+        Optional<Boards> boardsOp = boardsRepository.findById(id);
+        Boards boardsEntity = null;
+
+        // 게시글 확인
+        if (boardsOp.isPresent()) {
+            boardsEntity = boardsOp.get();
+        } else {
+            throw new RuntimeException("해당 게시글을 찾을 수 없습니다");
+        }
+
+        // 권한 확인
+        boolean auth = mCheckAuth(principal, boardsEntity.getUser());
+
+        if (auth) {
+            return boardsEntity;
+        } else {
+            throw new CustomException("수정 권한이 없습니다.");
+        }
     }
 
     public List<Boards> 게시글목록(Integer page) {
@@ -157,6 +203,7 @@ public class BoardsService {
     // .PlaceLikesCount(0)
     // .build());
 
+    // 권한 확인
     private boolean mCheckAuth(User principal, User user) {
         boolean auth = false;
         if (principal != null) {
