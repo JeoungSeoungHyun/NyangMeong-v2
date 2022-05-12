@@ -2,12 +2,15 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.user.User;
@@ -20,6 +23,19 @@ import spring.project.nyangmong.web.dto.members.user.UpdateDto;
 public class UserApiController {
     private final UserService userService;
     private final HttpSession session;
+
+    // 프로필 이미지 수정
+    @PutMapping("/s/api/user/{id}/profile-img")
+    public ResponseEntity<?> profileImgUpdate(@PathVariable Integer id, MultipartFile userImgurl) {
+        // 권한 - 세션의 아이디와 {id}를 비교
+        User principal = (User) session.getAttribute("principal");
+        if (principal.getId() != id) {
+            throw new RuntimeException("수정 권한이 없습니다.");
+        } else {
+            userService.프로필이미지변경(id, userImgurl);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     // 회원 탈퇴
     @DeleteMapping("/s/api/user/{id}/delete")

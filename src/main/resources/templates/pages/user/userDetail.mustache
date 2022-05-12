@@ -1,5 +1,7 @@
 {{> /layout/header}}
 
+<input type="hidden" id="userId" value="{{user.id}}">
+
 <div>
     <!-- 상세보기 메뉴 시작-->
     <div class="container mx-auto m_mh_lg ">
@@ -30,7 +32,10 @@
         <div class="col-lg-6 m_mt_lg">
 
             <div class="m_box_profile">
-                <img class="m_img_profile" src="/images/cat.jpg" alt="프로필 이미지">
+                <img class="m_img_profile" src="/images/cat.jpg" alt="프로필 이미지" id="profile-img-btn">
+                <form id="file-form">
+                    <input type="file" class="my_hidden" id="profile-img-input" name="userImgurl" />
+                </form>
             </div>
         </div>
         <!-- 이미지 박스 끝-->
@@ -111,5 +116,7 @@
     </div>
     <!-- 회원정보 아우터 끝 -->
 </div>
+
+<script src="/js/userdetail.js"></script>
 
 {{> /layout/footer}}

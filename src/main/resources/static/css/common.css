@@ -131,3 +131,9 @@ i:hover {
 .m_box_info_place {
     border: 1px solid gray; 
 }
+
+
+/* 태그 숨기기 */
+.my_hidden {
+    display: none;
+}

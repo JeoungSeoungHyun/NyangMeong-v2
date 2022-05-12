@@ -25,7 +25,6 @@ public class PetUpdateDto {
         pet.setPetGender(petGender);
         pet.setPetSpices(petSpices);
         pet.setPetAge(petAge);
-        pet.setPetImgurl(petImgurl);
         pet.setUser(user);
         return pet;
     }

@@ -48,19 +48,6 @@ public class UserController {
         }
     }
 
-    // 회원 정보 페이지 - 반려동물 최초 등록하기
-    @PostMapping("/s/pet/{userId}/info")
-    public String petInfo(@PathVariable Integer userId, Pet pet) {
-        // 권한 (유저아이디로 접속했을 경우 등록 권한주기)
-        User principal = (User) session.getAttribute("principal");
-        if (principal.getId() == userId) {
-            petService.펫등록하기(userId, pet);
-            return "redirect:/s/user/{userId}/detail";
-        } else {
-            throw new CustomException("회원 정보 보기 권한이 없습니다.");
-        }
-    }
-
     // 리팩토링 중...
     // 회원 정보 페이지
     @GetMapping("/s/user/{id}/detail")
