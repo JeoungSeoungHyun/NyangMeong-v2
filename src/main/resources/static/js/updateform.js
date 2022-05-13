@@ -66,7 +66,7 @@ async function petUpdate() {
         petSpices: $("#pet-spices").val()
     }
 
-    let response = await fetch(`/s/api/pet/${petId}/update`, {
+    let response = await fetch(`/s/api/pet/${petId}`, {
         method: "PUT",
         body: JSON.stringify(updateDto),
         headers: {

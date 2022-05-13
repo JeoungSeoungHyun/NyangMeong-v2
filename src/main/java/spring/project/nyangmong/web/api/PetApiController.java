@@ -18,7 +18,7 @@ public class PetApiController {
     private final PetService petService;
 
     // 반려동물 정보 수정
-    @PutMapping("/s/api/pet/{petId}/update")
+    @PutMapping("/s/api/pet/{petId}")
     public ResponseEntity<?> update(@PathVariable Integer petId, @RequestBody PetUpdateDto petUpdateDto) {
         petService.반려동물수정(petId, petUpdateDto);
         return new ResponseEntity<>(HttpStatus.OK);
