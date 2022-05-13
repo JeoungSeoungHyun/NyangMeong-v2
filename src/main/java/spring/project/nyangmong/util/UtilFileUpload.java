@@ -12,7 +12,7 @@ import spring.project.nyangmong.handle.ex.CustomException;
 public class UtilFileUpload {
 
     // 파일을 쓰고 난 뒤 그 경로를 리턴해주는 메서드이다.
-    public static String write(String uploadFolder, MultipartFile file) {
+    public static String write(MultipartFile file) {
         UUID uuid = UUID.randomUUID();
         String originalFilename = file.getOriginalFilename();
         String uuidFilename = uuid + "_" + originalFilename;

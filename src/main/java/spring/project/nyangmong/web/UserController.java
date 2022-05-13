@@ -48,6 +48,7 @@ public class UserController {
         }
     }
 
+    // 리팩토링 중...
     // 회원 정보 페이지
     @GetMapping("/s/user/{id}/detail")
     public String userDetail(@PathVariable Integer id, Model model) {
@@ -63,7 +64,6 @@ public class UserController {
         } else {
             throw new CustomException("회원 정보 보기 권한이 없습니다.");
         }
-
     }
 
     // 로그아웃하기
@@ -85,14 +85,12 @@ public class UserController {
         if (user.getRemember() != null && user.getRemember().equals("on")) {
             response.addHeader("Set-Cookie", "remember=" + user.getUserId());
         }
-
         return "redirect:/";
     }
 
     // 회원가입
     @PostMapping("/join")
     public String join(JoinDto joinDto) {
-        System.out.println("조인디티오 : " + joinDto);
         userService.회원가입(joinDto);
         return "redirect:/login-form";
     }

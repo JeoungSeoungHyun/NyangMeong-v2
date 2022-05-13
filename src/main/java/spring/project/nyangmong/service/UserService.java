@@ -4,11 +4,14 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
+import spring.project.nyangmong.handle.ex.CustomApiException;
 import spring.project.nyangmong.handle.ex.CustomException;
+import spring.project.nyangmong.util.UtilFileUpload;
 import spring.project.nyangmong.web.dto.members.user.IdFindReqDto;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
 import spring.project.nyangmong.web.dto.members.user.PwFindReqDto;
@@ -18,6 +21,22 @@ import spring.project.nyangmong.web.dto.members.user.UpdateDto;
 @Service // 컴포넌트 스캔시에 IoC 컨테이너에 등록됨 // 트랜잭션 관리하는 오브젝트임. 기능 모임
 public class UserService {
     private final UserRepository userRepository;
+
+    // 프로필 사진 변경하기
+    @Transactional
+    public void 프로필이미지변경(Integer id, MultipartFile file) {
+        // 1. 파일을 upload 폴더에 저장완료
+        String userImgurl = UtilFileUpload.write(file);
+
+        // 2. 해당 경로를 User 테이블에 update 하면 됨.
+        Optional<User> userOp = userRepository.findById(id);
+        if (userOp.isPresent()) {
+            User userEntity = userOp.get();
+            userEntity.setUserImgurl(userImgurl);
+        } else {
+            throw new CustomApiException("해당 유저를 찾을 수 없습니다.");
+        }
+    } // 영속화된 userEntity 변경 후 더티체킹완료됨.
 
     // 회원 탈퇴하기
     @Transactional

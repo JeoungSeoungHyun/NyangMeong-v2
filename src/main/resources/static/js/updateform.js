@@ -3,6 +3,11 @@ $("#btn-update").click(()=>{
     update();
 });
 
+// 반려동물 수정 버튼 이벤트 리스너
+$("#btn-pet-update").click(()=>{
+    petUpdate();
+});
+
 // 회원 정보 수정 함수
 async function update() {
     let id = $("#id").val();
@@ -47,5 +52,32 @@ async function deleteUser(userId) {
         location.href = "/";
     } else {
         alert("회원탈퇴 실패 : " + responseParse.msg);
+    }
+}
+
+// 반려동물 정보 수정 함수
+async function petUpdate() {
+    let id = $("#id").val();
+    let petId = $("#pet-id").val();
+    let updateDto = {
+        petName: $("#pet-name").val(),
+        petGender: $("#pet-gender").val(),
+        petAge: $("#pet-age").val(),
+        petSpices: $("#pet-spices").val()
+    }
+
+    let response = await fetch(`/s/api/pet/${petId}`, {
+        method: "PUT",
+        body: JSON.stringify(updateDto),
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        }
+    });
+
+    if (response.status == 200) {
+        alert("업데이트 성공");
+        location.href = `/s/user/${id}/update-form`;
+    } else {
+        alert("업데이트 실패");
     }
 }
