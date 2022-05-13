@@ -31,7 +31,7 @@ public class Comment { // Post 1 1, Comment N 1
 
     private String content;
 
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "boardsId")
     @ManyToOne
     private Boards boards;
 

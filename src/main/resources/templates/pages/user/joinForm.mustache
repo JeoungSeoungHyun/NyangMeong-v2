@@ -17,18 +17,21 @@
                 <input id="password" class="my_auth_form_box_input" type="password" name="password" placeholder="Enter PASSWORD" maxlength="20" required />
                 <input id="same-password" class="my_auth_form_box_input" type="password" placeholder="Check PASSWORD" maxlength="20" required />
                 <input class="my_auth_form_box_input" type="email" name="email" placeholder="Enter EMAIL" maxlength="60" required />
-                <input id="userAuth" class="my_auth_form_box_input" type="text" name="userAuth" placeholder="관리자코드를 입력하세요 (홈페이지 관리자일 경우만 입력하세요)" maxlength="60" />
-                <button type="submit" style="background-color: #E1E2E1; float: right; margin-top: 20px;" class="btn">회원가입</button>
-
+                <div style="float: right; margin-top:20px">
+                    <button type="submit" style="background-color: #E1E2E1;" class="btn">회원가입</button>
+                    <button type="button" style="background-color: #E1E2E1;" class="btn">
+                    <a href="/admin/join-form">
+                        관리자
+                        회원가입 
+                    </a>
+                </button>
+                </div>
             </form>
 
         </div>
     </div>
 
-    <button style="background-color: #E1E2E1; float: right; margin-top: 20px;" class="btn">
-        <a href="/admin/join-form">
-            관리자
-            회원가입 </a></button>
+
 </div>
 
 {{> /layout/footer}}

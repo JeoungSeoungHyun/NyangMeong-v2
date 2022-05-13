@@ -33,4 +33,6 @@ spring:
     ansi:
       enabled: always
 
+file:
+  path: C:/Users/green/upload/
       

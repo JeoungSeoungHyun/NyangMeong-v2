@@ -1,81 +1,62 @@
-//공지사항 및 댕냥이자랑 게시판
 
-//이벤트 리스너 - 공지사항 등록 
-$("#btn-writeJarang").click(() => {
-    writeJarang();
+//게시글 수정버튼 클릭 이벤트
+$("#btn-updateJarang").click((event) => {
+    update();
 });
 
-$("#btn-writeNotice").click(() => {
-    writeNotice();
-});
-// 자랑글쓰기 
-async function writeJarang() {
-    let writeDto = {
-        title: $("#title").val(),
-        content: $("#summernote").val() 
-    }
- let id = $("#userId").val();
-    console.log(writeDto);
-    console.log(id);
-    let response = await fetch(`/s/boards/${id}/update`, {
-        method: "POST",
-        body: JSON.stringify(writeDto),
-        headers: {
-            "Content-Type": "application/json; charset=utf-8"
-        }
-    });
-    let responseParse = await response.json();
-
-    if (responseParse.code == 1) {
-        alert("게시글 등록 성공");
-        location.href = "/boards";
-    } else {
-        alert("게시글 등록 실패"); 
-    }
-}
-// 공지사항 쓰기 
-async function writeNotice() {
-    let writeDto = {
-        title: $("#title").val(),
-        content: $("#summernote").val()
-    }
- let id = $("#userId").val();
-    console.log(writeDto);
-    console.log(id);
-    let response = await fetch(`/s/notice/${id}/update`, {
-        method: "POST",
-        body: JSON.stringify(writeDto),
-        headers: {
-            "Content-Type": "application/json; charset=utf-8"
-        }
-    });
-    let responseParse = await response.json();
-
-    if (responseParse.code == 1) {
-        alert("게시글 등록 성공");
-        location.href = "/notice";
-    } else {
-        alert("게시글 등록 실패");
-    }
-}
-
-//게시글 삭제 (댕냥이자랑)
-
+//게시글 삭제버튼 클릭 이벤트
 $("#btn-delete").click(() => {
     deletePost();
 });
 
-async function deletePost() {
-    let postId = $("#postId").val();
-    let response = await fetch(`/s/api/post/${postId}`, {
-        method: "DELETE" // delete는 body가 없다.
-    });
-    let responseParse = await response.json();
+//게시글 수정
+async function update() {
 
-    if (responseParse.code == 1) {
-        alert("삭제성공");
-        location.href = "/";
+    let id = $("#userId").val();
+
+    console.log(id);
+
+    let fileForm = $("#fileForm")[0];
+
+    let formData = new FormData(fileForm);
+
+    let response = await fetch(`/s/api/boards/${id}` , {
+        method: "PUT",
+        body: formData,
+    });
+
+    if (response.status == 200) {
+        alert("수정성공");
+        location.href = "/boards/" + id;
     } else {
-        alert("삭제실패");
+        alert("수정실패");
     }
 }
+
+//게시글 삭제 
+ async function deletePost() {
+        let boardsId = $("#boardsId").val();
+        let response = await fetch(`/s/api/boards/${boardsId}`, {
+            method: "DELETE" // delete는 body가 없다.
+        });
+        let responseParse = await response.json();
+
+        if (responseParse.code == 1) {
+            alert("삭제성공");
+            location.href = "/";
+        } else {
+            alert("삭제실패");
+        }
+}
+
+// 썸네일 파일 이미지 확인
+$("#img-input").change((event)=>{
+    let f = event.target.files[0];
+
+    if(!f.type.match("image.*")){
+        alert("이미지를 선택해주세요!")
+        return ;
+    }
+});
+
+   

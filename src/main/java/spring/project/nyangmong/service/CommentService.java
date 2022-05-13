@@ -59,12 +59,12 @@ public class CommentService {
     }
 
     /* UPDATE */
-    @Transactional
-    public void 댓글수정(Integer userId, CommentResponseDto dto) {
-        Comment comment = commentRepository.findByuserId(
-                userId);
+     @Transactional
+     public void 댓글수정(Integer userId, CommentResponseDto dto) {
+         Comment comment = commentRepository.findByuserId(
+           userId);
 
-    }
+     }
 
     // 댓글 수정
     // @Transactional

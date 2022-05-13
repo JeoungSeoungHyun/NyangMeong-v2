@@ -6,22 +6,22 @@
     <br>
 
     <!-- 글쓰기 아우터 시작 -->
-    
+
     <div class="m_mt_md">
 
         <!-- 글쓰기 폼 시작 -->
-           
-            {{#user}}
-            <input id="userId" type="hidden" value="{{id}}" />
-            {{/user}}
+
+
+        <form action="/s/boards" method="post" enctype="multipart/form-data">
             <div class="m_mb_md">
                 <input id="title" type="text" class="form-control" placeholder="Enter title" name="title">
             </div>
             <div class="m_mb_md">
-                <textarea  id="summernote"  class="form-control" name="content" rows="10"></textarea>
+                <textarea id="summernote" class="form-control" name="content" rows="10"></textarea>
             </div>
             <div class="m_box_right">
-                <button id="btn-writeJarang" class="btn m_bg_secondary" type="button">완료</button>
+                <div>썸네일 사진 등록 : <input id="img-input" type="file" name="thumnailFile"></div>
+                <button id="btn-writeJarang" class="btn m_bg_secondary" type="submit">완료</button>
             </div>
         </form>
         <!-- 글쓰기 폼 끝 -->
@@ -29,7 +29,7 @@
     </div>
     <!-- 글쓰기 아우터  끝 -->
 </div>
- 
+
 <!-- 글쓰기 아우터  끝 -->
 </div>
 

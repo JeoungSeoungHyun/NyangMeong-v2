@@ -54,26 +54,22 @@
                         </div>
                         {{/imageList}}
                         <div class="carousel-item active " data-bs-interval="100">
-                            <img style="object-fit:cover; height:90%; " src="#" alt="# " class="m_box_img_slide m_mh_lg ">
+                        
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="m_bg_primary col-lg-5 d-flex " style=" border-radius: 25px; padding: 20px; height:500px ">
+            <div class="m_bg_primary col-lg-5 d-flex " style=" border-radius: 25px; padding: 20px; height:530px ">
                 <div style="position: relative ">
                     <!-- 좋아요,즐찾버튼 시작 -->
 
-                    <div class="d-flex " style="position: absolute; left: 350px; top: -35px ">
+                    <div class="d-flex " style="position: absolute; left: 400px; top: -35px ">
                         <div class="d-flex bg-light " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
                             <i id="btn-like" class="material-icons ">favorite_border</i>
                         </div>
                         <div class="d-flex bg-light m_ml_sm " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
                             <i id="btn-favorite" class="material-icons ">star_border</i>
-                        </div>
-                        <div class="d-flex bg-light m_ml_sm " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
-                            <i id="btn-setting" class="fa-solid fa-gear "></i>
-
                         </div>
                     </div>
                     <!-- 좋아요, 즐찾버튼 끝 -->
@@ -81,27 +77,27 @@
 
                     <div class="m_ph_sm m_txt_title m_font_xxl ">{{title}}</div>
                     <div class="m_ph_sm m_center_column ">
-                        <div class="m_txt_title m_font_xl ">주소</div>
+                        <div class="m_txt_title m_font_xl" style="width: 100px;">주소</div>
                         <div class="m_pl_sm m_font_md ">{{address}}</div>
                     </div>
                     <div class="m_ph_sm m_center_column ">
-                        <div class="m_txt_title m_font_xl ">문의처</div>
+                        <div class="m_txt_title m_font_xl" style="width: 100px;">문의처</div>
                         <div class="m_pl_sm ">{{tel}}</div>
                     </div>
                     <div class="m_ph_sm m_center_column ">
-                        <div class="m_txt_title m_font_xl ">이용시간</div>
+                        <div class="m_txt_title m_font_xl" style="width: 100px;">이용시간</div>
                         <div class="m_pl_sm m_font_md ">{{usedTime}}</div>
                     </div>
                     <div class="m_ph_sm m_center_column ">
-                        <div class="m_txt_title m_font_xl ">홈페이지</div>
+                        <div class="m_txt_title m_font_xl" style="width: 100px;">홈페이지</div>
                         <div class="m_pl_sm m_font_md ">{{homePage}}</div>
                     </div>
                     <div class="m_ph_sm m_center_column ">
-                        <div class="m_txt_title m_font_xl ">연관키워드</div>
+                        <div class="m_txt_title m_font_xl" style="width: 100px;">연관키워드</div>
                         <div class="m_pl_sm m_font_md ">{{keyword}}</div>
                     </div>
                     {{#option}}
-                    <div class="m_ph_sm d-flex col-lg-7 " style="overflow-x:100%; ">
+                    <div class="m_ph_sm d-flex" style="overflow:auto">
                         <!-- 여러개인경우 슬라이드?-->
                         {{#bathFlagShow}}
                         <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width: 100px;; height:100px; justify-content: center; align-items: center; padding:10px ">
