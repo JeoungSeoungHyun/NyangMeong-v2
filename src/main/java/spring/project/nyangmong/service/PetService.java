@@ -40,23 +40,19 @@ public class PetService {
     }
 
     // 펫 정보 수정
-    // 수정페이지에서 펫 정보를 입력할 때 최초 입력은 insert, 이후는 update
     @Transactional
-    public void 펫수정(Integer userId, PetUpdateDto petUpdateDto) {
+    public void 반려동물수정(Integer petId, PetUpdateDto petUpdateDto) {
 
-        // 2. 유저아이디와 펫정보가 있는지 확인
-        Optional<User> userOp = userRepository.findById(userId);
-        Pet petEntity = petRepository.findByuserId(userId);
+        // 펫정보가 있는지 확인
+        Optional<Pet> petOp = petRepository.findById(petId);
 
-        // 3. DB에 저장
-        if (userOp.isPresent()) {
-            // 최초 등록 시 펫 정보 추가 (Insert)
-            if (petEntity != null) {
-                petEntity.setPetName(petUpdateDto.getPetName());
-                petEntity.setPetGender(petUpdateDto.getPetGender());
-                petEntity.setPetAge(petUpdateDto.getPetAge());
-                petEntity.setPetSpices(petUpdateDto.getPetSpices());
-            }
+        // 영속화된 오브젝트 수정
+        if (petOp.isPresent()) {
+            Pet petEntity = petOp.get();
+            petEntity.setPetName(petUpdateDto.getPetName());
+            petEntity.setPetGender(petUpdateDto.getPetGender());
+            petEntity.setPetAge(petUpdateDto.getPetAge());
+            petEntity.setPetSpices(petUpdateDto.getPetSpices());
         } else {
             throw new RuntimeException("아이디를 찾을 수 없습니다.");
         }
