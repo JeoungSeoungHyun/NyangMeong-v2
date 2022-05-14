@@ -62,6 +62,7 @@ public class BoardsService {
         // 썸네일 변경 확인
         if (writeJarangDto.getThumnailFile() != null) {
             thumnail = UtilFileUpload.write(writeJarangDto.getThumnailFile());
+
             boardsEntity.setThumnail(thumnail);
         }
 
@@ -133,6 +134,7 @@ public class BoardsService {
 
     public JarangRespDto 게시글목록(Integer page) {
         Pageable pq = PageRequest.of(page, 8, Sort.by(Direction.DESC, "id"));
+
         Page<Boards> boardsEntity = boardsRepository.listJarang(pq);
         List<Integer> pageNumbers = new ArrayList<>();
         for (int i = 0; i < boardsEntity.getTotalPages(); i++) {
@@ -155,9 +157,10 @@ public class BoardsService {
     public void 글쓰기(WriteJarangDto writeJarangDto, User principal) {
         // 이미지 파일 저장 (UUID로 변경해서 저장)
         String thumnail = null;
-        
+
         if (!writeJarangDto.getThumnailFile().isEmpty()) {
             thumnail = UtilFileUpload.write(writeJarangDto.getThumnailFile());
+
         }
 
         // boards DB 저장
