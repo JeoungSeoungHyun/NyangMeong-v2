@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
@@ -20,8 +19,8 @@ import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.AdminService;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.service.CommentService;
-import spring.project.nyangmong.web.dto.members.ResponseDto;
 import spring.project.nyangmong.web.dto.members.admin.AdminUserDto;
+import spring.project.nyangmong.web.dto.members.boards.JarangRespDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
 
 @RequiredArgsConstructor
@@ -69,6 +68,16 @@ public class AdminController {
         return "/pages/admin/noticeManage";
     }
 
+        //댕냥자랑 관리페이지
+    @GetMapping("/s/admin/jarang-manage")
+    public String adminJarang(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        JarangRespDto dto = boardsService.게시글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("jarang", dto);
+        return "/pages/admin/JarangManage";
+    }
+
+
     // 공지사항 쓰기 페이지
     @GetMapping("/s/admin/write-form")
     public String adminNoticeWriteForm() {
@@ -90,12 +99,6 @@ public class AdminController {
     @GetMapping("/s/admin/comment-manage")
     public String adminComment() {
         return "pages/admin/commentManage";
-    }
-
-    // 게시글 관리페이지
-    @GetMapping("/s/admin/jarang-manage")
-    public String adminJarang() {
-        return "pages/admin/jarangManage";
     }
 
     // notice-write는 게시판 합쳐지면 있을 것 같음 일단 보류...

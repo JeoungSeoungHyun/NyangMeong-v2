@@ -1,81 +1,96 @@
 {{>/layout/header}}
 
-<div class="container" style="height: 70vh;">
+<div class="container">
 
-    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">댕냥이자랑 게시글 관리</h1>
+    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">게시판 관리</h1>
 
+    {{#principal}}
+    {{#userAuth}}
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
-            <a href="/s/notice/write-form">글쓰기</a>
+            <a href="/s/admin/write-form">글쓰기</a>
         </button>
         <button class="btn m_bg_secondary m_p_sm" onclick="deleteValue();">
             삭제
         </button>
     </div>
+    {{/userAuth}}
+    {{/principal}}
 
-    <div class="m_mb_lg">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
+    <form action="/s/admin/notice-delete">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="checkall" /></td>
+                    <th class="col-1">번호</th>
+                    <th class="col-6">제목</th>
+                    <th class="col-2">작성자</th>
+                    <th class="col-2">작성일자</th>
+                    <th class="col-1">상세보기</th>
+                </tr>
+            </thead>
 
-                <div class="collapse navbar-collapse justify-content-between">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <div>작성글: 총 @@건</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+            {{#jarang.boards.content}}
+            <tbody>
+                <tr>
+                    <td><input id="chk" type="checkbox" name="id" value="1" /></td>
+                    <th scope="row">{{id}}</th>
+                    <td> {{title}} </td>
+                    <td> {{user.userName}} </td>
+                    <td>{{formatCreateDate}}</td>
+                    <td>
+                        <a href="/boards/{{id}}">더보기
+                        </a>
+                    </td>
+                </tr>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <td><input type="checkbox" id="checkall" /></td>
-                <th class="col-1">#</th>
-                <th class="col-6">글 제목</th>
-                <th class="col-2">작성자</th>
-                <th class="col-2">작성일자</th>
-                <th class="col-1">상세보기</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="checkbox" id="chk" name="chk" /></td>
-                <th>id</th>
-                <td>Title</td>
-                <td>username</td>
-                <td>createdate</td>
-                <td>
-                    <a href="/#">더보기
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="chk" name="chk" /></td>
-                <th>id</th>
-                <td>Title</td>
-                <td>username</td>
-                <td>createdate</td>
-                <td>
-                    <a href="/#">더보기
-                    </a>
-                </td>
-            </tr>
+            </tbody>
+            {{/jarang.boards.content}}
+        </table>
 
-        </tbody>
-    </table>
+    </form>
 
+    {{#jarang}}
+    <input id="first" type="hidden" value="{{boards.first}}" />
+    <input id="last" type="hidden" value="{{boards.last}}" />
     <div class="paging-div">
         <ul class="pagination" id="pagination">
-            <li class="page-item"><a class="page-link" href="">이전</a></li>
-            <li class="page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
-            <li><a class="page-link" href="">다음</a></li>
+            <li id="prev" class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{prev}}">이전</a>
+            </li>
+            {{#pageNumbers}}
+            <li class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{.}}">{{.}}</a></li>
+            {{/pageNumbers}}
+            <li id="next" class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{next}}">다음</a>
+            </li>
         </ul>
     </div>
+    {{/jarang}}
+
 </div>
+
+<script src="/js/admin.js"></script>
+
+<script>
+    let checkAuthBtn = () => {
+        let first = $("#first").val();
+        let last = $("#last").val();
+
+        console.log(first);
+        console.log(last);
+
+        if (first == "true") {
+            $("#prev").addClass("disabled");
+            $("#next").removeClass("disabled");
+        } else if (last == "true") {
+            $("#prev").removeClass("disabled");
+            $("#next").addClass("disabled");
+        } else {
+            $("#prev").removeClass("disabled");
+            $("#next").removeClass("disabled");
+        }
+    };
+    checkAuthBtn();
+</script>
 <script>
     function deleteValue() {
         let url = "delete";
@@ -91,7 +106,7 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
-                url:  ,
+                url: /s/admin / comment - delete ,
                 type: 'POST',
                 traditional: true,
                 data: {
@@ -110,5 +125,5 @@
         }
     }
 </script>
-<script src="/js/admin.js"></script>
+
 {{>/layout/footer}}

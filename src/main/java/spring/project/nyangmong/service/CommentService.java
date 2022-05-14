@@ -24,11 +24,9 @@ public class CommentService {
     @Transactional
     public void 댓글삭제(Integer id, User principal) {
         Optional<Comment> commentOp = commentRepository.findById(id);
-
         if (commentOp.isPresent()) {
             Comment commentEntity = commentOp.get();
-
-            if (principal.getId() != commentEntity.getId()) {
+            if (principal.getId() != commentEntity.getUser().getId()) {
                 throw new RuntimeException("권한이 없습니다");
             }
         } else {
