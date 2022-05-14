@@ -37,9 +37,6 @@ public class BoardsService {
     private final PlaceLikesRepository placelikesRepository;
     private final UserRepository userRepository;
 
-    @Value("${file.path}")
-    String uploadFolder;
-
     @Transactional
     public void 글수정하기(WriteJarangDto writeJarangDto, Integer id, User principal) {
         Boards boardsEntity = null;
@@ -61,7 +58,7 @@ public class BoardsService {
 
         // 썸네일 변경 확인
         if (writeJarangDto.getThumnailFile() != null) {
-            thumnail = UtilFileUpload.write(uploadFolder, writeJarangDto.getThumnailFile());
+            thumnail = UtilFileUpload.write(writeJarangDto.getThumnailFile());
             boardsEntity.setThumnail(thumnail);
         }
 
@@ -156,7 +153,7 @@ public class BoardsService {
         // 이미지 파일 저장 (UUID로 변경해서 저장)
         String thumnail = null;
         if (!writeJarangDto.getThumnailFile().isEmpty()) {
-            thumnail = UtilFileUpload.write(uploadFolder, writeJarangDto.getThumnailFile());
+            thumnail = UtilFileUpload.write(writeJarangDto.getThumnailFile());
         }
 
         // boards DB 저장
