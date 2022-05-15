@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
-import spring.project.nyangmong.handle.ex.CustomApiException;
 import spring.project.nyangmong.util.UtilFileUpload;
 import spring.project.nyangmong.web.dto.members.user.IdFindReqDto;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
@@ -36,8 +35,6 @@ public class UserService {
             userEntity.setUserImgurl(userImgurl);
             // 세션값 변경
             session.setAttribute("principal", userEntity);
-        } else {
-            throw new CustomApiException("해당 유저를 찾을 수 없습니다.");
         }
     } // 영속화된 userEntity 변경 후 더티체킹완료됨.
 
@@ -84,14 +81,13 @@ public class UserService {
         if (userOp.isPresent()) {
             return userOp.get();
         } else {
-            System.out.println("아이디를 찾을 수 없습니다.");
             return null;
         }
     }
 
     // 회원정보 수정
     @Transactional
-    public User 회원수정(Integer id, UpdateDto updateDto) {
+    public void 회원수정(Integer id, UpdateDto updateDto, HttpSession session) {
 
         Optional<User> userOp = userRepository.findById(id);
 
@@ -101,9 +97,7 @@ public class UserService {
             userEntity.setUserName(updateDto.getUserName());
             userEntity.setPassword(updateDto.getPassword());
             userEntity.setEmail(updateDto.getEmail());
-            return userEntity;
-        } else {
-            throw new RuntimeException("아이디를 찾을 수 없습니다.");
+            session.setAttribute("principal", userEntity); // 세션 변경하기
         }
     }
 

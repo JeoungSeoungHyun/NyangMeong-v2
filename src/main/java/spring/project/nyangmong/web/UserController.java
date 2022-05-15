@@ -30,43 +30,43 @@ import spring.project.nyangmong.web.dto.members.user.PwFindReqDto;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final HttpSession session;
     private final PetService petService;
+    private final HttpSession session;
+    private final HttpServletResponse response;
 
     // 회원 정보 수정 페이지
     @GetMapping("/s/user/{id}/update-form")
-    public String userChangeForm(@PathVariable Integer id, Model model, HttpServletResponse response) {
+    public String userChangeForm(@PathVariable Integer id, Model model) {
         User principal = (User) session.getAttribute("principal");
-        // 권한체크
-        if (principal.getId() == id) {
-            User userEntity = userService.회원정보보기(id);
-            Pet petEntity = petService.펫정보보기(id);
-            model.addAttribute("user", userEntity);
-            model.addAttribute("pet", petEntity);
-        } else {
-            // 권한없음 - 로그인 후 다른 유저 페이지로 접근 시 스크립트 처리함
+
+        // 권한이 없을 때 - 로그인 후 다른 유저 페이지로 접근 시 스크립트 처리함
+        if (principal.getId() != id) {
             String scriptMsg = Script.back("잘못된 접근입니다.");
             RespScript.스크립트로응답하기(scriptMsg, response);
         }
+
+        User userEntity = userService.회원정보보기(id);
+        Pet petEntity = petService.펫정보보기(id);
+        model.addAttribute("user", userEntity);
+        model.addAttribute("pet", petEntity);
         return "pages/user/userChange";
     }
 
     // 회원 정보 페이지
     @GetMapping("/s/user/{id}/detail")
-    public String userDetail(@PathVariable Integer id, Model model, HttpServletResponse response) {
-
+    public String userDetail(@PathVariable Integer id, Model model) {
         User principal = (User) session.getAttribute("principal");
-        // 권한체크
-        if (principal.getId() == id) {
-            User userEntity = userService.회원정보보기(id);
-            Pet petEntity = petService.펫정보보기(id);
-            model.addAttribute("user", userEntity);
-            model.addAttribute("pet", petEntity);
-        } else {
-            // 권한없음 - 로그인 후 다른 유저 페이지로 접근 시 스크립트 처리함
+
+        // 권한이 없을 때 - 로그인 후 다른 유저 페이지로 접근 시 스크립트 처리함
+        if (principal.getId() != id) {
             String scriptMsg = Script.back("잘못된 접근입니다.");
             RespScript.스크립트로응답하기(scriptMsg, response);
         }
+
+        User userEntity = userService.회원정보보기(id);
+        Pet petEntity = petService.펫정보보기(id);
+        model.addAttribute("user", userEntity);
+        model.addAttribute("pet", petEntity);
         return "pages/user/userDetail";
     }
 
@@ -79,7 +79,7 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(User user, HttpServletResponse response) {
+    public String login(User user) {
         User userEntity = userService.로그인(user);
         session.setAttribute("principal", userEntity);
 
