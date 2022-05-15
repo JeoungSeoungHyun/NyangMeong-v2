@@ -2,6 +2,8 @@ package spring.project.nyangmong.service;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +25,7 @@ public class UserService {
 
     // 프로필 사진 변경하기
     @Transactional
-    public void 프로필이미지변경(Integer id, MultipartFile file) {
+    public void 프로필이미지변경(Integer id, MultipartFile file, HttpSession session) {
         // 1. 파일을 upload 폴더에 저장완료
         String userImgurl = UtilFileUpload.write(file);
 
@@ -32,6 +34,8 @@ public class UserService {
         if (userOp.isPresent()) {
             User userEntity = userOp.get();
             userEntity.setUserImgurl(userImgurl);
+            // 세션값 변경
+            session.setAttribute("principal", userEntity);
         } else {
             throw new CustomApiException("해당 유저를 찾을 수 없습니다.");
         }

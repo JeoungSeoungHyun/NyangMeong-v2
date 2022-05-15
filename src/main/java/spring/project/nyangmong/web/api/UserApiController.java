@@ -32,7 +32,8 @@ public class UserApiController {
         if (principal.getId() != id) {
             throw new RuntimeException("수정 권한이 없습니다.");
         } else {
-            userService.프로필이미지변경(id, userImgurl);
+            // 세션값 변경하기
+            userService.프로필이미지변경(id, userImgurl, session);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
