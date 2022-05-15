@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.pet.Pet;
 import spring.project.nyangmong.domain.user.User;
-import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.PetService;
 import spring.project.nyangmong.service.UserService;
 import spring.project.nyangmong.util.RespScript;
@@ -36,36 +35,39 @@ public class UserController {
 
     // 회원 정보 수정 페이지
     @GetMapping("/s/user/{id}/update-form")
-    public String userChangeForm(@PathVariable Integer id, Model model) {
-        // 권한
+    public String userChangeForm(@PathVariable Integer id, Model model, HttpServletResponse response) {
         User principal = (User) session.getAttribute("principal");
+        // 권한체크
         if (principal.getId() == id) {
             User userEntity = userService.회원정보보기(id);
             Pet petEntity = petService.펫정보보기(id);
             model.addAttribute("user", userEntity);
             model.addAttribute("pet", petEntity);
-            return "pages/user/userChange";
         } else {
-            throw new CustomException("수정할 권한이 없습니다.");
+            // 권한없음 - 로그인 후 다른 유저 페이지로 접근 시 스크립트 처리함
+            String scriptMsg = Script.back("잘못된 접근입니다.");
+            RespScript.스크립트로응답하기(scriptMsg, response);
         }
+        return "pages/user/userChange";
     }
 
-    // 리팩토링 중...
     // 회원 정보 페이지
     @GetMapping("/s/user/{id}/detail")
-    public String userDetail(@PathVariable Integer id, Model model) {
+    public String userDetail(@PathVariable Integer id, Model model, HttpServletResponse response) {
 
-        // 권한
         User principal = (User) session.getAttribute("principal");
+        // 권한체크
         if (principal.getId() == id) {
             User userEntity = userService.회원정보보기(id);
             Pet petEntity = petService.펫정보보기(id);
             model.addAttribute("user", userEntity);
             model.addAttribute("pet", petEntity);
-            return "pages/user/userDetail";
         } else {
-            throw new CustomException("회원 정보 보기 권한이 없습니다.");
+            // 권한없음 - 로그인 후 다른 유저 페이지로 접근 시 스크립트 처리함
+            String scriptMsg = Script.back("잘못된 접근입니다.");
+            RespScript.스크립트로응답하기(scriptMsg, response);
         }
+        return "pages/user/userDetail";
     }
 
     // 로그아웃하기
@@ -83,7 +85,7 @@ public class UserController {
 
         // 아이디 또는 패스워드 불일치 시 스크립트 처리하는 로직
         if (userEntity == null) {
-            String scriptMsg = Script.href("/login-form", "아이디 또는 패스워드가 일치하지 않습니다.");
+            String scriptMsg = Script.back("아이디 또는 패스워드가 일치하지 않습니다.");
             RespScript.스크립트로응답하기(scriptMsg, response);
         }
 
