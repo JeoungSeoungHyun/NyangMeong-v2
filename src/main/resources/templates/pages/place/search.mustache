@@ -1,28 +1,28 @@
 {{> /layout/header}}
-<div class="container"  style="height: max-content;">
+<div class="container" style="height: max-content;">
 
     <div class="m_ph_md">
 
         <!-- 메뉴 박스 아우터 시작-->
         <div class="m_outer_menu_detail m_mh_md">
             <!-- 메뉴 박스 시작 -->
-                <!-- 메뉴 박스 시작 -->
-                <div class="m_box_menu_detail m_bg_primary">
-                    <a href="javascript:linkListGo('관광지')" onclick="ListGo('관광지')" class="m_txt_title">관광지</a>
-                </div>
-                <div class=" m_box_menu_detail m_bg_primary">
-                    <a href="javascript:linkListGo('숙박')" onclick="ListGo('숙박')" class="m_txt_title">숙박</a>
-                </div>
-                <div class="m_box_menu_detail m_bg_primary">
-                    <a href="javascript:linkListGo('식음료')" onclick="ListGo('식음료')" class="m_txt_title">식음료</a>
-                </div>
-                <div class="m_box_menu_detail m_bg_primary">
-                    <a href="javascript:linkListGo('체험')" onclick="ListGo('체험')" class="m_txt_title">체험</a>
-                </div>
-                <div class="m_box_menu_detail m_bg_primary">
-                    <a href="javascript:linkListGo('동물병원')" onclick="ListGo('동물병원')" class="m_txt_title">동물병원</a>
-                </div>
-                <!-- 메뉴 박스  끝-->
+            <!-- 메뉴 박스 시작 -->
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a href="javascript:linkListGo('관광지')" onclick="ListGo('관광지')" class="m_txt_title">관광지</a>
+            </div>
+            <div class=" m_box_menu_detail m_bg_secondary">
+                <a href="javascript:linkListGo('숙박')" onclick="ListGo('숙박')" class="m_txt_title">숙박</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a href="javascript:linkListGo('식음료')" onclick="ListGo('식음료')" class="m_txt_title">식음료</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a href="javascript:linkListGo('체험')" onclick="ListGo('체험')" class="m_txt_title">체험</a>
+            </div>
+            <div class="m_box_menu_detail m_bg_secondary">
+                <a href="javascript:linkListGo('동물병원')" onclick="ListGo('동물병원')" class="m_txt_title">동물병원</a>
+            </div>
+            <!-- 메뉴 박스  끝-->
 
             <!-- 메뉴 박스  끝-->
         </div>
@@ -35,58 +35,55 @@
     <div class="m_pt_md">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-
+                <span>총 {{count}} 건</span>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                     </ul>
-        <form class="navbar-form navbar-right" role="search" action="/outline/search" method="get" >
+                    <form class="navbar-form navbar-right" role="search" action="/outline/search" method="get">
                         <div class="form-group d-flex">
-                                <div class="form-group d-flex">
-                                </div>
-                            <input type="text" class="form-control m_ml_sm" placeholder="Search">
+                            <div class="form-group d-flex">
+                            </div>
+                            <input name="keyword" type="text" class="form-control m_ml_sm" placeholder="Search">
                             <button type="submit" class="btn btn-secondary m_ml_sm" style="width: 100px;">검색</button>
                         </div>
                     </form>
                 </div>
             </div>
         </nav>
-    <br>
-    <div>
+        <br>
+        <div>
         </div>
         <div class="row">
-                    {{#places.content}}
-                    <div class="col-md-3 m_mb_md">
-                        <div class="m_box_info_place">
-                            <a href="/place/{{contentSeq}}">
-                                <div>
-                                    <div class="caption m_p_sm">
-                                        <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
-                                        <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{address}}</div>
-                                    </div>
-                                </div>
-                            </a>
+            {{#places.content}}
+            <div class="col-md-3 m_mb_md">
+                <div class="m_box_info_place">
+                    <a href="/place/{{contentSeq}}">
+                        <div>
+                            <div class="caption m_p_sm">
+                                <div class=" m_font_lg m_font_bold m_ph_sm">{{title}}</div>
+                                <div class="m_outlineList_box_addr"><i class="fa-solid fa-location-dot"></i> {{address}}</div>
+                            </div>
                         </div>
-                    </div>
-                    {{/places.content}}
+                    </a>
+                </div>
+            </div>
+            {{/places.content}}
         </div>
     </div>
 
     <div class="paging-div">
- <ul class="pagination" id="pagination">
-     {{#places.first}}
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?&page={{previewPage}}">이전</a></li>
-         {{/places.first}}
-         {{^places.first}}
-   <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?&page={{previewPage}}">이전</a></li>
-         {{/places.first}}
-     {{#places.last}}    
-    <li id="li-prev"class="page-item disabled"><a id="btn-prev" class="page-link" href="?&page={{nextPage}}">다음</a></li>
-         {{/places.last}}
-         {{^places.last}}
-    <li id="li-prev"class="page-item"><a id="btn-prev" class="page-link" href="?&page={{nextPage}}">다음</a></li>         
-         {{/places.last}}
-</ul>
-</div>
+        <ul class="pagination" id="pagination">
+            {{#places.first}}
+            <li id="li-prev" class="page-item disabled"><a id="btn-prev" class="page-link" href="?&page={{previewPage}}">이전</a></li>
+            {{/places.first}} {{^places.first}}
+            <li id="li-prev" class="page-item"><a id="btn-prev" class="page-link" href="?&page={{previewPage}}">이전</a></li>
+            {{/places.first}} {{#places.last}}
+            <li id="li-prev" class="page-item disabled"><a id="btn-prev" class="page-link" href="?&page={{nextPage}}">다음</a></li>
+            {{/places.last}} {{^places.last}}
+            <li id="li-prev" class="page-item"><a id="btn-prev" class="page-link" href="?&page={{nextPage}}">다음</a></li>
+            {{/places.last}}
+        </ul>
+    </div>
 </div>
 
 {{> /layout/footer}}

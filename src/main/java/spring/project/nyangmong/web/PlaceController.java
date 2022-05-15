@@ -214,10 +214,12 @@ public class PlaceController {
             model.addAttribute("places", placeRepository.findAll(pq));
             return "pages/place/search";
         }
-        // Page<Places> placesPaging = placeRepository.searchPlaces(keyword, pq);
-        model.addAttribute("places", placeRepository.searchPlaces(keyword, pq));
+        Page<Places> placesPaging = placeRepository.searchPlaces(keyword, pq);
+        long count = placesPaging.getTotalElements();
+        model.addAttribute("places", placesPaging);
         model.addAttribute("nextPage", page + 1);
         model.addAttribute("previewPage", page - 1);
+        model.addAttribute("count", count);
         return "pages/place/search";
 
     }

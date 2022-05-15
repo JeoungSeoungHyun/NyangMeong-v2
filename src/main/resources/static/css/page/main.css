@@ -40,8 +40,9 @@
 .m_box_search {
     text-align: center;
     position: relative;
-    left: 50px;
+    left: 30px;
     top: 15px;
+    font-size: 30px;
 }
 
 
@@ -187,7 +188,7 @@ body {
 
 .m_carousel-inner,
 .m_carousel,
-.m_carousel-container{
+.m_carousel-container {
     height: 600px;
     width: 100%;
     background-position: center center;
@@ -351,39 +352,43 @@ body {
 
 /* 이미지 슬라이드 끝*/
 
+
 /* 좋아요 이미지 탭 키  */
-ul.tabs{
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
-ul.tabs li{
-	background: none;
-	color: #222;
-	display: inline-block;
-	padding: 10px 15px;
-	cursor: pointer;
+
+ul.tabs {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
 }
 
-ul.tabs li.current{
-	background: #FFE082;
-	color: #222;    
+ul.tabs li {
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+ul.tabs li.current {
+    background: #FFE082;
+    color: #222;
     border: 1px solid #E1E2E1;
 }
 
-.tab-content{
-	display: none;
-	background: white;
-	padding: 15px;
+.tab-content {
+    display: none;
+    background: white;
+    padding: 15px;
     border: 2px solid #E1E2E1;
 }
 
-.tab-content.current{
-	display: inherit;
+.tab-content.current {
+    display: inherit;
 }
 
 .m_box_like_place {
-    border: 2px solid  #b4b2b2;;
+    border: 2px solid #b4b2b2;
+    ;
 }
 
 
