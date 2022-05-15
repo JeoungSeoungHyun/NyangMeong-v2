@@ -5,14 +5,19 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
@@ -68,9 +73,21 @@ public class BoardsController {
     @GetMapping("/s/boards/{id}/update-form")
     public String jarangUpdateForm(@PathVariable Integer id, Model model) {
         User principal = (User) session.getAttribute("principal");
-        Boards boardsEntity = boardsService.글한건보기(id, principal);
+        Boards boardsEntity = boardsService.수정게시글찾기(id, principal);
         model.addAttribute("boards", boardsEntity);
         return "/pages/post/jarangUpdateForm";
+    }
+
+    // 자랑 UPDATE 글수정 /post/{id} - 글상세보기 페이지가기 - 인증 O
+    @PutMapping("/s/api/boards/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id,
+            WriteJarangDto writeJarangDto) {
+
+        User principal = (User) session.getAttribute("principal");
+
+        boardsService.글수정하기(writeJarangDto, id, principal);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 공지사항 글리스트 전달 메서드
@@ -90,5 +107,22 @@ public class BoardsController {
     @GetMapping("/s/notice/{id}/update-form")
     public String noticeUpdateForm() {
         return "/pages/post/noticeUpdateForm";
+    }
+
+    // 좋아요
+    @PostMapping("/s/api/boards/{boardsId}/like")
+    public ResponseEntity<?> boardsLike(@PathVariable Integer boardsId) {
+        User principal = (User) session.getAttribute("principal");
+        BoardLikes boardLikesEntity = boardsService.좋아요(boardsId, principal);
+        Integer boardsLikeId = boardLikesEntity.getId();
+        return new ResponseEntity<>(boardsLikeId, HttpStatus.CREATED);
+    }
+
+    // 좋아요 취소
+    @DeleteMapping("/s/api/boards/{boardsId}/like/{boardLikesId}")
+    public ResponseEntity<?> boardsUnLike(@PathVariable Integer boardLikesId) {
+        User principal = (User) session.getAttribute("principal");
+        boolean result = boardsService.좋아요취소(boardLikesId, principal);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

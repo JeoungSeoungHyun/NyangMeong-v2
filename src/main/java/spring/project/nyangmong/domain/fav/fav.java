@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -23,9 +25,9 @@ import spring.project.nyangmong.domain.user.User;
 @Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-// @Table(uniqueConstraints = {
-// @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
-// })
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
+})
 public class Fav {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

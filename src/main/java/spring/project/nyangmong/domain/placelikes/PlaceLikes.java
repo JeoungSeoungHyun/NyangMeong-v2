@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,9 +28,9 @@ import spring.project.nyangmong.domain.user.User;
 @Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-// @Table(uniqueConstraints = {
-// @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
-// })
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "fav_uk", columnNames = { "userId", "placesId" })
+})
 public class PlaceLikes {
     // - 이 때 Boards와 User하고 연관관계가 생성된다. -PlaceLikes:Boards=1:N,PlaceLikes:User=1:
     // N의 관계이므로 다음과 같이 설정해 주었다.

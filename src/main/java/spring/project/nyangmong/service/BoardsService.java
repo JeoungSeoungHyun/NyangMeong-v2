@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +14,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.boardlikes.BoardLikes;
+import spring.project.nyangmong.domain.boardlikes.BoardLikesRepository;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
@@ -36,19 +37,14 @@ public class BoardsService {
     private final BoardsRepository boardsRepository;
     private final PlaceLikesRepository placelikesRepository;
     private final UserRepository userRepository;
+    private final BoardLikesRepository boardLikesRepository;
 
     @Transactional
-    public void 글수정하기(WriteJarangDto writeJarangDto, Integer id, User principal) {
-        Boards boardsEntity = null;
+    public void 글수정하기(WriteJarangDto writeJarangDto, Integer boardsId, User principal) {
         String thumnail = null;
 
         // 글확인
-        Optional<Boards> boardsOp = boardsRepository.findById(id);
-        if (boardsOp.isPresent()) {
-            boardsEntity = boardsOp.get();
-        } else {
-            throw new CustomApiException("해당 게시글을 찾을 수 없습니다");
-        }
+        Boards boardsEntity = mFinBoards(boardsId);
 
         // 권한 확인
         boolean auth = mCheckAuth(principal, boardsEntity.getUser());
@@ -75,20 +71,15 @@ public class BoardsService {
         boardsRepository.deleteById(id);
     }
 
-    public DetailResponseDto 글상세보기(Integer id, User principal) {
-        Optional<Boards> boardsOp = boardsRepository.findById(id);
-        Boards boardsEntity = null;
+    public DetailResponseDto 글상세보기(Integer boardsId, User principal) {
+        BoardLikes boardLikesEntity = null;
+        Integer boardLikesId = null;
 
         // 게시글 확인
-        if (boardsOp.isPresent()) {
-            boardsEntity = boardsOp.get();
-        } else {
-            throw new RuntimeException("해당 게시글을 찾을 수 없습니다");
-        }
-
+        Boards boardsEntity = mFinBoards(boardsId);
         // 게시글 수정,삭제 권한 확인
+        System.out.println("확인1");
         boolean boardAuth = mCheckAuth(principal, boardsEntity.getUser());
-
         // 댓글 수정,삭제 권한 확인
         List<CommentResponseDto> comments = new ArrayList<>();
 
@@ -100,23 +91,28 @@ public class BoardsService {
             dto.setAuth(auth);
             comments.add(dto);
         }
-        DetailResponseDto detailResponseDto = new DetailResponseDto(boardsEntity, comments, boardAuth);
+        System.out.println("확인2");
+        // 좋아요 정보 확인
+        if (principal != null) {
+            Optional<BoardLikes> boardLikesOp = boardLikesRepository.mFindBoardIdAndUserId(boardsEntity.getId(),
+                    principal.getId());
+            if (boardLikesOp.isPresent()) {
+                boardLikesEntity = boardLikesOp.get();
+                boardLikesId = boardLikesEntity.getId();
+            }
+        }
+        DetailResponseDto detailResponseDto = new DetailResponseDto(
+                boardsEntity,
+                comments,
+                boardAuth,
+                boardLikesId);
         return detailResponseDto;
-        // 조회수 증가
-
-        // 인기 게시물 처리~!!
     }
 
-    public Boards 글한건보기(Integer id, User principal) {
-        Optional<Boards> boardsOp = boardsRepository.findById(id);
-        Boards boardsEntity = null;
+    public Boards 수정게시글찾기(Integer boardsId, User principal) {
 
         // 게시글 확인
-        if (boardsOp.isPresent()) {
-            boardsEntity = boardsOp.get();
-        } else {
-            throw new RuntimeException("해당 게시글을 찾을 수 없습니다");
-        }
+        Boards boardsEntity = mFinBoards(boardsId);
 
         // 권한 확인
         boolean auth = mCheckAuth(principal, boardsEntity.getUser());
@@ -169,6 +165,37 @@ public class BoardsService {
         boardsRepository.save(boards);
     }
 
+    // 좋아요
+    @Transactional
+    public BoardLikes 좋아요(Integer boardsId, User principal) {
+        BoardLikes boardLikes = new BoardLikes();
+
+        // 게시글 찾기
+        Boards boardsEntity = mFinBoards(boardsId);
+
+        boardLikes.setUser(principal);
+        boardLikes.setBoards(boardsEntity);
+
+        return boardLikesRepository.save(boardLikes);
+    }
+
+    // 좋아요 취소
+    @Transactional
+    public boolean 좋아요취소(Integer boardLikesId, User principal) {
+
+        // 좋아요 정보 확인
+        BoardLikes boardLikesEntity = mFindBoardLikes(boardLikesId);
+
+        // 좋아요 취소 권한 확인
+        if (principal.getId() == boardLikesEntity.getUser().getId()) {
+            boardLikesRepository.delete(boardLikesEntity);
+            return true;
+        } else {
+            throw new CustomApiException("좋아요 취소 권한이 없습니다.");
+        }
+
+    }
+
     /**
      * boardsinfodto를 반환한다.
      * 
@@ -212,9 +239,30 @@ public class BoardsService {
     // .PlaceLikesCount(0)
     // .build());
 
+    // 좋아요 찾기
+    private BoardLikes mFindBoardLikes(Integer boardLikesId) {
+        Optional<BoardLikes> boardLikesOp = boardLikesRepository.findById(boardLikesId);
+        if (boardLikesOp.isPresent()) {
+            return boardLikesOp.get();
+        } else {
+            throw new CustomException("해당 좋아요 정보가 존재하지 않습니다.");
+        }
+    }
+
+    // 게시글 찾기
+    private Boards mFinBoards(Integer boardsId) {
+        Optional<Boards> boardsOp = boardsRepository.findById(boardsId);
+        if (boardsOp.isPresent()) {
+            return boardsOp.get();
+        } else {
+            throw new CustomException("해당 게시글이 존재하지 않습니다.");
+        }
+    }
+
     // 권한 확인
     private boolean mCheckAuth(User principal, User user) {
         boolean auth = false;
+
         if (principal != null) {
             if (principal.getId() == user.getId()) {
                 auth = true;
