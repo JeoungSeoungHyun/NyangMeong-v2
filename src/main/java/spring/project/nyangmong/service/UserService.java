@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
 import spring.project.nyangmong.handle.ex.CustomApiException;
-import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.util.UtilFileUpload;
 import spring.project.nyangmong.web.dto.members.user.IdFindReqDto;
 import spring.project.nyangmong.web.dto.members.user.JoinDto;
@@ -53,10 +52,9 @@ public class UserService {
         // 2. 같은 email이 있으면 DB에서 가져오기
         if (userOp.isPresent()) {
             User userEntity = userOp.get(); // 영속화
-            // System.out.println("=====================" + userEntity.getUserId());
             return userEntity.getUserId(); // 아이디 리턴
         } else {
-            throw new CustomException("해당 이메일이 존재하지 않습니다.");
+            return null;
         }
     }
 
@@ -69,10 +67,9 @@ public class UserService {
         // 2. 같은 id, email이 있으면 DB에서 가져오기
         if (userOp.isPresent()) {
             User userEntity = userOp.get(); // 영속화
-            // System.out.println("=====================" + userEntity.getPassword());
             return userEntity.getPassword(); // 비밀번호 리턴
         } else {
-            throw new CustomException("해당 아이디 또는 이메일이 존재하지 않습니다.");
+            return null;
         }
     }
 
