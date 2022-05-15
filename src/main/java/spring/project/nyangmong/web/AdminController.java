@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
@@ -20,8 +19,8 @@ import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.AdminService;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.service.CommentService;
-import spring.project.nyangmong.web.dto.members.ResponseDto;
 import spring.project.nyangmong.web.dto.members.admin.AdminUserDto;
+import spring.project.nyangmong.web.dto.members.boards.JarangRespDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
 
 @RequiredArgsConstructor
@@ -94,7 +93,9 @@ public class AdminController {
 
     // 게시글 관리페이지
     @GetMapping("/s/admin/jarang-manage")
-    public String adminJarang() {
+    public String adminJarang(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        JarangRespDto jarangRespDto = boardsService.게시글목록(page);
+        model.addAttribute("data", jarangRespDto);
         return "pages/admin/jarangManage";
     }
 
