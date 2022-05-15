@@ -117,11 +117,7 @@ public class UserService {
         // 로그인 처리 쿼리를 JPA에서 제공해주지 않는다.
         // SELECT * FROM user WHERE username=:username AND password = :password
         User userEntity = userRepository.mLogin(user.getUserId(), user.getPassword());
-        if (userEntity == null) {
-            throw new RuntimeException("아이디 또는 패스워드가 틀렸습니다.");
-        } else {
-            return userEntity;
-        }
+        return userEntity;
     }
 
     public boolean checkuserNameDuplicate(String userId) {
