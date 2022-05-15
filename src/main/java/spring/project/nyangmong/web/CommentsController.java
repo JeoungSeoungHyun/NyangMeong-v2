@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.CommentService;
@@ -27,7 +26,6 @@ public class CommentsController {
     @DeleteMapping("/s/api/comment/{id}")
     public @ResponseBody ResponseDto<?> deleteById(@PathVariable Integer id) {
         // 세션의 id와 comment의 userId와 비교
-        System.out.println("몽몽");
         User principal = (User) session.getAttribute("principal");
         commentService.댓글삭제(id, principal);
         return new ResponseDto<>(1, "성공", null);
