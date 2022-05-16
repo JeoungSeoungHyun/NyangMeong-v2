@@ -46,6 +46,7 @@
                                     class="fas fa-heart"></i>
                             {{/boardLikesId}}
                             {{^boardLikesId}}
+                            <input id="boardLikesId" type="hidden" value="" />
                             <button id="btn-like" class="m_feeling_a">
                                 <i id="icon-like" class="far fa-heart"> I LOOOOOVE THIS PICTURE</i> <i id="icon-likee"
                                     class="far fa-heart"></i>
@@ -147,21 +148,28 @@
     };
     checkAuthBtn();
 
+    // 좋아요
+    let likeRendering = () => {
+        $("#icon-like").removeClass("far fa-heart");
+        $("#icon-likee").removeClass("far fa-heart");
+        $("#icon-like").addClass("fas fa-heart");
+        $("#icon-likee").addClass("fas fa-heart");
+    }
+    // 좋아요 취소
+    let unLikeRendering = () => {
+        $("#icon-like").removeClass("fas fa-heart");
+        $("#icon-likee").removeClass("fas fa-heart");
+        $("#icon-like").addClass("far fa-heart");
+        $("#icon-likee").addClass("far fa-heart");
+    }
+
     $("#btn-like").click(() => {
         if ($("#icon-like").hasClass("far fa-heart")) {
-            $("#icon-like").removeClass("far fa-heart");
-            $("#icon-likee").removeClass("far fa-heart");
-            $("#icon-like").addClass("fas fa-heart");
-            $("#icon-likee").addClass("fas fa-heart");
+            like();
+        } else {
+            unlike();
         }
-
-        // 좋아요 취소
-        let unLikeRendering = () => {
-            $("#icon-like").removeClass("fas fa-heart");
-            $("#icon-likee").removeClass("fas fa-heart");
-            $("#icon-like").addClass("far fa-heart");
-            $("#icon-likee").addClass("far fa-heart");
-        }
+    });
 
         // 좋아요 요청
         let like = async() => {
