@@ -31,10 +31,12 @@
     </div>
 
     <br>
+    <!-- 펫 정보가 있으면 모델에 담아온 pet 정보 뿌려주기 -->
+    {{#pet}}
     <h1 class="text-center m_txt_title">반려동물 정보 </h1>
-    <input id="pet-id" type="hidden" value="{{pet.id}}">
     <div class="my_auth_box">
         <div class="my_auth_form_box">
+            <input id="pet-id" type="hidden" value="{{pet.id}}">
             <form>
                 <input id="pet-name" class="my_auth_form_box_input" type="text" value="{{pet.petName}}" maxlength="20"
                     required />
@@ -47,11 +49,14 @@
                 <button type="button" style="background-color: #E1E2E1; float: right; margin-top: 20px;" class="btn"
                     id="btn-pet-update">수정</button>
             </form>
+            {{/pet}}
         </div>
     </div>
+    <!-- 펫 정보가 없으면 반려동물 박스 안 보이게 하기 -->
+    {{^pet}}
+    {{/pet}}
 </div>
 
-<script src="/js/joinform.js"></script>
 <script src="/js/updateform.js"></script>
 
 {{> /layout/footer}}

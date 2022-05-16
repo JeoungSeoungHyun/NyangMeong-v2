@@ -30,9 +30,18 @@
     <div class="container mx-auto m_outer_info_detail m_mt_xl">
         <!-- 이미지 박스 시작-->
         <div class="col-lg-6 m_mt_lg">
-
             <div class="m_box_profile">
+                {{#principal}}
+                <!-- 프로필 사진 등록/변경 했을 때 -->
+                {{#userImgurl}}
+                <img class="m_img_profile" src="/upload/{{userImgurl}}" id="profile-img-btn">
+                {{/userImgurl}}
+
+                <!-- 프로필 사진 등록 안 했을 때 기본 이미지 -->
+                {{^userImgurl}}
                 <img class="m_img_profile" src="/images/cat.jpg" alt="프로필 이미지" id="profile-img-btn">
+                {{/userImgurl}}
+                {{/principal}}
                 <form id="file-form">
                     <input type="file" class="my_hidden" id="profile-img-input" name="userImgurl" />
                 </form>
