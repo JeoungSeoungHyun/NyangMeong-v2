@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.CommentService;

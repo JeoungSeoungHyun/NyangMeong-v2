@@ -17,10 +17,16 @@
 
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
-                        <p id="title" class="col-6" style="word-break:break-all;">{{boards.title}}</p>
-                        <p id="createDate" class="col-2">날짜 : {{boards.formatCreateDate}} </p>
-                        <p id="userName" class="col-2">작성자 : {{boards.user.userName}}</p>
-                        <p id="pageCount" class="col-1">조회수 : {{boards.pageCount}}</p>
+                        <p id="title" class="col-6" style="word-break:break-all; font-weight:bold;">{{boards.title}}</p>
+                        <p id="createDate" class="col-2">날짜 :
+                            <span style="font-weight: bold;">{{boards.formatCreateDate}}</span>
+                        </p>
+                        <p id="userName" class="col-2">작성자 :
+                            <span style="font-weight: bold;">{{boards.user.userName}}</span>
+                        </p>
+                        <p id="pageCount" class="col-1">조회수 :
+                            <span style="font-weight: bold;">{{boards.pageCount}}</span>
+                        </p>
                     </div>
 
                     <div class="board-container">
@@ -50,6 +56,7 @@
 
 
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
+<<<<<<< HEAD
                         class="btn">목록으로</button> {{#auth}}
                             <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">삭제</button>
                             <a href="/s/boards/{{boards.id}}/update-form" class="btn" style="background-color: #E1E2E1; float: right; margin: 10px;">수정</a> {{/auth}}
@@ -86,6 +93,37 @@
                                             <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
 
                                         </div>
+=======
+                        class="btn">목록으로</button>
+                    {{#principal}}
+                    {{#userAuth}}
+                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">관리자삭제</button>
+                    {{/userAuth}}
+                    {{/principal}}
+                    {{#auth}}
+                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
+                        class="btn">삭제</button>
+                    <a href="/s/boards/{{boards.id}}/update-form" class="btn"
+                        style="background-color: #E1E2E1; float: right; margin: 10px;">수정</a>
+                    {{/auth}}
+                    <br><br><br>
+
+                    <!-- 댓글 시작 -->
+
+                    <div class="card mb-2">
+                        <div class="card-header bg-light">
+                            <i class="fa fa-comment fa"></i> COMMENT
+                        </div>
+                        <form action="/s/boards/{{boards.id}}/comment" method="post">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
+                                            rows="3"></textarea>
+                                        <button style="float:right; " type="submit"
+                                            class="btn btn-dark mt-3">등록</button>
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                                     </li>
                                     {{/comments}} {{/data}}
                                 </ul>
@@ -93,20 +131,71 @@
                             <br>
                             <!-- 댓글 끝 -->
 
+                    {{#pages}}
+                    <input id="first" type="hidden" value="{{boards.first}}" />
+                    <input id="last" type="hidden" value="{{boards.last}}" />
 
+<<<<<<< HEAD
                             <div class="list-group" style="margin-top: 20px; margin-bottom: 20px;">
                                 <a href="#" class="list-group-item">이전글: </a>
                                 <a href="#" class="list-group-item">다음글: </a>
                             </div>
                         </div>
+=======
+                    <div class="paging-div">
+                        <ul class="pagination" id="pagination">
+                            <li id="prev" class="page-item"><a class="page-link" href="/boards/{{prev}}">이전</a>
+                            </li>
+                            <!-- {{#pageNumbers}}
+                            <li class="page-item"><a class="page-link" href="/boards/{{.}}">{{.}}</a></li>
+                            {{/pageNumbers}} -->
+                            <li id="next" class="page-item"><a class="page-link" href="/boards/{{next}}">다음</a>
+                            </li>
+
+                        </ul>
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                     </div>
+                    {{/pages}}
+
+
+
                 </div>
     </main>
     </div>
 
+<<<<<<< HEAD
     <script>
         // 좋아요
         let likeRendering = () => {
+=======
+<script>
+
+    let checkAuthBtn = () => {
+        let first = $("#first").val();
+        let last = $("#last").val();
+
+        console.log(first);
+        console.log(last);
+
+        if (first == "true") {
+            $("#prev").addClass("disabled");
+            $("#next").removeClass("disabled");
+        } else if (last == "true") {
+
+            $("#prev").removeClass("disabled");
+            $("#next").addClass("disabled");
+        } else {
+            $("#prev").removeClass("disabled");
+            $("#next").removeClass("disabled");
+        }
+    };
+    checkAuthBtn();
+
+
+
+    $("#btn-like").click(() => {
+        if ($("#icon-like").hasClass("far fa-heart")) {
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
             $("#icon-like").removeClass("far fa-heart");
             $("#icon-likee").removeClass("far fa-heart");
             $("#icon-like").addClass("fas fa-heart");

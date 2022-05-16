@@ -1,29 +1,35 @@
 {{>/layout/header}}
+<!-- 아이디찾기 컨테이너 시작 -->
 <div class="mx-auto m_outer_notice_category m_box_auth" style="padding: 20px;">
 
     <div class="m_box_notice_category ">
         <h1 class="m_txt_title">아이디 찾기</h1>
     </div>
+    <br />
+    <br />
 
-
+    <!-- 아이디가 있을 때 -->
+    {{#findUserId}}
     <div class="m_mh_md text-center">
         아이디는 {{findUserId}} 입니다.
     </div>
-
-    <br />
+    <br /><br /><br />
     <div class="d-flex m_center" style="justify-content: center;">
         <button class="btn m_bg_secondary"><a href="/login-form">로그인하기</a></button>
     </div>
+    {{/findUserId}}
 
-
-    <!-- 컨테이너 시작 -->
-
-
-    <!-- 아이디 찾기 폼 시작 -->
-
-    <!-- 아이디 찾기 폼 끝 -->
+    <!-- 아이디가 없을 때 -->
+    {{^findUserId}}
+    <div class="m_mh_md text-center">
+        입력하신 이메일이 존재하지 않습니다.
+    </div>
+    <br /><br /><br />
+    <div class="d-flex m_center" style="justify-content: center;">
+        <button class=" btn m_bg_secondary"><a href="/find/id-form">아이디 찾기</a></button>
+        <button class="btn m_bg_secondary btn m_ml_md"><a href="/join-form">회원가입</a></button>
+    </div>
+    {{/findUserId}}
 </div>
-</div>
-<!-- 컨테이너 끝 -->
-
+<!-- 아이디찾기 컨테이너 끝 -->
 {{>/layout/footer}}

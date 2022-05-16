@@ -23,9 +23,7 @@ async function update() {
         headers: {
             "Content-Type": "application/json; charset=utf-8"
         }
-
     });
-
     // console.log(response);
 
     let responseParse = await response.json();
@@ -33,7 +31,7 @@ async function update() {
 
     if (responseParse.code == 1) {
         alert("업데이트 성공");
-        location.href = `/s/user/${id}/update-form`;
+        location.href = `/s/user/${id}/detail`;
     } else {
         alert("업데이트 실패");
     }

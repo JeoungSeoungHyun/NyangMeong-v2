@@ -4,7 +4,12 @@
 
     <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">공지사항</h1>
 
+<<<<<<< HEAD
     {{#principal}} {{#userAuth}}
+=======
+    {{#principal}}
+    {{#userAuth}}
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
             <a href="/s/admin/write-form">글쓰기</a>
@@ -13,7 +18,12 @@
             삭제
         </button>
     </div>
+<<<<<<< HEAD
     {{/userAuth}} {{/principal}}
+=======
+    {{/userAuth}}
+    {{/principal}}
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
 
     <form action="/s/admin/notice-delete">
         <table class="table table-hover">
@@ -31,10 +41,21 @@
             <tbody>
                 <tr>
                     <td><input id="chk" type="checkbox" name="id" value="1" /></td>
+<<<<<<< HEAD
                     <th onclick="location.href='/boards/{{id}}'" style="cursor: pointer;" scope="row">{{id}}</th>
                     <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;"> {{title}} </td>
                     <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;"> {{user.userName}} </td>
                     <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;">{{formatCreateDate}}</td>
+=======
+                    <th scope="row">{{id}}</th>
+                    <td> {{title}} </td>
+                    <td> {{user.userName}} </td>
+                    <td>{{formatCreateDate}}</td>
+                    <td>
+                        <a href="/boards/{{id}}">더보기
+                        </a>
+                    </td>
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                 </tr>
 
             </tbody>
@@ -68,7 +89,11 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
+<<<<<<< HEAD
                 url: ,
+=======
+                url: /s/admin / comment - delete ,
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                 type: 'POST',
                 traditional: true,
                 data: {

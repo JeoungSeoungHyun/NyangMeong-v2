@@ -1,17 +1,20 @@
 {{>/layout/header}}
 
-<div class="container" style="height: 70vh;">
+<div class="container">
 
-    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">댕냥이자랑 게시글 관리</h1>
+    <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">게시판 관리</h1>
 
+    {{#principal}}
+    {{#userAuth}}
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
-            <a href="/s/notice/write-form">글쓰기</a>
+            <a href="/s/admin/write-form">글쓰기</a>
         </button>
         <button class="btn m_bg_secondary m_p_sm" onclick="deleteValue();">
             삭제
         </button>
     </div>
+<<<<<<< HEAD
     {{#data}}
     <div class="m_mb_lg">
         <nav class="navbar navbar-expand-lg bg-light">
@@ -52,10 +55,50 @@
     </table>
 
 
+=======
+    {{/userAuth}}
+    {{/principal}}
+
+    <form action="/s/admin/notice-delete">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="checkall" /></td>
+                    <th class="col-1">번호</th>
+                    <th class="col-6">제목</th>
+                    <th class="col-2">작성자</th>
+                    <th class="col-2">작성일자</th>
+                    <th class="col-1">상세보기</th>
+                </tr>
+            </thead>
+
+            {{#jarang.boards.content}}
+            <tbody>
+                <tr>
+                    <td><input id="chk" type="checkbox" name="id" value="1" /></td>
+                    <th scope="row">{{id}}</th>
+                    <td> {{title}} </td>
+                    <td> {{user.userName}} </td>
+                    <td>{{formatCreateDate}}</td>
+                    <td>
+                        <a href="/boards/{{id}}">더보기
+                        </a>
+                    </td>
+                </tr>
+
+            </tbody>
+            {{/jarang.boards.content}}
+        </table>
+
+    </form>
+
+    {{#jarang}}
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
     <input id="first" type="hidden" value="{{boards.first}}" />
     <input id="last" type="hidden" value="{{boards.last}}" />
     <div class="paging-div">
         <ul class="pagination" id="pagination">
+<<<<<<< HEAD
             <li id="prev" class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{prev}}">이전</a></li>
             {{#pageNumbers}}
             <li class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{.}}">{{.}}</a></li>
@@ -64,7 +107,44 @@
         </ul>
     </div>
     {{/data}}
+=======
+            <li id="prev" class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{prev}}">이전</a>
+            </li>
+            {{#pageNumbers}}
+            <li class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{.}}">{{.}}</a></li>
+            {{/pageNumbers}}
+            <li id="next" class="page-item"><a class="page-link" href="/s/admin/jarang-manage/?page={{next}}">다음</a>
+            </li>
+        </ul>
+    </div>
+    {{/jarang}}
+
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
 </div>
+
+<script src="/js/admin.js"></script>
+
+<script>
+    let checkAuthBtn = () => {
+        let first = $("#first").val();
+        let last = $("#last").val();
+
+        console.log(first);
+        console.log(last);
+
+        if (first == "true") {
+            $("#prev").addClass("disabled");
+            $("#next").removeClass("disabled");
+        } else if (last == "true") {
+            $("#prev").removeClass("disabled");
+            $("#next").addClass("disabled");
+        } else {
+            $("#prev").removeClass("disabled");
+            $("#next").removeClass("disabled");
+        }
+    };
+    checkAuthBtn();
+</script>
 <script>
     let checkAuthBtn = () => {
         let first = $("#first").val();
@@ -100,7 +180,11 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
+<<<<<<< HEAD
                 url: ""
+=======
+                url: /s/admin / comment - delete ,
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                 type: 'POST',
                 traditional: true,
                 data: {
@@ -118,5 +202,5 @@
         }
     }
 </script>
-<script src="/js/admin.js"></script>
+
 {{>/layout/footer}}

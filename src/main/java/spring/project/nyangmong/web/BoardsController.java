@@ -63,7 +63,6 @@ public class BoardsController {
     public String detail(@PathVariable Integer id, Model model) {
         User principal = (User) session.getAttribute("principal");
         DetailResponseDto detailResponseDto = boardsService.글상세보기(id, principal);
-
         model.addAttribute("data", detailResponseDto);
 
         return "pages/post/jarangDetail";

@@ -4,7 +4,12 @@
 
     <h1 class="text-center m_txt_title m_ph_lg">공지사항</h1>
 
+<<<<<<< HEAD
     {{#principal}} {{#userAuth}}
+=======
+    {{#principal}}
+    {{#userAuth}}
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
             <a href="/s/admin/write-form">글쓰기</a>
@@ -13,7 +18,12 @@
             삭제
         </button>
     </div>
+<<<<<<< HEAD
     {{/userAuth}} {{/principal}}
+=======
+    {{/userAuth}}
+    {{/principal}}
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
 
     <form action="/s/admin/notice-delete">
         <table class="table table-hover">
@@ -47,10 +57,12 @@
         </ul>
     </div>
 
+
 </div>
 
 <script src="/js/admin.js"></script>
 <script>
+
     function deleteValue() {
         let url = "delete";
         let valueArr = new Array();
@@ -82,6 +94,8 @@
             });
         }
     }
+
+
 </script>
 
 {{>/layout/footer}}

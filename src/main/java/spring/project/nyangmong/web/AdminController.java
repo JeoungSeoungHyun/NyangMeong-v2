@@ -22,6 +22,7 @@ import spring.project.nyangmong.service.CommentService;
 import spring.project.nyangmong.web.dto.members.admin.AdminUserDto;
 import spring.project.nyangmong.web.dto.members.boards.JarangRespDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
+import spring.project.nyangmong.web.dto.members.comment.CommentDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -68,6 +69,15 @@ public class AdminController {
         return "/pages/admin/noticeManage";
     }
 
+    // 댕냥자랑 관리페이지
+    @GetMapping("/s/admin/jarang-manage")
+    public String adminJarang(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        JarangRespDto dto = boardsService.게시글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("jarang", dto);
+        return "/pages/admin/JarangManage";
+    }
+
     // 공지사항 쓰기 페이지
     @GetMapping("/s/admin/write-form")
     public String adminNoticeWriteForm() {
@@ -85,18 +95,13 @@ public class AdminController {
         return "redirect:/notice";
     }
 
-    // 댓글 관리페이지
+    // 댓글관리게시판
     @GetMapping("/s/admin/comment-manage")
-    public String adminComment() {
-        return "pages/admin/commentManage";
-    }
-
-    // 게시글 관리페이지
-    @GetMapping("/s/admin/jarang-manage")
-    public String adminJarang(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        JarangRespDto jarangRespDto = boardsService.게시글목록(page);
-        model.addAttribute("data", jarangRespDto);
-        return "pages/admin/jarangManage";
+    public String adminComment(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        CommentDto dto = commentService.댓글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("comment", dto);
+        return "/pages/admin/commentManage";
     }
 
     // notice-write는 게시판 합쳐지면 있을 것 같음 일단 보류...
