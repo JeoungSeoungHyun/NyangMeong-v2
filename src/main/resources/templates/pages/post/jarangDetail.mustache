@@ -56,7 +56,6 @@
 
 
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
-<<<<<<< HEAD
                         class="btn">목록으로</button> {{#auth}}
                             <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">삭제</button>
                             <a href="/s/boards/{{boards.id}}/update-form" class="btn" style="background-color: #E1E2E1; float: right; margin: 10px;">수정</a> {{/auth}}
@@ -93,37 +92,6 @@
                                             <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
 
                                         </div>
-=======
-                        class="btn">목록으로</button>
-                    {{#principal}}
-                    {{#userAuth}}
-                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
-                        class="btn">관리자삭제</button>
-                    {{/userAuth}}
-                    {{/principal}}
-                    {{#auth}}
-                    <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit"
-                        class="btn">삭제</button>
-                    <a href="/s/boards/{{boards.id}}/update-form" class="btn"
-                        style="background-color: #E1E2E1; float: right; margin: 10px;">수정</a>
-                    {{/auth}}
-                    <br><br><br>
-
-                    <!-- 댓글 시작 -->
-
-                    <div class="card mb-2">
-                        <div class="card-header bg-light">
-                            <i class="fa fa-comment fa"></i> COMMENT
-                        </div>
-                        <form action="/s/boards/{{boards.id}}/comment" method="post">
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
-                                        <button style="float:right; " type="submit"
-                                            class="btn btn-dark mt-3">등록</button>
->>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                                     </li>
                                     {{/comments}} {{/data}}
                                 </ul>
@@ -135,13 +103,6 @@
                     <input id="first" type="hidden" value="{{boards.first}}" />
                     <input id="last" type="hidden" value="{{boards.last}}" />
 
-<<<<<<< HEAD
-                            <div class="list-group" style="margin-top: 20px; margin-bottom: 20px;">
-                                <a href="#" class="list-group-item">이전글: </a>
-                                <a href="#" class="list-group-item">다음글: </a>
-                            </div>
-                        </div>
-=======
                     <div class="paging-div">
                         <ul class="pagination" id="pagination">
                             <li id="prev" class="page-item"><a class="page-link" href="/boards/{{prev}}">이전</a>
@@ -153,7 +114,6 @@
                             </li>
 
                         </ul>
->>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                     </div>
                     {{/pages}}
 
@@ -163,11 +123,7 @@
     </main>
     </div>
 
-<<<<<<< HEAD
-    <script>
-        // 좋아요
-        let likeRendering = () => {
-=======
+
 <script>
 
     let checkAuthBtn = () => {
@@ -191,11 +147,8 @@
     };
     checkAuthBtn();
 
-
-
     $("#btn-like").click(() => {
         if ($("#icon-like").hasClass("far fa-heart")) {
->>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
             $("#icon-like").removeClass("far fa-heart");
             $("#icon-likee").removeClass("far fa-heart");
             $("#icon-like").addClass("fas fa-heart");
