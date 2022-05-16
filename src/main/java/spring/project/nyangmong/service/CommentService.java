@@ -43,10 +43,15 @@ public class CommentService {
     }
 
     @Transactional
-    public void 관리자댓글삭제( List<String> ids ) {
+    public void 관리자댓글삭제(List<String> ids) {
         for (String id : ids) {
             commentRepository.deleteById(Integer.parseInt(id));
         }
+    }
+    
+    @Transactional
+    public void 댓글전체삭제() {
+        commentRepository.deleteAll();
     }
 
     @Transactional

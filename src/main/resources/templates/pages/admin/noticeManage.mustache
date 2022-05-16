@@ -70,13 +70,13 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
-                url: /s/admin / comment - delete ,
+                url: ``,
                 type: 'POST',
                 traditional: true,
                 data: {
                     valueArr: valueArr
                 },
-                success: function(jdata) {
+                success: function (jdata) {
                     if (jdata = 1) {
                         alert("삭제성공");
                         location.replace("list")

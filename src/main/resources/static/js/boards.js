@@ -1,4 +1,8 @@
-
+//게시글 폼 크기
+    $("#summernote").summernote({
+        height: 500
+    });
+    
 //게시글 수정버튼 클릭 이벤트
 $("#btn-updateJarang").click((event) => {
     update();
@@ -59,4 +63,24 @@ $("#img-input").change((event)=>{
     }
 });
 
+//페이징 disable처리
+ let checkAuthBtn = () => {
+        let first = $("#first").val();
+        let last = $("#last").val();
+
+        console.log(first);
+        console.log(last);
+
+        if (first == "true") {
+            $("#prev").addClass("disabled");
+            $("#next").removeClass("disabled");
+        } else if (last == "true") {
+            $("#prev").removeClass("disabled");
+            $("#next").addClass("disabled");
+        } else {
+            $("#prev").removeClass("disabled");
+            $("#next").removeClass("disabled");
+        }
+    };
+    checkAuthBtn();
    

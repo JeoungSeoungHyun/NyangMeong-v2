@@ -69,30 +69,10 @@
 </div>
 
 <script src="/js/admin.js"></script>
-
-<script>
-    let checkAuthBtn = () => {
-        let first = $("#first").val();
-        let last = $("#last").val();
-
-        console.log(first);
-        console.log(last);
-
-        if (first == "true") {
-            $("#prev").addClass("disabled");
-            $("#next").removeClass("disabled");
-        } else if (last == "true") {
-            $("#prev").removeClass("disabled");
-            $("#next").addClass("disabled");
-        } else {
-            $("#prev").removeClass("disabled");
-            $("#next").removeClass("disabled");
-        }
-    };
-    checkAuthBtn();
-</script>
+<script src="/js/boards.js"></script>
 <script>
 
+    //체크박스로 삭제하기 
     function deleteValue() {
         let url = "delete";
         let valueArr = new Array();
@@ -107,7 +87,7 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
-                url: /s/admin / comment - delete ,
+                url: `/s/api/boards/jarang-delete`,
                 type: 'POST',
                 traditional: true,
                 data: {
@@ -124,6 +104,6 @@
             });
         }
     }
-</script>
 
+</script>
 {{>/layout/footer}}

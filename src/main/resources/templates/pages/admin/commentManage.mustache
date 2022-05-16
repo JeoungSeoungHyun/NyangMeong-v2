@@ -29,7 +29,7 @@
         <thead>
             <tr>
                 <td><input type="checkbox" id="checkall" /></td>
-                <th class="col-1">#</th>
+                <th class="col-1">번호</th>
                 <th class="col-6">댓글 내용</th>
                 <th class="col-2">작성자</th>
                 <th class="col-2">작성일자</th>
@@ -73,28 +73,8 @@
     {{/comment}}
 </div>
 
+<script src="/js/boards.js"></script>
 <script>
-
-    let checkAuthBtn = () => {
-        let first = $("#first").val();
-        let last = $("#last").val();
-
-        console.log(first);
-        console.log(last);
-
-        if (first == "true") {
-            $("#prev").addClass("disabled");
-            $("#next").removeClass("disabled");
-        } else if (last == "true") {
-            $("#prev").removeClass("disabled");
-            $("#next").addClass("disabled");
-        } else {
-            $("#prev").removeClass("disabled");
-            $("#next").removeClass("disabled");
-        }
-    };
-    checkAuthBtn();
-
 
     function deleteValue() {
         let url = "delete";
@@ -110,7 +90,7 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
-                url:  ,
+                url: '/s/admin/comment-delete',
                 type: 'POST',
                 traditional: true,
                 data: {

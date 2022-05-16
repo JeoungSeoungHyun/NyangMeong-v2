@@ -104,7 +104,11 @@
                                     {{#auth}}
                                     <button class="badge bg-primary"
                                         onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
-
+                                    {{#principal}}
+                                    {{#userAuth}}
+                                    <button class="badge bg-primary" onclick="deleteAll();">관리자삭제</button>
+                                    {{/userAuth}}
+                                    {{/principal}}
                                 </div>
                             </li>
                             {{/comments}} {{/data}}

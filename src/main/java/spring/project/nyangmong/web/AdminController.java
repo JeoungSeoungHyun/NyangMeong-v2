@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
@@ -104,20 +103,6 @@ public class AdminController {
         return "redirect:/notice";
     }
 
-   
-
-    // notice-write는 게시판 합쳐지면 있을 것 같음 일단 보류...
-    // notice-detail 도 마찬가지
-    // notice-list보기도 마찬가지
-    // notice-update 마찬가지
-    // notice-delete마찬가지
-
-    // 중복
-    @PutMapping("/s/admin/notice-update")
-    public String adminNoticeUpdate() {
-        return "";
-    }
-
     // 중복
     @GetMapping("/s/admin/notice-delete")
     public String adminNoticeDelete() {
@@ -139,7 +124,7 @@ public class AdminController {
             ids.add(idSplit);
         }
         commentService.관리자댓글삭제(ids);
-        return "";
+        return "redirect:/s/admin/comment-manage";
     }
 
 }
