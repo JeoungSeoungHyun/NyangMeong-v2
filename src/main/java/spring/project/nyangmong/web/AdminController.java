@@ -69,7 +69,7 @@ public class AdminController {
         return "/pages/admin/noticeManage";
     }
 
-        //댕냥자랑 관리페이지
+    // 댕냥자랑 관리페이지
     @GetMapping("/s/admin/jarang-manage")
     public String adminJarang(@RequestParam(defaultValue = "0") Integer page, Model model) {
         JarangRespDto dto = boardsService.게시글목록(page);
@@ -95,7 +95,7 @@ public class AdminController {
         return "redirect:/notice";
     }
 
-    //댓글관리게시판
+    // 댓글관리게시판
     @GetMapping("/s/admin/comment-manage")
     public String adminComment(@RequestParam(defaultValue = "0") Integer page, Model model) {
         CommentDto dto = commentService.댓글목록(page);
@@ -103,7 +103,6 @@ public class AdminController {
         model.addAttribute("comment", dto);
         return "/pages/admin/commentManage";
     }
-
 
     // notice-write는 게시판 합쳐지면 있을 것 같음 일단 보류...
     // notice-detail 도 마찬가지

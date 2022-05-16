@@ -1,6 +1,6 @@
 {{>layout/header}}
 
-<div class="container">
+<div class="container m_pb_md">
 
     <div class="m_ph_md">
 
@@ -54,7 +54,7 @@
                         </div>
                         {{/imageList}}
                         <div class="carousel-item active " data-bs-interval="100">
-                        
+
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                         <div class="m_pl_sm m_font_md ">{{keyword}}</div>
                     </div>
                     {{#option}}
-                    <div class="m_ph_sm d-flex" style="overflow:auto">
+                    <div class="m_ph_sm d-flex" style="width: 90%; overflow:auto">
                         <!-- 여러개인경우 슬라이드?-->
                         {{#bathFlagShow}}
                         <div class="d-flex bg-light m_ml_sm " style="flex-direction:column; border-radius: 10px; width: 100px;; height:100px; justify-content: center; align-items: center; padding:10px ">
@@ -298,4 +298,3 @@
     changeColorBox();
 </script>
 {{/places}} {{>layout/footer}}
-

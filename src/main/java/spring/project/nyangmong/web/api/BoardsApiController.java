@@ -31,18 +31,6 @@ public class BoardsApiController {
     // return new ResponseDto<>(1, "성공", boards);
     // }
 
-    // 자랑 UPDATE 글수정 /post/{id} - 글상세보기 페이지가기 - 인증 O
-    @PutMapping("/s/api/boards/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,
-            WriteJarangDto writeJarangDto) {
-
-        User principal = (User) session.getAttribute("principal");
-
-        boardsService.글수정하기(writeJarangDto, id, principal);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @DeleteMapping("/s/api/boards/{id}")
     public ResponseDto<?> deleteById(@PathVariable Integer id) {
         boardsService.글삭제하기(id);

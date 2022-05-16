@@ -13,6 +13,7 @@ import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 @Data
 public class DetailResponseDto {
     private Boards boards;
-    List<CommentResponseDto> comments;
+    private List<CommentResponseDto> comments;
     private boolean auth;
+    private Integer boardLikesId;
 }

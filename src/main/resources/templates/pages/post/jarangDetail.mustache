@@ -14,6 +14,7 @@
                     <hr>
                     <input id="boardsId" type="hidden" value="{{boards.id}}" />
 
+
                     <div class="row mt-1 header">
                         <div class="col-1 board-title">제목</div>
                         <p id="title" class="col-6" style="word-break:break-all; font-weight:bold;">{{boards.title}}</p>
@@ -36,18 +37,63 @@
                     </div>
 
                     <br>
-
                     <div class="m_feeling_div">
                         <div class="button-container like-container m_ml_md">
+                            {{#boardLikesId}}
+                            <input id="boardLikesId" type="hidden" value="{{boardLikesId}}" />
+                            <button id="btn-like" class="m_feeling_a">
+                                <i id="icon-like" class="fas fa-heart"> I LOOOOOVE THIS PICTURE</i> <i id="icon-likee"
+                                    class="fas fa-heart"></i>
+                            {{/boardLikesId}}
+                            {{^boardLikesId}}
                             <button id="btn-like" class="m_feeling_a">
                                 <i id="icon-like" class="far fa-heart"> I LOOOOOVE THIS PICTURE</i> <i id="icon-likee"
                                     class="far fa-heart"></i>
+                            {{/boardLikesId}}
                         </div>
                     </div>
                     <br>
 
 
                     <button style="background-color: #E1E2E1; float: right; margin: 10px;" onclick="history.back()"
+<<<<<<< HEAD
+                        class="btn">목록으로</button> {{#auth}}
+                            <button id="btn-delete" style="background-color: #E1E2E1; float: right; margin: 10px;" type="submit" class="btn">삭제</button>
+                            <a href="/s/boards/{{boards.id}}/update-form" class="btn" style="background-color: #E1E2E1; float: right; margin: 10px;">수정</a> {{/auth}}
+                            <br><br><br>
+
+                            <!-- 댓글 시작 -->
+
+                            <div class="card mb-2">
+                                <div class="card-header bg-light">
+                                    <i class="fa fa-comment fa"></i> COMMENT
+                                </div>
+                                <form action="/s/boards/{{boards.id}}/comment" method="post">
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                <button style="float:right; " type="submit" class="btn btn-dark mt-3">등록</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                            <br />
+                            <div class="card">
+                                <div class="card-header"><i class="fa fa-comment fa"></i> COMMENT LIST</div>
+                                <ul id="reply-box" class="list-group">
+                                    {{#comments}}
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div>{{comment.content}}</div>
+                                        <div class="d-flex">
+                                            <div class="font-italic"> <i class="far fa-user-circle"></i> {{comment.user.userName}} &nbsp;</div>
+
+                                            {{#auth}}
+                                            <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
+
+                                        </div>
+=======
                         class="btn">목록으로</button>
                     {{#principal}}
                     {{#userAuth}}
@@ -77,38 +123,25 @@
                                             rows="3"></textarea>
                                         <button style="float:right; " type="submit"
                                             class="btn btn-dark mt-3">등록</button>
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                                     </li>
+                                    {{/comments}} {{/data}}
                                 </ul>
                             </div>
-                        </form>
-                    </div>
-                    <br />
-                    <div class="card">
-                        <div class="card-header"><i class="fa fa-comment fa"></i> COMMENT LIST</div>
-                        <ul id="reply-box" class="list-group">
-                            {{#comments}}
-                            <li class="list-group-item d-flex justify-content-between">
-                                <div>{{comment.content}}</div>
-                                <div class="d-flex">
-                                    <div class="font-italic"> <i class="far fa-user-circle"></i>
-                                        {{comment.user.userName}} &nbsp;</div>
-
-                                    {{#auth}}
-                                    <button class="badge bg-primary"
-                                        onclick="deleteComment('{{comment.id}}');">삭제</button> {{/auth}}
-
-                                </div>
-                            </li>
-                            {{/comments}} {{/data}}
-                        </ul>
-                    </div>
-                    <br>
-                    <!-- 댓글 끝 -->
+                            <br>
+                            <!-- 댓글 끝 -->
 
                     {{#pages}}
                     <input id="first" type="hidden" value="{{boards.first}}" />
                     <input id="last" type="hidden" value="{{boards.last}}" />
 
+<<<<<<< HEAD
+                            <div class="list-group" style="margin-top: 20px; margin-bottom: 20px;">
+                                <a href="#" class="list-group-item">이전글: </a>
+                                <a href="#" class="list-group-item">다음글: </a>
+                            </div>
+                        </div>
+=======
                     <div class="paging-div">
                         <ul class="pagination" id="pagination">
                             <li id="prev" class="page-item"><a class="page-link" href="/boards/{{prev}}">이전</a>
@@ -120,17 +153,21 @@
                             </li>
 
                         </ul>
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
                     </div>
                     {{/pages}}
 
 
 
                 </div>
-            </div>
-        </div>
     </main>
-</div>
+    </div>
 
+<<<<<<< HEAD
+    <script>
+        // 좋아요
+        let likeRendering = () => {
+=======
 <script>
 
     let checkAuthBtn = () => {
@@ -158,30 +195,58 @@
 
     $("#btn-like").click(() => {
         if ($("#icon-like").hasClass("far fa-heart")) {
+>>>>>>> 9f68bb5f63b830d204d6972132e8fa3458deb02c
             $("#icon-like").removeClass("far fa-heart");
-            $("#icon-like").addClass("fas fa-heart");
-        } else {
-            $("#icon-like").removeClass("fas fa-heart");
-            $("#icon-like").addClass("far fa-heart");
-        }
-        if ($("#icon-likee").hasClass("far fa-heart")) {
             $("#icon-likee").removeClass("far fa-heart");
+            $("#icon-like").addClass("fas fa-heart");
             $("#icon-likee").addClass("fas fa-heart");
-        } else {
+        }
+
+        // 좋아요 취소
+        let unLikeRendering = () => {
+            $("#icon-like").removeClass("fas fa-heart");
             $("#icon-likee").removeClass("fas fa-heart");
+            $("#icon-like").addClass("far fa-heart");
             $("#icon-likee").addClass("far fa-heart");
         }
-    });
-    let dataRendering = async () => {
-        let id = $("#id").val();
-        let response = await fetch(`/api/boards/${id}`);
-        console.log(response);
-        let responseParse = await response.json();
 
-    };
-    dataRendering();
-</script>
+        // 좋아요 요청
+        let like = async() => {
+                let boardsId = $("#boardsId").val();
+                let response = await fetch(`/s/api/boards/${boardsId}/like`, {
+                    method: "post"
+                })
+                if (response.status == 201) {
+                    let responseEntity = await response.json();
+                    $("#boardLikesId").val(responseEntity);
+                    likeRendering();
+                }
+            }
+            // 좋아요 취소 요청
+        let unlike = async() => {
+            let boardsId = $("#boardsId").val();
+            let boardLikesId = $("#boardLikesId").val();
+            let response = await fetch(`/s/api/boards/${boardsId}/like/${boardLikesId}`, {
+                method: "delete"
+            })
 
-<script src="/js/comment.js"></script>
-<script src="/js/boards.js"></script>
-{{> /layout/footer}}
+            let responseParse = await response.json();
+
+            if (responseParse === true) {
+                $("#boardLikesId").val("");
+                unLikeRendering();
+            }
+        }
+
+        $("#btn-like").click(() => {
+            if ($("#icon-like").hasClass("far fa-heart")) {
+                like();
+            } else {
+                unlike();
+            }
+        });
+    </script>
+
+    <script src="/js/comment.js"></script>
+    <script src="/js/boards.js"></script>
+    {{> /layout/footer}}
