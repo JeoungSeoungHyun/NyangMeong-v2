@@ -92,25 +92,6 @@
     checkAuthBtn();
 </script>
 <script>
-    let checkAuthBtn = () => {
-        let first = $("#first").val();
-        let last = $("#last").val();
-
-        console.log(first);
-        console.log(last);
-
-        if (first == "true") {
-            $("#prev").addClass("disabled");
-            $("#next").removeClass("disabled");
-        } else if (last == "true") {
-            $("#prev").removeClass("disabled");
-            $("#next").addClass("disabled");
-        } else {
-            $("#prev").removeClass("disabled");
-            $("#next").removeClass("disabled");
-        }
-    };
-    checkAuthBtn();
 
     function deleteValue() {
         let url = "delete";
@@ -132,7 +113,7 @@
                 data: {
                     valueArr: valueArr
                 },
-                success: function(jdata) {
+                success: function (jdata) {
                     if (jdata = 1) {
                         alert("삭제성공");
                         location.replace("list")

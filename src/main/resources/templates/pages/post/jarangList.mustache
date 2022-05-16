@@ -45,15 +45,14 @@
                     <div class="thumbnail">
                         {{#thumnail}}
                         <a href="/boards/{{id}}">
-                            <img class="m_box_image" src="/upload/{{thumnail}}">
+                            <img class="m_box_image m_list_thumnail" src="/upload/{{thumnail}}"
+                                onerror="this.src='/upload/{{thumnail}}'">
                         </a>
-
                         {{/thumnail}}
                         {{^thumnail}}
                         <a href="/boards/{{id}}">
-                            <img class="m_box_image" src="/images/cat.jpg">
+                            <img class="m_box_image m_list_thumnail" src="/images/cat.jpg">
                         </a>
-
                         {{/thumnail}}
 
                         <div class="caption">

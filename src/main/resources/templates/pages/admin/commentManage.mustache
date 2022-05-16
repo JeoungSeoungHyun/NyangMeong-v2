@@ -1,6 +1,6 @@
 {{>/layout/header}}
 
-<div class="container" style="height: 70vh;">
+<div class="container">
 
     <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">댓글 관리</h1>
 
@@ -46,7 +46,7 @@
                 <td> {{user.userName}} </td>
                 <td>{{formatCreateDate}}</td>
                 <td>
-                    <a href="/boards/{{id}}">더보기
+                    <a href="/boards/{{boards.id}}">더보기
                     </a>
                 </td>
             </tr>
@@ -55,18 +55,47 @@
         {{/comment.comment.content}}
     </table>
 
+
+    {{#comment}}
+    <input id="first" type="hidden" value="{{comment.first}}" />
+    <input id="last" type="hidden" value="{{comment.last}}" />
     <div class="paging-div">
         <ul class="pagination" id="pagination">
-            <li class="page-item"><a class="page-link" href="">이전</a></li>
-            <li class="page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
-            <li><a class="page-link" href="">다음</a></li>
+            <li id="prev" class="page-item"><a class="page-link" href="/s/admin/comment-manage/?page={{prev}}">이전</a>
+            </li>
+            {{#pageNumbers}}
+            <li class="page-item"><a class="page-link" href="/s/admin/comment-manage/?page={{.}}">{{.}}</a></li>
+            {{/pageNumbers}}
+            <li id="next" class="page-item"><a class="page-link" href="/s/admin/comment-manage/?page={{next}}">다음</a>
+            </li>
         </ul>
     </div>
+    {{/comment}}
 </div>
 
 <script>
+
+    let checkAuthBtn = () => {
+        let first = $("#first").val();
+        let last = $("#last").val();
+
+        console.log(first);
+        console.log(last);
+
+        if (first == "true") {
+            $("#prev").addClass("disabled");
+            $("#next").removeClass("disabled");
+        } else if (last == "true") {
+            $("#prev").removeClass("disabled");
+            $("#next").addClass("disabled");
+        } else {
+            $("#prev").removeClass("disabled");
+            $("#next").removeClass("disabled");
+        }
+    };
+    checkAuthBtn();
+
+
     function deleteValue() {
         let url = "delete";
         let valueArr = new Array();

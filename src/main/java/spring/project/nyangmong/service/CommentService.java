@@ -72,10 +72,13 @@ public class CommentService {
         for (int i = 0; i < commentsEntity.getTotalPages(); i++) {
             pageNumbers.add(i);
         }
+  
         CommentDto commentDto = new CommentDto(
                 commentsEntity,
                 commentsEntity.getNumber() - 1,
-                commentsEntity.getNumber() + 1, pageNumbers);
+                commentsEntity.getNumber() + 1,
+                pageNumbers
+                );
 
         return commentDto;
     }
