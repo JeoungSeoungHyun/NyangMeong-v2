@@ -1,8 +1,14 @@
 package spring.project.nyangmong.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +18,7 @@ import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.web.dto.members.comment.CommentDto;
 import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
 @RequiredArgsConstructor
@@ -24,11 +31,9 @@ public class CommentService {
     @Transactional
     public void 댓글삭제(Integer id, User principal) {
         Optional<Comment> commentOp = commentRepository.findById(id);
-
         if (commentOp.isPresent()) {
             Comment commentEntity = commentOp.get();
-
-            if (principal.getId() != commentEntity.getId()) {
+            if (principal.getId() != commentEntity.getUser().getId()) {
                 throw new RuntimeException("권한이 없습니다");
             }
         } else {
@@ -56,6 +61,23 @@ public class CommentService {
             throw new RuntimeException("없는 게시글에 댓글을 작성할 수 없습니다");
         }
         commentRepository.save(comment);
+    }
+
+    
+ public CommentDto 댓글목록(Integer page) {
+        Pageable pq = PageRequest.of(page, 8, Sort.by(Direction.DESC, "id"));
+
+        Page<Comment> commentsEntity = commentRepository.listComment(pq);
+        List<Integer> pageNumbers = new ArrayList<>();
+        for (int i = 0; i < commentsEntity.getTotalPages(); i++) {
+            pageNumbers.add(i);
+        }
+        CommentDto commentDto = new CommentDto(
+                commentsEntity,
+                commentsEntity.getNumber() - 1,
+                commentsEntity.getNumber() + 1, pageNumbers);
+
+        return commentDto;
     }
 
     /* UPDATE */

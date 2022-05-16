@@ -43,16 +43,19 @@
                 {{#data.boards.content}}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        {{#content.thumnail}}
+                        {{#thumnail}}
                         <a href="/boards/{{id}}">
                             <img class="m_box_image" src="/upload/{{thumnail}}">
                         </a>
-                        {{/content.thumnail}}
-                        {{^content.thumnail}}
+
+                        {{/thumnail}}
+                        {{^thumnail}}
                         <a href="/boards/{{id}}">
                             <img class="m_box_image" src="/images/cat.jpg">
                         </a>
-                        {{/content.thumnail}}
+
+                        {{/thumnail}}
+
                         <div class="caption">
                             <div class="m_font_lg m_mt_sm" style="font-weight: bold;">{{title}}</div>
                         </div>
@@ -64,13 +67,15 @@
     </div>
 
     {{#data}}
-    <input id="first" type="hidden" value="{{boards.first}}"/>
-    <input id="last" type="hidden" value="{{boards.last}}"/>
+    <input id="first" type="hidden" value="{{boards.first}}" />
+    <input id="last" type="hidden" value="{{boards.last}}" />
+
     <div class="paging-div">
         <ul class="pagination" id="pagination">
             <li id="prev" class="page-item"><a class="page-link" href="/boards/?page={{prev}}">이전</a></li>
             {{#pageNumbers}}
-                <li class="page-item"><a class="page-link" href="/boards/?page={{.}}">{{.}}</a></li>
+            <li class="page-item"><a class="page-link" href="/boards/?page={{.}}">{{.}}</a></li>
+
             {{/pageNumbers}}
             <li id="next" class="page-item"><a class="page-link" href="/boards/?page={{next}}">다음</a></li>
         </ul>
@@ -86,10 +91,11 @@
         console.log(first);
         console.log(last);
 
-        if(first == "true"){
+        if (first == "true") {
             $("#prev").addClass("disabled");
             $("#next").removeClass("disabled");
-        } else if(last == "true"){
+        } else if (last == "true") {
+
             $("#prev").removeClass("disabled");
             $("#next").addClass("disabled");
         } else {

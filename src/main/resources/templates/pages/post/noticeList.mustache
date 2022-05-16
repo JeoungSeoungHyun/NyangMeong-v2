@@ -4,7 +4,7 @@
 
     <h1 class="text-center m_txt_title m_ph_lg">공지사항</h1>
 
-{{#principal}}
+    {{#principal}}
     {{#userAuth}}
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
@@ -14,7 +14,7 @@
             삭제
         </button>
     </div>
-       {{/userAuth}}
+    {{/userAuth}}
     {{/principal}}
 
     <form action="/s/admin/notice-delete">
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
 
-    {{#notices}}
+            {{#notices}}
             <tbody>
                 <tr>
                     <th scope="row">{{num}}</th>
@@ -43,7 +43,7 @@
                 </tr>
 
             </tbody>
-    {{/notices}}
+            {{/notices}}
         </table>
 
     </form>
@@ -55,10 +55,12 @@
         </ul>
     </div>
 
+
 </div>
 
 <script src="/js/admin.js"></script>
 <script>
+
     function deleteValue() {
         let url = "delete";
         let valueArr = new Array();
@@ -91,6 +93,8 @@
             });
         }
     }
+
+
 </script>
 
 {{>/layout/footer}}
