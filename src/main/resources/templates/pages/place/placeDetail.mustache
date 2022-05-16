@@ -33,7 +33,7 @@
 
     </div>
     {{#places}}
-
+    <input id="placesId" type="hidden" value="{{contentSeq}}"/>
     <input id="latitude" type="hidden" value="{{latitude}}" />
     <input id="longitude" type="hidden" value="{{longitude}}" />
 
@@ -65,12 +65,30 @@
                     <!-- 좋아요,즐찾버튼 시작 -->
 
                     <div class="d-flex " style="position: absolute; left: 400px; top: -35px ">
+                        {{#placeLikesId}}
+                        <input id="placeLikesId" type="hidden" value="{{placeLikesId}}"/>
+                        <div class="d-flex bg-light text-danger" style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
+                            <i id="btn-like" class="material-icons ">favorite</i>
+                        </div>
+                        {{/placeLikesId}}
+                        {{^placeLikesId}}
+                        <input id="placeLikesId" type="hidden" value=""/>
                         <div class="d-flex bg-light " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
                             <i id="btn-like" class="material-icons ">favorite_border</i>
                         </div>
+                        {{/placeLikesId}}
+                        {{#favId}}
+                        <input id="favId" type="hidden" value="{{favId}}" />
+                        <div class="d-flex bg-light m_ml_sm text-warning" style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
+                            <i id="btn-favorite" class="material-icons ">star</i>
+                        </div>
+                        {{/favId}}
+                        {{^favId}}
+                        <input id="favId" type="hidden" value="" />
                         <div class="d-flex bg-light m_ml_sm " style="width: 40px; height:40px; justify-content: center; align-items: center; border-radius: 25px; box-shadow: 0px 0px 3px 0px rgb(110, 105, 105) inset ">
                             <i id="btn-favorite" class="material-icons ">star_border</i>
                         </div>
+                        {{/favId}}
                     </div>
                     <!-- 좋아요, 즐찾버튼 끝 -->
 
@@ -219,36 +237,109 @@
 </div>
 
 <script>
-    //  좋아요 버튼 활성화, 비활성화
-    $("#btn-like ").click((event) => {
-        let status = $("#btn-like ")[0].innerText;
-        console.log(status);
-        if (status == "favorite_border") {
-            console.log($("#btn-like "));
-            $("#btn-like ")[0].innerText = 'favorite';
-            $("#btn-like ").addClass("text-danger");
-        } else {
-            $("#btn-like ")[0].innerText = 'favorite_border';
-            $("#btn-like ").removeClass("text-danger");
+     // 좋아요
+     let likeRendering = () => {
+        $("#btn-like")[0].innerText = 'favorite';
+        $("#btn-like").addClass("text-danger");
+    }
+    // 좋아요 취소
+    let unLikeRendering = () => {
+        $("#btn-like")[0].innerText = 'favorite_border';
+        $("#btn-like").removeClass("text-danger");
+    }
+
+
+    // 좋아요 요청
+    let like = async() => {
+        let placesId = $("#placesId").val();
+        let response = await fetch(`/s/api/places/${placesId}/like`, {
+            method: "post"
+        })
+        if (response.status == 201) {
+            let responseEntity = await response.json();
+            $("#placeLikesId").val(responseEntity);
+            likeRendering();
         }
-    });
-    // 즐겨찾기 버튼 활성화, 비활성화
-    $("#btn-favorite ").click((event) => {
-        let status = $("#btn-favorite ")[0].innerText;
-        console.log(status);
-        if (status == "star_border") {
-            $("#btn-favorite ")[0].innerText = 'star';
-            $("#btn-favorite ").addClass("text-warning");
+    }
+
+    // 좋아요 취소 요청
+    let unlike = async() => {
+        let placesId = $("#placesId").val();
+        let placeLikesId = $("#placeLikesId").val();
+        let response = await fetch(`/s/api/places/${placesId}/like/${placeLikesId}`, {
+            method: "delete"
+        })
+
+        let responseParse = await response.json();
+
+        if (responseParse === true) {
+            $("#placeLikesId").val("");
+            unLikeRendering();
+        }
+    }
+
+    //  좋아요 버튼 클릭이벤트
+    $("#btn-like ").click((event) => {
+        let status = $("#btn-like")[0].innerText;
+        if (status == "favorite_border") {
+            like();
         } else {
-            $("#btn-favorite ")[0].innerText = 'star_border';
-            $("#btn-favorite ").removeClass("text-warning");
+            unlike();
         }
     });
 
+    // 즐겨찾기
+    let favRendering = () => {
+        $("#btn-favorite")[0].innerText = 'star';
+        $("#btn-favorite").addClass("text-warning");
+    }
+    // 즐겨찾기 취소
+    let unFavRendering = () => {
+        $("#btn-favorite")[0].innerText = 'star_border';
+        $("#btn-favorite").removeClass("text-warning");
+    }
+
+    // 즐겨찾기 요청
+    let fav = async() => {
+        let placesId = $("#placesId").val();
+        let response = await fetch(`/s/api/places/${placesId}/fav`, {
+            method: "post"
+        })
+        if (response.status == 201) {
+            let responseEntity = await response.json();
+            $("#favId").val(responseEntity);
+            favRendering();
+        }
+    }
+
+    // 즐겨찾기 취소 요청
+    let unFav = async() => {
+        let placesId = $("#placesId").val();
+        let favId = $("#favId").val();
+        let response = await fetch(`/s/api/places/${placesId}/fav/${favId}`, {
+            method: "delete"
+        })
+
+        let responseParse = await response.json();
+
+        if (responseParse === true) {
+            $("#favId").val("");
+            unFavRendering();
+        }
+    }
+
+    // 즐겨찾기 버튼 활성화, 비활성화
+    $("#btn-favorite").click((event) => {
+        let status = $("#btn-favorite")[0].innerText;
+        if (status == "star_border") {
+            fav();
+        } else {
+            unFav();
+        }
+    });
 
     let latitude = $("#latitude").val();
     let longitude = $("#longitude").val();
-
 
     //지도 옵션
     var mapOptions = {

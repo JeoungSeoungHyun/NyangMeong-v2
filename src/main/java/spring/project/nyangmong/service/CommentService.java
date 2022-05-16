@@ -43,7 +43,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void 관리자댓글삭제( List<String> ids ) {
+    public void 관리자댓글삭제(List<String> ids) {
         for (String id : ids) {
             commentRepository.deleteById(Integer.parseInt(id));
         }
@@ -63,13 +63,14 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    
- public CommentDto 댓글목록(Integer page) {
+    public CommentDto 댓글목록(Integer page) {
         Pageable pq = PageRequest.of(page, 8, Sort.by(Direction.DESC, "id"));
 
         Page<Comment> commentsEntity = commentRepository.listComment(pq);
+        System.out.println("페이지 수 : " + commentsEntity.getTotalPages());
         List<Integer> pageNumbers = new ArrayList<>();
         for (int i = 0; i < commentsEntity.getTotalPages(); i++) {
+            System.out.println(i);
             pageNumbers.add(i);
         }
         CommentDto commentDto = new CommentDto(
@@ -81,12 +82,12 @@ public class CommentService {
     }
 
     /* UPDATE */
-     @Transactional
-     public void 댓글수정(Integer userId, CommentResponseDto dto) {
-         Comment comment = commentRepository.findByuserId(
-           userId);
+    @Transactional
+    public void 댓글수정(Integer userId, CommentResponseDto dto) {
+        Comment comment = commentRepository.findByuserId(
+                userId);
 
-     }
+    }
 
     // 댓글 수정
     // @Transactional

@@ -2,24 +2,34 @@ package spring.project.nyangmong.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.fav.Fav;
+import spring.project.nyangmong.domain.fav.FavRepository;
 import spring.project.nyangmong.domain.image.ImageRepository;
 import spring.project.nyangmong.domain.image.PublicDataImage;
+import spring.project.nyangmong.domain.placelikes.PlaceLikes;
+import spring.project.nyangmong.domain.placelikes.PlaceLikesRepository;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.PlaceService;
 import spring.project.nyangmong.util.ChooseImg;
 import spring.project.nyangmong.util.ContentSeqDownload;
@@ -28,7 +38,6 @@ import spring.project.nyangmong.web.dto.craw.PlaceDto;
 import spring.project.nyangmong.web.dto.craw.Result;
 import spring.project.nyangmong.web.dto.places.ImageListDto;
 import spring.project.nyangmong.web.dto.places.InfoRespDto;
-import spring.project.nyangmong.web.dto.places.PlaceListDto;
 import spring.project.nyangmong.web.dto.places.PlacesOptionDto;
 
 @RequiredArgsConstructor
@@ -37,6 +46,8 @@ public class PlaceController {
     private final PlaceService placeService;
     private final PlaceRepository placeRepository;
     private final ImageRepository imageRepository;
+    private final FavRepository favRepository;
+    private final PlaceLikesRepository placeLikesRepository;
     private final HttpSession session;
     private final OptionChange change;
 
@@ -59,6 +70,7 @@ public class PlaceController {
 
     @GetMapping("/place/{contentSeq}")
     public String detailPlaces(@PathVariable Integer contentSeq, Model model) {
+        User principal = (User) session.getAttribute("principal");
         Places places = placeService.상세보기(contentSeq);
         List<PublicDataImage> imageList = imageRepository.ImagecontentSeq(contentSeq);
         ImageListDto dto = new ImageListDto();
@@ -73,6 +85,23 @@ public class PlaceController {
         option.setInOutFlagShow(placeService.옵션표시(places.getInOutFlag()));
         option.setPetFlagShow(placeService.옵션표시(places.getPetFlag()));
         // List<PlaceDto> placesDto = new ArrayList<>();
+        Integer favId = null;
+        Integer placeLikesId = null;
+        if (principal != null) {
+            Optional<Fav> favOp = favRepository.mFindUserIdAndPlacesId(principal.getId(), places.getContentSeq());
+            if (favOp.isPresent()) {
+                favId = favOp.get().getId();
+            }
+            Optional<PlaceLikes> placeLikesOp = placeLikesRepository.mFindUserIdAndPlacesId(principal.getId(),
+                    places.getContentSeq());
+            if (placeLikesOp.isPresent()) {
+                placeLikesId = placeLikesOp.get().getId();
+            }
+        }
+        System.out.println("즐찾 : " + favId);
+        System.out.println("좋아요 : " + placeLikesId);
+        model.addAttribute("favId", favId);
+        model.addAttribute("placeLikesId", placeLikesId);
         model.addAttribute("option", option);
         model.addAttribute("imageList", dto);
         model.addAttribute("places", places);
@@ -307,6 +336,40 @@ public class PlaceController {
             }
         }
         return "redirect:/";
+    }
+
+    // 좋아요
+    @PostMapping("/s/api/places/{placesId}/like")
+    public ResponseEntity<?> boardsLike(@PathVariable Integer placesId) {
+        User principal = (User) session.getAttribute("principal");
+        PlaceLikes placeLikesEntity = placeService.좋아요(placesId, principal);
+        Integer placeLikesId = placeLikesEntity.getId();
+        return new ResponseEntity<>(placeLikesId, HttpStatus.CREATED);
+    }
+
+    // 좋아요 취소
+    @DeleteMapping("/s/api/places/{placesId}/like/{placeLikesId}")
+    public ResponseEntity<?> boardsUnLike(@PathVariable Integer placeLikesId) {
+        User principal = (User) session.getAttribute("principal");
+        boolean result = placeService.좋아요취소(placeLikesId, principal);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    // 즐겨찾기
+    @PostMapping("/s/api/places/{placesId}/fav")
+    public ResponseEntity<?> boardsFav(@PathVariable Integer placesId) {
+        User principal = (User) session.getAttribute("principal");
+        Fav favEntity = placeService.즐겨찾기(placesId, principal);
+        Integer favId = favEntity.getId();
+        return new ResponseEntity<>(favId, HttpStatus.CREATED);
+    }
+
+    // 즐겨찾기 취소
+    @DeleteMapping("/s/api/places/{placesId}/fav/{favId}")
+    public ResponseEntity<?> boardsUnFav(@PathVariable Integer favId) {
+        User principal = (User) session.getAttribute("principal");
+        boolean result = placeService.즐겨찾기취소(favId, principal);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

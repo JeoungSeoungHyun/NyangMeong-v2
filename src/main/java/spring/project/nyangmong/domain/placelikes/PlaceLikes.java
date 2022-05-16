@@ -1,5 +1,7 @@
 package spring.project.nyangmong.domain.placelikes;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -12,13 +14,13 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.places.Places;
 import spring.project.nyangmong.domain.user.User;
 
@@ -42,12 +44,7 @@ public class PlaceLikes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "boardsId")
-    @ManyToOne
-    private Boards boards;
-
     @JoinColumn(name = "userId")
-    @JsonIgnoreProperties({ "boardsList" })
     @ManyToOne
     private User user;
 
@@ -55,9 +52,9 @@ public class PlaceLikes {
     @ManyToOne
     private Places places;
 
-    @Builder
-    public PlaceLikes(Boards boards, User user) {
-        this.boards = boards;
-        this.user = user;
-    }
+    @CreatedDate
+    private LocalDateTime createDate;
+
+    @LastModifiedDate
+    private LocalDateTime updateDate;
 }

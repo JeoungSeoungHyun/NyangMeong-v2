@@ -78,7 +78,6 @@ public class BoardsService {
         // 게시글 확인
         Boards boardsEntity = mFinBoards(boardsId);
         // 게시글 수정,삭제 권한 확인
-        System.out.println("확인1");
         boolean boardAuth = mCheckAuth(principal, boardsEntity.getUser());
         // 댓글 수정,삭제 권한 확인
         List<CommentResponseDto> comments = new ArrayList<>();
@@ -91,7 +90,6 @@ public class BoardsService {
             dto.setAuth(auth);
             comments.add(dto);
         }
-        System.out.println("확인2");
         // 좋아요 정보 확인
         if (principal != null) {
             Optional<BoardLikes> boardLikesOp = boardLikesRepository.mFindBoardIdAndUserId(boardsEntity.getId(),
