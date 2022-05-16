@@ -4,7 +4,7 @@
 
     <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">공지사항</h1>
 
-{{#principal}}
+    {{#principal}}
     {{#userAuth}}
     <div class="m_box_right m_pb_lg">
         <button class="btn m_bg_secondary m_p_sm m_mr_md">
@@ -14,7 +14,7 @@
             삭제
         </button>
     </div>
-       {{/userAuth}}
+    {{/userAuth}}
     {{/principal}}
 
     <form action="/s/admin/notice-delete">
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
 
-  {{#notice}}
+            {{#notice}}
             <tbody>
                 <tr>
                     <td><input id="chk" type="checkbox" name="id" value="1" /></td>
@@ -39,13 +39,13 @@
                     <td> {{user.userName}} </td>
                     <td>{{formatCreateDate}}</td>
                     <td>
-                        <a href="/boards/{id}">더보기
+                        <a href="/boards/{{id}}">더보기
                         </a>
                     </td>
                 </tr>
 
             </tbody>
-              {{/notice}}
+            {{/notice}}
         </table>
 
     </form>
@@ -53,9 +53,6 @@
     <div class="paging-div">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="">이전</a></li>
-            <li class="page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
             <li><a class="page-link" href="">다음</a></li>
         </ul>
     </div>
@@ -78,7 +75,7 @@
         } else {
             let chk = confirm("정말 삭제하겠습니까?");
             $.ajax({
-                url:  ,
+                url: /s/admin / comment - delete ,
                 type: 'POST',
                 traditional: true,
                 data: {
