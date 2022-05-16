@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import spring.project.nyangmong.domain.user.User;
 
@@ -28,6 +29,10 @@ public interface BoardsRepository extends JpaRepository<Boards, Integer> {
     List<Boards> listNotice(Pageable pq);
 
     //자랑 이전글 다음글
-    // @Query(value = "", nativeQuery = true)
+    // @Query(value = "SELECT id, LAG(id, -1) OVER(ORDER BY id DESC), LAG(id,1) OVER(ORDER BY id DESC) FROM boards;", nativeQuery = true)
+    // Page<Boards> updownJarang(Pageable pq);
 
+    //게시글 제목으로 검색
+    @Query(value = "SELECT * FROM boards WHERE title like %:keyword%", nativeQuery = true)
+    Page<Boards> findByTitleContaining(@Param("keyword") String keyword, Pageable pageable);
 }

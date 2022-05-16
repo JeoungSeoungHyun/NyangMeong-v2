@@ -18,8 +18,9 @@
                         </ul>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control" placeholder="Search">
-                                <button type="submit" class="btn btn-secondary m_ml_sm"
+                                <input id="mykeyword" name="mykeyword" class="form-control" type="text"
+                                    placeholder="Search">
+                                <button id="mybtn-search" class="btn btn-secondary m_ml_sm" type="submit"
                                     style="width: 100px;">검색</button>
                             </div>
                         </form>
@@ -39,7 +40,7 @@
                 </button>
             </div>
 
-            <div class="row">
+            <div class="row" id="post-box">
                 {{#data.boards.content}}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail">
@@ -83,5 +84,32 @@
 </div>
 
 <script src="/js/boards.js"></script>
+<script>
+    let mykeyword = $("#mykeyword").val("");
+
+    $("#mybtn-search").click(() => {
+        page = 0; // 페이지 초기화 
+        mykeyword = $("#mykeyword").val();
+        $("#post-box").empty();
+        list(mykeyword);
+    });
+
+
+    async function list(mykeyword) {
+        let response = await fetch(`/api/jarang/keywordlist?page=${page}&mykeyword=${mykeyword}`);
+        let responseParse = await response.json();
+        console.log(responseParse);
+        console.log(responseParse.first);
+        if (response.status === 200) {
+            pagingDisabled(responseParse);
+            responseParse.content.forEach((post) => {
+                $("#post-box").append(postItemRender(post));
+            });
+        } else {
+            alert("잘못된 요청입니다.");
+        }
+    }
+
+</script>
 
 {{> /layout/footer}}

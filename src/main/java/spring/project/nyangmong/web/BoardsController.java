@@ -60,8 +60,11 @@ public class BoardsController {
 
     // 글상세보기
     @GetMapping("/boards/{id}")
-    public String detail(@PathVariable Integer id, Model model) {
+    public String detail(@PathVariable Integer id, Model model, @RequestParam(defaultValue = "0") Integer page) {
         User principal = (User) session.getAttribute("principal");
+         JarangRespDto jarangRespDto = boardsService.게시글목록(page);
+         model.addAttribute("pages", jarangRespDto);
+        
         DetailResponseDto detailResponseDto = boardsService.글상세보기(id, principal);
         model.addAttribute("data", detailResponseDto);
 
