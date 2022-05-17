@@ -1,4 +1,6 @@
-// 유저아이디 및 비밀번호 중복체크하기
+// 회원가입 중복체크 (사용자, 관리자)
+// 아이디, 이메일 중복체크 (DB에 같은 값이 있는지)
+// 패스워드 중복체크 (패스워드, 패스워드 확인 둘의 값이 일치하는지)
 
 let valid = {
     userId: {
@@ -41,10 +43,17 @@ function validation() {
         return true;
     } else { // 중복이라면
         let errorMsgs = ``;
-
-        errorMsgs += `${valid.userId.msg}<br/>`;
-        errorMsgs += `${valid.password.msg}<br/>`;
-        errorMsgs += `${valid.email.msg}<br/>`;
+        
+        // errorMsgs가 있을 때만 출력하기
+        if(valid.userId.msg != ``){
+            errorMsgs += `${valid.userId.msg}<br/>`;
+        }
+        if(valid.password.msg != ``){
+            errorMsgs += `${valid.password.msg}<br/>`;
+        }
+        if(valid.email.msg != ``){
+            errorMsgs += `${valid.email.msg}<br/>`;
+        }
 
         $(".my_error_box").html(errorMsgs);
         $(".my_error_box").removeClass("my_hidden");

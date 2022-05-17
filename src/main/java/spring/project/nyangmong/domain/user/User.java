@@ -64,7 +64,7 @@ public class User {
     private LocalDateTime createDate;
 
     // 유저 권한
-    @Column(length = 20)
+    @Column(length = 11)
     // @ColumnDefault("일반")
     private String userAuth;
 

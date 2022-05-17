@@ -1,16 +1,22 @@
 package spring.project.nyangmong.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
@@ -19,6 +25,7 @@ import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.AdminService;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.service.CommentService;
+import spring.project.nyangmong.util.Script;
 import spring.project.nyangmong.web.dto.members.admin.AdminUserDto;
 import spring.project.nyangmong.web.dto.members.boards.JarangRespDto;
 import spring.project.nyangmong.web.dto.members.boards.WriteNoticeDto;
@@ -42,15 +49,25 @@ public class AdminController {
 
     // 관리자 회원가입
     @PostMapping("/admin/join")
-    public String adminjoin(AdminUserDto adminUserDto) {
-        System.out.println(adminUserDto);
+    public @ResponseBody String adminjoin(@Valid AdminUserDto adminUserDto, BindingResult bindingResult) {
+        // System.out.println(adminUserDto);
 
+        // validation
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorMap = new HashMap<>();
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                errorMap.put(fe.getField(), fe.getDefaultMessage());
+            }
+            // 유효성 검사해서 맞지 않을 시 스크립트 안내창 후 페이지 뒤로가기(데이터 남아있음)
+            throw new CustomException(errorMap.toString());
+        }
+
+        // 관리자 코드가 일치여부 확인
         if (adminUserDto.getAdminCode().equals("juwongenius")) {
-            adminService.관리자회원가입(adminUserDto);
-
-            return "redirect:/login-form";
+            adminService.관리자회원가입(adminUserDto.toEntity());
+            return Script.href("/login-form");
         } else {
-            throw new CustomException("관리자코드가 틀렸습니다");
+            return Script.back("관리자 코드가 일치하지 않습니다.");
         }
     }
 
