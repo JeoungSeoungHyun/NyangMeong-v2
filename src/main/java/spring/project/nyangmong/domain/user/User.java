@@ -12,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -42,25 +40,19 @@ public class User {
     private Integer id;
 
     // 회원가입 시 ID
-    @Column(length = 20, nullable = false, unique = true)
+    @Column(length = 12, nullable = false, unique = true)
     private String userId;
 
     // 유저닉네임
-    @NotBlank(message = "아이디를 입력해주세요.")
-    @Size(min = 2, max = 12, message = "아이디는 2자 이상 12자 이하로 입력해주세요.")
     @Column(unique = true, nullable = false, length = 12)
     private String userName;
 
     // 회원가입 시 입력할 비밀번호
-    // 1234 -> SHA256(해시 알고리즘) -> AB4539GDUF3AE -> 이렇게 안하면 시큐리티 거부
-    @NotBlank(message = "비밀번호를 입력해주세요.")
-    @Size(min = 2, max = 12, message = "비밀번호는 2자 이상 12자 이하로 입력해주세요.")
     @Column(nullable = false, length = 12)
     private String password;
 
     // 회원가입 시 받을 이메일
-    @NotBlank(message = "이메일을 입력해주세요.")
-    @Column(nullable = false, length = 300)
+    @Column(nullable = false, length = 100, unique = true)
     private String email;
 
     // 프로필 사진 경로 저장

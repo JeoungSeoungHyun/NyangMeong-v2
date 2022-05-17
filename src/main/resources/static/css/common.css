@@ -133,6 +133,16 @@ i:hover {
 
 
 /* 태그 숨기기 */
+
 .my_hidden {
     display: none;
+}
+
+
+/* 회원가입 에러창 */
+
+.my_error_box {
+    background-color: #FFE082;
+    font-style: italic;
+    padding: 10px;
 }
