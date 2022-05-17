@@ -237,6 +237,8 @@
 </div>
 
 <script>
+    let principalId = $("#principalId").val();
+    
      // 좋아요
      let likeRendering = () => {
         $("#btn-like")[0].innerText = 'favorite';
@@ -280,6 +282,11 @@
 
     //  좋아요 버튼 클릭이벤트
     $("#btn-like ").click((event) => {
+        if(principalId == undefined){
+            alert("로그인이 필요한 서비스입니다");
+            location.href="/login-form";
+            return;
+        }
         let status = $("#btn-like")[0].innerText;
         if (status == "favorite_border") {
             like();
@@ -330,6 +337,11 @@
 
     // 즐겨찾기 버튼 활성화, 비활성화
     $("#btn-favorite").click((event) => {
+        if(principalId == undefined){
+            alert("로그인이 필요한 서비스입니다");
+            location.href="/login-form";
+            return;
+        }
         let status = $("#btn-favorite")[0].innerText;
         if (status == "star_border") {
             fav();

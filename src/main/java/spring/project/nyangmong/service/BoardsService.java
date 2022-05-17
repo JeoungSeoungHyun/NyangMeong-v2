@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boardlikes.BoardLikes;
@@ -193,7 +192,34 @@ public class BoardsService {
         } else {
             throw new CustomApiException("좋아요 취소 권한이 없습니다.");
         }
+    }
 
+    // 관리자공지사항삭제
+    @Transactional
+    public void 관리자공지사항삭제(List<Integer> ids, User principal) {
+
+        // 권한(관리자) 확인
+        if (principal.getUserAuth() != null) {
+            for (Integer id : ids) {
+                boardsRepository.deleteById(id);
+            }
+        } else {
+            throw new CustomException("권한이 없습니다.");
+        }
+    }
+
+    // 관리자게시글삭제
+    @Transactional
+    public void 관리자게시글삭제(List<Integer> ids, User principal) {
+
+        // 권한(관리자) 확인
+        if (principal.getUserAuth() != null) {
+            for (Integer id : ids) {
+                boardsRepository.deleteById(id);
+            }
+        } else {
+            throw new CustomException("권한이 없습니다.");
+        }
     }
 
     /**

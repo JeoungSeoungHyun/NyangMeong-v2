@@ -117,15 +117,19 @@ public class AdminController {
     }
 
     // 중복
-    @GetMapping("/s/admin/notice-delete")
-    public String adminNoticeDelete() {
-        return "";
+    @PostMapping("/s/admin/notice-delete")
+    public String adminNoticeDelete(@RequestParam(required = false) List<Integer> ids) {
+        User principal = (User) session.getAttribute("principal");
+        boardsService.관리자공지사항삭제(ids, principal);
+        return "redirect:/s/admin/notice-manage";
     }
 
     // 중복
-    @GetMapping("/s/admin/jarang-delete")
-    public String adminJarangDelete() {
-        return "";
+    @PostMapping("/s/admin/jarang-delete")
+    public String adminJarangDelete(@RequestParam(required = false) List<Integer> ids) {
+        User principal = (User) session.getAttribute("principal");
+        boardsService.관리자게시글삭제(ids, principal);
+        return "redirect:/s/admin/jarang-manage";
     }
 
     // 중복
