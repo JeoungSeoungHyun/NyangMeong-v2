@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.web.dto.members.boards.DetailResponseDto;
@@ -31,12 +32,15 @@ import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
 public class BoardsController {
     private final BoardsService boardsService;
     private final HttpSession session;
+    private final BoardsRepository boardsRepository;
 
     // 댕냥이 자랑 글리스트 전달 메서드
     @GetMapping("/boards")
     public String list(Model model, @RequestParam(defaultValue = "0") Integer page) {
         JarangRespDto jarangRespDto = boardsService.게시글목록(page);
         model.addAttribute("data", jarangRespDto);
+        long count = boardsRepository.count();
+        model.addAttribute("count", count);
         return "/pages/post/jarangList";
     }
 

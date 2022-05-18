@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.AdminService;
@@ -30,7 +31,7 @@ public class AdminController {
     private final CommentService commentService;
     private final BoardsService boardsService;
     private final HttpSession session;
-
+    private final CommentRepository commentRepository;
     private final AdminService adminService;
 
     // 관리자 회원가입 페이지
@@ -83,6 +84,8 @@ public class AdminController {
         CommentDto dto = commentService.댓글목록(page);
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
         model.addAttribute("comment", dto);
+                long count = commentRepository.count();
+        model.addAttribute("count", count);
         return "/pages/admin/commentManage";
     }
 
