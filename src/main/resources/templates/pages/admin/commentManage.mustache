@@ -33,21 +33,19 @@
                 <th class="col-6">댓글 내용</th>
                 <th class="col-2">작성자</th>
                 <th class="col-2">작성일자</th>
-                <th class="col-1">상세보기</th>
             </tr>
         </thead>
 
         {{#comment.comment.content}}
         <tbody>
-            <tr>
+            <tr onclick="location.href='/boards/{{boards.id}}'" style="cursor: pointer;">
                 <td><input id="chk" type="checkbox" name="id" value="1" /></td>
                 <th scope="row">{{id}}</th>
                 <td> {{content}} </td>
                 <td> {{user.userName}} </td>
                 <td>{{formatCreateDate}}</td>
                 <td>
-                    <a href="/boards/{{boards.id}}">더보기
-                    </a>
+
                 </td>
             </tr>
 

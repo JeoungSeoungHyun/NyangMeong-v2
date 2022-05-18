@@ -29,10 +29,10 @@ public interface BoardsRepository extends JpaRepository<Boards, Integer> {
     List<Boards> listNotice(Pageable pq);
 
     //자랑 이전글 다음글
-    // @Query(value = "SELECT id, LAG(id, -1) OVER(ORDER BY id DESC), LAG(id,1) OVER(ORDER BY id DESC) FROM boards;", nativeQuery = true)
-    // Page<Boards> updownJarang(Pageable pq);
+    @Query(value = "SELECT id, LAG(id, -1) OVER(ORDER BY id DESC), LAG(id,1) OVER(ORDER BY id DESC) FROM boards;", nativeQuery = true)
+    Page<Boards> updownJarang(Pageable pq);
 
     //게시글 제목으로 검색
     @Query(value = "SELECT * FROM boards WHERE title like %:keyword%", nativeQuery = true)
-    Page<Boards> findByTitleContaining(@Param("keyword") String keyword, Pageable pageable);
+    Page<Boards> findByTitleContaining(@Param("keyword") String mykeyword, Pageable pageable);
 }

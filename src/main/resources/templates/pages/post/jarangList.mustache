@@ -20,7 +20,7 @@
                             <div class="form-group d-flex">
                                 <input id="mykeyword" name="mykeyword" class="form-control" type="text"
                                     placeholder="Search">
-                                <button id="mybtn-search" class="btn btn-secondary m_ml_sm" type="submit"
+                                <button id="mybtn-search" class="btn btn-secondary m_ml_sm" type="button"
                                     style="width: 100px;">검색</button>
                             </div>
                         </form>
@@ -85,7 +85,7 @@
 
 <script src="/js/boards.js"></script>
 <script>
-    let mykeyword = $("#mykeyword").val("");
+    let mykeyword = $("#mykeyword").val();
 
     $("#mybtn-search").click(() => {
         page = 0; // 페이지 초기화 
@@ -102,13 +102,29 @@
         console.log(responseParse.first);
         if (response.status === 200) {
             pagingDisabled(responseParse);
-            responseParse.content.forEach((post) => {
-                $("#post-box").append(postItemRender(post));
+            responseParse.content.forEach((boards) => {
+                $("#post-box").append(postItemRender(boards));
             });
         } else {
             alert("잘못된 요청입니다.");
         }
     }
+
+    function postItemRender(boards) {
+        return `<div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+	        <a href="/boards/${boards.id}">
+            <img class="m_box_image m_list_thumnail" src="/upload/${boards.thumnail}"
+              onerror="this.src='/upload/${boards.thumnail}'">
+               </a>
+            <div class="caption">
+              <div class="m_font_lg m_mt_sm" style="font-weight: bold;">${boards.title}</div>
+                  </div>
+    </div>
+                </div>`;
+    }
+
+
 
 </script>
 

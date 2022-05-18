@@ -53,10 +53,11 @@ public class BoardsApiController {
         return null;
     }
 
+    //자랑 게시판 검색
        @GetMapping("/api/jarang/keywordlist")
-    public ResponseEntity<?> list(String keyword, Integer page,
+    public ResponseEntity<?> list(String mykeyword, Integer page,
             @PageableDefault(size = 9, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<Boards> boards = boardsService.검색글목록보기(keyword, pageable);
+        Page<Boards> boards = boardsService.검색글목록보기(mykeyword, pageable);
 
         return new ResponseEntity<>(boards, HttpStatus.OK);
     }
