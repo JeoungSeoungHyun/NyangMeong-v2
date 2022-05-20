@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +18,7 @@ import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.web.dto.members.comment.CommentDto;
 import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
@@ -76,7 +77,8 @@ public class CommentService {
         CommentDto commentDto = new CommentDto(
                 commentsEntity,
                 commentsEntity.getNumber() - 1,
-                commentsEntity.getNumber() + 1, pageNumbers);
+                commentsEntity.getNumber() + 1,
+                pageNumbers);
 
         return commentDto;
     }
@@ -87,6 +89,24 @@ public class CommentService {
         Comment comment = commentRepository.findByuserId(
                 userId);
 
+    }
+
+    // 관리자댓글삭제
+    @Transactional
+    public boolean 관리자댓글삭제(List<Integer> ids, User principal) {
+
+        System.out.println("사이즈 : " + ids.size());
+
+        // 권한(관리자) 확인
+        if (principal.getUserAuth() != null) {
+            for (Integer id : ids) {
+                System.out.println("아이디 : " + id);
+                commentRepository.deleteById(id);
+            }
+            return true;
+        } else {
+            throw new CustomException("권한이 없습니다.");
+        }
     }
 
     // 댓글 수정

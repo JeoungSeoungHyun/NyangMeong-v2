@@ -1,6 +1,7 @@
 package spring.project.nyangmong.domain.comment;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
@@ -41,4 +43,12 @@ public class Comment { // Post 1 1, Comment N 1
 
     @CreatedDate // insert
     private LocalDateTime createDate;
+
+    @LastModifiedDate // insert, update
+    private LocalDateTime updateDate;
+
+    public String getFormatCreateDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return createDate.format(formatter);
+    }
 }
