@@ -26,6 +26,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import spring.project.nyangmong.domain.boardlikes.BoardLikes;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.user.User;
 
@@ -44,9 +45,6 @@ public class Boards { // N (드라이빙 테이블, FK의 주인)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // private String tag;
-    // private String text;
-
     @Column(length = 300, nullable = false)
     private String title;
 
@@ -57,30 +55,17 @@ public class Boards { // N (드라이빙 테이블, FK의 주인)
     @Column
     private Integer pageCount; // 조회수
 
-    // @JsonIgnoreProperties({ "boards" })
-    // @OneToMany(mappedBy = "boards")
-    // private List<PlaceLikes> placelikesList;
-
     private long PlaceLikesCount; // 좋아요 수
 
     private String classification; // 공지사항, 댕냥이자랑 구분
 
     private String thumnail;
 
-    // @Builder
-    // public Boards(String tag, String text, User user, long PlaceLikesCount) {
-    // this.tag = tag;
-    // this.text = text;
-    // this.user = user;
-    // this.PlaceLikesCount = PlaceLikesCount;
-    // }
-
-    // public void setPlaceLikesCount(long PlaceLikesCount) {
-    // this.PlaceLikesCount = PlaceLikesCount;
-    // }
+    @JsonIgnoreProperties({ "boards" })
+    @OneToMany(mappedBy = "boards", cascade = CascadeType.REMOVE)
+    private List<BoardLikes> boardLikes;
 
     @JsonIgnoreProperties({ "password" })
-    // @JsonIgnoreProperties({"boardsList"})
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;

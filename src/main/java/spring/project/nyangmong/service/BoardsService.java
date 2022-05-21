@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.boardlikes.BoardLikes;
@@ -19,6 +18,7 @@ import spring.project.nyangmong.domain.boardlikes.BoardLikesRepository;
 import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
+import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.placelikes.PlaceLikesRepository;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
@@ -38,6 +38,7 @@ public class BoardsService {
     private final PlaceLikesRepository placelikesRepository;
     private final UserRepository userRepository;
     private final BoardLikesRepository boardLikesRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public void 글수정하기(WriteJarangDto writeJarangDto, Integer boardsId, User principal) {
@@ -78,20 +79,20 @@ public class BoardsService {
         // 게시글 확인
         Boards boardsEntity = mFinBoards(boardsId);
         // 게시글 수정,삭제 권한 확인
-        System.out.println("확인1");
         boolean boardAuth = mCheckAuth(principal, boardsEntity.getUser());
         // 댓글 수정,삭제 권한 확인
-        List<CommentResponseDto> comments = new ArrayList<>();
+        List<CommentResponseDto> commentRespDto = new ArrayList<>();
 
-        for (Comment comment : boardsEntity.getComments()) {
+        List<Comment> comments = commentRepository.mFindByBoardsId(boardsId);
+
+        for (Comment comment : comments) {
             CommentResponseDto dto = new CommentResponseDto();
             dto.setComment(comment);
 
             boolean auth = mCheckAuth(principal, comment.getUser());
             dto.setAuth(auth);
-            comments.add(dto);
+            commentRespDto.add(dto);
         }
-        System.out.println("확인2");
         // 좋아요 정보 확인
         if (principal != null) {
             Optional<BoardLikes> boardLikesOp = boardLikesRepository.mFindBoardIdAndUserId(boardsEntity.getId(),
@@ -103,7 +104,7 @@ public class BoardsService {
         }
         DetailResponseDto detailResponseDto = new DetailResponseDto(
                 boardsEntity,
-                comments,
+                commentRespDto,
                 boardAuth,
                 boardLikesId);
         return detailResponseDto;
@@ -140,9 +141,19 @@ public class BoardsService {
         return jarangRespDto;
     }
 
-    public List<Boards> 공지사항목록(Integer page) {
+    public JarangRespDto 공지사항목록(Integer page) {
         PageRequest pq = PageRequest.of(page, 15, Sort.by(Direction.DESC, "id"));
-        return boardsRepository.listNotice(pq);
+
+        Page<Boards> noticeEntity = boardsRepository.listNotice(pq);
+        List<Integer> pageNumbers = new ArrayList<>();
+        for (int i = 0; i < noticeEntity.getTotalPages(); i++) {
+            pageNumbers.add(i);
+        }
+        JarangRespDto jarangRespDto = new JarangRespDto(
+                noticeEntity,
+                noticeEntity.getNumber() - 1,
+                noticeEntity.getNumber() + 1, pageNumbers);
+        return jarangRespDto;
     }
 
     @Transactional
@@ -194,6 +205,36 @@ public class BoardsService {
             return true;
         } else {
             throw new CustomApiException("좋아요 취소 권한이 없습니다.");
+        }
+    }
+
+    // 관리자공지사항삭제
+    @Transactional
+    public boolean 관리자공지사항삭제(List<Integer> ids, User principal) {
+
+        // 권한(관리자) 확인
+        if (principal.getUserAuth() != null) {
+            for (Integer id : ids) {
+                boardsRepository.deleteById(id);
+            }
+            return true;
+        } else {
+            throw new CustomException("권한이 없습니다.");
+        }
+    }
+
+    // 관리자게시글삭제
+    @Transactional
+    public boolean 관리자게시글삭제(List<Integer> ids, User principal) {
+        // 권한(관리자) 확인
+        if (principal.getUserAuth() != null) {
+            for (Integer id : ids) {
+                System.out.println("변경 아이디 : " + id);
+                boardsRepository.deleteById(id);
+            }
+            return true;
+        } else {
+            throw new CustomException("권한이 없습니다.");
         }
 
     }

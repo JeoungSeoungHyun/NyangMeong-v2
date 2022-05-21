@@ -1,12 +1,15 @@
 package spring.project.nyangmong.web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,7 +31,7 @@ import spring.project.nyangmong.web.dto.members.comment.CommentDto;
 @Controller
 public class AdminController {
 
-    private CommentService commentService;
+    private final CommentService commentService;
     private final BoardsService boardsService;
     private final HttpSession session;
 
@@ -63,9 +66,10 @@ public class AdminController {
     // 공지사항 관리페이지
     @GetMapping("/s/admin/notice-manage")
     public String adminNotice(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        List<Boards> boards = boardsService.공지사항목록(page);
+        JarangRespDto jarangRespDto = boardsService.공지사항목록(page);
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
-        model.addAttribute("notice", boards);
+        model.addAttribute("notice", jarangRespDto);
+        model.addAttribute("count", jarangRespDto.getBoards().getTotalElements());
         return "/pages/admin/noticeManage";
     }
 
@@ -75,6 +79,7 @@ public class AdminController {
         JarangRespDto dto = boardsService.게시글목록(page);
         // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
         model.addAttribute("jarang", dto);
+        model.addAttribute("count", dto.getBoards().getTotalElements());
         return "/pages/admin/JarangManage";
     }
 
@@ -104,40 +109,31 @@ public class AdminController {
         return "/pages/admin/commentManage";
     }
 
-    // notice-write는 게시판 합쳐지면 있을 것 같음 일단 보류...
-    // notice-detail 도 마찬가지
-    // notice-list보기도 마찬가지
-    // notice-update 마찬가지
-    // notice-delete마찬가지
-
     // 중복
     @PutMapping("/s/admin/notice-update")
     public String adminNoticeUpdate() {
         return "";
     }
 
-    // 중복
-    @GetMapping("/s/admin/notice-delete")
-    public String adminNoticeDelete() {
-        return "";
+    @DeleteMapping("/s/api/admin/notice-delete")
+    public ResponseEntity<?> adminNoticeDelete(@RequestParam(required = false) List<Integer> ids) {
+        User principal = (User) session.getAttribute("principal");
+        boolean result = boardsService.관리자공지사항삭제(ids, principal);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 중복
-    @GetMapping("/s/admin/jarang-delete")
-    public String adminJarangDelete() {
-        return "";
+    @DeleteMapping("/s/api/admin/jarang-delete")
+    public ResponseEntity<?> adminJarangDelete(@RequestParam(required = false) List<Integer> ids) {
+        User principal = (User) session.getAttribute("principal");
+        boolean result = boardsService.관리자게시글삭제(ids, principal);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 중복
-    @GetMapping("/s/admin/comment-delete")
-    public String adminCommentDelete(String id) {
-        String[] idParse = id.split(",");
-        List<String> ids = new ArrayList<>();
-        for (String idSplit : idParse) {
-            ids.add(idSplit);
-        }
-        commentService.관리자댓글삭제(ids);
-        return "";
+    @DeleteMapping("/s/api/admin/comment-delete")
+    public ResponseEntity<?> adminCommentDelete(@RequestParam(required = false) List<Integer> ids) {
+        User principal = (User) session.getAttribute("principal");
+        boolean result = commentService.관리자댓글삭제(ids, principal);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
