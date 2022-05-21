@@ -68,10 +68,9 @@ public class CommentService {
         Pageable pq = PageRequest.of(page, 8, Sort.by(Direction.DESC, "id"));
 
         Page<Comment> commentsEntity = commentRepository.listComment(pq);
-        System.out.println("페이지 수 : " + commentsEntity.getTotalPages());
+
         List<Integer> pageNumbers = new ArrayList<>();
         for (int i = 0; i < commentsEntity.getTotalPages(); i++) {
-            System.out.println(i);
             pageNumbers.add(i);
         }
         CommentDto commentDto = new CommentDto(
@@ -95,12 +94,9 @@ public class CommentService {
     @Transactional
     public boolean 관리자댓글삭제(List<Integer> ids, User principal) {
 
-        System.out.println("사이즈 : " + ids.size());
-
         // 권한(관리자) 확인
         if (principal.getUserAuth() != null) {
             for (Integer id : ids) {
-                System.out.println("아이디 : " + id);
                 commentRepository.deleteById(id);
             }
             return true;
