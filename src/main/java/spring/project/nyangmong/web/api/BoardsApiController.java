@@ -2,26 +2,19 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.nyangmong.domain.boards.Boards;
-import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.service.BoardsService;
-import spring.project.nyangmong.service.PlaceLikesService;
 import spring.project.nyangmong.web.dto.members.ResponseDto;
-import spring.project.nyangmong.web.dto.members.boards.WriteJarangDto;
 
 @RequiredArgsConstructor
 @RestController
 public class BoardsApiController {
     private final BoardsService boardsService;
-    private final PlaceLikesService placelikesService;
     private final HttpSession session;
 
     // @GetMapping("/s/api/boards/{id}")
@@ -50,15 +43,4 @@ public class BoardsApiController {
         return null;
     }
 
-    // @PostMapping("/s/user/{id}/boardlike")
-    // public void likes(@PathVariable long boardsId, Authentication
-    // authentication){
-    // placelikesService.placelikes(boardsId, authentication.getUsername());
-    // }
-
-    // @DeleteMapping("/s/user/{id}/unboardlike")
-    // public void unLikes(@PathVariable long boardsId, Authentication
-    // authentication) {
-    // placelikesService.unplacelikes(boardsId, authentication.getUsername());
-    // }
 }

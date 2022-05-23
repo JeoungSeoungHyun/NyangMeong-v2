@@ -4,14 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.boardlikes.BoardLikes;
+import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.fav.Fav;
+import spring.project.nyangmong.domain.fav.FavRepository;
 import spring.project.nyangmong.domain.image.ImageRepository;
+import spring.project.nyangmong.domain.placelikes.PlaceLikes;
+import spring.project.nyangmong.domain.placelikes.PlaceLikesRepository;
 import spring.project.nyangmong.domain.places.PlaceRepository;
 import spring.project.nyangmong.domain.places.Places;
+import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.handle.ex.CustomApiException;
 import spring.project.nyangmong.web.dto.places.MapSearchDto;
 
 @RequiredArgsConstructor
@@ -19,6 +29,8 @@ import spring.project.nyangmong.web.dto.places.MapSearchDto;
 public class PlaceService {
     private final PlaceRepository placeRepository;
     private final ImageRepository imageRepository;
+    private final PlaceLikesRepository placeLikesRepository;
+    private final FavRepository favRepository;
 
     public Places 상세보기(Integer contentSeq) {
         Optional<Places> placesOp = placeRepository.findById(contentSeq);
@@ -96,5 +108,98 @@ public class PlaceService {
             return list;
         }
         return null;
+    }
+
+    // 좋아요
+    @Transactional
+    public PlaceLikes 좋아요(Integer placesId, User principal) {
+        PlaceLikes placeLikes = new PlaceLikes();
+
+        // 장소 찾기
+        Places placesEntity = mFindPlaces(placesId);
+
+        placeLikes.setUser(principal);
+        placeLikes.setPlaces(placesEntity);
+
+        return placeLikesRepository.save(placeLikes);
+    }
+
+    // 좋아요 취소
+    @Transactional
+    public boolean 좋아요취소(Integer placeLikesId, User principal) {
+
+        // 좋아요 정보 확인
+        PlaceLikes placeLikesEntity = mFindPlaceLikes(placeLikesId);
+
+        // 좋아요 취소 권한 확인
+        if (principal.getId() == placeLikesEntity.getUser().getId()) {
+            placeLikesRepository.delete(placeLikesEntity);
+            return true;
+        } else {
+            throw new CustomApiException("좋아요 취소 권한이 없습니다.");
+        }
+    }
+
+    // 즐겨찾기
+    @Transactional
+    public Fav 즐겨찾기(Integer placesId, User principal) {
+        Fav fav = new Fav();
+
+        // 장소 찾기
+        Places placesEntity = mFindPlaces(placesId);
+
+        fav.setUser(principal);
+        fav.setPlaces(placesEntity);
+
+        return favRepository.save(fav);
+    }
+
+    // 즐겨찾기 취소
+    @Transactional
+    public boolean 즐겨찾기취소(Integer favId, User principal) {
+
+        // 즐겨찾기 정보 확인
+        Fav favEntity = mFindFav(favId);
+
+        // 즐겨찾기 취소 권한 확인
+        if (principal.getId() == favEntity.getUser().getId()) {
+            favRepository.delete(favEntity);
+            return true;
+        } else {
+            throw new CustomApiException("즐겨찾기 취소 권한이 없습니다.");
+        }
+    }
+
+    // 장소 찾기
+    private Places mFindPlaces(Integer placesId) {
+        Optional<Places> placesOp = placeRepository.findById(placesId);
+
+        if (placesOp.isPresent()) {
+            return placesOp.get();
+        } else {
+            throw new CustomApiException("해당 장소정보가 없습니다.");
+        }
+    }
+
+    // 장소 좋아요 찾기
+    private PlaceLikes mFindPlaceLikes(Integer placeLikesId) {
+        Optional<PlaceLikes> placeLikesOp = placeLikesRepository.findById(placeLikesId);
+
+        if (placeLikesOp.isPresent()) {
+            return placeLikesOp.get();
+        } else {
+            throw new CustomApiException("해당 좋아요 정보가 없습니다.");
+        }
+    }
+
+    // 장소 즐겨찾기 찾기
+    private Fav mFindFav(Integer favId) {
+        Optional<Fav> favOp = favRepository.findById(favId);
+
+        if (favOp.isPresent()) {
+            return favOp.get();
+        } else {
+            throw new CustomApiException("해당 즐겨찾기 정보가 없습니다.");
+        }
     }
 }
