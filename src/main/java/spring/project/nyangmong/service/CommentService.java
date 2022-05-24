@@ -93,7 +93,6 @@ public class CommentService {
     public void 댓글수정(Integer userId, CommentResponseDto dto) {
         Comment comment = commentRepository.findByuserId(
                 userId);
-
     }
 
     // 관리자댓글삭제

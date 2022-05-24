@@ -141,6 +141,7 @@ public class BoardsService {
         return jarangRespDto;
     }
 
+
     public JarangRespDto 위아래목록(Integer page) {
         Pageable pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
 

@@ -2,6 +2,7 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -50,6 +51,7 @@ public class BoardsApiController {
     public String noticeDelete() {
         return null;
     }
+
 
     // 자랑 게시판 검색
     @GetMapping("/api/jarang/keywordlist")
