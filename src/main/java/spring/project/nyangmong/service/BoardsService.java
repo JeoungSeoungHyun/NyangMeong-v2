@@ -141,6 +141,26 @@ public class BoardsService {
         return jarangRespDto;
     }
 
+
+    public JarangRespDto 위아래목록(Integer page) {
+        Pageable pq = PageRequest.of(page, 3, Sort.by(Direction.DESC, "id"));
+
+        Page<Boards> boardsEntity = boardsRepository.updownJarang(pq);
+        List<Integer> pageNumbers = new ArrayList<>();
+        for (int i = 0; i < boardsEntity.getTotalPages(); i++) {
+            pageNumbers.add(i);
+        }
+        JarangRespDto jarangRespDto = new JarangRespDto(
+                boardsEntity,
+                boardsEntity.getNumber() - 1,
+                boardsEntity.getNumber() + 1, pageNumbers);
+        return jarangRespDto;
+    }
+
+    public Page<Boards> 검색글목록보기(String mykeyword, Pageable pageable) {
+        return boardsRepository.findByTitleContaining(mykeyword, pageable);
+    }
+
     public JarangRespDto 공지사항목록(Integer page) {
         PageRequest pq = PageRequest.of(page, 15, Sort.by(Direction.DESC, "id"));
 

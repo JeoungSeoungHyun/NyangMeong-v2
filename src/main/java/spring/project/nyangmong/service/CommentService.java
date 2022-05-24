@@ -51,6 +51,11 @@ public class CommentService {
     }
 
     @Transactional
+    public void 댓글전체삭제() {
+        commentRepository.deleteAll();
+    }
+
+    @Transactional
     public void 댓글쓰기(Comment comment, Integer boardsId) {
 
         Optional<Boards> boardsOp = boardsRepository.findById(boardsId);
@@ -73,6 +78,7 @@ public class CommentService {
         for (int i = 0; i < commentsEntity.getTotalPages(); i++) {
             pageNumbers.add(i);
         }
+
         CommentDto commentDto = new CommentDto(
                 commentsEntity,
                 commentsEntity.getNumber() - 1,
@@ -87,7 +93,6 @@ public class CommentService {
     public void 댓글수정(Integer userId, CommentResponseDto dto) {
         Comment comment = commentRepository.findByuserId(
                 userId);
-
     }
 
     // 관리자댓글삭제

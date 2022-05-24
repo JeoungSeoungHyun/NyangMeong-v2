@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-import spring.project.nyangmong.domain.boards.Boards;
+import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.AdminService;
@@ -43,7 +44,7 @@ public class AdminController {
     private final CommentService commentService;
     private final BoardsService boardsService;
     private final HttpSession session;
-
+    private final CommentRepository commentRepository;
     private final AdminService adminService;
 
     // 관리자 회원가입 페이지
@@ -102,6 +103,17 @@ public class AdminController {
         return "/pages/admin/JarangManage";
     }
 
+    // 댓글관리게시판
+    @GetMapping("/s/admin/comment-manage")
+    public String adminComment(@RequestParam(defaultValue = "0") Integer page, Model model) {
+        CommentDto dto = commentService.댓글목록(page);
+        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
+        model.addAttribute("comment", dto);
+        long count = commentRepository.count();
+        model.addAttribute("count", count);
+        return "/pages/admin/commentManage";
+    }
+
     // 공지사항 쓰기 페이지
     @GetMapping("/s/admin/write-form")
     public String adminNoticeWriteForm() {
@@ -117,15 +129,6 @@ public class AdminController {
         boardsService.공지사항쓰기(writeDto, principal);
 
         return "redirect:/notice";
-    }
-
-    // 댓글관리게시판
-    @GetMapping("/s/admin/comment-manage")
-    public String adminComment(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        CommentDto dto = commentService.댓글목록(page);
-        // 응답의 DTO를 만들어서 <- posts 를 옮김. (라이브러리 있음)
-        model.addAttribute("comment", dto);
-        return "/pages/admin/commentManage";
     }
 
     // 중복

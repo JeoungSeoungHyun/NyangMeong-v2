@@ -2,12 +2,21 @@ package spring.project.nyangmong.web.api;
 
 import javax.servlet.http.HttpSession;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.service.BoardsService;
 import spring.project.nyangmong.web.dto.members.ResponseDto;
 
@@ -43,4 +52,25 @@ public class BoardsApiController {
         return null;
     }
 
+
+    // 자랑 게시판 검색
+    @GetMapping("/api/jarang/keywordlist")
+    public ResponseEntity<?> list(String mykeyword, Integer page,
+            @PageableDefault(size = 9, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Boards> boards = boardsService.검색글목록보기(mykeyword, pageable);
+
+        return new ResponseEntity<>(boards, HttpStatus.OK);
+    }
+
+    // @PostMapping("/s/user/{id}/boardlike")
+    // public void likes(@PathVariable long boardsId, Authentication
+    // authentication){
+    // placelikesService.placelikes(boardsId, authentication.getUsername());
+    // }
+
+    // @DeleteMapping("/s/user/{id}/unboardlike")
+    // public void unLikes(@PathVariable long boardsId, Authentication
+    // authentication) {
+    // placelikesService.unplacelikes(boardsId, authentication.getUsername());
+    // }
 }

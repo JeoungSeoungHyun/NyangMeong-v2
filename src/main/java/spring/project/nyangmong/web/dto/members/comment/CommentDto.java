@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import spring.project.nyangmong.domain.boards.Boards;
 import spring.project.nyangmong.domain.comment.Comment;
 
 @AllArgsConstructor

@@ -33,7 +33,7 @@
         <thead>
             <tr>
                 <td><input type="checkbox" id="checkall" /></td>
-                <th class="col-1">#</th>
+                <th class="col-1">번호</th>
                 <th class="col-6">댓글 내용</th>
                 <th class="col-2">작성자</th>
                 <th class="col-2">작성일자</th>
@@ -58,6 +58,9 @@
     <input id="first" type="hidden" value="{{comment.first}}" />
     <input id="last" type="hidden" value="{{comment.last}}" />
 
+    {{#comment}}
+    <input id="first" type="hidden" value="{{comment.first}}" />
+    <input id="last" type="hidden" value="{{comment.last}}" />
     <div class="paging-div">
         <ul class="pagination" id="pagination">
             <li id="prev" class="page-item"><a class="page-link" href="/s/admin/comment-manage/?page={{prev}}">이전</a>
@@ -73,7 +76,9 @@
     </div>
 
 <script src="/js/admin.js"></script>
+<script src="/js/admin.js"></script>
 
+<script src="/js/boards.js"></script>
 <script>
 
     let commentsDelete = async()=>{
