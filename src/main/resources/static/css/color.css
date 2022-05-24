@@ -30,3 +30,10 @@
 .m_text_white {
     color: #E1E2E1;
 }
+
+
+/* 회원가입 에러창 색 */
+
+.my_bg_error {
+    background-color: #FFE082;
+}

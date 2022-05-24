@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import spring.project.nyangmong.domain.fav.Fav;
 import spring.project.nyangmong.domain.image.PublicDataImage;
 import spring.project.nyangmong.domain.placelikes.PlaceLikes;
 
@@ -165,5 +166,9 @@ public class Places {
 
     @JsonIgnoreProperties({ "places" }) // messageConverter에게 알려주는 어노테이션
     @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명
-    private List<PlaceLikes> placesLikesList;
+    private List<PlaceLikes> placesLikes;
+
+    @JsonIgnoreProperties({ "places" })
+    @OneToMany(mappedBy = "places", cascade = CascadeType.REMOVE)
+    private List<Fav> favs;
 }

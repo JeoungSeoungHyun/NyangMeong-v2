@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -99,13 +100,8 @@ public class BoardsController {
     // 공지사항 글리스트 전달 메서드
     @GetMapping("/notice")
     public String adminNotice(Model model, @RequestParam(defaultValue = "0") Integer page) {
-        List<Boards> boards = boardsService.공지사항목록(page);
-        List<NoticeListRespDto> noticeDto = new ArrayList<>();
-        int size = boards.size();
-        for (int i = 0; i < size; i++) {
-            noticeDto.add(new NoticeListRespDto(size - i, boards.get(i)));
-        }
-        model.addAttribute("notices", noticeDto);
+        JarangRespDto jarangRespDto = boardsService.공지사항목록(page);
+        model.addAttribute("notices", jarangRespDto);
         return "/pages/post/noticeList";
     }
 

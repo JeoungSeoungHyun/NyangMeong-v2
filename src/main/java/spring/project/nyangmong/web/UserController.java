@@ -1,15 +1,20 @@
 package spring.project.nyangmong.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import spring.project.nyangmong.domain.pet.Pet;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.service.PetService;
 import spring.project.nyangmong.service.UserService;
 import spring.project.nyangmong.util.RespScript;
@@ -98,8 +104,19 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/join")
-    public String join(JoinDto joinDto) {
-        userService.회원가입(joinDto);
+    public String join(@Valid JoinDto joinDto, BindingResult bindingResult) {
+
+        // validation
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorMap = new HashMap<>();
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                errorMap.put(fe.getField(), fe.getDefaultMessage());
+            }
+            // 유효성 검사해서 맞지 않을 시 스크립트 안내창 후 페이지 뒤로가기(데이터 남아있음)
+            throw new CustomException(errorMap.toString());
+        }
+
+        userService.회원가입(joinDto.toEntity());
         return "redirect:/login-form";
     }
 
@@ -124,9 +141,18 @@ public class UserController {
         return "pages/user/loginForm";
     }
 
-    @GetMapping("/user-username/{username}/exists")
-    public ResponseEntity<Boolean> checkusernameDuplicate(@PathVariable String username) {
-        return ResponseEntity.ok(userService.checkuserNameDuplicate(username));
+    // 회원가입 시 유저아이디 중복체크
+    @GetMapping("/api/user/userid-same-check")
+    public ResponseEntity<?> userIdSameCheck(String userId) {
+        boolean isNotSame = userService.유저아이디중복체크(userId); // true (같지 않다)
+        return new ResponseEntity<>(isNotSame, HttpStatus.OK);
+    }
+
+    // 회원가입 시 이메일 중복체크
+    @GetMapping("/api/user/email-same-check")
+    public ResponseEntity<?> emailSameCheck(String email) {
+        boolean isNotSame = userService.이메일중복체크(email); // true (같지 않다)
+        return new ResponseEntity<>(isNotSame, HttpStatus.OK);
     }
 
     // 추후 api <로그인을 인증해야해서> 옮겨야하는 맵핑

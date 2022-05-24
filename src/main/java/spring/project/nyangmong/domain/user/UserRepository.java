@@ -12,7 +12,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT * FROM user WHERE userId = :userId AND password = :password", nativeQuery = true)
     User mLogin(@Param("userId") String userId, @Param("password") String password);
 
-    boolean existsByuserId(String userId);
+    // 아이디 찾기 (회원가입 시 중복체크를 위함)
+    @Query(value = "SELECT * FROM user WHERE userId = :userId", nativeQuery = true)
+    Optional<User> findByUserId(@Param("userId") String userId);
+
+    // 이메일 찾기 (회원가입 시 중복체크를 위함)
+    @Query(value = "SELECT * FROM user WHERE email = :email", nativeQuery = true)
+    Optional<User> findByEmail(@Param("email") String email);
 
     // 이메일로 아이디 찾기
     @Query(value = "SELECT * FROM user WHERE email = :email", nativeQuery = true)

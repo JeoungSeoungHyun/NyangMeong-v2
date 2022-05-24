@@ -26,13 +26,13 @@ public interface BoardsRepository extends JpaRepository<Boards, Integer> {
 
     // 공지사항 리스트 찾기
     @Query(value = "SELECT ROW_NUMBER() OVER() AS rownum,b.* FROM boards b WHERE classification='공지사항' ", nativeQuery = true)
-    List<Boards> listNotice(Pageable pq);
+    Page<Boards> listNotice(Pageable pq);
 
-    //자랑 이전글 다음글
+    // 자랑 이전글 다음글
     @Query(value = "SELECT id, LAG(id, -1) OVER(ORDER BY id DESC), LAG(id,1) OVER(ORDER BY id DESC) FROM boards;", nativeQuery = true)
     Page<Boards> updownJarang(Pageable pq);
 
-    //게시글 제목으로 검색
+    // 게시글 제목으로 검색
     @Query(value = "SELECT * FROM boards WHERE title like %:keyword%", nativeQuery = true)
     Page<Boards> findByTitleContaining(@Param("keyword") String mykeyword, Pageable pageable);
 }

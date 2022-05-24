@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +18,7 @@ import spring.project.nyangmong.domain.boards.BoardsRepository;
 import spring.project.nyangmong.domain.comment.Comment;
 import spring.project.nyangmong.domain.comment.CommentRepository;
 import spring.project.nyangmong.domain.user.User;
+import spring.project.nyangmong.handle.ex.CustomException;
 import spring.project.nyangmong.web.dto.members.comment.CommentDto;
 import spring.project.nyangmong.web.dto.members.comment.CommentResponseDto;
 
@@ -48,7 +49,7 @@ public class CommentService {
             commentRepository.deleteById(Integer.parseInt(id));
         }
     }
-    
+
     @Transactional
     public void 댓글전체삭제() {
         commentRepository.deleteAll();
@@ -68,33 +69,47 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    
- public CommentDto 댓글목록(Integer page) {
+    public CommentDto 댓글목록(Integer page) {
         Pageable pq = PageRequest.of(page, 8, Sort.by(Direction.DESC, "id"));
 
         Page<Comment> commentsEntity = commentRepository.listComment(pq);
+
         List<Integer> pageNumbers = new ArrayList<>();
         for (int i = 0; i < commentsEntity.getTotalPages(); i++) {
             pageNumbers.add(i);
         }
-  
+
         CommentDto commentDto = new CommentDto(
                 commentsEntity,
                 commentsEntity.getNumber() - 1,
                 commentsEntity.getNumber() + 1,
-                pageNumbers
-                );
+                pageNumbers);
 
         return commentDto;
     }
 
     /* UPDATE */
-     @Transactional
-     public void 댓글수정(Integer userId, CommentResponseDto dto) {
-         Comment comment = commentRepository.findByuserId(
-           userId);
+    @Transactional
+    public void 댓글수정(Integer userId, CommentResponseDto dto) {
+        Comment comment = commentRepository.findByuserId(
+                userId);
 
-     }
+    }
+
+    // 관리자댓글삭제
+    @Transactional
+    public boolean 관리자댓글삭제(List<Integer> ids, User principal) {
+
+        // 권한(관리자) 확인
+        if (principal.getUserAuth() != null) {
+            for (Integer id : ids) {
+                commentRepository.deleteById(id);
+            }
+            return true;
+        } else {
+            throw new CustomException("권한이 없습니다.");
+        }
+    }
 
     // 댓글 수정
     // @Transactional

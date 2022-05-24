@@ -4,25 +4,35 @@
 
     <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">게시판 관리</h1>
 
-    {{#principal}}
-    {{#userAuth}}
+    <div class="m_mb_lg">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <div>작성댓글: 총 {{count}}건</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    {{#principal.userAuth}}
     <div class="m_box_right m_pb_lg">
-        <button class="btn m_bg_secondary m_p_sm m_mr_md">
-            <a href="/s/admin/write-form">글쓰기</a>
-        </button>
-        <button class="btn m_bg_secondary m_p_sm" onclick="deleteValue();">
+        <button id="btn-boardsDelete" type="button" class="btn m_bg_secondary m_p_sm">
             삭제
         </button>
     </div>
-    {{/userAuth}}
-    {{/principal}}
+    {{/principal.userAuth}}
 
-    <form action="/s/admin/notice-delete">
+    <form id="formData">
+
         <table class="table table-hover">
             <thead>
-                <tr>
+                <tr> 
                     <td><input type="checkbox" id="checkall" /></td>
-                    <th class="col-1">번호</th>
+                    <th class="col-1">아이디</th>
                     <th class="col-6">제목</th>
                     <th class="col-2">작성자</th>
                     <th class="col-2">작성일자</th>
@@ -31,6 +41,7 @@
 
             {{#jarang.boards.content}}
             <tbody>
+<<<<<<< HEAD
                 <tr onclick="location.href='/boards/{{id}}'" style="cursor: pointer;">
                     <td><input id="chk" type="checkbox" name="id" value="1" /></td>
                     <th scope="row">{{id}}</th>
@@ -39,8 +50,15 @@
                     <td>{{formatCreateDate}}</td>
                     <td>
                     </td>
+=======
+                <tr>
+                    <td><input id="chk" type="checkbox" name="ids" value="{{id}}" /></td>
+                    <th onclick="location.href='/boards/{{id}}'" style="cursor: pointer;" scope="row">{{id}}</th>
+                    <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;" > {{title}} </td>
+                    <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;"> {{user.userName}} </td>
+                    <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;">{{formatCreateDate}}</td>
+>>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
                 </tr>
-
             </tbody>
             {{/jarang.boards.content}}
         </table>
@@ -66,6 +84,7 @@
 </div>
 
 <script src="/js/admin.js"></script>
+<<<<<<< HEAD
 <script src="/js/boards.js"></script>
 <script>
 
@@ -101,6 +120,62 @@
             });
         }
     }
+=======
+
+<script>
+
+    let boardsDelete = async()=>{
+        let formData = $("#formData");
+        let ids="";
+        let length =formData[0].length;
+
+        for(let i=1;i<length;i++){
+            if(formData[0][i].checked === true){
+                if(i == 1){
+                    ids = ids + "?ids=";
+                } else{
+                    ids = ids + "&ids=";
+                }
+                ids = ids + formData[0][i].value ;
+            }
+        } 
+
+       let response = await fetch(`/s/api/admin/jarang-delete${ids}`,{
+           method:"DELETE"
+       })
+       let responseParse = await response.json();
+       if(responseParse === true){
+           location.reload();
+           alert("게시글이 삭제되었습니다.");
+       } else {
+           alert("문제가 발생하였습니다.");
+       }
+    };
+
+    $("#btn-boardsDelete").click(()=>{
+        boardsDelete();
+    });
+
+
+    let checkAuthBtn = () => {
+        let first = $("#first").val();
+        let last = $("#last").val();
+
+        if (first == "true") {
+            $("#prev").addClass("disabled");
+            $("#next").removeClass("disabled");
+        } else if (last == "true") {
+            $("#prev").removeClass("disabled");
+            $("#next").addClass("disabled");
+        } else {
+            $("#prev").removeClass("disabled");
+            $("#next").removeClass("disabled");
+        }
+    };
+    checkAuthBtn();
+
+</script>
+>>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
 
 </script>
 {{>/layout/footer}}
