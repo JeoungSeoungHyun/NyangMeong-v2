@@ -13,7 +13,6 @@ import spring.project.nyangmong.domain.user.User;
 import spring.project.nyangmong.domain.user.UserRepository;
 import spring.project.nyangmong.util.UtilFileUpload;
 import spring.project.nyangmong.web.dto.members.user.IdFindReqDto;
-import spring.project.nyangmong.web.dto.members.user.JoinDto;
 import spring.project.nyangmong.web.dto.members.user.PwFindReqDto;
 import spring.project.nyangmong.web.dto.members.user.UpdateDto;
 
@@ -103,8 +102,8 @@ public class UserService {
 
     // 회원가입
     @Transactional
-    public void 회원가입(JoinDto joinDto) {
-        userRepository.save(joinDto.toEntity());
+    public void 회원가입(User user) {
+        userRepository.save(user);
     }
 
     // 로그인하기
@@ -115,7 +114,25 @@ public class UserService {
         return userEntity;
     }
 
-    public boolean checkuserNameDuplicate(String userId) {
-        return userRepository.existsByuserId(userId);
+    // 회원가입 시 유저아이디 중복체크하기
+    public boolean 유저아이디중복체크(String userId) {
+        Optional<User> userOp = userRepository.findByUserId(userId);
+
+        if (userOp.isPresent()) {
+            return false; // 이미 아이디 있으면 false
+        } else {
+            return true; // 아이디 없으면 true
+        }
+    }
+
+    // 회원가입 시 이메일 중복체크하기
+    public boolean 이메일중복체크(String email) {
+        Optional<User> userOp = userRepository.findByEmail(email);
+
+        if (userOp.isPresent()) {
+            return false; // 이미 이메일 있으면 false
+        } else {
+            return true; // 이메일 없으면 true
+        }
     }
 }
