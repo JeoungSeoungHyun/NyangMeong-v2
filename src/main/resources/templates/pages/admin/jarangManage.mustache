@@ -41,23 +41,12 @@
 
             {{#jarang.boards.content}}
             <tbody>
-<<<<<<< HEAD
-                <tr onclick="location.href='/boards/{{id}}'" style="cursor: pointer;">
-                    <td><input id="chk" type="checkbox" name="id" value="1" /></td>
-                    <th scope="row">{{id}}</th>
-                    <td> {{title}} </td>
-                    <td> {{user.userName}} </td>
-                    <td>{{formatCreateDate}}</td>
-                    <td>
-                    </td>
-=======
                 <tr>
                     <td><input id="chk" type="checkbox" name="ids" value="{{id}}" /></td>
                     <th onclick="location.href='/boards/{{id}}'" style="cursor: pointer;" scope="row">{{id}}</th>
                     <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;" > {{title}} </td>
                     <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;"> {{user.userName}} </td>
                     <td onclick="location.href='/boards/{{id}}'" style="cursor: pointer;">{{formatCreateDate}}</td>
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
                 </tr>
             </tbody>
             {{/jarang.boards.content}}
@@ -84,43 +73,6 @@
 </div>
 
 <script src="/js/admin.js"></script>
-<<<<<<< HEAD
-<script src="/js/boards.js"></script>
-<script>
-
-    //체크박스로 삭제하기 
-    function deleteValue() {
-        let url = "delete";
-        let valueArr = new Array();
-        let list = $("input[name='RowCheck']");
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].checked) {
-                valueArr.push(list[i].value);
-            }
-        }
-        if (valueArr.length == 0) {
-            alert("선택된 글이 없습니다");
-        } else {
-            let chk = confirm("정말 삭제하겠습니까?");
-            $.ajax({
-                url: `/s/api/boards/jarang-delete`,
-                type: 'POST',
-                traditional: true,
-                data: {
-                    valueArr: valueArr
-                },
-                success: function (jdata) {
-                    if (jdata = 1) {
-                        alert("삭제성공");
-                        location.replace("list")
-                    } else {
-                        alert("삭제실패");
-                    }
-                }
-            });
-        }
-    }
-=======
 
 <script>
 
@@ -173,9 +125,6 @@
         }
     };
     checkAuthBtn();
-
-</script>
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
 
 </script>
 {{>/layout/footer}}

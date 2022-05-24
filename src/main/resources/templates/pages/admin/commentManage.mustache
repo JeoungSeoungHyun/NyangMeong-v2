@@ -4,24 +4,6 @@
 
     <h1 class="text-center m_txt_title  m_ph_md m_mt_lg">댓글 관리</h1>
 
-<<<<<<< HEAD
-    <div class="m_box_right m_pb_lg">
-        <button class="btn m_bg_secondary m_p_sm" onclick="deleteValue();">
-            삭제
-        </button>
-    </div>
-
-    <div class="m_mb_lg">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-
-                <div class="collapse navbar-collapse justify-content-between">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <div>작성댓글: 총 {{count}}건</div>
-                        </li>
-                    </ul>
-=======
         {{#comment}}
         <div class="m_mb_lg">
             <nav class="navbar navbar-expand-lg bg-light">
@@ -34,7 +16,6 @@
                             </li>
                         </ul>
                     </div>
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
                 </div>
             </nav>
         </div>
@@ -61,24 +42,12 @@
 
         {{#comment.comment.content}}
         <tbody>
-<<<<<<< HEAD
-            <tr onclick="location.href='/boards/{{boards.id}}'" style="cursor: pointer;">
-                <td><input id="chk" type="checkbox" name="id" value="1" /></td>
-                <th scope="row">{{id}}</th>
-                <td> {{content}} </td>
-                <td> {{user.userName}} </td>
-                <td>{{formatCreateDate}}</td>
-                <td>
-
-                </td>
-=======
             <tr>
                 <td><input id="chk" type="checkbox" name="ids" value="{{id}}" /></td>
                 <th onclick="location.href='/boards/{{boards.id}}'" style="cursor: pointer;" scope="row">{{id}}</th>
                 <td onclick="location.href='/boards/{{boards.id}}'" style="cursor: pointer;"> {{content}} </td>
                 <td onclick="location.href='/boards/{{boards.id}}'" style="cursor: pointer;"> {{user.userName}} </td>
                 <td onclick="location.href='/boards/{{boards.id}}'" style="cursor: pointer;">{{formatCreateDate}}</td>
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
             </tr>
 
         </tbody>
@@ -105,26 +74,13 @@
         </ul>
     </div>
     {{/comment}}
-<<<<<<< HEAD
-</div>
-=======
     </div>
 
 <script src="/js/admin.js"></script>
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
 
 <script src="/js/boards.js"></script>
 <script>
 
-<<<<<<< HEAD
-    function deleteValue() {
-        let url = "delete";
-        let valueArr = new Array();
-        let list = $("input[name='RowCheck']");
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].checked) {
-                valueArr.push(list[i].value);
-=======
     let commentsDelete = async()=>{
         let formData = $("#formData");
         let ids="";
@@ -138,7 +94,6 @@
                     ids = ids + "&ids=";
                 }
                 ids = ids + formData[0][i].value ;
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
             }
         } 
 
@@ -170,29 +125,8 @@
             $("#prev").removeClass("disabled");
             $("#next").addClass("disabled");
         } else {
-<<<<<<< HEAD
-            let chk = confirm("정말 삭제하겠습니까?");
-            $.ajax({
-                url: '/s/admin/comment-delete',
-                type: 'POST',
-                traditional: true,
-                data: {
-                    valueArr: valueArr
-                },
-                success: function (jdata) {
-                    if (jdata = 1) {
-                        alert("삭제성공");
-                        location.replace("list")
-                    }
-                    else {
-                        alert("삭제실패");
-                    }
-                }
-            });
-=======
             $("#prev").removeClass("disabled");
             $("#next").removeClass("disabled");
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
         }
     };
     checkAuthBtn();

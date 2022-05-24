@@ -121,28 +121,8 @@
             $("#prev").removeClass("disabled");
             $("#next").addClass("disabled");
         } else {
-<<<<<<< HEAD
-            let chk = confirm("정말 삭제하겠습니까?");
-            $.ajax({
-                url: ``,
-                type: 'POST',
-                traditional: true,
-                data: {
-                    valueArr: valueArr
-                },
-                success: function (jdata) {
-                    if (jdata = 1) {
-                        alert("삭제성공");
-                        location.replace("list")
-                    } else {
-                        alert("삭제실패");
-                    }
-                }
-            });
-=======
             $("#prev").removeClass("disabled");
             $("#next").removeClass("disabled");
->>>>>>> fee6093eb99a46d11dfd849bb27ae47274542ff2
         }
     };
     checkAuthBtn();
